@@ -207,6 +207,9 @@ return [
     'city' => 'City',
     'select_a_city' => 'Select a city',
     'cities' => 'Cities',
+	'Is this item Lost or Found?' => 'Is this item Lost or Found?',
+    'lost'  => 'Lost',
+    'found' => 'Found',
     
     'how_to_sell_quickly' => 'How to sell quickly?',
     'sell_quickly_advice_1' => 'Use a brief title and description of the item',

@@ -43,7 +43,7 @@ class PageSeeder extends Seeder
 					'en' => 'Terms & Conditions',
 					'fr' => 'Conditions Générales d\'Utilisation',
 					'es' => 'Términos y condiciones',
-					'ar' => 'البنود و الظروف',
+					'ar' => 'الشروط و الاحكام',
 					'pt' => 'Termos e Condições',
 					'ru' => 'Условия и положения',
 					'tr' => 'şartlar ve koşullar',

@@ -124,6 +124,7 @@ class Post extends BaseModel implements Feedable
 		'payment_id',
 		'category_id',
 		'post_type_id',
+		'lost_or_found',
 		'title',
 		'description',
 		'tags',
@@ -196,6 +197,7 @@ class Post extends BaseModel implements Feedable
 			'archived_at'           => NullableDateTimeCast::class,
 			'archived_manually_at'  => NullableDateTimeCast::class,
 			'deletion_mail_sent_at' => NullableDateTimeCast::class,
+			'lost_or_found'         => 'string',
 		];
 		
 		if (Schema::hasColumn($this->table, 'otp_expires_at')) {
@@ -839,4 +841,30 @@ class Post extends BaseModel implements Feedable
 		
 		return (string)$result;
 	}
+	    // … other methods …
+
+    /**
+     * Scope a query to only include lost posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLost($query)
+    {
+        return $query->where('lost_or_found', 'lost');
+    }
+
+    /**
+     * Scope a query to only include found posts.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFound($query)
+    {
+        return $query->where('lost_or_found', 'found');
+    }
+
 }
+
+

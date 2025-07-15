@@ -28,7 +28,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "https://demo.laraclassifier.local";
+        var tryItOutBaseUrl = "https://127.0.0.1";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -500,7 +500,7 @@
         <h1 id="introduction">Introduction</h1>
 <p>LaraClassifier API specification and documentation.</p>
 <aside>
-    <strong>Base URL</strong>: <code>https://demo.laraclassifier.local</code>
+    <strong>Base URL</strong>: <code>https://127.0.0.1</code>
 </aside>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
@@ -531,11 +531,11 @@ need to be added in the header of all the API requests with <code>X-AppApiToken<
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/auth/login" \
+    "https://127.0.0.1/api/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"email\": \"user@demosite.com\",
@@ -550,14 +550,14 @@ need to be added in the header of all the API requests with <code>X-AppApiToken<
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/login"
+    "https://127.0.0.1/api/auth/login"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -579,7 +579,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/login';
+$url = 'https://127.0.0.1/api/auth/login';
 $response = $client-&gt;post(
     $url,
     [
@@ -587,7 +587,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -608,7 +608,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/login'
+url = 'https://127.0.0.1/api/auth/login'
 payload = {
     "email": "user@demosite.com",
     "password": "123456",
@@ -718,10 +718,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-auth-login"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -817,18 +817,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/logout/4" \
+    --get "https://127.0.0.1/api/auth/logout/4" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/logout/4"
+    "https://127.0.0.1/api/auth/logout/4"
 );
 
 const headers = {
@@ -836,7 +836,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -848,7 +848,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/logout/4';
+$url = 'https://127.0.0.1/api/auth/logout/4';
 $response = $client-&gt;get(
     $url,
     [
@@ -857,7 +857,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -870,7 +870,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/logout/4'
+url = 'https://127.0.0.1/api/auth/logout/4'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -1002,10 +1002,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-logout--userId-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -1045,11 +1045,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/auth/password/forgot" \
+    "https://127.0.0.1/api/auth/password/forgot" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"email\": \"user@demosite.com\",
@@ -1063,14 +1063,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/password/forgot"
+    "https://127.0.0.1/api/auth/password/forgot"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -1091,7 +1091,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/password/forgot';
+$url = 'https://127.0.0.1/api/auth/password/forgot';
 $response = $client-&gt;post(
     $url,
     [
@@ -1099,7 +1099,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -1119,7 +1119,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/password/forgot'
+url = 'https://127.0.0.1/api/auth/password/forgot'
 payload = {
     "email": "user@demosite.com",
     "auth_field": "email",
@@ -1228,10 +1228,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-auth-password-forgot"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -1315,11 +1315,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/auth/password/reset" \
+    "https://127.0.0.1/api/auth/password/reset" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"email\": \"john.doe@domain.tld\",
@@ -1336,14 +1336,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/password/reset"
+    "https://127.0.0.1/api/auth/password/reset"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -1367,7 +1367,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/password/reset';
+$url = 'https://127.0.0.1/api/auth/password/reset';
 $response = $client-&gt;post(
     $url,
     [
@@ -1375,7 +1375,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -1398,7 +1398,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/password/reset'
+url = 'https://127.0.0.1/api/auth/password/reset'
 payload = {
     "email": "john.doe@domain.tld",
     "token": "accusamus",
@@ -1510,10 +1510,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-auth-password-reset"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -1635,24 +1635,24 @@ Return JSON data with an 'img' item that contains the captcha image to show and 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/captcha" \
+    --get "https://127.0.0.1/api/captcha" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/captcha"
+    "https://127.0.0.1/api/captcha"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -1664,7 +1664,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/captcha';
+$url = 'https://127.0.0.1/api/captcha';
 $response = $client-&gt;get(
     $url,
     [
@@ -1672,7 +1672,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -1685,7 +1685,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/captcha'
+url = 'https://127.0.0.1/api/captcha'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -1809,10 +1809,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-captcha"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -1844,17 +1844,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;embed=&amp;sort=-lft&amp;perPage=2&amp;page=1" \
+    --get "https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;embed=&amp;sort=-lft&amp;perPage=2&amp;page=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/categories"
+    "https://127.0.0.1/api/categories"
 );
 
 const params = {
@@ -1872,7 +1872,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -1884,7 +1884,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/categories';
+$url = 'https://127.0.0.1/api/categories';
 $response = $client-&gt;get(
     $url,
     [
@@ -1892,7 +1892,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -1913,7 +1913,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/categories'
+url = 'https://127.0.0.1/api/categories'
 params = {
   'parentId': '0',
   'nestedIncluded': '0',
@@ -1971,7 +1971,7 @@ vary: Origin
                 &quot;type&quot;: &quot;classified&quot;,
                 &quot;is_for_permanent&quot;: 0,
                 &quot;active&quot;: 1,
-                &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                 &quot;parentClosure&quot;: null
             },
             {
@@ -1992,15 +1992,15 @@ vary: Origin
                 &quot;type&quot;: &quot;classified&quot;,
                 &quot;is_for_permanent&quot;: 0,
                 &quot;active&quot;: 1,
-                &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                 &quot;parentClosure&quot;: null
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=6&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=6&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -2013,42 +2013,42 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=3&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=3&quot;,
                     &quot;label&quot;: &quot;3&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=4&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=4&quot;,
                     &quot;label&quot;: &quot;4&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=5&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=5&quot;,
                     &quot;label&quot;: &quot;5&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=6&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=6&quot;,
                     &quot;label&quot;: &quot;6&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/categories?parentId=0&amp;nestedIncluded=0&amp;sort=-lft&amp;perPage=2&amp;page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/categories&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/categories&quot;,
             &quot;per_page&quot;: 2,
             &quot;to&quot;: 2,
             &quot;total&quot;: 12
@@ -2143,10 +2143,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-categories"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -2241,17 +2241,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/categories/cars?parentCatSlug=automobiles" \
+    --get "https://127.0.0.1/api/categories/cars?parentCatSlug=automobiles" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/categories/cars"
+    "https://127.0.0.1/api/categories/cars"
 );
 
 const params = {
@@ -2264,7 +2264,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -2276,7 +2276,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/categories/cars';
+$url = 'https://127.0.0.1/api/categories/cars';
 $response = $client-&gt;get(
     $url,
     [
@@ -2284,7 +2284,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -2300,7 +2300,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/categories/cars'
+url = 'https://127.0.0.1/api/categories/cars'
 params = {
   'parentCatSlug': 'automobiles',
 }
@@ -2351,7 +2351,7 @@ vary: Origin
         &quot;type&quot;: &quot;classified&quot;,
         &quot;is_for_permanent&quot;: 0,
         &quot;active&quot;: 1,
-        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
     }
 }</code>
  </pre>
@@ -2442,10 +2442,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-categories--slugOrId-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -2497,11 +2497,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/categories/1/fields" \
+    --get "https://127.0.0.1/api/categories/1/fields" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"language_code\": \"en\",
@@ -2512,14 +2512,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/categories/1/fields"
+    "https://127.0.0.1/api/categories/1/fields"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -2537,7 +2537,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/categories/1/fields';
+$url = 'https://127.0.0.1/api/categories/1/fields';
 $response = $client-&gt;get(
     $url,
     [
@@ -2545,7 +2545,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -2562,7 +2562,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/categories/1/fields'
+url = 'https://127.0.0.1/api/categories/1/fields'
 payload = {
     "language_code": "en",
     "post_id": 1
@@ -3511,10 +3511,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-categories--id--fields"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -3577,11 +3577,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/categories/1/fields" \
+    "https://127.0.0.1/api/categories/1/fields" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"language_code\": \"en\",
@@ -3592,14 +3592,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/categories/1/fields"
+    "https://127.0.0.1/api/categories/1/fields"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -3617,7 +3617,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/categories/1/fields';
+$url = 'https://127.0.0.1/api/categories/1/fields';
 $response = $client-&gt;post(
     $url,
     [
@@ -3625,7 +3625,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -3642,7 +3642,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/categories/1/fields'
+url = 'https://127.0.0.1/api/categories/1/fields'
 payload = {
     "language_code": "en",
     "post_id": 1
@@ -3748,10 +3748,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-categories--id--fields"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -3818,11 +3818,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/contact" \
+    "https://127.0.0.1/api/contact" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"name\": \"voluptas\",
@@ -3840,14 +3840,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/contact"
+    "https://127.0.0.1/api/contact"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -3872,7 +3872,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/contact';
+$url = 'https://127.0.0.1/api/contact';
 $response = $client-&gt;post(
     $url,
     [
@@ -3880,7 +3880,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -3904,7 +3904,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/contact'
+url = 'https://127.0.0.1/api/contact'
 payload = {
     "name": "voluptas",
     "email": "john.doe@domain.tld",
@@ -4017,10 +4017,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-contact"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -4148,11 +4148,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/posts/3/report" \
+    "https://127.0.0.1/api/posts/3/report" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"report_type_id\": 2,
@@ -4165,14 +4165,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts/3/report"
+    "https://127.0.0.1/api/posts/3/report"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -4192,7 +4192,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts/3/report';
+$url = 'https://127.0.0.1/api/posts/3/report';
 $response = $client-&gt;post(
     $url,
     [
@@ -4200,7 +4200,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -4219,7 +4219,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts/3/report'
+url = 'https://127.0.0.1/api/posts/3/report'
 payload = {
     "report_type_id": 2,
     "email": "john.doe@domain.tld",
@@ -4327,10 +4327,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-posts--id--report"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -4419,17 +4419,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/countries?embed=&amp;includeNonActive=&amp;iti=%27onlyCountries%27&amp;countryCode=&amp;sort=-name&amp;perPage=2" \
+    --get "https://127.0.0.1/api/countries?embed=&amp;includeNonActive=&amp;iti=%27onlyCountries%27&amp;countryCode=&amp;sort=-name&amp;perPage=2" \
     --header "Content-Language: en" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/countries"
+    "https://127.0.0.1/api/countries"
 );
 
 const params = {
@@ -4447,7 +4447,7 @@ const headers = {
     "Content-Language": "en",
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -4459,7 +4459,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/countries';
+$url = 'https://127.0.0.1/api/countries';
 $response = $client-&gt;get(
     $url,
     [
@@ -4467,7 +4467,7 @@ $response = $client-&gt;get(
             'Content-Language' =&gt; 'en',
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -4488,7 +4488,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/countries'
+url = 'https://127.0.0.1/api/countries'
 params = {
   'embed': '',
   'includeNonActive': '0',
@@ -4616,10 +4616,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-countries"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -4724,17 +4724,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/countries/DE?embed=currency" \
+    --get "https://127.0.0.1/api/countries/DE?embed=currency" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/countries/DE"
+    "https://127.0.0.1/api/countries/DE"
 );
 
 const params = {
@@ -4747,7 +4747,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -4759,7 +4759,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/countries/DE';
+$url = 'https://127.0.0.1/api/countries/DE';
 $response = $client-&gt;get(
     $url,
     [
@@ -4767,7 +4767,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -4783,7 +4783,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/countries/DE'
+url = 'https://127.0.0.1/api/countries/DE'
 params = {
   'embed': 'currency',
 }
@@ -4832,12 +4832,12 @@ vary: Origin
         &quot;admin_type&quot;: &quot;1&quot;,
         &quot;active&quot;: 1,
         &quot;icode&quot;: &quot;de&quot;,
-        &quot;flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/de.png&quot;,
-        &quot;flag16_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/de.png&quot;,
-        &quot;flag24_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/24/de.png&quot;,
-        &quot;flag32_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/32/de.png&quot;,
-        &quot;flag48_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/48/de.png&quot;,
-        &quot;flag64_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/64/de.png&quot;,
+        &quot;flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/de.png&quot;,
+        &quot;flag16_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/de.png&quot;,
+        &quot;flag24_url&quot;: &quot;https://127.0.0.1/images/flags/circle/24/de.png&quot;,
+        &quot;flag32_url&quot;: &quot;https://127.0.0.1/images/flags/circle/32/de.png&quot;,
+        &quot;flag48_url&quot;: &quot;https://127.0.0.1/images/flags/circle/48/de.png&quot;,
+        &quot;flag64_url&quot;: &quot;https://127.0.0.1/images/flags/circle/64/de.png&quot;,
         &quot;background_image_url&quot;: null,
         &quot;currency&quot;: {
             &quot;code&quot;: &quot;EUR&quot;,
@@ -4939,10 +4939,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-countries--code-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -4994,17 +4994,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/countries/US/subAdmins1?embed=&amp;q=&amp;sort=-name&amp;perPage=2&amp;page=1" \
+    --get "https://127.0.0.1/api/countries/US/subAdmins1?embed=&amp;q=&amp;sort=-name&amp;perPage=2&amp;page=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/countries/US/subAdmins1"
+    "https://127.0.0.1/api/countries/US/subAdmins1"
 );
 
 const params = {
@@ -5021,7 +5021,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -5033,7 +5033,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/countries/US/subAdmins1';
+$url = 'https://127.0.0.1/api/countries/US/subAdmins1';
 $response = $client-&gt;get(
     $url,
     [
@@ -5041,7 +5041,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -5061,7 +5061,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/countries/US/subAdmins1'
+url = 'https://127.0.0.1/api/countries/US/subAdmins1'
 params = {
   'embed': '',
   'q': '',
@@ -5114,10 +5114,10 @@ vary: Origin
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=26&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=26&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -5130,52 +5130,52 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=3&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=3&quot;,
                     &quot;label&quot;: &quot;3&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=4&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=4&quot;,
                     &quot;label&quot;: &quot;4&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=5&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=5&quot;,
                     &quot;label&quot;: &quot;5&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=6&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=6&quot;,
                     &quot;label&quot;: &quot;6&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=7&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=7&quot;,
                     &quot;label&quot;: &quot;7&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=8&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=8&quot;,
                     &quot;label&quot;: &quot;8&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=9&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=9&quot;,
                     &quot;label&quot;: &quot;9&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=10&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=10&quot;,
                     &quot;label&quot;: &quot;10&quot;,
                     &quot;active&quot;: false
                 },
@@ -5185,22 +5185,22 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=25&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=25&quot;,
                     &quot;label&quot;: &quot;25&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=26&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=26&quot;,
                     &quot;label&quot;: &quot;26&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1?page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins1&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins1&quot;,
             &quot;per_page&quot;: 2,
             &quot;to&quot;: 2,
             &quot;total&quot;: 51
@@ -5295,10 +5295,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-countries--countryCode--subAdmins1"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -5394,17 +5394,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/countries/US/subAdmins2?embed=&amp;admin1Code=&amp;q=&amp;sort=-name&amp;perPage=2&amp;page=1" \
+    --get "https://127.0.0.1/api/countries/US/subAdmins2?embed=&amp;admin1Code=&amp;q=&amp;sort=-name&amp;perPage=2&amp;page=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/countries/US/subAdmins2"
+    "https://127.0.0.1/api/countries/US/subAdmins2"
 );
 
 const params = {
@@ -5422,7 +5422,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -5434,7 +5434,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/countries/US/subAdmins2';
+$url = 'https://127.0.0.1/api/countries/US/subAdmins2';
 $response = $client-&gt;get(
     $url,
     [
@@ -5442,7 +5442,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -5463,7 +5463,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/countries/US/subAdmins2'
+url = 'https://127.0.0.1/api/countries/US/subAdmins2'
 params = {
   'embed': '',
   'admin1Code': '',
@@ -5519,10 +5519,10 @@ vary: Origin
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=1572&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=1572&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -5535,52 +5535,52 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=3&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=3&quot;,
                     &quot;label&quot;: &quot;3&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=4&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=4&quot;,
                     &quot;label&quot;: &quot;4&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=5&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=5&quot;,
                     &quot;label&quot;: &quot;5&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=6&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=6&quot;,
                     &quot;label&quot;: &quot;6&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=7&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=7&quot;,
                     &quot;label&quot;: &quot;7&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=8&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=8&quot;,
                     &quot;label&quot;: &quot;8&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=9&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=9&quot;,
                     &quot;label&quot;: &quot;9&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=10&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=10&quot;,
                     &quot;label&quot;: &quot;10&quot;,
                     &quot;active&quot;: false
                 },
@@ -5590,22 +5590,22 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=1571&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=1571&quot;,
                     &quot;label&quot;: &quot;1571&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=1572&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=1572&quot;,
                     &quot;label&quot;: &quot;1572&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2?page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/subAdmins2&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/countries/US/subAdmins2&quot;,
             &quot;per_page&quot;: 2,
             &quot;to&quot;: 2,
             &quot;total&quot;: 3143
@@ -5700,10 +5700,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-countries--countryCode--subAdmins2"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -5810,17 +5810,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/countries/US/cities?embed=&amp;admin1Code=&amp;admin2Code=&amp;q=&amp;autocomplete=&amp;sort=-name&amp;perPage=2&amp;page=1" \
+    --get "https://127.0.0.1/api/countries/US/cities?embed=&amp;admin1Code=&amp;admin2Code=&amp;q=&amp;autocomplete=&amp;sort=-name&amp;perPage=2&amp;page=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/countries/US/cities"
+    "https://127.0.0.1/api/countries/US/cities"
 );
 
 const params = {
@@ -5840,7 +5840,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -5852,7 +5852,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/countries/US/cities';
+$url = 'https://127.0.0.1/api/countries/US/cities';
 $response = $client-&gt;get(
     $url,
     [
@@ -5860,7 +5860,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -5883,7 +5883,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/countries/US/cities'
+url = 'https://127.0.0.1/api/countries/US/cities'
 params = {
   'embed': '',
   'admin1Code': '',
@@ -5953,10 +5953,10 @@ vary: Origin
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=3600&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=3600&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -5969,52 +5969,52 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=3&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=3&quot;,
                     &quot;label&quot;: &quot;3&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=4&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=4&quot;,
                     &quot;label&quot;: &quot;4&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=5&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=5&quot;,
                     &quot;label&quot;: &quot;5&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=6&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=6&quot;,
                     &quot;label&quot;: &quot;6&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=7&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=7&quot;,
                     &quot;label&quot;: &quot;7&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=8&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=8&quot;,
                     &quot;label&quot;: &quot;8&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=9&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=9&quot;,
                     &quot;label&quot;: &quot;9&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=10&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=10&quot;,
                     &quot;label&quot;: &quot;10&quot;,
                     &quot;active&quot;: false
                 },
@@ -6024,22 +6024,22 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=3599&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=3599&quot;,
                     &quot;label&quot;: &quot;3599&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=3600&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=3600&quot;,
                     &quot;label&quot;: &quot;3600&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/countries/US/cities?page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/countries/US/cities&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/countries/US/cities&quot;,
             &quot;per_page&quot;: 2,
             &quot;to&quot;: 2,
             &quot;total&quot;: 7200
@@ -6134,10 +6134,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-countries--countryCode--cities"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -6276,17 +6276,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/subAdmins1/CH.VD?embed=" \
+    --get "https://127.0.0.1/api/subAdmins1/CH.VD?embed=" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/subAdmins1/CH.VD"
+    "https://127.0.0.1/api/subAdmins1/CH.VD"
 );
 
 const params = {
@@ -6299,7 +6299,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -6311,7 +6311,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/subAdmins1/CH.VD';
+$url = 'https://127.0.0.1/api/subAdmins1/CH.VD';
 $response = $client-&gt;get(
     $url,
     [
@@ -6319,7 +6319,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -6335,7 +6335,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/subAdmins1/CH.VD'
+url = 'https://127.0.0.1/api/subAdmins1/CH.VD'
 params = {
   'embed': '',
 }
@@ -6371,8 +6371,8 @@ vary: Origin
     &quot;result&quot;: {
         &quot;data&quot;: [],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/subAdmins1/CH.VD?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/subAdmins1/CH.VD?page=1&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/subAdmins1/CH.VD?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/subAdmins1/CH.VD?page=1&quot;,
             &quot;prev&quot;: null,
             &quot;next&quot;: null
         },
@@ -6387,7 +6387,7 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/subAdmins1/CH.VD?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/subAdmins1/CH.VD?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
@@ -6397,7 +6397,7 @@ vary: Origin
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/subAdmins1/CH.VD&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/subAdmins1/CH.VD&quot;,
             &quot;per_page&quot;: 39,
             &quot;to&quot;: null,
             &quot;total&quot;: 0
@@ -6492,10 +6492,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-subAdmins1--code-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -6547,17 +6547,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/subAdmins2/CH.VD.2225?embed=" \
+    --get "https://127.0.0.1/api/subAdmins2/CH.VD.2225?embed=" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/subAdmins2/CH.VD.2225"
+    "https://127.0.0.1/api/subAdmins2/CH.VD.2225"
 );
 
 const params = {
@@ -6570,7 +6570,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -6582,7 +6582,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/subAdmins2/CH.VD.2225';
+$url = 'https://127.0.0.1/api/subAdmins2/CH.VD.2225';
 $response = $client-&gt;get(
     $url,
     [
@@ -6590,7 +6590,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -6606,7 +6606,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/subAdmins2/CH.VD.2225'
+url = 'https://127.0.0.1/api/subAdmins2/CH.VD.2225'
 params = {
   'embed': '',
 }
@@ -6735,10 +6735,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-subAdmins2--code-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -6790,17 +6790,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/cities/12544?embed=country" \
+    --get "https://127.0.0.1/api/cities/12544?embed=country" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/cities/12544"
+    "https://127.0.0.1/api/cities/12544"
 );
 
 const params = {
@@ -6813,7 +6813,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -6825,7 +6825,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/cities/12544';
+$url = 'https://127.0.0.1/api/cities/12544';
 $response = $client-&gt;get(
     $url,
     [
@@ -6833,7 +6833,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -6849,7 +6849,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/cities/12544'
+url = 'https://127.0.0.1/api/cities/12544'
 params = {
   'embed': 'country',
 }
@@ -6910,12 +6910,12 @@ vary: Origin
             &quot;admin_type&quot;: &quot;1&quot;,
             &quot;active&quot;: 1,
             &quot;icode&quot;: &quot;de&quot;,
-            &quot;flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/de.png&quot;,
-            &quot;flag16_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/de.png&quot;,
-            &quot;flag24_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/24/de.png&quot;,
-            &quot;flag32_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/32/de.png&quot;,
-            &quot;flag48_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/48/de.png&quot;,
-            &quot;flag64_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/64/de.png&quot;,
+            &quot;flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/de.png&quot;,
+            &quot;flag16_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/de.png&quot;,
+            &quot;flag24_url&quot;: &quot;https://127.0.0.1/images/flags/circle/24/de.png&quot;,
+            &quot;flag32_url&quot;: &quot;https://127.0.0.1/images/flags/circle/32/de.png&quot;,
+            &quot;flag48_url&quot;: &quot;https://127.0.0.1/images/flags/circle/48/de.png&quot;,
+            &quot;flag64_url&quot;: &quot;https://127.0.0.1/images/flags/circle/64/de.png&quot;,
             &quot;background_image_url&quot;: null
         }
     }
@@ -7008,10 +7008,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-cities--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -7067,24 +7067,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/sections" \
+    --get "https://127.0.0.1/api/sections" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/sections"
+    "https://127.0.0.1/api/sections"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -7096,7 +7096,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/sections';
+$url = 'https://127.0.0.1/api/sections';
 $response = $client-&gt;get(
     $url,
     [
@@ -7104,7 +7104,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -7117,7 +7117,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/sections'
+url = 'https://127.0.0.1/api/sections'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -7233,7 +7233,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;9&quot;: {
                             &quot;id&quot;: 9,
@@ -7253,7 +7253,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;14&quot;: {
                             &quot;id&quot;: 14,
@@ -7273,7 +7273,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;30&quot;: {
                             &quot;id&quot;: 30,
@@ -7293,7 +7293,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;37&quot;: {
                             &quot;id&quot;: 37,
@@ -7313,7 +7313,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;46&quot;: {
                             &quot;id&quot;: 46,
@@ -7333,7 +7333,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;54&quot;: {
                             &quot;id&quot;: 54,
@@ -7353,7 +7353,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;62&quot;: {
                             &quot;id&quot;: 62,
@@ -7373,7 +7373,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;73&quot;: {
                             &quot;id&quot;: 73,
@@ -7393,7 +7393,7 @@ vary: Origin
                             &quot;type&quot;: &quot;job-offer&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;97&quot;: {
                             &quot;id&quot;: 97,
@@ -7413,7 +7413,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;114&quot;: {
                             &quot;id&quot;: 114,
@@ -7433,7 +7433,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         },
                         &quot;122&quot;: {
                             &quot;id&quot;: 122,
@@ -7453,7 +7453,7 @@ vary: Origin
                             &quot;type&quot;: &quot;classified&quot;,
                             &quot;is_for_permanent&quot;: 0,
                             &quot;active&quot;: 1,
-                            &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
+                            &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;
                         }
                     },
                     &quot;countPostsPerCat&quot;: []
@@ -7771,7 +7771,7 @@ vary: Origin
                 &quot;data&quot;: {
                     &quot;latest&quot;: {
                         &quot;title&quot;: &quot;&lt;span style=\&quot;font-weight: bold;\&quot;&gt;Latest&lt;/span&gt; Listings&quot;,
-                        &quot;link&quot;: &quot;https://demo.laraclassifier.local/search&quot;,
+                        &quot;link&quot;: &quot;https://127.0.0.1/search&quot;,
                         &quot;posts&quot;: [
                             {
                                 &quot;id&quot;: 9971,
@@ -7829,14 +7829,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:55.725446Z&quot;,
                                 &quot;reference&quot;: &quot;LYqaQk6ldnj&quot;,
                                 &quot;slug&quot;: &quot;highlander-2022-4x4&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/highlander-2022-4x4/LYqaQk6ldnj&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/highlander-2022-4x4/LYqaQk6ldnj&quot;,
                                 &quot;phone_intl&quot;: &quot;&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 week ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$9,000,000&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -7850,10 +7850,10 @@ vary: Origin
                                     &quot;position&quot;: 0,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -7865,10 +7865,10 @@ vary: Origin
                                         &quot;position&quot;: 0,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
                                         }
                                     },
                                     {
@@ -7879,10 +7879,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-13jpg-3251746540991jpg-55811746587268.jpg&quot;
                                         }
                                     },
                                     {
@@ -7893,10 +7893,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-800px-flag-of-benin-1975-1990-svgpng-41011746540992png-85861746587269.png&quot;
                                         }
                                     },
                                     {
@@ -7907,10 +7907,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-apple-mandelapng-75021746541128png-85501746587270.png&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-apple-mandelapng-75021746541128png-85501746587270.png&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-apple-mandelapng-75021746541128png-85501746587270.png&quot;
                                         }
                                     }
                                 ],
@@ -7924,9 +7924,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-01 23:06:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-05 22:43:08&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 4,
@@ -7946,7 +7946,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 1,
                                         &quot;parent_id&quot;: null,
@@ -7965,7 +7965,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -8046,14 +8046,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:55.806298Z&quot;,
                                 &quot;reference&quot;: &quot;mWZdPjzwaKg&quot;,
                                 &quot;slug&quot;: &quot;publier-une-annonce&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/publier-une-annonce/mWZdPjzwaKg&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/publier-une-annonce/mWZdPjzwaKg&quot;,
                                 &quot;phone_intl&quot;: &quot;(553) 779-7114&quot;,
                                 &quot;created_at_formatted&quot;: &quot;3 weeks ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$200,000&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -8067,10 +8067,10 @@ vary: Origin
                                     &quot;position&quot;: 0,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -8082,10 +8082,10 @@ vary: Origin
                                         &quot;position&quot;: 0,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
                                         }
                                     },
                                     {
@@ -8096,10 +8096,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/120x90-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/320x240-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-600x-drapeau-beninjpg-61961745273583.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/120x90-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/320x240-600x-drapeau-beninjpg-61961745273583.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-600x-drapeau-beninjpg-61961745273583.jpg&quot;
                                         }
                                     },
                                     {
@@ -8110,10 +8110,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/120x90-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/320x240-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/120x90-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/320x240-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-800px-flag-of-benin-1975-1990svgpng-45051745260406.png&quot;
                                         }
                                     }
                                 ],
@@ -8127,9 +8127,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-01 23:06:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-05 22:43:08&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 2,
@@ -8149,7 +8149,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 1,
                                         &quot;parent_id&quot;: null,
@@ -8168,7 +8168,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -8249,14 +8249,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:55.894765Z&quot;,
                                 &quot;reference&quot;: &quot;QJ0dNk6eLOv&quot;,
                                 &quot;slug&quot;: &quot;handbags-silver&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/handbags-silver/QJ0dNk6eLOv&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/handbags-silver/QJ0dNk6eLOv&quot;,
                                 &quot;phone_intl&quot;: &quot;1530188788&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$20&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -8270,10 +8270,10 @@ vary: Origin
                                     &quot;position&quot;: 1,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/120x90-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/320x240-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/120x90-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/320x240-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -8285,10 +8285,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/120x90-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/320x240-8b643bdec544b4088959784015780c5a.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/120x90-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/320x240-8b643bdec544b4088959784015780c5a.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-8b643bdec544b4088959784015780c5a.jpg&quot;
                                         }
                                     },
                                     {
@@ -8299,10 +8299,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/120x90-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/320x240-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/68/thumbnails/816x460-2d39d48e80f7b12d2a82d62461def136.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/120x90-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/320x240-2d39d48e80f7b12d2a82d62461def136.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/68/thumbnails/816x460-2d39d48e80f7b12d2a82d62461def136.jpg&quot;
                                         }
                                     }
                                 ],
@@ -8316,9 +8316,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 60,
@@ -8338,7 +8338,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 54,
                                         &quot;parent_id&quot;: null,
@@ -8357,7 +8357,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -8438,14 +8438,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:55.982086Z&quot;,
                                 &quot;reference&quot;: &quot;7LDdwpRe1YK&quot;,
                                 &quot;slug&quot;: &quot;magsafe-charger-red&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/magsafe-charger-red/7LDdwpRe1YK&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/magsafe-charger-red/7LDdwpRe1YK&quot;,
                                 &quot;phone_intl&quot;: &quot;(835) 799-3680&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$2,809&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -8459,10 +8459,10 @@ vary: Origin
                                     &quot;position&quot;: 1,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/120x90-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/320x240-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/120x90-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/320x240-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -8474,10 +8474,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/120x90-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/320x240-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/120x90-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/320x240-884300773eee8af4001b9f6ebe73af11.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/55/thumbnails/816x460-884300773eee8af4001b9f6ebe73af11.jpg&quot;
                                         }
                                     }
                                 ],
@@ -8491,9 +8491,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 16,
@@ -8513,7 +8513,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 14,
                                         &quot;parent_id&quot;: null,
@@ -8532,7 +8532,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -8613,14 +8613,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:56.072053Z&quot;,
                                 &quot;reference&quot;: &quot;Gz3YaOpbxql&quot;,
                                 &quot;slug&quot;: &quot;urgent-office-volunteer&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/urgent-office-volunteer/Gz3YaOpbxql&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/urgent-office-volunteer/Gz3YaOpbxql&quot;,
                                 &quot;phone_intl&quot;: &quot;(265) 467-2439&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Salary:&quot;,
                                 &quot;price_formatted&quot;: &quot;$8&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -8634,10 +8634,10 @@ vary: Origin
                                     &quot;position&quot;: 1,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -8649,10 +8649,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-43f6be7f7c4b59de1c0fae5fa4e8b628.jpg&quot;
                                         }
                                     },
                                     {
@@ -8663,10 +8663,10 @@ vary: Origin
                                         &quot;position&quot;: 1,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-47c9c1d0e05c88be8086e9e7d1dc796a.jpg&quot;
                                         }
                                     },
                                     {
@@ -8677,10 +8677,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-104770a01a17269b8d96690f54ff61e0.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-104770a01a17269b8d96690f54ff61e0.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-104770a01a17269b8d96690f54ff61e0.jpg&quot;
                                         }
                                     },
                                     {
@@ -8691,10 +8691,10 @@ vary: Origin
                                         &quot;position&quot;: 4,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-67d4441d5951457b548ac79efa9ddef2.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-67d4441d5951457b548ac79efa9ddef2.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-67d4441d5951457b548ac79efa9ddef2.jpg&quot;
                                         }
                                     },
                                     {
@@ -8705,10 +8705,10 @@ vary: Origin
                                         &quot;position&quot;: 5,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/120x90-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/320x240-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/25/thumbnails/816x460-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/120x90-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/320x240-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/25/thumbnails/816x460-66ab4de122aaa8c4ed4609149a0d51df.jpg&quot;
                                         }
                                     }
                                 ],
@@ -8722,9 +8722,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-01 23:06:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-05 22:43:08&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 87,
@@ -8744,7 +8744,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;job-offer&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 73,
                                         &quot;parent_id&quot;: null,
@@ -8763,7 +8763,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;job-offer&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -8844,14 +8844,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:56.165654Z&quot;,
                                 &quot;reference&quot;: &quot;K4oeERva0By&quot;,
                                 &quot;slug&quot;: &quot;vivo-y73s-gray&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/vivo-y73s-gray/K4oeERva0By&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/vivo-y73s-gray/K4oeERva0By&quot;,
                                 &quot;phone_intl&quot;: &quot;(342) 405-9507&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$44&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -8865,10 +8865,10 @@ vary: Origin
                                     &quot;position&quot;: 2,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/120x90-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/320x240-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/120x90-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/320x240-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -8880,10 +8880,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/120x90-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/320x240-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/120x90-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/320x240-442857fe2e274e970343e87246bfeb4f.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/62/thumbnails/816x460-442857fe2e274e970343e87246bfeb4f.jpg&quot;
                                         }
                                     },
                                     {
@@ -8894,10 +8894,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
                                         }
                                     },
                                     {
@@ -8908,10 +8908,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
                                         }
                                     },
                                     {
@@ -8922,10 +8922,10 @@ vary: Origin
                                         &quot;position&quot;: 4,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
                                         }
                                     }
                                 ],
@@ -8939,9 +8939,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
                                     &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
                                     &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 11,
@@ -8961,7 +8961,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 9,
                                         &quot;parent_id&quot;: null,
@@ -8980,7 +8980,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -9061,14 +9061,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:56.256069Z&quot;,
                                 &quot;reference&quot;: &quot;Wjneg7ZewZ1&quot;,
                                 &quot;slug&quot;: &quot;consectetur-earum-expedita-repudiandae-deleniti-minima&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/consectetur-earum-expedita-repudiandae-deleniti-minima/Wjneg7ZewZ1&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/consectetur-earum-expedita-repudiandae-deleniti-minima/Wjneg7ZewZ1&quot;,
                                 &quot;phone_intl&quot;: &quot;(890) 962-1317&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$31,413&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -9082,10 +9082,10 @@ vary: Origin
                                     &quot;position&quot;: 3,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/120x90-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/320x240-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/120x90-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/320x240-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -9097,10 +9097,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/120x90-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/320x240-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/120x90-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/320x240-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-2f2d9f1c6e0e81473bb57b32a5fdb6f7.jpg&quot;
                                         }
                                     },
                                     {
@@ -9111,10 +9111,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/120x90-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/320x240-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/120x90-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/320x240-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-4d22c19b854c3c43f4e1f3b29a1f460f.jpg&quot;
                                         }
                                     },
                                     {
@@ -9125,10 +9125,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/120x90-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/320x240-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-e66de8d197af3cef78fef4c72c235442.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/120x90-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/320x240-e66de8d197af3cef78fef4c72c235442.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-e66de8d197af3cef78fef4c72c235442.jpg&quot;
                                         }
                                     },
                                     {
@@ -9139,10 +9139,10 @@ vary: Origin
                                         &quot;position&quot;: 4,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/120x90-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/320x240-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/444/thumbnails/816x460-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/120x90-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/320x240-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/444/thumbnails/816x460-8f852811d4f7d87fa12e2b0a1b7ceba6.jpg&quot;
                                         }
                                     }
                                 ],
@@ -9156,9 +9156,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2024-12-20 19:50:46&quot;,
                                     &quot;original_last_activity&quot;: null,
                                     &quot;created_at_formatted&quot;: &quot;7 months ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/pt.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/pt.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 63,
@@ -9178,7 +9178,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 62,
                                         &quot;parent_id&quot;: null,
@@ -9197,7 +9197,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -9278,14 +9278,14 @@ vary: Origin
                                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:56.344538Z&quot;,
                                 &quot;reference&quot;: &quot;EKQe1jm3aJY&quot;,
                                 &quot;slug&quot;: &quot;2016-honda-accord&quot;,
-                                &quot;url&quot;: &quot;https://demo.laraclassifier.local/2016-honda-accord/EKQe1jm3aJY&quot;,
+                                &quot;url&quot;: &quot;https://127.0.0.1/2016-honda-accord/EKQe1jm3aJY&quot;,
                                 &quot;phone_intl&quot;: &quot;(795) 788-5753&quot;,
                                 &quot;created_at_formatted&quot;: &quot;1 month ago&quot;,
                                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                                 &quot;price_label&quot;: &quot;Price:&quot;,
                                 &quot;price_formatted&quot;: &quot;$7,770&quot;,
                                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -9299,10 +9299,10 @@ vary: Origin
                                     &quot;position&quot;: 2,
                                     &quot;active&quot;: 1,
                                     &quot;url&quot;: {
-                                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;
+                                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;
                                     }
                                 },
                                 &quot;pictures&quot;: [
@@ -9314,10 +9314,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-37ec322971be1196484baf26a0eaa228.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-37ec322971be1196484baf26a0eaa228.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-37ec322971be1196484baf26a0eaa228.jpg&quot;
                                         }
                                     },
                                     {
@@ -9328,10 +9328,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-d3ef2513727a41a903c800587b43d178.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-d3ef2513727a41a903c800587b43d178.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-d3ef2513727a41a903c800587b43d178.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-d3ef2513727a41a903c800587b43d178.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-d3ef2513727a41a903c800587b43d178.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-d3ef2513727a41a903c800587b43d178.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-d3ef2513727a41a903c800587b43d178.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-d3ef2513727a41a903c800587b43d178.jpg&quot;
                                         }
                                     },
                                     {
@@ -9342,10 +9342,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-7b47d2ebd4fe966ae8127ec8e04c1352.jpg&quot;
                                         }
                                     },
                                     {
@@ -9356,10 +9356,10 @@ vary: Origin
                                         &quot;position&quot;: 2,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-c752d40543c76181298c8f8e6a3ca17d.jpg&quot;
                                         }
                                     },
                                     {
@@ -9370,10 +9370,10 @@ vary: Origin
                                         &quot;position&quot;: 3,
                                         &quot;active&quot;: 1,
                                         &quot;url&quot;: {
-                                            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
-                                            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/120x90-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
-                                            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/320x240-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
-                                            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/5734/thumbnails/816x460-a5e517fb915e46770e8792a45b4a1128.jpg&quot;
+                                            &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
+                                            &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/120x90-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
+                                            &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/320x240-a5e517fb915e46770e8792a45b4a1128.jpg&quot;,
+                                            &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/5734/thumbnails/816x460-a5e517fb915e46770e8792a45b4a1128.jpg&quot;
                                         }
                                     }
                                 ],
@@ -9387,9 +9387,9 @@ vary: Origin
                                     &quot;original_updated_at&quot;: &quot;2025-03-14 05:26:49&quot;,
                                     &quot;original_last_activity&quot;: null,
                                     &quot;created_at_formatted&quot;: &quot;4 months ago&quot;,
-                                    &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
+                                    &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
                                     &quot;p_is_online&quot;: false,
-                                    &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/qa.png&quot;
+                                    &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/qa.png&quot;
                                 },
                                 &quot;category&quot;: {
                                     &quot;id&quot;: 5,
@@ -9409,7 +9409,7 @@ vary: Origin
                                     &quot;type&quot;: &quot;classified&quot;,
                                     &quot;is_for_permanent&quot;: 0,
                                     &quot;active&quot;: 1,
-                                    &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                    &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                     &quot;parent&quot;: {
                                         &quot;id&quot;: 1,
                                         &quot;parent_id&quot;: null,
@@ -9428,7 +9428,7 @@ vary: Origin
                                         &quot;type&quot;: &quot;classified&quot;,
                                         &quot;is_for_permanent&quot;: 0,
                                         &quot;active&quot;: 1,
-                                        &quot;image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
+                                        &quot;image_url&quot;: &quot;https://127.0.0.1/storage/app/default/categories/thumbnails/70x70-fa-folder-default.png&quot;,
                                         &quot;parent&quot;: null
                                     }
                                 },
@@ -9574,10 +9574,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-sections"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -9605,17 +9605,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/sections/1?parentCatSlug=automobiles" \
+    --get "https://127.0.0.1/api/sections/1?parentCatSlug=automobiles" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/sections/1"
+    "https://127.0.0.1/api/sections/1"
 );
 
 const params = {
@@ -9628,7 +9628,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -9640,7 +9640,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/sections/1';
+$url = 'https://127.0.0.1/api/sections/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -9648,7 +9648,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -9664,7 +9664,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/sections/1'
+url = 'https://127.0.0.1/api/sections/1'
 params = {
   'parentCatSlug': 'automobiles',
 }
@@ -9788,10 +9788,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-sections--method-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -9858,24 +9858,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/languages" \
+    --get "https://127.0.0.1/api/languages" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/languages"
+    "https://127.0.0.1/api/languages"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -9887,7 +9887,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/languages';
+$url = 'https://127.0.0.1/api/languages';
 $response = $client-&gt;get(
     $url,
     [
@@ -9895,7 +9895,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -9908,7 +9908,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/languages'
+url = 'https://127.0.0.1/api/languages'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -10422,10 +10422,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-languages"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -10453,24 +10453,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/languages/en" \
+    --get "https://127.0.0.1/api/languages/en" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/languages/en"
+    "https://127.0.0.1/api/languages/en"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -10482,7 +10482,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/languages/en';
+$url = 'https://127.0.0.1/api/languages/en';
 $response = $client-&gt;get(
     $url,
     [
@@ -10490,7 +10490,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -10503,7 +10503,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/languages/en'
+url = 'https://127.0.0.1/api/languages/en'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -10645,10 +10645,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-languages--code-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -10692,24 +10692,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/postTypes" \
+    --get "https://127.0.0.1/api/postTypes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/postTypes"
+    "https://127.0.0.1/api/postTypes"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -10721,7 +10721,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/postTypes';
+$url = 'https://127.0.0.1/api/postTypes';
 $response = $client-&gt;get(
     $url,
     [
@@ -10729,7 +10729,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -10742,7 +10742,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/postTypes'
+url = 'https://127.0.0.1/api/postTypes'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -10873,10 +10873,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-postTypes"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -10904,24 +10904,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/postTypes/1" \
+    --get "https://127.0.0.1/api/postTypes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/postTypes/1"
+    "https://127.0.0.1/api/postTypes/1"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -10933,7 +10933,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/postTypes/1';
+$url = 'https://127.0.0.1/api/postTypes/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -10941,7 +10941,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -10954,7 +10954,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/postTypes/1'
+url = 'https://127.0.0.1/api/postTypes/1'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -11078,10 +11078,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-postTypes--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -11121,24 +11121,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/reportTypes" \
+    --get "https://127.0.0.1/api/reportTypes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/reportTypes"
+    "https://127.0.0.1/api/reportTypes"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -11150,7 +11150,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/reportTypes';
+$url = 'https://127.0.0.1/api/reportTypes';
 $response = $client-&gt;get(
     $url,
     [
@@ -11158,7 +11158,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -11171,7 +11171,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/reportTypes'
+url = 'https://127.0.0.1/api/reportTypes'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -11314,10 +11314,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-reportTypes"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -11345,24 +11345,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/reportTypes/1" \
+    --get "https://127.0.0.1/api/reportTypes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/reportTypes/1"
+    "https://127.0.0.1/api/reportTypes/1"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -11374,7 +11374,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/reportTypes/1';
+$url = 'https://127.0.0.1/api/reportTypes/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -11382,7 +11382,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -11395,7 +11395,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/reportTypes/1'
+url = 'https://127.0.0.1/api/reportTypes/1'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -11518,10 +11518,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-reportTypes--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -11564,17 +11564,17 @@ So you need to embed the picture table like: /api/posts?embed=pictures to retrie
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/posts?op=&amp;postId=&amp;distance=&amp;belongLoggedUser=&amp;pendingApproval=&amp;archived=&amp;embed=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/posts?op=&amp;postId=&amp;distance=&amp;belongLoggedUser=&amp;pendingApproval=&amp;archived=&amp;embed=&amp;sort=created_at&amp;perPage=2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts"
+    "https://127.0.0.1/api/posts"
 );
 
 const params = {
@@ -11595,7 +11595,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -11607,7 +11607,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts';
+$url = 'https://127.0.0.1/api/posts';
 $response = $client-&gt;get(
     $url,
     [
@@ -11615,7 +11615,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -11639,7 +11639,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts'
+url = 'https://127.0.0.1/api/posts'
 params = {
   'op': '',
   'postId': '',
@@ -11738,14 +11738,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-07T03:07:47.000000Z&quot;,
                 &quot;reference&quot;: &quot;LYqaQk6ldnj&quot;,
                 &quot;slug&quot;: &quot;highlander-2022-4x4&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/highlander-2022-4x4/LYqaQk6ldnj&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/highlander-2022-4x4/LYqaQk6ldnj&quot;,
                 &quot;phone_intl&quot;: &quot;&quot;,
                 &quot;created_at_formatted&quot;: &quot;May 6th, 2025 at 23:07&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 6th, 2025 at 23:07&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$9,000,000&quot;,
                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -11759,10 +11759,10 @@ vary: Origin
                     &quot;position&quot;: 0,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/120x90-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/320x240-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9971/thumbnails/816x460-01-techpoint-new-office-12jpg-81501746540991jpg-30651746587267.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -11823,14 +11823,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-04-28T13:46:16.000000Z&quot;,
                 &quot;reference&quot;: &quot;mWZdPjzwaKg&quot;,
                 &quot;slug&quot;: &quot;publier-une-annonce&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/publier-une-annonce/mWZdPjzwaKg&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/publier-une-annonce/mWZdPjzwaKg&quot;,
                 &quot;phone_intl&quot;: &quot;+1 553-779-7114&quot;,
                 &quot;created_at_formatted&quot;: &quot;Apr 20th, 2025 at 14:55&quot;,
                 &quot;updated_at_formatted&quot;: &quot;Apr 28th, 2025 at 09:46&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/1/thumbnails/800x800-169751-167491006628503-100001028145118-381299-2017441-o-2-600xjpg-17061746180992.jpg&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$200,000&quot;,
                 &quot;visits_formatted&quot;: &quot;0 view&quot;,
@@ -11844,10 +11844,10 @@ vary: Origin
                     &quot;position&quot;: 0,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/120x90-6of9jpeg-6281745273583.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/320x240-6of9jpeg-6281745273583.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9970/thumbnails/816x460-6of9jpeg-6281745273583.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -11908,14 +11908,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-02-26T23:05:54.000000Z&quot;,
                 &quot;reference&quot;: &quot;GELe36Qxd69&quot;,
                 &quot;slug&quot;: &quot;adult-eskimo-dog-available&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/adult-eskimo-dog-available/GELe36Qxd69&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/adult-eskimo-dog-available/GELe36Qxd69&quot;,
                 &quot;phone_intl&quot;: &quot;(661) 173-7766&quot;,
                 &quot;created_at_formatted&quot;: &quot;Feb 10th, 2025 at 14:25&quot;,
                 &quot;updated_at_formatted&quot;: &quot;Feb 26th, 2025 at 18:05&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$30&quot;,
                 &quot;visits_formatted&quot;: &quot;845 views&quot;,
@@ -11929,10 +11929,10 @@ vary: Origin
                     &quot;position&quot;: 3,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9880/thumbnails/816x460-fe9b4956873948c53910242d21f13085.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9880/thumbnails/120x90-fe9b4956873948c53910242d21f13085.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9880/thumbnails/320x240-fe9b4956873948c53910242d21f13085.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9880/thumbnails/816x460-fe9b4956873948c53910242d21f13085.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9880/thumbnails/816x460-fe9b4956873948c53910242d21f13085.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9880/thumbnails/120x90-fe9b4956873948c53910242d21f13085.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9880/thumbnails/320x240-fe9b4956873948c53910242d21f13085.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9880/thumbnails/816x460-fe9b4956873948c53910242d21f13085.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -11993,14 +11993,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-03-29T00:49:32.000000Z&quot;,
                 &quot;reference&quot;: &quot;EKQe16WPaJY&quot;,
                 &quot;slug&quot;: &quot;eum-animi-ad-magnam&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/eum-animi-ad-magnam/EKQe16WPaJY&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/eum-animi-ad-magnam/EKQe16WPaJY&quot;,
                 &quot;phone_intl&quot;: &quot;(496) 359-2438&quot;,
                 &quot;created_at_formatted&quot;: &quot;Mar 21st, 2025 at 02:26&quot;,
                 &quot;updated_at_formatted&quot;: &quot;Mar 28th, 2025 at 20:49&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$573&quot;,
                 &quot;visits_formatted&quot;: &quot;70 views&quot;,
@@ -12014,10 +12014,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9878/thumbnails/816x460-003f75350062e01573e381b2ce8e844b.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9878/thumbnails/120x90-003f75350062e01573e381b2ce8e844b.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9878/thumbnails/320x240-003f75350062e01573e381b2ce8e844b.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9878/thumbnails/816x460-003f75350062e01573e381b2ce8e844b.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9878/thumbnails/816x460-003f75350062e01573e381b2ce8e844b.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9878/thumbnails/120x90-003f75350062e01573e381b2ce8e844b.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9878/thumbnails/320x240-003f75350062e01573e381b2ce8e844b.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9878/thumbnails/816x460-003f75350062e01573e381b2ce8e844b.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12078,14 +12078,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:38.911251Z&quot;,
                 &quot;reference&quot;: &quot;joQeZ8VRbpZ&quot;,
                 &quot;slug&quot;: &quot;vel-illo-excepturi-in&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/vel-illo-excepturi-in/joQeZ8VRbpZ&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/vel-illo-excepturi-in/joQeZ8VRbpZ&quot;,
                 &quot;phone_intl&quot;: &quot;(468) 311-9540&quot;,
                 &quot;created_at_formatted&quot;: &quot;Mar 16th, 2025 at 22:34&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$39,658&quot;,
                 &quot;visits_formatted&quot;: &quot;158 views&quot;,
@@ -12099,10 +12099,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9833/thumbnails/816x460-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9833/thumbnails/120x90-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9833/thumbnails/320x240-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9833/thumbnails/816x460-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9833/thumbnails/816x460-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9833/thumbnails/120x90-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9833/thumbnails/320x240-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9833/thumbnails/816x460-2a8df509e0ea9aaff63a6ae8e6e9cf2c.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12163,14 +12163,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.043257Z&quot;,
                 &quot;reference&quot;: &quot;oBDbDq9qdl2&quot;,
                 &quot;slug&quot;: &quot;apple-pencil-white-color&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/apple-pencil-white-color/oBDbDq9qdl2&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/apple-pencil-white-color/oBDbDq9qdl2&quot;,
                 &quot;phone_intl&quot;: &quot;(339) 782-0786&quot;,
                 &quot;created_at_formatted&quot;: &quot;Feb 21st, 2025 at 16:33&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$930&quot;,
                 &quot;visits_formatted&quot;: &quot;751 views&quot;,
@@ -12184,10 +12184,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9817/thumbnails/816x460-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9817/thumbnails/120x90-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9817/thumbnails/320x240-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9817/thumbnails/816x460-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9817/thumbnails/816x460-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9817/thumbnails/120x90-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9817/thumbnails/320x240-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9817/thumbnails/816x460-0e8ab1155f7317df6716d33e3fd05d94.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12248,14 +12248,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.168519Z&quot;,
                 &quot;reference&quot;: &quot;7LDdw0j1e1Y&quot;,
                 &quot;slug&quot;: &quot;for-sale-samsung-w21-5g&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/for-sale-samsung-w21-5g/7LDdw0j1e1Y&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/for-sale-samsung-w21-5g/7LDdw0j1e1Y&quot;,
                 &quot;phone_intl&quot;: &quot;(963) 152-0619&quot;,
                 &quot;created_at_formatted&quot;: &quot;Jan 28th, 2025 at 22:32&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$3,528&quot;,
                 &quot;visits_formatted&quot;: &quot;113 views&quot;,
@@ -12269,10 +12269,10 @@ vary: Origin
                     &quot;position&quot;: 3,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9799/thumbnails/816x460-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9799/thumbnails/120x90-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9799/thumbnails/320x240-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9799/thumbnails/816x460-57a02aeeb54bd20413f45a276d16c532.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9799/thumbnails/816x460-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9799/thumbnails/120x90-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9799/thumbnails/320x240-57a02aeeb54bd20413f45a276d16c532.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9799/thumbnails/816x460-57a02aeeb54bd20413f45a276d16c532.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12333,14 +12333,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.306111Z&quot;,
                 &quot;reference&quot;: &quot;Oy5eVvmveEP&quot;,
                 &quot;slug&quot;: &quot;ballet-shoe-yellow&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/ballet-shoe-yellow/Oy5eVvmveEP&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/ballet-shoe-yellow/Oy5eVvmveEP&quot;,
                 &quot;phone_intl&quot;: &quot;(911) 662-3591&quot;,
                 &quot;created_at_formatted&quot;: &quot;Feb 26th, 2025 at 10:02&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$76,352&quot;,
                 &quot;visits_formatted&quot;: &quot;8.2K views&quot;,
@@ -12354,10 +12354,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9773/thumbnails/816x460-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9773/thumbnails/120x90-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9773/thumbnails/320x240-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9773/thumbnails/816x460-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9773/thumbnails/816x460-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9773/thumbnails/120x90-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9773/thumbnails/320x240-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9773/thumbnails/816x460-6b9729a76f41a7d5c94d774ff467e1ba.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12418,14 +12418,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.435035Z&quot;,
                 &quot;reference&quot;: &quot;WjnegpYkawZ&quot;,
                 &quot;slug&quot;: &quot;slip-on-shoe&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/slip-on-shoe/WjnegpYkawZ&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/slip-on-shoe/WjnegpYkawZ&quot;,
                 &quot;phone_intl&quot;: &quot;(208) 864-7517&quot;,
                 &quot;created_at_formatted&quot;: &quot;Mar 3rd, 2025 at 23:46&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$620&quot;,
                 &quot;visits_formatted&quot;: &quot;93 views&quot;,
@@ -12439,10 +12439,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9688/thumbnails/816x460-89a64619902592a556f436ef84f7c252.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9688/thumbnails/120x90-89a64619902592a556f436ef84f7c252.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9688/thumbnails/320x240-89a64619902592a556f436ef84f7c252.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9688/thumbnails/816x460-89a64619902592a556f436ef84f7c252.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9688/thumbnails/816x460-89a64619902592a556f436ef84f7c252.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9688/thumbnails/120x90-89a64619902592a556f436ef84f7c252.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9688/thumbnails/320x240-89a64619902592a556f436ef84f7c252.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9688/thumbnails/816x460-89a64619902592a556f436ef84f7c252.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12503,14 +12503,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.567655Z&quot;,
                 &quot;reference&quot;: &quot;K4oeE8rgd0B&quot;,
                 &quot;slug&quot;: &quot;canon-eos-5d-mark-iv-white&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/canon-eos-5d-mark-iv-white/K4oeE8rgd0B&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/canon-eos-5d-mark-iv-white/K4oeE8rgd0B&quot;,
                 &quot;phone_intl&quot;: &quot;(319) 841-3610&quot;,
                 &quot;created_at_formatted&quot;: &quot;Mar 13th, 2025 at 08:05&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$72,517&quot;,
                 &quot;visits_formatted&quot;: &quot;4.1K views&quot;,
@@ -12524,10 +12524,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9662/thumbnails/816x460-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9662/thumbnails/120x90-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9662/thumbnails/320x240-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9662/thumbnails/816x460-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9662/thumbnails/816x460-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9662/thumbnails/120x90-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9662/thumbnails/320x240-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9662/thumbnails/816x460-4defa6d9445f7e5188283ab1effa6aee.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12587,14 +12587,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.741392Z&quot;,
                 &quot;reference&quot;: &quot;LYqaQn39bnj&quot;,
                 &quot;slug&quot;: &quot;2023-macbook-air&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/2023-macbook-air/LYqaQn39bnj&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/2023-macbook-air/LYqaQn39bnj&quot;,
                 &quot;phone_intl&quot;: &quot;(546) 721-8473&quot;,
                 &quot;created_at_formatted&quot;: &quot;Mar 7th, 2025 at 15:16&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$47&quot;,
                 &quot;visits_formatted&quot;: &quot;197 views&quot;,
@@ -12608,10 +12608,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9627/thumbnails/816x460-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9627/thumbnails/120x90-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9627/thumbnails/320x240-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9627/thumbnails/816x460-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9627/thumbnails/816x460-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9627/thumbnails/120x90-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9627/thumbnails/320x240-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9627/thumbnails/816x460-711ba65c2dc3454ae5d2eabc95e3ce1e.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12672,14 +12672,14 @@ vary: Origin
                 &quot;updated_at&quot;: &quot;2025-05-17T08:23:39.929457Z&quot;,
                 &quot;reference&quot;: &quot;qM7e5QjYe2v&quot;,
                 &quot;slug&quot;: &quot;repellendus-ducimus-rerum-unde-odit&quot;,
-                &quot;url&quot;: &quot;https://demo.laraclassifier.local/repellendus-ducimus-rerum-unde-odit/qM7e5QjYe2v&quot;,
+                &quot;url&quot;: &quot;https://127.0.0.1/repellendus-ducimus-rerum-unde-odit/qM7e5QjYe2v&quot;,
                 &quot;phone_intl&quot;: &quot;(943) 535-2427&quot;,
                 &quot;created_at_formatted&quot;: &quot;Jan 25th, 2025 at 04:00&quot;,
                 &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
                 &quot;archived_at_formatted&quot;: &quot;&quot;,
                 &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-                &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/user.png&quot;,
-                &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+                &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/app/default/user.png&quot;,
+                &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
                 &quot;price_label&quot;: &quot;Price:&quot;,
                 &quot;price_formatted&quot;: &quot;$518&quot;,
                 &quot;visits_formatted&quot;: &quot;29.5K views&quot;,
@@ -12693,10 +12693,10 @@ vary: Origin
                     &quot;position&quot;: 1,
                     &quot;active&quot;: 1,
                     &quot;url&quot;: {
-                        &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9582/thumbnails/816x460-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
-                        &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9582/thumbnails/120x90-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
-                        &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9582/thumbnails/320x240-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
-                        &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/9582/thumbnails/816x460-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;
+                        &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/9582/thumbnails/816x460-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
+                        &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/9582/thumbnails/120x90-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
+                        &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/9582/thumbnails/320x240-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;,
+                        &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/9582/thumbnails/816x460-05749c3b8b0ff7e82ccd956cdea5ebd0.jpg&quot;
                     }
                 },
                 &quot;rating_cache&quot;: 0,
@@ -12704,10 +12704,10 @@ vary: Origin
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=21&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/posts?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/posts?page=21&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/posts?page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -12720,52 +12720,52 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=3&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=3&quot;,
                     &quot;label&quot;: &quot;3&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=4&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=4&quot;,
                     &quot;label&quot;: &quot;4&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=5&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=5&quot;,
                     &quot;label&quot;: &quot;5&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=6&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=6&quot;,
                     &quot;label&quot;: &quot;6&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=7&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=7&quot;,
                     &quot;label&quot;: &quot;7&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=8&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=8&quot;,
                     &quot;label&quot;: &quot;8&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=9&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=9&quot;,
                     &quot;label&quot;: &quot;9&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=10&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=10&quot;,
                     &quot;label&quot;: &quot;10&quot;,
                     &quot;active&quot;: false
                 },
@@ -12775,22 +12775,22 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=20&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=20&quot;,
                     &quot;label&quot;: &quot;20&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=21&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=21&quot;,
                     &quot;label&quot;: &quot;21&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts?page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/posts&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/posts&quot;,
             &quot;per_page&quot;: 12,
             &quot;to&quot;: 12,
             &quot;total&quot;: 251
@@ -12885,10 +12885,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-posts"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -13049,17 +13049,17 @@ So you need to embed the picture table like: /api/posts/1?embed=pictures to retr
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/posts/2?unactivatedIncluded=1&amp;belongLoggedUser=&amp;noCache=&amp;embed=user%2CpostType&amp;detailed=" \
+    --get "https://127.0.0.1/api/posts/2?unactivatedIncluded=1&amp;belongLoggedUser=&amp;noCache=&amp;embed=user%2CpostType&amp;detailed=" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts/2"
+    "https://127.0.0.1/api/posts/2"
 );
 
 const params = {
@@ -13076,7 +13076,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -13088,7 +13088,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts/2';
+$url = 'https://127.0.0.1/api/posts/2';
 $response = $client-&gt;get(
     $url,
     [
@@ -13096,7 +13096,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -13116,7 +13116,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts/2'
+url = 'https://127.0.0.1/api/posts/2'
 params = {
   'unactivatedIncluded': '1',
   'belongLoggedUser': '0',
@@ -13208,14 +13208,14 @@ vary: Origin
         &quot;updated_at&quot;: &quot;2025-05-17T08:23:41.000000Z&quot;,
         &quot;reference&quot;: &quot;GWpmbk5ezJn&quot;,
         &quot;slug&quot;: &quot;voluptas-inventore-repellendus-veniam&quot;,
-        &quot;url&quot;: &quot;https://demo.laraclassifier.local/voluptas-inventore-repellendus-veniam/GWpmbk5ezJn&quot;,
+        &quot;url&quot;: &quot;https://127.0.0.1/voluptas-inventore-repellendus-veniam/GWpmbk5ezJn&quot;,
         &quot;phone_intl&quot;: &quot;(833) 383-6966&quot;,
         &quot;created_at_formatted&quot;: &quot;3 months ago&quot;,
         &quot;updated_at_formatted&quot;: &quot;May 17th, 2025 at 04:23&quot;,
         &quot;archived_at_formatted&quot;: &quot;&quot;,
         &quot;archived_manually_at_formatted&quot;: &quot;&quot;,
-        &quot;user_photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/2/thumbnails/800x800-41ccbeb517f138cf49aa5048e8f07b68.jpg&quot;,
-        &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;,
+        &quot;user_photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/2/thumbnails/800x800-41ccbeb517f138cf49aa5048e8f07b68.jpg&quot;,
+        &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;,
         &quot;price_label&quot;: &quot;Price:&quot;,
         &quot;price_formatted&quot;: &quot;$75,594&quot;,
         &quot;visits_formatted&quot;: &quot;96 views&quot;,
@@ -13229,10 +13229,10 @@ vary: Origin
             &quot;position&quot;: 1,
             &quot;active&quot;: 1,
             &quot;url&quot;: {
-                &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/2/thumbnails/816x460-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
-                &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/2/thumbnails/120x90-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
-                &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/2/thumbnails/320x240-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
-                &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/2/thumbnails/816x460-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;
+                &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/2/thumbnails/816x460-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
+                &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/2/thumbnails/120x90-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
+                &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/2/thumbnails/320x240-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;,
+                &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/2/thumbnails/816x460-eb4a05e800c6ea5fbf9d16171777fce3.jpg&quot;
             }
         },
         &quot;user&quot;: {
@@ -13245,9 +13245,9 @@ vary: Origin
             &quot;original_updated_at&quot;: &quot;2025-01-21 16:23:44&quot;,
             &quot;original_last_activity&quot;: null,
             &quot;created_at_formatted&quot;: &quot;1 year ago&quot;,
-            &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/2/thumbnails/800x800-41ccbeb517f138cf49aa5048e8f07b68.jpg&quot;,
+            &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/2/thumbnails/800x800-41ccbeb517f138cf49aa5048e8f07b68.jpg&quot;,
             &quot;p_is_online&quot;: false,
-            &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+            &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
         },
         &quot;postType&quot;: {
             &quot;id&quot;: 1,
@@ -13349,10 +13349,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-posts--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -13490,12 +13490,12 @@ Note: The field 'admin_code' is only available when the listing's country's 'adm
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/posts" \
+    "https://127.0.0.1/api/posts" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "category_id=1"\
     --form "post_type_id=1"\
@@ -13525,7 +13525,7 @@ Note: The field 'admin_code' is only available when the listing's country's 'adm
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts"
+    "https://127.0.0.1/api/posts"
 );
 
 const headers = {
@@ -13533,7 +13533,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -13572,7 +13572,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts';
+$url = 'https://127.0.0.1/api/posts';
 $response = $client-&gt;post(
     $url,
     [
@@ -13581,7 +13581,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -13692,7 +13692,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts'
+url = 'https://127.0.0.1/api/posts'
 files = {
   'category_id': (None, '1'),
   'post_type_id': (None, '1'),
@@ -13856,10 +13856,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-posts"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -14206,12 +14206,12 @@ The field 'admin_code' is only available when the listing's country's 'admin_typ
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/posts/6" \
+    "https://127.0.0.1/api/posts/6" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "category_id=1"\
     --form "post_type_id=1"\
@@ -14240,7 +14240,7 @@ The field 'admin_code' is only available when the listing's country's 'admin_typ
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts/6"
+    "https://127.0.0.1/api/posts/6"
 );
 
 const headers = {
@@ -14248,7 +14248,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -14286,7 +14286,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts/6';
+$url = 'https://127.0.0.1/api/posts/6';
 $response = $client-&gt;put(
     $url,
     [
@@ -14295,7 +14295,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -14402,7 +14402,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts/6'
+url = 'https://127.0.0.1/api/posts/6'
 files = {
   'category_id': (None, '1'),
   'post_type_id': (None, '1'),
@@ -14564,10 +14564,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-posts--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -14914,18 +14914,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/posts/111111,222222,333333" \
+    "https://127.0.0.1/api/posts/111111,222222,333333" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts/111111,222222,333333"
+    "https://127.0.0.1/api/posts/111111,222222,333333"
 );
 
 const headers = {
@@ -14933,7 +14933,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -14945,7 +14945,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts/111111,222222,333333';
+$url = 'https://127.0.0.1/api/posts/111111,222222,333333';
 $response = $client-&gt;delete(
     $url,
     [
@@ -14954,7 +14954,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -14967,7 +14967,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts/111111,222222,333333'
+url = 'https://127.0.0.1/api/posts/111111,222222,333333'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -15081,10 +15081,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-posts--ids-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -15128,17 +15128,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/packages/promotion?embed=&amp;sort=-lft" \
+    --get "https://127.0.0.1/api/packages/promotion?embed=&amp;sort=-lft" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/packages/promotion"
+    "https://127.0.0.1/api/packages/promotion"
 );
 
 const params = {
@@ -15152,7 +15152,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -15164,7 +15164,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/packages/promotion';
+$url = 'https://127.0.0.1/api/packages/promotion';
 $response = $client-&gt;get(
     $url,
     [
@@ -15172,7 +15172,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -15189,7 +15189,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/packages/promotion'
+url = 'https://127.0.0.1/api/packages/promotion'
 params = {
   'embed': '',
   'sort': '-lft',
@@ -15424,10 +15424,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-packages-promotion"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -15478,17 +15478,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/packages/subscription?embed=&amp;sort=-lft" \
+    --get "https://127.0.0.1/api/packages/subscription?embed=&amp;sort=-lft" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/packages/subscription"
+    "https://127.0.0.1/api/packages/subscription"
 );
 
 const params = {
@@ -15502,7 +15502,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -15514,7 +15514,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/packages/subscription';
+$url = 'https://127.0.0.1/api/packages/subscription';
 $response = $client-&gt;get(
     $url,
     [
@@ -15522,7 +15522,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -15539,7 +15539,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/packages/subscription'
+url = 'https://127.0.0.1/api/packages/subscription'
 params = {
   'embed': '',
   'sort': '-lft',
@@ -15736,10 +15736,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-packages-subscription"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -15790,17 +15790,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/packages/2?embed=currency" \
+    --get "https://127.0.0.1/api/packages/2?embed=currency" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/packages/2"
+    "https://127.0.0.1/api/packages/2"
 );
 
 const params = {
@@ -15813,7 +15813,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -15825,7 +15825,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/packages/2';
+$url = 'https://127.0.0.1/api/packages/2';
 $response = $client-&gt;get(
     $url,
     [
@@ -15833,7 +15833,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -15849,7 +15849,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/packages/2'
+url = 'https://127.0.0.1/api/packages/2'
 params = {
   'embed': 'currency',
 }
@@ -16018,10 +16018,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-packages--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -16077,17 +16077,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/pages?excludedFromFooter=&amp;sort=-lft&amp;perPage=2" \
+    --get "https://127.0.0.1/api/pages?excludedFromFooter=&amp;sort=-lft&amp;perPage=2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pages"
+    "https://127.0.0.1/api/pages"
 );
 
 const params = {
@@ -16102,7 +16102,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -16114,7 +16114,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pages';
+$url = 'https://127.0.0.1/api/pages';
 $response = $client-&gt;get(
     $url,
     [
@@ -16122,7 +16122,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -16140,7 +16140,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pages'
+url = 'https://127.0.0.1/api/pages'
 params = {
   'excludedFromFooter': '0',
   'sort': '-lft',
@@ -16225,10 +16225,10 @@ vary: Origin
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=2&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/pages?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/pages?page=2&quot;,
             &quot;prev&quot;: null,
-            &quot;next&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=2&quot;
+            &quot;next&quot;: &quot;https://127.0.0.1/api/pages?page=2&quot;
         },
         &quot;meta&quot;: {
             &quot;current_page&quot;: 1,
@@ -16241,22 +16241,22 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/pages?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/pages?page=2&quot;,
                     &quot;label&quot;: &quot;2&quot;,
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/pages?page=2&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/pages?page=2&quot;,
                     &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/pages&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/pages&quot;,
             &quot;per_page&quot;: 2,
             &quot;to&quot;: 2,
             &quot;total&quot;: 4
@@ -16351,10 +16351,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-pages"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -16426,24 +16426,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/pages/terms" \
+    --get "https://127.0.0.1/api/pages/terms" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pages/terms"
+    "https://127.0.0.1/api/pages/terms"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -16455,7 +16455,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pages/terms';
+$url = 'https://127.0.0.1/api/pages/terms';
 $response = $client-&gt;get(
     $url,
     [
@@ -16463,7 +16463,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -16476,7 +16476,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pages/terms'
+url = 'https://127.0.0.1/api/pages/terms'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -16618,10 +16618,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-pages--slugOrId-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -16665,17 +16665,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/paymentMethods?countryCode=US&amp;sort=-lft" \
+    --get "https://127.0.0.1/api/paymentMethods?countryCode=US&amp;sort=-lft" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/paymentMethods"
+    "https://127.0.0.1/api/paymentMethods"
 );
 
 const params = {
@@ -16689,7 +16689,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -16701,7 +16701,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/paymentMethods';
+$url = 'https://127.0.0.1/api/paymentMethods';
 $response = $client-&gt;get(
     $url,
     [
@@ -16709,7 +16709,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -16726,7 +16726,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/paymentMethods'
+url = 'https://127.0.0.1/api/paymentMethods'
 params = {
   'countryCode': 'US',
   'sort': '-lft',
@@ -16852,10 +16852,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-paymentMethods"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -16906,24 +16906,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/paymentMethods/1" \
+    --get "https://127.0.0.1/api/paymentMethods/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/paymentMethods/1"
+    "https://127.0.0.1/api/paymentMethods/1"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -16935,7 +16935,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/paymentMethods/1';
+$url = 'https://127.0.0.1/api/paymentMethods/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -16943,7 +16943,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -16956,7 +16956,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/paymentMethods/1'
+url = 'https://127.0.0.1/api/paymentMethods/1'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -17077,10 +17077,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-paymentMethods--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -17125,18 +17125,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/payments/promotion?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/payments/promotion?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/payments/promotion"
+    "https://127.0.0.1/api/payments/promotion"
 );
 
 const params = {
@@ -17154,7 +17154,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -17166,7 +17166,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/payments/promotion';
+$url = 'https://127.0.0.1/api/payments/promotion';
 $response = $client-&gt;get(
     $url,
     [
@@ -17175,7 +17175,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -17195,7 +17195,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/payments/promotion'
+url = 'https://127.0.0.1/api/payments/promotion'
 params = {
   'embed': '',
   'valid': '0',
@@ -17335,10 +17335,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-payments-promotion"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -17443,18 +17443,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/payments/subscription?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/payments/subscription?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/payments/subscription"
+    "https://127.0.0.1/api/payments/subscription"
 );
 
 const params = {
@@ -17472,7 +17472,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -17484,7 +17484,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/payments/subscription';
+$url = 'https://127.0.0.1/api/payments/subscription';
 $response = $client-&gt;get(
     $url,
     [
@@ -17493,7 +17493,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -17513,7 +17513,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/payments/subscription'
+url = 'https://127.0.0.1/api/payments/subscription'
 params = {
   'embed': '',
   'valid': '0',
@@ -17653,10 +17653,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-payments-subscription"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -17761,18 +17761,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/payments/subscription/users/1/payments?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/payments/subscription/users/1/payments?embed=&amp;valid=&amp;active=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/payments/subscription/users/1/payments"
+    "https://127.0.0.1/api/payments/subscription/users/1/payments"
 );
 
 const params = {
@@ -17790,7 +17790,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -17802,7 +17802,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/payments/subscription/users/1/payments';
+$url = 'https://127.0.0.1/api/payments/subscription/users/1/payments';
 $response = $client-&gt;get(
     $url,
     [
@@ -17811,7 +17811,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -17831,7 +17831,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/payments/subscription/users/1/payments'
+url = 'https://127.0.0.1/api/payments/subscription/users/1/payments'
 params = {
   'embed': '',
   'valid': '0',
@@ -17971,10 +17971,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-payments-subscription-users--userId--payments"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -18091,18 +18091,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/payments/2?embed=" \
+    --get "https://127.0.0.1/api/payments/2?embed=" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/payments/2"
+    "https://127.0.0.1/api/payments/2"
 );
 
 const params = {
@@ -18116,7 +18116,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -18128,7 +18128,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/payments/2';
+$url = 'https://127.0.0.1/api/payments/2';
 $response = $client-&gt;get(
     $url,
     [
@@ -18137,7 +18137,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -18153,7 +18153,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/payments/2'
+url = 'https://127.0.0.1/api/payments/2'
 params = {
   'embed': '',
 }
@@ -18289,10 +18289,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-payments--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -18345,12 +18345,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/payments?package=19" \
+    "https://127.0.0.1/api/payments?package=19" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"country_code\": \"US\",
@@ -18364,7 +18364,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/payments"
+    "https://127.0.0.1/api/payments"
 );
 
 const params = {
@@ -18378,7 +18378,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -18399,7 +18399,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/payments';
+$url = 'https://127.0.0.1/api/payments';
 $response = $client-&gt;post(
     $url,
     [
@@ -18408,7 +18408,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -18431,7 +18431,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/payments'
+url = 'https://127.0.0.1/api/payments'
 payload = {
     "country_code": "US",
     "payable_id": 2,
@@ -18555,10 +18555,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-payments"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -18658,17 +18658,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/pictures/298?embed=" \
+    --get "https://127.0.0.1/api/pictures/298?embed=" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pictures/298"
+    "https://127.0.0.1/api/pictures/298"
 );
 
 const params = {
@@ -18681,7 +18681,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -18693,7 +18693,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pictures/298';
+$url = 'https://127.0.0.1/api/pictures/298';
 $response = $client-&gt;get(
     $url,
     [
@@ -18701,7 +18701,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -18717,7 +18717,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pictures/298'
+url = 'https://127.0.0.1/api/pictures/298'
 params = {
   'embed': '',
 }
@@ -18758,10 +18758,10 @@ vary: Origin
         &quot;position&quot;: 2,
         &quot;active&quot;: 1,
         &quot;url&quot;: {
-            &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-            &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-            &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-            &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+            &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+            &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+            &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+            &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
         }
     }
 }</code>
@@ -18853,10 +18853,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-pictures--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -18909,12 +18909,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/pictures" \
+    "https://127.0.0.1/api/pictures" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "country_code=US"\
     --form "count_packages=3"\
@@ -18925,7 +18925,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pictures"
+    "https://127.0.0.1/api/pictures"
 );
 
 const headers = {
@@ -18933,7 +18933,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -18953,7 +18953,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pictures';
+$url = 'https://127.0.0.1/api/pictures';
 $response = $client-&gt;post(
     $url,
     [
@@ -18962,7 +18962,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -18997,7 +18997,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pictures'
+url = 'https://127.0.0.1/api/pictures'
 files = {
   'country_code': (None, 'US'),
   'count_packages': (None, '3'),
@@ -19123,10 +19123,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-pictures"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -19215,12 +19215,12 @@ The 'new_post_id' and 'new_post_tmp_token' fields need to be removed or unset du
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/pictures/999999999" \
+    "https://127.0.0.1/api/pictures/999999999" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"post_id\": 2
@@ -19230,7 +19230,7 @@ The 'new_post_id' and 'new_post_tmp_token' fields need to be removed or unset du
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pictures/999999999"
+    "https://127.0.0.1/api/pictures/999999999"
 );
 
 const headers = {
@@ -19238,7 +19238,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -19255,7 +19255,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pictures/999999999';
+$url = 'https://127.0.0.1/api/pictures/999999999';
 $response = $client-&gt;delete(
     $url,
     [
@@ -19264,7 +19264,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -19280,7 +19280,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pictures/999999999'
+url = 'https://127.0.0.1/api/pictures/999999999'
 payload = {
     "post_id": 2
 }
@@ -19397,10 +19397,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-pictures--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -19453,13 +19453,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/pictures/reorder" \
+    "https://127.0.0.1/api/pictures/reorder" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "X-Action: bulk" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"post_id\": 2,
@@ -19470,7 +19470,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/pictures/reorder"
+    "https://127.0.0.1/api/pictures/reorder"
 );
 
 const headers = {
@@ -19479,7 +19479,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -19497,7 +19497,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/pictures/reorder';
+$url = 'https://127.0.0.1/api/pictures/reorder';
 $response = $client-&gt;post(
     $url,
     [
@@ -19507,7 +19507,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -19524,7 +19524,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/pictures/reorder'
+url = 'https://127.0.0.1/api/pictures/reorder'
 payload = {
     "post_id": 2,
     "body": "suscipit"
@@ -19654,10 +19654,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-pictures-reorder"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -19708,17 +19708,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/posts/4621/pictures?embed=&amp;postId=1&amp;latest=&amp;sort=-position&amp;perPage=2" \
+    --get "https://127.0.0.1/api/posts/4621/pictures?embed=&amp;postId=1&amp;latest=&amp;sort=-position&amp;perPage=2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/posts/4621/pictures"
+    "https://127.0.0.1/api/posts/4621/pictures"
 );
 
 const params = {
@@ -19735,7 +19735,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -19747,7 +19747,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/posts/4621/pictures';
+$url = 'https://127.0.0.1/api/posts/4621/pictures';
 $response = $client-&gt;get(
     $url,
     [
@@ -19755,7 +19755,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -19775,7 +19775,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/posts/4621/pictures'
+url = 'https://127.0.0.1/api/posts/4621/pictures'
 params = {
   'embed': '',
   'postId': '1',
@@ -19822,10 +19822,10 @@ vary: Origin
                 &quot;position&quot;: 1,
                 &quot;active&quot;: 1,
                 &quot;url&quot;: {
-                    &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/1/thumbnails/816x460-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
-                    &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/1/thumbnails/120x90-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
-                    &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/1/thumbnails/320x240-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
-                    &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/files/us/1/thumbnails/816x460-070907f995fd5c828e90834bf495d9fd.jpg&quot;
+                    &quot;full&quot;: &quot;https://127.0.0.1/storage/files/us/1/thumbnails/816x460-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
+                    &quot;small&quot;: &quot;https://127.0.0.1/storage/files/us/1/thumbnails/120x90-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
+                    &quot;medium&quot;: &quot;https://127.0.0.1/storage/files/us/1/thumbnails/320x240-070907f995fd5c828e90834bf495d9fd.jpg&quot;,
+                    &quot;large&quot;: &quot;https://127.0.0.1/storage/files/us/1/thumbnails/816x460-070907f995fd5c828e90834bf495d9fd.jpg&quot;
                 }
             },
             {
@@ -19836,10 +19836,10 @@ vary: Origin
                 &quot;position&quot;: 2,
                 &quot;active&quot;: 1,
                 &quot;url&quot;: {
-                    &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+                    &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
                 }
             },
             {
@@ -19850,16 +19850,16 @@ vary: Origin
                 &quot;position&quot;: 1,
                 &quot;active&quot;: 1,
                 &quot;url&quot;: {
-                    &quot;full&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;small&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;medium&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;,
-                    &quot;large&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/picture.jpg&quot;
+                    &quot;full&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;small&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;medium&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;,
+                    &quot;large&quot;: &quot;https://127.0.0.1/storage/app/default/picture.jpg&quot;
                 }
             }
         ],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/posts/4621/pictures?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/posts/4621/pictures?page=1&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/posts/4621/pictures?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/posts/4621/pictures?page=1&quot;,
             &quot;prev&quot;: null,
             &quot;next&quot;: null
         },
@@ -19874,7 +19874,7 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/posts/4621/pictures?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/posts/4621/pictures?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
@@ -19884,7 +19884,7 @@ vary: Origin
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/posts/4621/pictures&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/posts/4621/pictures&quot;,
             &quot;per_page&quot;: 10,
             &quot;to&quot;: 3,
             &quot;total&quot;: 3
@@ -19979,10 +19979,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-posts--postId--pictures"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -20092,11 +20092,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/plugins/posts/3/reviews" \
+    --get "https://127.0.0.1/api/plugins/posts/3/reviews" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"postId\": 2
@@ -20106,14 +20106,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/plugins/posts/3/reviews"
+    "https://127.0.0.1/api/plugins/posts/3/reviews"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -20130,7 +20130,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/plugins/posts/3/reviews';
+$url = 'https://127.0.0.1/api/plugins/posts/3/reviews';
 $response = $client-&gt;get(
     $url,
     [
@@ -20138,7 +20138,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -20154,7 +20154,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/plugins/posts/3/reviews'
+url = 'https://127.0.0.1/api/plugins/posts/3/reviews'
 payload = {
     "postId": 2
 }
@@ -20190,8 +20190,8 @@ vary: Origin
     &quot;result&quot;: {
         &quot;data&quot;: [],
         &quot;links&quot;: {
-            &quot;first&quot;: &quot;https://demo.laraclassifier.local/api/plugins/posts/3/reviews?page=1&quot;,
-            &quot;last&quot;: &quot;https://demo.laraclassifier.local/api/plugins/posts/3/reviews?page=1&quot;,
+            &quot;first&quot;: &quot;https://127.0.0.1/api/plugins/posts/3/reviews?page=1&quot;,
+            &quot;last&quot;: &quot;https://127.0.0.1/api/plugins/posts/3/reviews?page=1&quot;,
             &quot;prev&quot;: null,
             &quot;next&quot;: null
         },
@@ -20206,7 +20206,7 @@ vary: Origin
                     &quot;active&quot;: false
                 },
                 {
-                    &quot;url&quot;: &quot;https://demo.laraclassifier.local/api/plugins/posts/3/reviews?page=1&quot;,
+                    &quot;url&quot;: &quot;https://127.0.0.1/api/plugins/posts/3/reviews?page=1&quot;,
                     &quot;label&quot;: &quot;1&quot;,
                     &quot;active&quot;: true
                 },
@@ -20216,7 +20216,7 @@ vary: Origin
                     &quot;active&quot;: false
                 }
             ],
-            &quot;path&quot;: &quot;https://demo.laraclassifier.local/api/plugins/posts/3/reviews&quot;,
+            &quot;path&quot;: &quot;https://127.0.0.1/api/plugins/posts/3/reviews&quot;,
             &quot;per_page&quot;: 10,
             &quot;to&quot;: null,
             &quot;total&quot;: 0
@@ -20311,10 +20311,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-plugins-posts--postId--reviews"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -20367,12 +20367,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/plugins/posts/2/reviews" \
+    "https://127.0.0.1/api/plugins/posts/2/reviews" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"comment\": null,
@@ -20386,7 +20386,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/plugins/posts/2/reviews"
+    "https://127.0.0.1/api/plugins/posts/2/reviews"
 );
 
 const headers = {
@@ -20394,7 +20394,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -20415,7 +20415,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/plugins/posts/2/reviews';
+$url = 'https://127.0.0.1/api/plugins/posts/2/reviews';
 $response = $client-&gt;post(
     $url,
     [
@@ -20424,7 +20424,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -20444,7 +20444,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/plugins/posts/2/reviews'
+url = 'https://127.0.0.1/api/plugins/posts/2/reviews'
 payload = {
     "comment": null,
     "rating": 4,
@@ -20565,10 +20565,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-plugins-posts--postId--reviews"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -20665,18 +20665,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/plugins/posts/2/reviews/reprehenderit" \
+    "https://127.0.0.1/api/plugins/posts/2/reviews/reprehenderit" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/plugins/posts/2/reviews/reprehenderit"
+    "https://127.0.0.1/api/plugins/posts/2/reviews/reprehenderit"
 );
 
 const headers = {
@@ -20684,7 +20684,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -20696,7 +20696,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/plugins/posts/2/reviews/reprehenderit';
+$url = 'https://127.0.0.1/api/plugins/posts/2/reviews/reprehenderit';
 $response = $client-&gt;delete(
     $url,
     [
@@ -20705,7 +20705,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -20718,7 +20718,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/plugins/posts/2/reviews/reprehenderit'
+url = 'https://127.0.0.1/api/plugins/posts/2/reviews/reprehenderit'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -20832,10 +20832,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-plugins-posts--postId--reviews--ids-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -20891,12 +20891,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/savedPosts" \
+    "https://127.0.0.1/api/savedPosts" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"post_id\": 2
@@ -20906,7 +20906,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedPosts"
+    "https://127.0.0.1/api/savedPosts"
 );
 
 const headers = {
@@ -20914,7 +20914,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -20931,7 +20931,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedPosts';
+$url = 'https://127.0.0.1/api/savedPosts';
 $response = $client-&gt;post(
     $url,
     [
@@ -20940,7 +20940,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -20956,7 +20956,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedPosts'
+url = 'https://127.0.0.1/api/savedPosts'
 payload = {
     "post_id": 2
 }
@@ -21073,10 +21073,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-savedPosts"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -21117,18 +21117,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/savedPosts?country_code=US&amp;embed=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/savedPosts?country_code=US&amp;embed=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedPosts"
+    "https://127.0.0.1/api/savedPosts"
 );
 
 const params = {
@@ -21145,7 +21145,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -21157,7 +21157,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedPosts';
+$url = 'https://127.0.0.1/api/savedPosts';
 $response = $client-&gt;get(
     $url,
     [
@@ -21166,7 +21166,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -21185,7 +21185,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedPosts'
+url = 'https://127.0.0.1/api/savedPosts'
 params = {
   'country_code': 'US',
   'embed': '',
@@ -21324,10 +21324,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-savedPosts"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -21401,18 +21401,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/savedPosts/1,2,3" \
+    "https://127.0.0.1/api/savedPosts/1,2,3" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedPosts/1,2,3"
+    "https://127.0.0.1/api/savedPosts/1,2,3"
 );
 
 const headers = {
@@ -21420,7 +21420,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -21432,7 +21432,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedPosts/1,2,3';
+$url = 'https://127.0.0.1/api/savedPosts/1,2,3';
 $response = $client-&gt;delete(
     $url,
     [
@@ -21441,7 +21441,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -21454,7 +21454,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedPosts/1,2,3'
+url = 'https://127.0.0.1/api/savedPosts/1,2,3'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -21568,10 +21568,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-savedPosts--ids-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -21616,12 +21616,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/savedSearches" \
+    "https://127.0.0.1/api/savedSearches" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"url\": \"https:\\/\\/demo.laraclassifier.com\\/search\\/?q=test&amp;l=\",
@@ -21632,7 +21632,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedSearches"
+    "https://127.0.0.1/api/savedSearches"
 );
 
 const headers = {
@@ -21640,7 +21640,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -21658,7 +21658,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedSearches';
+$url = 'https://127.0.0.1/api/savedSearches';
 $response = $client-&gt;post(
     $url,
     [
@@ -21667,7 +21667,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -21684,7 +21684,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedSearches'
+url = 'https://127.0.0.1/api/savedSearches'
 payload = {
     "url": "https:\/\/demo.laraclassifier.com\/search\/?q=test&amp;l=",
     "count_posts": 29
@@ -21802,10 +21802,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-savedSearches"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -21857,18 +21857,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/savedSearches?embed=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/savedSearches?embed=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedSearches"
+    "https://127.0.0.1/api/savedSearches"
 );
 
 const params = {
@@ -21884,7 +21884,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -21896,7 +21896,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedSearches';
+$url = 'https://127.0.0.1/api/savedSearches';
 $response = $client-&gt;get(
     $url,
     [
@@ -21905,7 +21905,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -21923,7 +21923,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedSearches'
+url = 'https://127.0.0.1/api/savedSearches'
 params = {
   'embed': '',
   'sort': 'created_at',
@@ -22061,10 +22061,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-savedSearches"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -22127,18 +22127,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/savedSearches/1?embed=" \
+    --get "https://127.0.0.1/api/savedSearches/1?embed=" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedSearches/1"
+    "https://127.0.0.1/api/savedSearches/1"
 );
 
 const params = {
@@ -22152,7 +22152,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -22164,7 +22164,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedSearches/1';
+$url = 'https://127.0.0.1/api/savedSearches/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -22173,7 +22173,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -22189,7 +22189,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedSearches/1'
+url = 'https://127.0.0.1/api/savedSearches/1'
 params = {
   'embed': '',
 }
@@ -22325,10 +22325,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-savedSearches--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -22381,18 +22381,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/savedSearches/1,2,3" \
+    "https://127.0.0.1/api/savedSearches/1,2,3" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/savedSearches/1,2,3"
+    "https://127.0.0.1/api/savedSearches/1,2,3"
 );
 
 const headers = {
@@ -22400,7 +22400,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -22412,7 +22412,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/savedSearches/1,2,3';
+$url = 'https://127.0.0.1/api/savedSearches/1,2,3';
 $response = $client-&gt;delete(
     $url,
     [
@@ -22421,7 +22421,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -22434,7 +22434,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/savedSearches/1,2,3'
+url = 'https://127.0.0.1/api/savedSearches/1,2,3'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -22548,10 +22548,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-savedSearches--ids-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -22595,24 +22595,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/settings" \
+    --get "https://127.0.0.1/api/settings" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/settings"
+    "https://127.0.0.1/api/settings"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -22624,7 +22624,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/settings';
+$url = 'https://127.0.0.1/api/settings';
 $response = $client-&gt;get(
     $url,
     [
@@ -22632,7 +22632,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -22645,7 +22645,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/settings'
+url = 'https://127.0.0.1/api/settings'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -22694,10 +22694,10 @@ vary: Origin
             &quot;countries_charts_limit&quot;: &quot;5&quot;,
             &quot;latest_entries_limit&quot;: &quot;10&quot;,
             &quot;general_settings_as_submenu_in_sidebar&quot;: &quot;1&quot;,
-            &quot;logo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo.png&quot;,
-            &quot;logo_dark_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo-dark.png&quot;,
-            &quot;logo_light_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo-light.png&quot;,
-            &quot;favicon_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/ico/favicon.png&quot;
+            &quot;logo_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo.png&quot;,
+            &quot;logo_dark_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo-dark.png&quot;,
+            &quot;logo_light_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo-light.png&quot;,
+            &quot;favicon_url&quot;: &quot;https://127.0.0.1/storage/app/default/ico/favicon.png&quot;
         },
         &quot;style&quot;: {
             &quot;skin&quot;: &quot;blueIzis&quot;,
@@ -22923,7 +22923,7 @@ vary: Origin
             &quot;send_notification_on_user_ban&quot;: &quot;none&quot;,
             &quot;open_login_in_modal&quot;: &quot;1&quot;,
             &quot;hero_image_path&quot;: &quot;app/default/auth/login-bg-blurred.jpg&quot;,
-            &quot;hero_image_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/auth/thumbnails/2500x2500-login-bg-blurred.jpg&quot;
+            &quot;hero_image_url&quot;: &quot;https://127.0.0.1/storage/app/default/auth/thumbnails/2500x2500-login-bg-blurred.jpg&quot;
         },
         &quot;social_auth&quot;: {
             &quot;social_login_activation&quot;: &quot;1&quot;,
@@ -23112,10 +23112,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-settings"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -23143,24 +23143,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/settings/app" \
+    --get "https://127.0.0.1/api/settings/app" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/settings/app"
+    "https://127.0.0.1/api/settings/app"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -23172,7 +23172,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/settings/app';
+$url = 'https://127.0.0.1/api/settings/app';
 $response = $client-&gt;get(
     $url,
     [
@@ -23180,7 +23180,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -23193,7 +23193,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/settings/app'
+url = 'https://127.0.0.1/api/settings/app'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -23241,10 +23241,10 @@ vary: Origin
         &quot;countries_charts_limit&quot;: &quot;5&quot;,
         &quot;latest_entries_limit&quot;: &quot;10&quot;,
         &quot;general_settings_as_submenu_in_sidebar&quot;: &quot;1&quot;,
-        &quot;logo_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo.png&quot;,
-        &quot;logo_dark_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo-dark.png&quot;,
-        &quot;logo_light_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/logo-light.png&quot;,
-        &quot;favicon_url&quot;: &quot;https://demo.laraclassifier.local/storage/app/default/ico/favicon.png&quot;
+        &quot;logo_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo.png&quot;,
+        &quot;logo_dark_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo-dark.png&quot;,
+        &quot;logo_light_url&quot;: &quot;https://127.0.0.1/storage/app/default/logo-light.png&quot;,
+        &quot;favicon_url&quot;: &quot;https://127.0.0.1/storage/app/default/ico/favicon.png&quot;
     }
 }</code>
  </pre>
@@ -23335,10 +23335,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-settings--key-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -23382,24 +23382,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/connect/" \
+    --get "https://127.0.0.1/api/auth/connect/" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/connect/"
+    "https://127.0.0.1/api/auth/connect/"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -23411,7 +23411,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/connect/';
+$url = 'https://127.0.0.1/api/auth/connect/';
 $response = $client-&gt;get(
     $url,
     [
@@ -23419,7 +23419,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -23432,7 +23432,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/connect/'
+url = 'https://127.0.0.1/api/auth/connect/'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -23551,10 +23551,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-connect--provider-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -23594,24 +23594,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/connect//callback" \
+    --get "https://127.0.0.1/api/auth/connect//callback" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/connect//callback"
+    "https://127.0.0.1/api/auth/connect//callback"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -23623,7 +23623,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/connect//callback';
+$url = 'https://127.0.0.1/api/auth/connect//callback';
 $response = $client-&gt;get(
     $url,
     [
@@ -23631,7 +23631,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -23644,7 +23644,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/connect//callback'
+url = 'https://127.0.0.1/api/auth/connect//callback'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -23763,10 +23763,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-connect--provider--callback"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -23810,12 +23810,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/threads" \
+    "https://127.0.0.1/api/threads" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "name=John Doe"\
     --form "auth_field=email"\
@@ -23830,7 +23830,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads"
+    "https://127.0.0.1/api/threads"
 );
 
 const headers = {
@@ -23838,7 +23838,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -23862,7 +23862,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads';
+$url = 'https://127.0.0.1/api/threads';
 $response = $client-&gt;post(
     $url,
     [
@@ -23871,7 +23871,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -23922,7 +23922,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads'
+url = 'https://127.0.0.1/api/threads'
 files = {
   'name': (None, 'John Doe'),
   'auth_field': (None, 'email'),
@@ -24056,10 +24056,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-threads"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -24194,18 +24194,18 @@ Filters:</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/threads?filter=unread&amp;embed=&amp;perPage=2" \
+    --get "https://127.0.0.1/api/threads?filter=unread&amp;embed=&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads"
+    "https://127.0.0.1/api/threads"
 );
 
 const params = {
@@ -24221,7 +24221,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -24233,7 +24233,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads';
+$url = 'https://127.0.0.1/api/threads';
 $response = $client-&gt;get(
     $url,
     [
@@ -24242,7 +24242,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -24260,7 +24260,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads'
+url = 'https://127.0.0.1/api/threads'
 params = {
   'filter': 'unread',
   'embed': '',
@@ -24398,10 +24398,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-threads"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -24464,18 +24464,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/threads/8?embed=" \
+    --get "https://127.0.0.1/api/threads/8?embed=" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/8"
+    "https://127.0.0.1/api/threads/8"
 );
 
 const params = {
@@ -24489,7 +24489,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -24501,7 +24501,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/8';
+$url = 'https://127.0.0.1/api/threads/8';
 $response = $client-&gt;get(
     $url,
     [
@@ -24510,7 +24510,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -24526,7 +24526,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/8'
+url = 'https://127.0.0.1/api/threads/8'
 params = {
   'embed': '',
 }
@@ -24662,10 +24662,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-threads--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -24718,12 +24718,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/threads/111111" \
+    "https://127.0.0.1/api/threads/111111" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "body=Modi temporibus voluptas expedita voluptatibus voluptas veniam."\
     --form "file_path=@/private/var/folders/r0/k0xbnx757k3fnz09_6g9rp6w0000gn/T/phpCJc5A1" </code></pre></div>
@@ -24731,7 +24731,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/111111"
+    "https://127.0.0.1/api/threads/111111"
 );
 
 const headers = {
@@ -24739,7 +24739,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -24756,7 +24756,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/111111';
+$url = 'https://127.0.0.1/api/threads/111111';
 $response = $client-&gt;put(
     $url,
     [
@@ -24765,7 +24765,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -24788,7 +24788,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/111111'
+url = 'https://127.0.0.1/api/threads/111111'
 files = {
   'body': (None, 'Modi temporibus voluptas expedita voluptatibus voluptas veniam.'),
   'file_path': open('/private/var/folders/r0/k0xbnx757k3fnz09_6g9rp6w0000gn/T/phpCJc5A1', 'rb')}
@@ -24908,10 +24908,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-threads--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -24975,18 +24975,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/threads/111111,222222,333333" \
+    "https://127.0.0.1/api/threads/111111,222222,333333" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/111111,222222,333333"
+    "https://127.0.0.1/api/threads/111111,222222,333333"
 );
 
 const headers = {
@@ -24994,7 +24994,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -25006,7 +25006,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/111111,222222,333333';
+$url = 'https://127.0.0.1/api/threads/111111,222222,333333';
 $response = $client-&gt;delete(
     $url,
     [
@@ -25015,7 +25015,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -25028,7 +25028,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/111111,222222,333333'
+url = 'https://127.0.0.1/api/threads/111111,222222,333333'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -25142,10 +25142,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-threads--ids-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -25186,18 +25186,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/threads/bulkUpdate/111111,222222,333333?type=dolore" \
+    "https://127.0.0.1/api/threads/bulkUpdate/111111,222222,333333?type=dolore" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/bulkUpdate/111111,222222,333333"
+    "https://127.0.0.1/api/threads/bulkUpdate/111111,222222,333333"
 );
 
 const params = {
@@ -25211,7 +25211,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -25223,7 +25223,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/bulkUpdate/111111,222222,333333';
+$url = 'https://127.0.0.1/api/threads/bulkUpdate/111111,222222,333333';
 $response = $client-&gt;post(
     $url,
     [
@@ -25232,7 +25232,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -25248,7 +25248,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/bulkUpdate/111111,222222,333333'
+url = 'https://127.0.0.1/api/threads/bulkUpdate/111111,222222,333333'
 params = {
   'type': 'dolore',
 }
@@ -25365,10 +25365,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-threads-bulkUpdate--ids--"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -25421,18 +25421,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/threads/293/messages?embed=&amp;sort=created_at&amp;perPage=2" \
+    --get "https://127.0.0.1/api/threads/293/messages?embed=&amp;sort=created_at&amp;perPage=2" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/293/messages"
+    "https://127.0.0.1/api/threads/293/messages"
 );
 
 const params = {
@@ -25448,7 +25448,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -25460,7 +25460,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/293/messages';
+$url = 'https://127.0.0.1/api/threads/293/messages';
 $response = $client-&gt;get(
     $url,
     [
@@ -25469,7 +25469,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -25487,7 +25487,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/293/messages'
+url = 'https://127.0.0.1/api/threads/293/messages'
 params = {
   'embed': '',
   'sort': 'created_at',
@@ -25625,10 +25625,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-threads--threadId--messages"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -25703,18 +25703,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/threads/293/messages/3545?embed=" \
+    --get "https://127.0.0.1/api/threads/293/messages/3545?embed=" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/threads/293/messages/3545"
+    "https://127.0.0.1/api/threads/293/messages/3545"
 );
 
 const params = {
@@ -25728,7 +25728,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -25740,7 +25740,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/threads/293/messages/3545';
+$url = 'https://127.0.0.1/api/threads/293/messages/3545';
 $response = $client-&gt;get(
     $url,
     [
@@ -25749,7 +25749,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -25765,7 +25765,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/threads/293/messages/3545'
+url = 'https://127.0.0.1/api/threads/293/messages/3545'
 params = {
   'embed': '',
 }
@@ -25901,10 +25901,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-threads--threadId--messages--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -25971,24 +25971,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/genders" \
+    --get "https://127.0.0.1/api/genders" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/genders"
+    "https://127.0.0.1/api/genders"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -26000,7 +26000,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/genders';
+$url = 'https://127.0.0.1/api/genders';
 $response = $client-&gt;get(
     $url,
     [
@@ -26008,7 +26008,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -26021,7 +26021,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/genders'
+url = 'https://127.0.0.1/api/genders'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -26154,10 +26154,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-genders"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -26185,24 +26185,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/genders/1" \
+    --get "https://127.0.0.1/api/genders/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/genders/1"
+    "https://127.0.0.1/api/genders/1"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -26214,7 +26214,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/genders/1';
+$url = 'https://127.0.0.1/api/genders/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -26222,7 +26222,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -26235,7 +26235,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/genders/1'
+url = 'https://127.0.0.1/api/genders/1'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -26360,10 +26360,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-genders--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -26403,24 +26403,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/userTypes" \
+    --get "https://127.0.0.1/api/userTypes" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/userTypes"
+    "https://127.0.0.1/api/userTypes"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -26432,7 +26432,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/userTypes';
+$url = 'https://127.0.0.1/api/userTypes';
 $response = $client-&gt;get(
     $url,
     [
@@ -26440,7 +26440,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -26453,7 +26453,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/userTypes'
+url = 'https://127.0.0.1/api/userTypes'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -26584,10 +26584,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-userTypes"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -26615,24 +26615,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/userTypes/1" \
+    --get "https://127.0.0.1/api/userTypes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/userTypes/1"
+    "https://127.0.0.1/api/userTypes/1"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -26644,7 +26644,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/userTypes/1';
+$url = 'https://127.0.0.1/api/userTypes/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -26652,7 +26652,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -26665,7 +26665,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/userTypes/1'
+url = 'https://127.0.0.1/api/userTypes/1'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -26789,10 +26789,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-userTypes--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -26832,24 +26832,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/users" \
+    --get "https://127.0.0.1/api/users" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users"
+    "https://127.0.0.1/api/users"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -26861,7 +26861,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users';
+$url = 'https://127.0.0.1/api/users';
 $response = $client-&gt;get(
     $url,
     [
@@ -26869,7 +26869,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -26882,7 +26882,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users'
+url = 'https://127.0.0.1/api/users'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -27002,10 +27002,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-users"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -27034,18 +27034,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/users/3?embed=" \
+    --get "https://127.0.0.1/api/users/3?embed=" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/3"
+    "https://127.0.0.1/api/users/3"
 );
 
 const params = {
@@ -27059,7 +27059,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -27071,7 +27071,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/3';
+$url = 'https://127.0.0.1/api/users/3';
 $response = $client-&gt;get(
     $url,
     [
@@ -27080,7 +27080,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'query' =&gt; [
@@ -27096,7 +27096,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/3'
+url = 'https://127.0.0.1/api/users/3'
 params = {
   'embed': '',
 }
@@ -27140,9 +27140,9 @@ vary: Origin
         &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
         &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
         &quot;created_at_formatted&quot;: &quot;May 1st, 2024 at 17:02&quot;,
-        &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+        &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
         &quot;p_is_online&quot;: false,
-        &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+        &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
     }
 }</code>
  </pre>
@@ -27244,10 +27244,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-users--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -27299,11 +27299,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://demo.laraclassifier.local/api/users" \
+    "https://127.0.0.1/api/users" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "name=John Doe"\
     --form "country_code=US"\
@@ -27329,14 +27329,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users"
+    "https://127.0.0.1/api/users"
 );
 
 const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -27371,7 +27371,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users';
+$url = 'https://127.0.0.1/api/users';
 $response = $client-&gt;post(
     $url,
     [
@@ -27379,7 +27379,7 @@ $response = $client-&gt;post(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -27474,7 +27474,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users'
+url = 'https://127.0.0.1/api/users'
 files = {
   'name': (None, 'John Doe'),
   'country_code': (None, 'US'),
@@ -27618,10 +27618,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="POSTapi-users"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -27911,18 +27911,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/users/3/stats" \
+    --get "https://127.0.0.1/api/users/3/stats" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/3/stats"
+    "https://127.0.0.1/api/users/3/stats"
 );
 
 const headers = {
@@ -27930,7 +27930,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -27942,7 +27942,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/3/stats';
+$url = 'https://127.0.0.1/api/users/3/stats';
 $response = $client-&gt;get(
     $url,
     [
@@ -27951,7 +27951,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -27964,7 +27964,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/3/stats'
+url = 'https://127.0.0.1/api/users/3/stats'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -28097,10 +28097,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-users--id--stats"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -28141,18 +28141,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/users/999999/photo/delete" \
+    --get "https://127.0.0.1/api/users/999999/photo/delete" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999/photo/delete"
+    "https://127.0.0.1/api/users/999999/photo/delete"
 );
 
 const headers = {
@@ -28160,7 +28160,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -28172,7 +28172,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999/photo/delete';
+$url = 'https://127.0.0.1/api/users/999999/photo/delete';
 $response = $client-&gt;get(
     $url,
     [
@@ -28181,7 +28181,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -28194,7 +28194,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999/photo/delete'
+url = 'https://127.0.0.1/api/users/999999/photo/delete'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -28327,10 +28327,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-users--id--photo-delete"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -28371,12 +28371,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/users/999999/photo" \
+    "https://127.0.0.1/api/users/999999/photo" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "latest_update_ip=127.0.0.1"\
     --form "photo_path=@/private/var/folders/r0/k0xbnx757k3fnz09_6g9rp6w0000gn/T/phpIM96b7" </code></pre></div>
@@ -28384,7 +28384,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999/photo"
+    "https://127.0.0.1/api/users/999999/photo"
 );
 
 const headers = {
@@ -28392,7 +28392,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -28409,7 +28409,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999/photo';
+$url = 'https://127.0.0.1/api/users/999999/photo';
 $response = $client-&gt;put(
     $url,
     [
@@ -28418,7 +28418,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -28441,7 +28441,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999/photo'
+url = 'https://127.0.0.1/api/users/999999/photo'
 files = {
   'latest_update_ip': (None, '127.0.0.1'),
   'photo_path': open('/private/var/folders/r0/k0xbnx757k3fnz09_6g9rp6w0000gn/T/phpIM96b7', 'rb')}
@@ -28561,10 +28561,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-users--id--photo"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -28628,12 +28628,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/users/999999/preferences" \
+    "https://127.0.0.1/api/users/999999/preferences" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"disable_comments\": true,
@@ -28647,7 +28647,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999/preferences"
+    "https://127.0.0.1/api/users/999999/preferences"
 );
 
 const headers = {
@@ -28655,7 +28655,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -28676,7 +28676,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999/preferences';
+$url = 'https://127.0.0.1/api/users/999999/preferences';
 $response = $client-&gt;put(
     $url,
     [
@@ -28685,7 +28685,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -28705,7 +28705,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999/preferences'
+url = 'https://127.0.0.1/api/users/999999/preferences'
 payload = {
     "disable_comments": true,
     "latest_update_ip": "127.0.0.1",
@@ -28826,10 +28826,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-users--id--preferences"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -28955,11 +28955,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/users/999999/save-theme-preference" \
+    "https://127.0.0.1/api/users/999999/save-theme-preference" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --data "{
     \"theme\": \"light, dark or system\"
@@ -28969,14 +28969,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999/save-theme-preference"
+    "https://127.0.0.1/api/users/999999/save-theme-preference"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -28993,7 +28993,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999/save-theme-preference';
+$url = 'https://127.0.0.1/api/users/999999/save-theme-preference';
 $response = $client-&gt;put(
     $url,
     [
@@ -29001,7 +29001,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'json' =&gt; [
@@ -29017,7 +29017,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999/save-theme-preference'
+url = 'https://127.0.0.1/api/users/999999/save-theme-preference'
 payload = {
     "theme": "light, dark or system"
 }
@@ -29122,10 +29122,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-users--id--save-theme-preference"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -29178,12 +29178,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://demo.laraclassifier.local/api/users/999999" \
+    "https://127.0.0.1/api/users/999999" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs" \
     --form "name=John Doe"\
     --form "auth_field=email"\
@@ -29209,7 +29209,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999"
+    "https://127.0.0.1/api/users/999999"
 );
 
 const headers = {
@@ -29217,7 +29217,7 @@ const headers = {
     "Content-Type": "multipart/form-data",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -29252,7 +29252,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999';
+$url = 'https://127.0.0.1/api/users/999999';
 $response = $client-&gt;put(
     $url,
     [
@@ -29261,7 +29261,7 @@ $response = $client-&gt;put(
             'Content-Type' =&gt; 'multipart/form-data',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
         'multipart' =&gt; [
@@ -29356,7 +29356,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999'
+url = 'https://127.0.0.1/api/users/999999'
 files = {
   'name': (None, 'John Doe'),
   'auth_field': (None, 'email'),
@@ -29512,10 +29512,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="PUTapi-users--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -29817,18 +29817,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://demo.laraclassifier.local/api/users/999999" \
+    "https://127.0.0.1/api/users/999999" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/users/999999"
+    "https://127.0.0.1/api/users/999999"
 );
 
 const headers = {
@@ -29836,7 +29836,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -29848,7 +29848,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/users/999999';
+$url = 'https://127.0.0.1/api/users/999999';
 $response = $client-&gt;delete(
     $url,
     [
@@ -29857,7 +29857,7 @@ $response = $client-&gt;delete(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -29870,7 +29870,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/users/999999'
+url = 'https://127.0.0.1/api/users/999999'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_TOKEN}',
   'Content-Type': 'application/json',
@@ -29984,10 +29984,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="DELETEapi-users--id-"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -30031,24 +30031,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/verify/users/3/resend/email" \
+    --get "https://127.0.0.1/api/auth/verify/users/3/resend/email" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/verify/users/3/resend/email"
+    "https://127.0.0.1/api/auth/verify/users/3/resend/email"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -30060,7 +30060,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/verify/users/3/resend/email';
+$url = 'https://127.0.0.1/api/auth/verify/users/3/resend/email';
 $response = $client-&gt;get(
     $url,
     [
@@ -30068,7 +30068,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -30081,7 +30081,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/verify/users/3/resend/email'
+url = 'https://127.0.0.1/api/auth/verify/users/3/resend/email'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -30121,14 +30121,14 @@ vary: Origin
         &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
         &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
         &quot;created_at_formatted&quot;: &quot;May 1st, 2024 at 17:02&quot;,
-        &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+        &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
         &quot;p_is_online&quot;: false,
-        &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+        &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
     },
     &quot;extra&quot;: {
         &quot;isUnverifiedField&quot;: false,
         &quot;fieldVerificationSent&quot;: false,
-        &quot;resendUrl&quot;: &quot;https://demo.laraclassifier.local/auth/verify/users/3/resend/email&quot;,
+        &quot;resendUrl&quot;: &quot;https://127.0.0.1/auth/verify/users/3/resend/email&quot;,
         &quot;field&quot;: &quot;email&quot;,
         &quot;fieldValue&quot;: &quot;user@domain.tld&quot;,
         &quot;fieldHiddenValue&quot;: &quot;us**********tld&quot;,
@@ -30223,10 +30223,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-verify--entityMetadataKey---entityId--resend-email"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -30277,24 +30277,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/verify/users/3/resend/sms" \
+    --get "https://127.0.0.1/api/auth/verify/users/3/resend/sms" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/verify/users/3/resend/sms"
+    "https://127.0.0.1/api/auth/verify/users/3/resend/sms"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -30306,7 +30306,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/verify/users/3/resend/sms';
+$url = 'https://127.0.0.1/api/auth/verify/users/3/resend/sms';
 $response = $client-&gt;get(
     $url,
     [
@@ -30314,7 +30314,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -30327,7 +30327,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/verify/users/3/resend/sms'
+url = 'https://127.0.0.1/api/auth/verify/users/3/resend/sms'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -30367,14 +30367,14 @@ vary: Origin
         &quot;original_updated_at&quot;: &quot;2025-03-21 03:29:22&quot;,
         &quot;original_last_activity&quot;: &quot;2025-03-21 03:54:02&quot;,
         &quot;created_at_formatted&quot;: &quot;May 1st, 2024 at 17:02&quot;,
-        &quot;photo_url&quot;: &quot;https://demo.laraclassifier.local/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
+        &quot;photo_url&quot;: &quot;https://127.0.0.1/storage/avatars/us/3/thumbnails/800x800-294656d3a1838c92a0c8d425dfac5a30.jpg&quot;,
         &quot;p_is_online&quot;: false,
-        &quot;country_flag_url&quot;: &quot;https://demo.laraclassifier.local/images/flags/circle/16/us.png&quot;
+        &quot;country_flag_url&quot;: &quot;https://127.0.0.1/images/flags/circle/16/us.png&quot;
     },
     &quot;extra&quot;: {
         &quot;isUnverifiedField&quot;: false,
         &quot;fieldVerificationSent&quot;: false,
-        &quot;resendUrl&quot;: &quot;https://demo.laraclassifier.local/api/auth/verify/users/3/resend/sms&quot;,
+        &quot;resendUrl&quot;: &quot;https://127.0.0.1/api/auth/verify/users/3/resend/sms&quot;,
         &quot;field&quot;: &quot;phone&quot;,
         &quot;fieldValue&quot;: &quot;+15422023797&quot;,
         &quot;fieldHiddenValue&quot;: &quot;+1*******797&quot;,
@@ -30469,10 +30469,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-verify--entityMetadataKey---entityId--resend-sms"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;
@@ -30523,24 +30523,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://demo.laraclassifier.local/api/auth/verify/users/email/" \
+    --get "https://127.0.0.1/api/auth/verify/users/email/" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Content-Language: en" \
-    --header "X-AppApiToken: Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=" \
+    --header "X-AppApiToken: TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=" \
     --header "X-AppType: docs"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://demo.laraclassifier.local/api/auth/verify/users/email/"
+    "https://127.0.0.1/api/auth/verify/users/email/"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
     "Content-Language": "en",
-    "X-AppApiToken": "Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=",
+    "X-AppApiToken": "TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=",
     "X-AppType": "docs",
 };
 
@@ -30552,7 +30552,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'https://demo.laraclassifier.local/api/auth/verify/users/email/';
+$url = 'https://127.0.0.1/api/auth/verify/users/email/';
 $response = $client-&gt;get(
     $url,
     [
@@ -30560,7 +30560,7 @@ $response = $client-&gt;get(
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
             'Content-Language' =&gt; 'en',
-            'X-AppApiToken' =&gt; 'Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=',
+            'X-AppApiToken' =&gt; 'TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=',
             'X-AppType' =&gt; 'docs',
         ],
     ]
@@ -30573,7 +30573,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://demo.laraclassifier.local/api/auth/verify/users/email/'
+url = 'https://127.0.0.1/api/auth/verify/users/email/'
 headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json',
@@ -30693,10 +30693,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="X-AppApiToken"                data-endpoint="GETapi-auth-verify--entityMetadataKey---field---token--"
-               value="Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs="
+               value="TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4="
                data-component="header">
     <br>
-<p>Example: <code>Uk1DSFlVUVhIRXpHbWt6d2pIZjlPTG15akRPN2tJTUs=</code></p>
+<p>Example: <code>TDBqUXJ6UVlEWDFOQUlVWmU5aDBGOHVlRHU1S05adW4=</code></p>
             </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>X-AppType</code></b>&nbsp;&nbsp;

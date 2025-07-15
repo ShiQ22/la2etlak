@@ -152,7 +152,7 @@ return [
     'email' => 'Email',
     'please_repeat_your_password' => 'يرجى تكرار كلمة المرور',
     'at_least_num_characters' => ':num أحرف على الأقل',
-    'accept_terms_label' => 'لقد قرات ووافقت على ال <a :attributes>البنود و الظروف</a>',
+    'accept_terms_label' => 'لقد قرات ووافقت على ال <a :attributes>الشروط و الاحكام</a>',
     'accept_marketing_offers_label' => 'أوافق على تلقي رسائل البريد الإلكتروني التسويقية',
     'register' => 'تسجيل',
     'message_sent_to_moderators' => 'تم إرسال رسالتك إلى المشرفين لدينا.',
@@ -1046,4 +1046,7 @@ return [
     ],
     'go_home' => 'Go to Home',
     'go_back' => 'Go back',
+    'Is this item Lost or Found?' => 'هل هذا العنصر مفقود أم معثور عليه؟',
+    'lost'  => 'مفقود',
+    'found' => 'معثور عليه',
 ];

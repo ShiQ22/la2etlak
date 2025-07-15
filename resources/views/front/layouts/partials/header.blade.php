@@ -150,12 +150,17 @@
 						[$createListingLinkUrl, $createListingLinkAttr] = getCreateListingLinkInfo();
 					@endphp
 					<li class="nav-item">
-						<a class="btn btn-listing btn-border"
-						   href="{{ $createListingLinkUrl }}"{!! $createListingLinkAttr !!}
+						<a id="createListingBtn"
+						class="btn btn-listing btn-border"
+						href="#"
+						data-bs-toggle="modal"
+						data-bs-target="#listingTypeModal"
+						{!! $createListingLinkAttr !!}
 						>
 							<i class="fa-regular fa-pen-to-square"></i> {{ t('create_listing') }}
 						</a>
 					</li>
+
 					
 					@php
 						$openOnHover = ''; // ' open-on-hover'

@@ -122,7 +122,7 @@
 		{!! printJs(config('settings.other.js_code')) . "\n" !!}
 	@endif
 	
-	@include('front.common.js.document')
+	{{-- @include('front.common.js.document') --}}
  
 	<script>
 		paceOptions = {
@@ -274,5 +274,7 @@
 @if (config('settings.footer.tracking_code'))
 	{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
 @endif
+{{-- Lost vs Found selector --}}
+    @include('front.layouts.partials.listing-type-modal')
 </body>
 </html>

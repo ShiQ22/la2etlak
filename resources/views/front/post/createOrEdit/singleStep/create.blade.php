@@ -43,6 +43,8 @@
 								      class="{{ unsavedFormGuard() }}"
 								>
 									@csrf
+									   {{-- Persist Lost vs Found choice --}}
+   										<input type="hidden" name="type" value="{{ $type }}">
 									@honeypot
 									
 									<fieldset>

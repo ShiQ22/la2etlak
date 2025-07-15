@@ -32,6 +32,7 @@ use App\Services\PostService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Illuminate\Http\Request;
 
 class CreateController extends FrontController
 {
@@ -100,7 +101,7 @@ class CreateController extends FrontController
 	 *
 	 * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
 	 */
-	public function showForm()
+	public function showForm(Request $request)
 	{
 		// Check if the 'Pricing Page' must be started first, and make redirection to it.
 		$pricingUrl = $this->getPricingPage($this->selectedPackage);
@@ -121,7 +122,10 @@ class CreateController extends FrontController
 		MetaTag::set('title', $title);
 		MetaTag::set('description', strip_tags($description));
 		MetaTag::set('keywords', $keywords);
-		
+		    // ─── Capture Lost/Found choice (default to 'lost') ──────────────────────────────────
+			$type = $request->query('type', 'lost');
+			view()->share('type', $type);
+			// ───
 		// Create
 		return view('front.post.createOrEdit.singleStep.create');
 	}
@@ -133,101 +137,101 @@ class CreateController extends FrontController
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postForm(PostRequest $request): RedirectResponse
-	{
-		// Store Post
-		$data = getServiceData($this->postService->store($request));
-		
-		// Parsing the API response
-		$message = data_get($data, 'message');
-		
-		// Notification Message
-		if (data_get($data, 'success')) {
-			session()->put('message', $message);
-		} else {
-			$message = $message ?? t('unknown_error');
-			flash($message)->error();
-			
-			$previousUrl = data_get($data, 'extra.previousUrl');
-			$previousUrl = !empty($previousUrl) ? $previousUrl : url()->previous();
-			
-			return redirect()->to($previousUrl)->withInput($request->except('pictures'));
-		}
-		
-		// Get Listing Resource
-		$post = data_get($data, 'result');
-		
-		abort_if(empty($post), 404, t('post_not_found'));
-		
-		// Get the Next URL
-		$nextUrl = url('create/finish');
-		
-		// Get the listing ID
-		$postId = data_get($data, 'result.id');
-		
-		// Check if the payment process has been triggered
-		// NOTE: Payment bypass email or phone verification
-		// ===| Make|send payment (if needed) |==============
-		
-		$postObj = $this->retrievePayableModel($request, $postId);
-		if (!empty($postObj)) {
-			$payResult = $this->isPaymentRequested($request, $postObj);
-			if (data_get($payResult, 'success')) {
-				return $this->sendPayment($request, $postObj);
-			}
-			if (data_get($payResult, 'failure')) {
-				flash(data_get($payResult, 'message'))->error();
-			}
-		}
-		
-		// ===| If no payment is made (continue) |===========
-		
-		// Get user's verification data
-		$vEmailData = data_get($data, 'extra.sendEmailVerification');
-		$vPhoneData = data_get($data, 'extra.sendPhoneVerification');
-		$isUnverifiedEmail = (bool)(data_get($vEmailData, 'extra.isUnverifiedField') ?? false);
-		$isUnverifiedPhone = (bool)(data_get($vPhoneData, 'extra.isUnverifiedField') ?? false);
-		
-		if ($isUnverifiedEmail || $isUnverifiedPhone) {
-			$nextUrl = urlQuery($nextUrl)->setParameters(request()->only(['packageId']))->toString();
-			session()->put('itemNextUrl', $nextUrl);
-			
-			if ($isUnverifiedEmail) {
-				// Create Notification Trigger
-				$resendEmailVerificationData = data_get($vEmailData, 'extra');
-				session()->put('resendEmailVerificationData', collect($resendEmailVerificationData)->toJson());
-			}
-			
-			if ($isUnverifiedPhone) {
-				// Create Notification Trigger
-				$resendPhoneVerificationData = data_get($vPhoneData, 'extra');
-				session()->put('resendPhoneVerificationData', collect($resendPhoneVerificationData)->toJson());
-				
-				// Phone Number verification
-				// Get the token|code verification form page URL
-				// The user is supposed to have received this token|code by SMS
-				$nextUrl = urlGen()->phoneVerification('posts');
-			}
-		}
-		
-		// Get mail sending data
-		$mailData = data_get($data, 'extra.mail');
-		
-		// Mail Notification Message
-		if (data_get($mailData, 'message')) {
-			$mailMessage = data_get($mailData, 'message');
-			if (data_get($mailData, 'success')) {
-				flash($mailMessage)->success();
-			} else {
-				flash($mailMessage)->error();
-			}
-		}
-		
-		$nextUrl = urlQuery($nextUrl)
-			->setParameters(request()->only(['packageId']))
-			->toString();
-		
-		return redirect()->to($nextUrl);
-	}
+{
+ 
+    // Store Post
+    $data = getServiceData($this->postService->store($request));
+
+    // Parsing the API response
+    $message = data_get($data, 'message');
+    
+    // Notification Message
+    if (data_get($data, 'success')) {
+        session()->put('message', $message);
+    } else {
+        $message = $message ?? t('unknown_error');
+        flash($message)->error();
+        
+        $previousUrl = data_get($data, 'extra.previousUrl');
+        $previousUrl = !empty($previousUrl) ? $previousUrl : url()->previous();
+        
+        return redirect()->to($previousUrl)->withInput($request->except('pictures'));
+    }
+    
+    // Get Listing Resource
+    $post = data_get($data, 'result');
+    
+    abort_if(empty($post), 404, t('post_not_found'));
+    
+    // Get the Next URL
+    $nextUrl = url('create/finish');
+    
+    // Get the listing ID
+    $postId = data_get($data, 'result.id');
+    
+    // Check if the payment process has been triggered
+    // NOTE: Payment bypass email or phone verification
+    // ===| Make|send payment (if needed) |==============
+    
+    $postObj = $this->retrievePayableModel($request, $postId);
+    if (!empty($postObj)) {
+        $payResult = $this->isPaymentRequested($request, $postObj);
+        if (data_get($payResult, 'success')) {
+            return $this->sendPayment($request, $postObj);
+        }
+        if (data_get($payResult, 'failure')) {
+            flash(data_get($payResult, 'message'))->error();
+        }
+    }
+    
+    // ===| If no payment is made (continue) |===========
+    
+    // Get user's verification data
+    $vEmailData = data_get($data, 'extra.sendEmailVerification');
+    $vPhoneData = data_get($data, 'extra.sendPhoneVerification');
+    $isUnverifiedEmail = (bool)(data_get($vEmailData, 'extra.isUnverifiedField') ?? false);
+    $isUnverifiedPhone = (bool)(data_get($vPhoneData, 'extra.isUnverifiedField') ?? false);
+    
+    if ($isUnverifiedEmail || $isUnverifiedPhone) {
+        $nextUrl = urlQuery($nextUrl)->setParameters(request()->only(['packageId']))->toString();
+        session()->put('itemNextUrl', $nextUrl);
+        
+        if ($isUnverifiedEmail) {
+            // Create Notification Trigger
+            $resendEmailVerificationData = data_get($vEmailData, 'extra');
+            session()->put('resendEmailVerificationData', collect($resendEmailVerificationData)->toJson());
+        }
+        
+        if ($isUnverifiedPhone) {
+            // Create Notification Trigger
+            $resendPhoneVerificationData = data_get($vPhoneData, 'extra');
+            session()->put('resendPhoneVerificationData', collect($resendPhoneVerificationData)->toJson());
+            
+            // Phone Number verification
+            $nextUrl = urlGen()->phoneVerification('posts');
+        }
+    }
+    
+    // Get mail sending data
+    $mailData = data_get($data, 'extra.mail');
+    
+    // Mail Notification Message
+    if (data_get($mailData, 'message')) {
+        $mailMessage = data_get($mailData, 'message');
+        if (data_get($mailData, 'success')) {
+            flash($mailMessage)->success();
+        } else {
+            flash($mailMessage)->error();
+        }
+    }
+    
+    $nextUrl = urlQuery($nextUrl)
+        ->setParameters(request()->only(['packageId']))
+        ->toString();
+    
+    return redirect()->to($nextUrl);
+}
+
 	
 	/**
 	 * Confirmation

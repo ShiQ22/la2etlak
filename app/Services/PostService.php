@@ -127,6 +127,14 @@ class PostService extends BaseService
 	public function store(Request $request)
 	{
 		$this->setPaymentSettingsForPromotion();
+
+		   // ─── Map the user's Lost/Found choice into our DB column ──────────────────────────
+			// We pull 'type' (lost or found) from the request—defaulting to 'lost'—and set it on
+			// 'lost_or_found' so that storePost() picks it up when creating the Post.
+			$request->merge([
+				'lost_or_found' => $request->input('type', 'lost'),
+			]);
+			// ─────
 		
 		return $this->storePost($request);
 	}

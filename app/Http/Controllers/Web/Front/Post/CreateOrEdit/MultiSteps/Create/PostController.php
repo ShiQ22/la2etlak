@@ -21,7 +21,7 @@ use App\Http\Requests\Front\PostRequest;
 use App\Models\CategoryField;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Http\Request;
 class PostController extends BaseController
 {
 	/**
@@ -29,48 +29,56 @@ class PostController extends BaseController
 	 *
 	 * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
 	 */
-	public function showForm(): View|RedirectResponse
-	{
-		// Check if the 'Pricing Page' must be started first, and make redirection to it.
-		$pricingUrl = $this->getPricingPage($this->getSelectedPackage());
-		if (!empty($pricingUrl)) {
-			return redirect()->to($pricingUrl)->withHeaders(config('larapen.core.noCacheHeaders'));
-		}
-		
-		// Check if the form type is 'Single-Step Form' and make redirection to it (permanently).
-		if (isSingleStepFormEnabled()) {
-			$url = urlGen()->addPost();
-			if ($url != request()->fullUrl()) {
-				return redirect()->to($url, 301)->withHeaders(config('larapen.core.noCacheHeaders'));
-			}
-		}
-		
-		// Create an unique temporary ID
-		if (!session()->has('cfUid')) {
-			session()->put('cfUid', 'cf-' . generateUniqueCode(9));
-		}
-		
-		$postInput = session('postInput');
-		
-		// Ensure that the country data stored in the session corresponds to the current selection
-		$this->syncSessionCountryData();
-		
-		// Get steps URLs & labels
-		$previousStepUrl = null;
-		$previousStepLabel = null;
-		$formActionUrl = request()->fullUrl();
-		$nextStepUrl = null;
-		$nextStepLabel = t('Next') . '  <i class="bi bi-chevron-right"></i>';
-		
-		// Share steps URLs & label variables
-		view()->share('previousStepUrl', $previousStepUrl);
-		view()->share('previousStepLabel', $previousStepLabel);
-		view()->share('formActionUrl', $formActionUrl);
-		view()->share('nextStepUrl', $nextStepUrl);
-		view()->share('nextStepLabel', $nextStepLabel);
-		
-		return view('front.post.createOrEdit.multiSteps.create.post', compact('postInput'));
-	}
+	public function showForm(Request $request): View|RedirectResponse
+{
+    // Check if the 'Pricing Page' must be started first, and make redirection to it.
+    $pricingUrl = $this->getPricingPage($this->getSelectedPackage());
+    if (!empty($pricingUrl)) {
+        return redirect()->to($pricingUrl)->withHeaders(config('larapen.core.noCacheHeaders'));
+    }
+
+    // Check if the form type is 'Single-Step Form' and make redirection to it (permanently).
+    if (isSingleStepFormEnabled()) {
+        $url = urlGen()->addPost();
+        if ($url != request()->fullUrl()) {
+            return redirect()->to($url, 301)->withHeaders(config('larapen.core.noCacheHeaders'));
+        }
+    }
+
+    // Create a unique temporary ID
+    if (!session()->has('cfUid')) {
+        session()->put('cfUid', 'cf-' . generateUniqueCode(9));
+    }
+
+    $postInput = session('postInput');
+
+    // Ensure that the country data stored in the session corresponds to the current selection
+    $this->syncSessionCountryData();
+
+    // Get steps URLs & labels
+    $previousStepUrl   = null;
+    $previousStepLabel = null;
+    $formActionUrl     = request()->fullUrl();
+    $nextStepUrl       = null;
+    $nextStepLabel     = t('Next') . '  <i class="bi bi-chevron-right"></i>';
+
+    // Capture the Lost/Found type (default to 'lost')
+    $type = $request->query('type', 'lost');
+
+    // Share steps URLs & label variables
+    view()->share('previousStepUrl', $previousStepUrl);
+    view()->share('previousStepLabel', $previousStepLabel);
+    view()->share('formActionUrl', $formActionUrl);
+    view()->share('nextStepUrl', $nextStepUrl);
+    view()->share('nextStepLabel', $nextStepLabel);
+
+    // Render the view, passing both postInput and type
+    return view(
+        'front.post.createOrEdit.multiSteps.create.post',
+        ['postInput' => $postInput, 'type' => $type]
+    );
+}
+
 	
 	/**
 	 * Listing's step (POST)
@@ -80,7 +88,11 @@ class PostController extends BaseController
 	 */
 	public function postForm(PostRequest $request): RedirectResponse
 	{
+		    // Grab everything _except_ unwanted, but then ensure we include 'type'
 		$postInput = $request->except($this->unwantedFields());
+
+		// FORCE in the Lost/Found choice
+		$postInput['type'] = $request->input('type', 'lost');
 		
 		// Use unique ID to store post's pictures
 		if (session()->has('cfUid')) {

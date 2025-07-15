@@ -78,6 +78,8 @@ trait SubmitTrait
 		}
 		$inputArray = array_merge($inputArray, $paymentInput);
 		
+
+		
 		$request->merge($inputArray);
 		
 		// Set the pictures files in the current request (from the saved input variable)

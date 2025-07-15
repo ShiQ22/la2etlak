@@ -60,6 +60,8 @@
 									@csrf
 									@honeypot
 									
+									{{-- Preserve Lost/Found type --}}
+   									 <input type="hidden" name="type" value="{{ $type }}">
 									<fieldset>
 										
 										{{-- category_id --}}
