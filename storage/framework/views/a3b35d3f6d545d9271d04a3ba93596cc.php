@@ -81,7 +81,13 @@
 											<a href="<?php echo e($postUrl); ?>" class="<?php echo e(linkClass('body-emphasis')); ?>">
 												<?php echo e(str(data_get($post, 'title'))->limit(70)); ?>
 
+												<pre style="font-size: 12px;">Type: <?php echo e(data_get($post, 'lost_or_found')); ?></pre>
 											</a>
+											<?php if(data_get($post, 'lost_or_found') === 'lost'): ?>
+												<span class="badge badge-lost ms-2"><?php echo e(t('Lost')); ?></span>
+											<?php elseif(data_get($post, 'lost_or_found') === 'found'): ?>
+												<span class="badge badge-found ms-2"><?php echo e(t('Found')); ?></span>
+											<?php endif; ?>
 										</h5>
 										
 										

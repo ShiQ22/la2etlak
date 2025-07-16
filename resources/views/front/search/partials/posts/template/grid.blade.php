@@ -78,7 +78,13 @@
 										<h5 class="fs-5 fw-normal px-0">
 											<a href="{{ $postUrl }}" class="{{ linkClass('body-emphasis') }}">
 												{{ str(data_get($post, 'title'))->limit(70) }}
+												<pre style="font-size: 12px;">Type: {{ data_get($post, 'lost_or_found') }}</pre>
 											</a>
+											@if (data_get($post, 'lost_or_found') === 'lost')
+												<span class="badge badge-lost ms-2">{{ t('Lost') }}</span>
+											@elseif (data_get($post, 'lost_or_found') === 'found')
+												<span class="badge badge-found ms-2">{{ t('Found') }}</span>
+											@endif
 										</h5>
 										
 										{{-- Infos --}}

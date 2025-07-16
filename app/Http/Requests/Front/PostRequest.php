@@ -194,7 +194,7 @@ class PostRequest extends Request
 		$authFields = array_keys(getAuthFields());
 		
 		$rules = [];
-		$rules['type'] = ['required', Rule::in(['lost', 'found'])];
+		
 		$rules['category_id'] = ['required', 'not_in:0', 'exists:categories,id'];
 		if (config('settings.listing_form.show_listing_type')) {
 			$rules['post_type_id'] = ['required', Rule::in(PostType::values())];
@@ -249,7 +249,7 @@ class PostRequest extends Request
 			// Apply this rules for the 'Single-Step Form' (Web & API requests)
 			// Or for API requests whatever the form type (i.e.: Single or Multi Steps)
 			if ($isSingleStepFormEnabled || isFromApi()) {
-				
+			 $rules['type'] = ['required', Rule::in(['lost','found'])];
 				// Pictures
 				if ($this->file('pictures')) {
 					$serverAllowedImageFormats = collect(getServerAllowedImageFormats())->join(',');
