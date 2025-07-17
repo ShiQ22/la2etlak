@@ -144,6 +144,7 @@
 								   title="{{ data_get($post, 'title') }}"
 								>
 									{{ data_get($post, 'title') }}
+									@include('front.layouts.partials.lost-found-badge', ['post' => $post])
 								</a>
 								
 								@if (data_get($post, 'featured') == 1 && !empty(data_get($post, 'payment.package')))

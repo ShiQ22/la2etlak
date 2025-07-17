@@ -64,6 +64,7 @@
 										<?php echo e(str(data_get($post, 'title'))->limit($titleLimit)); ?>
 
 									</a>
+									<?php echo $__env->make('front.layouts.partials.lost-found-badge', ['post' => $post], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 								</h6>
 								
 								<div class="d-flex flex-column">

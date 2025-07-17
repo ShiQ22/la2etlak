@@ -44,7 +44,10 @@ use App\Exceptions\Handler\UnserializeExceptionHandler;
 use App\Exceptions\Handler\ValidationExceptionHandler;
 use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class Handler
 {
@@ -248,4 +251,28 @@ class Handler
 			return $this->renderCustomExceptionViews($e, $request);
 		});
 	}
+	/**
+ * Override the DB query exception handler so it returns a real Response.
+ *
+ * @param  \Illuminate\Database\QueryException  $e
+ * @param  \Illuminate\Http\Request             $request
+ * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+ */
+protected function responseDBQueryException(QueryException $e, Request $request): Response|JsonResponse
+{
+    // Log the actual error for debugging:
+    \Log::error('DB Query Exception: '.$e->getMessage());
+
+    if ($request->expectsJson()) {
+        // JSON API request → return JSON error
+        return response()->json([
+            'message' => 'A database error occurred.',
+            'error'   => $e->getMessage(),
+        ], 500);
+    }
+
+    // Standard web request → show your 500 error view
+    return response()
+        ->view('errors.500', ['exception' => $e], 500);
+}
 }

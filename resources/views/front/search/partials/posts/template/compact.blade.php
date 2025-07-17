@@ -44,11 +44,7 @@
 							<a href="{{ $postUrl }}" class="link-body-emphasis text-decoration-none">
 								{{ str(data_get($post, 'title'))->limit(70) }}
 							</a>
-							@if (data_get($post, 'lost_or_found') === 'lost')
-								<span class="badge badge-lost ms-2">{{ t('Lost') }}</span>
-							@elseif (data_get($post, 'lost_or_found') === 'found')
-								<span class="badge badge-found ms-2">{{ t('Found') }}</span>
-							@endif
+							@include('front.layouts.partials.lost-found-badge', ['post' => $post])
 						</h5>
 						
 						{{-- Details --}}

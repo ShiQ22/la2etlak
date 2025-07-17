@@ -61,6 +61,7 @@
 									<a href="{{ $postUrl }}" class="{{ linkClass() }}">
 										{{ str(data_get($post, 'title'))->limit($titleLimit) }}
 									</a>
+									@include('front.layouts.partials.lost-found-badge', ['post' => $post])
 								</h6>
 								
 								<div class="d-flex flex-column">

@@ -118,7 +118,7 @@
 
 
 
-<?php if (! $__env->hasRenderedOnce('5c8ce2d4-5baf-4b61-b14f-486c2dfb4a84')): $__env->markAsRenderedOnce('5c8ce2d4-5baf-4b61-b14f-486c2dfb4a84');
+<?php if (! $__env->hasRenderedOnce('42377b83-4656-4240-9bf3-f9525afc081d')): $__env->markAsRenderedOnce('42377b83-4656-4240-9bf3-f9525afc081d');
 $__env->startPush("{$viewName}_assets_styles"); ?>
 	<link href="<?php echo e(asset($pluginBasePath . 'css/select2.min.css')); ?>" rel="stylesheet" type="text/css"/>
 	<?php if($theme == 'bootstrap5'): ?>
@@ -135,7 +135,7 @@ $__env->startPush("{$viewName}_assets_styles"); ?>
 	<?php endif; ?>
 <?php $__env->stopPush(); endif; ?>
 
-<?php if (! $__env->hasRenderedOnce('c2985acf-11d1-43ca-bf19-580af742489d')): $__env->markAsRenderedOnce('c2985acf-11d1-43ca-bf19-580af742489d');
+<?php if (! $__env->hasRenderedOnce('f4dfa0fb-81bb-47af-83c9-5adaf8dce59a')): $__env->markAsRenderedOnce('f4dfa0fb-81bb-47af-83c9-5adaf8dce59a');
 $__env->startPush("{$viewName}_assets_scripts"); ?>
 	<script src="<?php echo e(asset($pluginBasePath . 'js/select2.full.min.js')); ?>"></script>
 	<?php
@@ -161,7 +161,7 @@ $__env->startPush("{$viewName}_assets_scripts"); ?>
 <?php $__env->stopPush(); endif; ?>
 
 
-<?php if (! $__env->hasRenderedOnce('d0612533-b336-416f-afe7-2cbd1b5a1074')): $__env->markAsRenderedOnce('d0612533-b336-416f-afe7-2cbd1b5a1074');
+<?php if (! $__env->hasRenderedOnce('2ba18098-b641-48e9-a6d1-e9715fb2c926')): $__env->markAsRenderedOnce('2ba18098-b641-48e9-a6d1-e9715fb2c926');
 $__env->startPush("select2_basic_assets_scripts"); ?>
 	<script>
 		onDocumentReady((event) => {

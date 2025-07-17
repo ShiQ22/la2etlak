@@ -52,6 +52,8 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Feed\Feedable;
+use App\Models\Scopes\IncludeLostOrFound;
+use Illuminate\Database\Eloquent\Model;
 
 #[ObservedBy([PostObserver::class])]
 #[ScopedBy([VerifiedScope::class, ReviewedScope::class, LocalizedScope::class])]
@@ -843,12 +845,18 @@ class Post extends BaseModel implements Feedable
 	}
 	    // … other methods …
 
+		protected static function booted()
+    {
+        static::addGlobalScope(new IncludeLostOrFound);
+    }
+
     /**
      * Scope a query to only include lost posts.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
+
     public function scopeLost($query)
     {
         return $query->where('lost_or_found', 'lost');

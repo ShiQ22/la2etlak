@@ -137,6 +137,7 @@
 								>
 									<?php echo e(data_get($post, 'title')); ?>
 
+									<?php echo $__env->make('front.layouts.partials.lost-found-badge', ['post' => $post], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 								</a>
 								
 								<?php if(data_get($post, 'featured') == 1 && !empty(data_get($post, 'payment.package'))): ?>

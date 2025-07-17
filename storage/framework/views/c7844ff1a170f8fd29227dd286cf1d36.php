@@ -19,6 +19,7 @@
 				<h4 class="mb-0 float-start fw-lighter">
 					<?php echo data_get($widget, 'title'); ?>
 
+					
 				</h4>
 				<h5 class="mb-0 float-end mt-1 fs-6 fw-lighter text-uppercase">
 					<a href="<?php echo e(data_get($widget, 'link')); ?>" class="<?php echo e(linkClass()); ?>">

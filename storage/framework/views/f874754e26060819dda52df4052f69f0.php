@@ -1,21 +1,7 @@
-{{--
- * LaraClassifier - Classified Ads Web Application
- * Copyright (c) BeDigit. All Rights Reserved
- *
- * Website: https://laraclassifier.com
- * Author: Mayeul Akpovi (BeDigit - https://bedigit.com)
- *
- * LICENSE
- * -------
- * This software is provided under a license agreement and may only be used or copied
- * in accordance with its terms, including the inclusion of the above copyright notice.
- * As this software is sold exclusively on CodeCanyon,
- * please review the full license details here: https://codecanyon.net/licenses/standard
---}}
-@php use App\Enums\BootstrapColor; @endphp
-@extends('front.layouts.master')
+<?php use App\Enums\BootstrapColor; ?>
 
-@php
+
+<?php
 	$apiResult ??= [];
 	$posts = (array)data_get($apiResult, 'data');
 	$totalPosts = (int)data_get($apiResult, 'meta.total', 0);
@@ -50,56 +36,59 @@
 	$pageIcon = $pageData[$pagePath]['icon'] ?? 'fa-solid fa-bullhorn';
 	$pageTitle = $pageData[$pagePath]['title'] ?? t('posts');
 	$basePath = $pageData[$pagePath]['basePath'] ?? urlGen()->getAccountBasePath() . '/posts/undefined';
-@endphp
+?>
 
-@section('content')
-	@include('front.common.spacer')
+<?php $__env->startSection('content'); ?>
+	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 	<div class="main-container">
 		<div class="container">
 			<div class="row">
 				
-				@if (session()->has('flash_notification'))
+				<?php if(session()->has('flash_notification')): ?>
 					<div class="col-12">
 						<div class="row">
 							<div class="col-12">
-								@include('flash::message')
+								<?php echo $__env->make('flash::message', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 							</div>
 						</div>
 					</div>
-				@endif
+				<?php endif; ?>
 				
 				<div class="col-md-3">
-					@include('front.account.partials.sidebar')
+					<?php echo $__env->make('front.account.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				</div>
 
 				<div class="col-md-9">
 					<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2">
 						<h3 class="fw-bold border-bottom pb-3 mb-4">
-							<i class="{{ $pageIcon }}"></i> {{ $pageTitle }}
+							<i class="<?php echo e($pageIcon); ?>"></i> <?php echo e($pageTitle); ?>
+
 						</h3>
 						
 						<div class="table-responsive" style="min-height: 600px;">
-							<form name="listForm" action="{{ url($basePath . '/delete') }}" method="POST">
-								@csrf
+							<form name="listForm" action="<?php echo e(url($basePath . '/delete')); ?>" method="POST">
+								<?php echo csrf_field(); ?>
 								<div class="table-action">
 									<div class="btn-group" role="group">
 										<button type="button" class="btn btn-sm btn btn-outline-primary pb-0">
 											<input type="checkbox" id="checkAll" class="from-check-all">
 										</button>
 										<button type="button" class="btn btn-sm btn btn-primary from-check-all">
-											{{ t('Select') }}: {{ t('All') }}
+											<?php echo e(t('Select')); ?>: <?php echo e(t('All')); ?>
+
 										</button>
 									</div>
 									
 									<button type="submit" class="btn btn-sm btn btn-danger confirm-simple-action">
-										<i class="fa-regular fa-trash-can"></i> {{ t('Delete') }}
+										<i class="fa-regular fa-trash-can"></i> <?php echo e(t('Delete')); ?>
+
 									</button>
 									
 									<div class="table-search float-end col-sm-7">
 										<div class="row">
-											<label class="col-5 form-label text-end">{{ t('search') }} <br>
-												<a title="clear filter" class="clear-filter {{ linkClass() }}" href="#clear">
-													[{{ t('clear') }}]
+											<label class="col-5 form-label text-end"><?php echo e(t('search')); ?> <br>
+												<a title="clear filter" class="clear-filter <?php echo e(linkClass()); ?>" href="#clear">
+													[<?php echo e(t('clear')); ?>]
 												</a>
 											</label>
 											<div class="col-7 px-3">
@@ -117,17 +106,17 @@
 									<thead>
 									<tr>
 										<th scope="col" data-type="numeric" data-sort-initial="true"></th>
-										<th scope="col">{{ t('Photo') }}</th>
-										<th scope="col" data-sort-ignore="true">{{ t('listing_details') }}</th>
+										<th scope="col"><?php echo e(t('Photo')); ?></th>
+										<th scope="col" data-sort-ignore="true"><?php echo e(t('listing_details')); ?></th>
 										<th scope="col" data-type="numeric" class="d-md-table-cell d-sm-none d-none">--</th>
-										<th scope="col">{{ t('action') }}</th>
+										<th scope="col"><?php echo e(t('action')); ?></th>
 									</tr>
 									</thead>
 									<tbody>
 									
-									@if (!empty($posts) && $totalPosts > 0)
-										@foreach($posts as $post)
-											@php
+									<?php if(!empty($posts) && $totalPosts > 0): ?>
+										<?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+											<?php
 												$postUrl = urlGen()->post($post);
 												$deletingUrl = url($basePath . '/' . data_get($post, 'id') . '/delete');
 												
@@ -167,34 +156,35 @@
 												$planPaymentUrl = url('posts/' . data_get($post, 'id') . '/payment');
 												$archivingUrl = url($basePath . '/' . data_get($post, 'id') . '/offline');
 												$repostingUrl = url($basePath . '/' . data_get($post, 'id') . '/repost');
-											@endphp
+											?>
 											<tr>
 												<td style="width:2%" class="add-img-selector">
 													<div class="checkbox">
-														<label><input type="checkbox" name="entries[]" value="{{ data_get($post, 'id') }}"></label>
+														<label><input type="checkbox" name="entries[]" value="<?php echo e(data_get($post, 'id')); ?>"></label>
 													</div>
 												</td>
 												<td style="width:20%" class="add-img-td">
-													<a href="{{ $postUrl }}">
-														<img class="img-thumbnail img-fluid" src="{{ data_get($post, 'picture.url.medium') }}" alt="img">
+													<a href="<?php echo e($postUrl); ?>">
+														<img class="img-thumbnail img-fluid" src="<?php echo e(data_get($post, 'picture.url.medium')); ?>" alt="img">
 													</a>
 												</td>
 												<td style="width:52%" class="items-details-td">
 													<div>
 														<p>
-															<a href="{{ $postUrl }}"
-															   class="{{ linkClass() }} fw-bold"
-															   title="{{ data_get($post, 'title') }}"
+															<a href="<?php echo e($postUrl); ?>"
+															   class="<?php echo e(linkClass()); ?> fw-bold"
+															   title="<?php echo e(data_get($post, 'title')); ?>"
 															>
-																{{ str(data_get($post, 'title'))->limit(40) }}
-																@include('front.layouts.partials.lost-found-badge', ['post' => $post])
+																<?php echo e(str(data_get($post, 'title'))->limit(40)); ?>
+
+																<?php echo $__env->make('front.layouts.partials.lost-found-badge', ['post' => $post], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 															</a>
-															@if (in_array($pagePath, ['list', 'archived', 'pending-approval']))
-																@if (
+															<?php if(in_array($pagePath, ['list', 'archived', 'pending-approval'])): ?>
+																<?php if(
 																	!empty(data_get($post, 'payment'))
 																	&& !empty(data_get($post, 'payment.package'))
-																)
-																	@php
+																): ?>
+																	<?php
 																		$ribbonColor = data_get($post, 'payment.package.ribbon');
 																		$ribbonColorClass = BootstrapColor::Badge->getColorClass($ribbonColor);
 																		$packageShortName = data_get($post, 'payment.package.short_name');
@@ -203,54 +193,59 @@
 																			$ribbonColorClass = 'text-bg-secondary';
 																			$packageInfo = ' (' . t('expired') . ')';
 																		}
-																	@endphp
-																	<span class="badge rounded-pill {{ $ribbonColorClass }}"
+																	?>
+																	<span class="badge rounded-pill <?php echo e($ribbonColorClass); ?>"
 																	      data-bs-toggle="tooltip"
 																	      data-bs-placement="bottom"
-																	      title="{{ $packageShortName . $packageInfo }}"
+																	      title="<?php echo e($packageShortName . $packageInfo); ?>"
 																	>
-																		{{ $packageShortName }}
+																		<?php echo e($packageShortName); ?>
+
 																	</span>
-																@endif
-															@endif
+																<?php endif; ?>
+															<?php endif; ?>
 														</p>
-														@php
+														<?php
 															$listingDates = getListingDates($post, $pagePath);
-														@endphp
-														@if (!empty($listingDates))
-															@foreach($listingDates as $label => $labeledDate)
+														?>
+														<?php if(!empty($listingDates)): ?>
+															<?php $__currentLoopData = $listingDates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $label => $labeledDate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 																<p class="mb-1">
 																	<i class="fa-regular fa-clock"
 																	   data-bs-toggle="tooltip"
 																	   data-bs-placement="bottom"
-																	   title="{{ $label }}"
-																	></i>&nbsp;{!! $labeledDate !!}
+																	   title="<?php echo e($label); ?>"
+																	></i>&nbsp;<?php echo $labeledDate; ?>
+
 																</p>
-															@endforeach
-														@endif
+															<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+														<?php endif; ?>
 														<p class="mb-1">
 															<i class="fa-regular fa-eye"
 															   data-bs-toggle="tooltip"
 															   data-bs-placement="bottom"
-															   title="{{ t('Visitors') }}"
-															></i> {{ data_get($post, 'visits_formatted') ?? 0 }}
+															   title="<?php echo e(t('Visitors')); ?>"
+															></i> <?php echo e(data_get($post, 'visits_formatted') ?? 0); ?>
+
 															
 															<i class="bi bi-geo-alt"
 															   data-bs-toggle="tooltip"
 															   data-bs-placement="bottom"
-															   title="{{ t('Located In') }}"
-															></i> {{ data_get($post, 'city.name') ?? '-' }}
+															   title="<?php echo e(t('Located In')); ?>"
+															></i> <?php echo e(data_get($post, 'city.name') ?? '-'); ?>
+
 															
-															<img src="{{ data_get($post, 'country_flag_url') }}" alt=""
+															<img src="<?php echo e(data_get($post, 'country_flag_url')); ?>" alt=""
 															     data-bs-toggle="tooltip"
-															     title="{{ data_get($post, 'country.name') }}"
+															     title="<?php echo e(data_get($post, 'country.name')); ?>"
 															>
 														</p>
 													</div>
 												</td>
 												<td style="width:16%" class="price-td d-md-table-cell d-sm-none d-none">
 													<div class="fw-bold">
-														{!! data_get($post, 'price_formatted') !!}
+														<?php echo data_get($post, 'price_formatted'); ?>
+
 													</div>
 												</td>
 												<td style="width:10%" class="action-td">
@@ -261,49 +256,56 @@
 															        data-bs-toggle="dropdown"
 															        aria-expanded="false"
 															>
-																{{ t('action') }}
+																<?php echo e(t('action')); ?>
+
 															</button>
 															<ul class="dropdown-menu">
-																@if ($isEditingAllowed)
+																<?php if($isEditingAllowed): ?>
 																	<li>
-																		<a class="dropdown-item" href="{{ $editingUrl }}">
-																			<i class="fa-regular fa-pen-to-square"></i> {{ t('Edit') }}
+																		<a class="dropdown-item" href="<?php echo e($editingUrl); ?>">
+																			<i class="fa-regular fa-pen-to-square"></i> <?php echo e(t('Edit')); ?>
+
 																		</a>
 																	</li>
-																@endif
-																@if ($isPhotoEditingAllowed)
+																<?php endif; ?>
+																<?php if($isPhotoEditingAllowed): ?>
 																	<li>
-																		<a class="dropdown-item" href="{{ $photoEditingUrl }}">
-																			<i class="bi bi-camera"></i> {{ t('Update Photos') }}
+																		<a class="dropdown-item" href="<?php echo e($photoEditingUrl); ?>">
+																			<i class="bi bi-camera"></i> <?php echo e(t('Update Photos')); ?>
+
 																		</a>
 																	</li>
-																@endif
-																@if ($isPlanPaymentAllowed)
+																<?php endif; ?>
+																<?php if($isPlanPaymentAllowed): ?>
 																	<li>
-																		<a class="dropdown-item" href="{{ $planPaymentUrl }}">
-																			<i class="fa-regular fa-circle-check"></i> {{ t('Make It Premium') }}
+																		<a class="dropdown-item" href="<?php echo e($planPaymentUrl); ?>">
+																			<i class="fa-regular fa-circle-check"></i> <?php echo e(t('Make It Premium')); ?>
+
 																		</a>
 																	</li>
-																@endif
-																@if ($isArchivingAllowed)
+																<?php endif; ?>
+																<?php if($isArchivingAllowed): ?>
 																	<li>
-																		<a class="dropdown-item confirm-simple-action" href="{{ $archivingUrl }}">
-																			<i class="fa-solid fa-eye-slash"></i> {{ t('put_it_offline') }}
+																		<a class="dropdown-item confirm-simple-action" href="<?php echo e($archivingUrl); ?>">
+																			<i class="fa-solid fa-eye-slash"></i> <?php echo e(t('put_it_offline')); ?>
+
 																		</a>
 																	</li>
-																@endif
-																@if ($isRepostingAllowed)
+																<?php endif; ?>
+																<?php if($isRepostingAllowed): ?>
 																	<li>
-																		<a class="dropdown-item confirm-simple-action" href="{{ $repostingUrl }}">
-																			<i class="fa-solid fa-recycle"></i> {{ t('re_post_it') }}
+																		<a class="dropdown-item confirm-simple-action" href="<?php echo e($repostingUrl); ?>">
+																			<i class="fa-solid fa-recycle"></i> <?php echo e(t('re_post_it')); ?>
+
 																		</a>
 																	</li>
-																@endif
+																<?php endif; ?>
 																<li>
 																	<a class="dropdown-item confirm-simple-action text-danger"
-																	   href="{{ $deletingUrl }}"
+																	   href="<?php echo e($deletingUrl); ?>"
 																	>
-																		<i class="fa-regular fa-trash-can"></i> {{ t('Delete') }}
+																		<i class="fa-regular fa-trash-can"></i> <?php echo e(t('Delete')); ?>
+
 																	</a>
 																</li>
 															</ul>
@@ -311,15 +313,15 @@
 													</div>
 												</td>
 											</tr>
-										@endforeach
-									@endif
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									<?php endif; ?>
 									</tbody>
 								</table>
 							</form>
 						</div>
 						
 						<nav>
-							@include('vendor.pagination.api.bootstrap-4')
+							<?php echo $__env->make('vendor.pagination.api.bootstrap-4', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 						</nav>
 						
 					</div>
@@ -327,11 +329,11 @@
 			</div>
 		</div>
 	</div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('after_scripts')
-	<script src="{{ url('assets/plugins/footable-jquery/2.0.1.4/footable.js?v=2-0-1') }}" type="text/javascript"></script>
-	<script src="{{ url('assets/plugins/footable-jquery/2.0.1.4/footable.filter.js?v=2-0-1') }}" type="text/javascript"></script>
+<?php $__env->startSection('after_scripts'); ?>
+	<script src="<?php echo e(url('assets/plugins/footable-jquery/2.0.1.4/footable.js?v=2-0-1')); ?>" type="text/javascript"></script>
+	<script src="<?php echo e(url('assets/plugins/footable-jquery/2.0.1.4/footable.filter.js?v=2-0-1')); ?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		onDocumentReady((event) => {
 			$('#addManageTable').footable().bind('footable_filtering', function (e) {
@@ -366,4 +368,6 @@
 			}
 		});
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/account/posts.blade.php ENDPATH**/ ?>

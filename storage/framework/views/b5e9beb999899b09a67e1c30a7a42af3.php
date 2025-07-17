@@ -72,7 +72,7 @@
 
 
 
-<?php if (! $__env->hasRenderedOnce('246c8648-bc0a-4f7d-b163-32bb7f8d6468')): $__env->markAsRenderedOnce('246c8648-bc0a-4f7d-b163-32bb7f8d6468');
+<?php if (! $__env->hasRenderedOnce('3d38c2d5-c533-44c0-9bbd-52e6aaf4e65e')): $__env->markAsRenderedOnce('3d38c2d5-c533-44c0-9bbd-52e6aaf4e65e');
 $__env->startPush("{$viewName}_assets_scripts"); ?>
 	<script src="<?php echo e(asset('assets/plugins/tinymce/tinymce.min.js')); ?>"></script>
 	<?php

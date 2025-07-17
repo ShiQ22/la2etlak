@@ -106,7 +106,7 @@
 
 
 
-<?php if (! $__env->hasRenderedOnce('d2f0d986-95cf-43d7-9868-4739a8274e70')): $__env->markAsRenderedOnce('d2f0d986-95cf-43d7-9868-4739a8274e70');
+<?php if (! $__env->hasRenderedOnce('99d03d71-12b6-43bf-81a3-f27b34cec06e')): $__env->markAsRenderedOnce('99d03d71-12b6-43bf-81a3-f27b34cec06e');
 $__env->startPush("select2_assets_styles"); ?>
 	<link href="<?php echo e(asset($pluginBasePath . 'css/select2.min.css')); ?>" rel="stylesheet" type="text/css"/>
 	<?php if($theme == 'bootstrap5'): ?>
@@ -123,7 +123,7 @@ $__env->startPush("select2_assets_styles"); ?>
 	<?php endif; ?>
 <?php $__env->stopPush(); endif; ?>
 
-<?php if (! $__env->hasRenderedOnce('12e7ebde-19c1-4c16-b3e8-a31a42bafcae')): $__env->markAsRenderedOnce('12e7ebde-19c1-4c16-b3e8-a31a42bafcae');
+<?php if (! $__env->hasRenderedOnce('857b1ab5-05b4-4b05-a285-20fdf7871598')): $__env->markAsRenderedOnce('857b1ab5-05b4-4b05-a285-20fdf7871598');
 $__env->startPush("select2_assets_scripts"); ?>
 	<script src="<?php echo e(asset($pluginBasePath . 'js/select2.full.min.js')); ?>"></script>
 	<?php

@@ -18,6 +18,7 @@
 			<div class="card-header border-bottom-0">
 				<h4 class="mb-0 float-start fw-lighter">
 					{!! data_get($widget, 'title') !!}
+					
 				</h4>
 				<h5 class="mb-0 float-end mt-1 fs-6 fw-lighter text-uppercase">
 					<a href="{{ data_get($widget, 'link') }}" class="{{ linkClass() }}">
