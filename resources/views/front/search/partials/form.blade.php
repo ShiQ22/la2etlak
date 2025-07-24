@@ -68,6 +68,24 @@
 		<div class="row m-0">
 			<div class="col-12 px-1 py-1 bg-primary rounded">
 				<div class="row gx-1 gy-1">
+
+				   {{-- type --}}
+					@php
+						$typeOptions = [
+							['value' => '',      'text' => t('All')],
+							['value' => 'lost',  'text' => t('Lost')],
+							['value' => 'found', 'text' => t('Found')],
+						];
+					@endphp
+					@include('helpers.forms.fields.select2', [
+						'id'        => 'typeSearch',
+						'name'      => 'type',
+						'options'   => $typeOptions,
+						'value'     => request()->query('type', ''),
+						'baseClass' => [
+							'wrapper' => 'col-xl-2 col-md-2 col-sm-12 col-12'
+						],
+					])
 					
 					{{-- c --}}
 					@php
@@ -94,7 +112,7 @@
 						'value'       => $qCategory,
 						'hint'        => null,
 						'baseClass'   => [
-							'wrapper' => 'col-xl-3 col-md-3 col-sm-12 col-12'
+							'wrapper' => 'col-xl-2 col-md-2 col-sm-12 col-12'
 						],
 					])
 					
@@ -105,7 +123,7 @@
 						'value'       => $keywords,
 						'baseClass'   => [
 							'field' => 'form-control keyword',
-							'wrapper' => 'col-xl-4 col-md-4 col-sm-12 col-12'
+							'wrapper' => 'col-xl-3 col-md-3 col-sm-12 col-12'
 						],
 					])
 					

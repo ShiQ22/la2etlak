@@ -69,6 +69,21 @@
 									
 									<input type="hidden" name="post_id" value="{{ data_get($post, 'id') }}">
 									<fieldset>
+
+									 {{-- Lost / Found (Step 1, shown first) --}}
+										<div class="form-group col-md-6">
+											<label for="lost_or_found">{{ t('type') }}</label>
+											<select name="lost_or_found" id="lost_or_found" class="form-control" required>
+											<option value="lost"
+												{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : '' }}>
+												{{ t('Lost') }}
+											</option>
+											<option value="found"
+												{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : '' }}>
+												{{ t('Found') }}
+											</option>
+											</select>
+										</div>
 										
 										{{-- category_id --}}
 										@php

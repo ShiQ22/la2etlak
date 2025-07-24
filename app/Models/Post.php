@@ -872,6 +872,26 @@ class Post extends BaseModel implements Feedable
     {
         return $query->where('lost_or_found', 'found');
     }
+    /**
+     * Scope a query by lost/found type or return all when empty.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $type  ''|'lost'|'found'
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeType(Builder $query, string $type)
+    {
+        if ($type === 'lost') {
+            return $query->lost();
+        }
+        if ($type === 'found') {
+            return $query->found();
+        }
+        // $type === '' (all) or invalid: remove any built-in filter
+        // The IncludeLostOrFound global scope ensures only posts with lost_or_found set,
+        // so here “all” means both lost and found.
+        return $query;
+    }
 
 }
 

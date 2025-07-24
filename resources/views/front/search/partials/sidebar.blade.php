@@ -14,6 +14,7 @@
 					$prefixId = '';
 				@endphp
 				@include('front.search.partials.sidebar.fields', ['prefixId' => $prefixId])
+				@include('front.search.partials.sidebar.type', ['prefixId' => $prefixId])
 				@include('front.search.partials.sidebar.categories', ['prefixId' => $prefixId])
 	            @include('front.search.partials.sidebar.cities', ['prefixId' => $prefixId])
 				@if (!config('settings.listings_list.hide_date'))

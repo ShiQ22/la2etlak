@@ -212,6 +212,10 @@ return [
     'found' => 'Found',
 	'Lost'  => 'Lost',
     'Found' => 'Found',
+	'Listing Type' => 'Listing Type',
+	'Lost first'  => 'Lost first',
+    'Found first' => 'Found first',
+	
     
     'how_to_sell_quickly' => 'How to sell quickly?',
     'sell_quickly_advice_1' => 'Use a brief title and description of the item',

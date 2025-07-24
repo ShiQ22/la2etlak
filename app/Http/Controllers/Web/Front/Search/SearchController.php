@@ -38,8 +38,13 @@ class SearchController extends BaseController
 		// Get Posts
 		$queryParams = [
 			'op' => $filterBy,
+			'type' => request()->input('type', ''),
 		];
 		$queryParams = array_merge(request()->all(), $queryParams);
+		    if (!in_array($queryParams['type'], ['', 'lost', 'found'])) {
+        // Optionally, you could abort or simply reset to all
+        $queryParams['type'] = '';
+  	  }
 		$data = getServiceData($this->postService->getEntries($queryParams));
 		
 		$apiMessage = data_get($data, 'message');

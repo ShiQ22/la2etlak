@@ -175,15 +175,15 @@ trait SidebarTrait
 			],
 			[
 				'condition'  => true,
-				'isSelected' => ($orderBy == 'priceAsc'),
-				'query'      => ['orderBy' => 'priceAsc'],
-				'label'      => t('price_low_to_high'),
+				'isSelected' => ($orderBy == 'lostFirst'),
+				'query'      => ['orderBy' => 'lostFirst'],
+				'label'      => t('Lost first'),
 			],
 			[
 				'condition'  => true,
-				'isSelected' => ($orderBy == 'priceDesc'),
-				'query'      => ['orderBy' => 'priceDesc'],
-				'label'      => t('price_high_to_low'),
+				'isSelected' => ($orderBy == 'foundFirst'),
+				'query'      => ['orderBy' => 'foundFirst'],
+				'label'      => t('Found first'),
 			],
 			[
 				'condition'  => !empty($keyword),

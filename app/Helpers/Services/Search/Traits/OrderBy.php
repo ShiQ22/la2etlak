@@ -27,16 +27,27 @@ trait OrderBy
 		}
 		
 		// Request Parameters
-		// 'queryStringKey' => ['name' => 'column', 'order' => 'direction']
-		$orderByParametersFields = [
-			'priceAsc'  => ['name' => $this->postsTable . '.price', 'order' => 'ASC'],
-			'priceDesc' => ['name' => $this->postsTable . '.price', 'order' => 'DESC'],
-			'date'      => ['name' => $this->postsTable . '.created_at', 'order' => 'DESC'],
-			// KeywordFilter (by 'relevance') - Only if needed
-			// LocationFilter (by 'distance') - Only if needed
-			// PaymentRelation (by 'premium' or 'random') - Only used by the system
-		];
-		$this->orderByParametersFields = array_merge($this->orderByParametersFields, $orderByParametersFields);
+$orderByParametersFields = [
+    'distance'   => [
+        'name'  => 'distance',
+        'order' => 'ASC',
+    ],
+    'lostFirst'  => [
+        'name'  => "{$this->postsTable}.lost_or_found = 'lost'",
+        'order' => 'DESC',
+    ],
+    'foundFirst' => [
+        'name'  => "{$this->postsTable}.lost_or_found = 'found'",
+        'order' => 'DESC',
+    ],
+    'date'       => [
+        'name'  => $this->postsTable . '.created_at',
+        'order' => 'DESC',
+    ],
+];
+$this->orderByParametersFields = array_merge($this->orderByParametersFields, $orderByParametersFields);
+
+
 		
 		if (config('plugins.reviews.installed')) {
 			// Make possible the orderBy 'rating'

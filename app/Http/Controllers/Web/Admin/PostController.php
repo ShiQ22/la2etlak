@@ -212,6 +212,18 @@ class PostController extends PanelController
 			}
 		);
 		// -----------------------
+		// Lost / Found filter
+			$this->xPanel->addFilter([
+				'name'  => 'lost_or_found',
+				'type'  => 'dropdown',
+				'label' => trans('type'),
+			], [
+				'lost'  => trans('Lost'),
+				'found' => trans('Found'),
+			], function($value) {
+				$this->xPanel->addClause('where', 'lost_or_found', $value);
+			});
+		// -----------------------
 		if (config('plugins.offlinepayment.installed')) {
 			$this->xPanel->addFilter(
 				[
@@ -290,6 +302,12 @@ class PostController extends PanelController
 			'label'         => trans('admin.Main Picture'),
 			'type'          => 'model_function',
 			'function_name' => 'getPictureHtml',
+		]);
+		$this->xPanel->addColumn([
+			'name'  => 'lost_or_found',
+			'label' => trans('type'),
+			'type'  => 'text',
+			
 		]);
 		$this->xPanel->addColumn([
 			'name'          => 'contact_name',
@@ -459,6 +477,18 @@ class PostController extends PanelController
 				'class' => 'col-md-6',
 			],
 		]);
+		$this->xPanel->addField([
+			'name'    => 'lost_or_found',
+			'label'   => trans('type'),
+			'type'    => 'select2_from_array',
+			'options' => [
+				'lost'  => trans('Lost'),
+				'found' => trans('Found'),
+			],
+			'wrapper' => [
+				'class' => 'col-md-6',
+			],
+		], 'update');
 		$tags = (!empty($entity) && isset($entity->tags)) ? (array)$entity->tags : [];
 		$this->xPanel->addField([
 			'name'            => 'tags',

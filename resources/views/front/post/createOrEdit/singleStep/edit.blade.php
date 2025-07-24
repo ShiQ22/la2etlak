@@ -58,6 +58,21 @@
 									<input type="hidden" name="post_id" value="{{ data_get($post, 'id') }}">
 									<input type="hidden" name="payable_id" value="{{ data_get($post, 'id') }}">
 									<fieldset>
+
+									{{-- Lost / Found --}}
+										<div class="form-group col-md-6">
+										<label for="lost_or_found">{{ t('type') }}</label>
+										<select name="lost_or_found" id="lost_or_found" class="form-control" required>
+											<option value="lost"
+											{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : '' }}>
+											{{ t('Lost') }}
+											</option>
+											<option value="found"
+											{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : '' }}>
+											{{ t('Found') }}
+											</option>
+										</select>
+										</div>
 										
 										{{-- category_id --}}
 										@php
@@ -287,6 +302,8 @@
 											'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
 											'wrapper'      => ['id' => 'cityBox'],
 										])
+
+										
 										
 										{{-- tags --}}
 										@php
@@ -413,6 +430,7 @@
 										
 										@include('front.post.createOrEdit.singleStep.partials.packages')
 										
+																				
 										{{-- button --}}
 										<div class="row mb-3 mt-5">
 											<div class="col-md-6 mb-md-0 mb-2 text-start d-grid">

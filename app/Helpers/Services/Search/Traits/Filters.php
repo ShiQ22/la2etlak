@@ -46,6 +46,12 @@ trait Filters
 		
 		// Author
 		$this->applyAuthorFilter();
+
+		   // Lost/Found filter (lost_or_found column)
+		$type = $this->input['type'] ?? '';
+		if (in_array($type, ['', 'lost', 'found'], true)) {
+			$this->posts->type($type);
+		}
 		
 		// Category
 		$this->applyCategoryFilter();

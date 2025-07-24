@@ -14,6 +14,7 @@
 					$prefixId = '';
 				?>
 				<?php echo $__env->make('front.search.partials.sidebar.fields', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+				<?php echo $__env->make('front.search.partials.sidebar.type', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				<?php echo $__env->make('front.search.partials.sidebar.categories', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 	            <?php echo $__env->make('front.search.partials.sidebar.cities', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				<?php if(!config('settings.listings_list.hide_date')): ?>

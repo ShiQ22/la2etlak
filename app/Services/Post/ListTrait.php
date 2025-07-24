@@ -49,7 +49,8 @@ trait ListTrait
 		$posts = Post::query()
 			->with(['user', 'user.permissions', 'picture'])
 			->inCountry($countryCode)
-			->has('country');
+			->has('country')
+			->when(isset($params['type']), fn($q) => $q->type($params['type']));
 		
 		if ($areBelongLoggedUser) {
 			$authUser = auth(getAuthGuard())->user();
