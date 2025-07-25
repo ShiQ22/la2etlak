@@ -134,7 +134,7 @@
 										{{-- cfContainer --}}
 										<div id="cfContainer"></div>
 										
-										{{-- price --}}
+										{{-- price 
 										@php
 											$currencySymbol = config('currency.symbol', 'X');
 											$price = old('price', data_get($postInput, 'price'));
@@ -162,6 +162,7 @@
 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
 											'wrapper'     => ['id' => 'priceBloc'],
 										])
+										--}}
 										
 										{{-- country_code --}}
 										@php

@@ -384,7 +384,7 @@ class PostController extends PanelController
 				'rows'        => 10,
 			],
 		]);
-		$this->xPanel->addField([
+		 /*$this->xPanel->addField([
 			'name'       => 'price',
 			'label'      => mb_ucfirst(trans('admin.Price')),
 			'type'       => 'number',
@@ -406,6 +406,7 @@ class PostController extends PanelController
 				'class' => 'col-md-6',
 			],
 		]);
+		*/
 		$this->xPanel->addField([
 			'label'     => mb_ucfirst(trans('admin.pictures')),
 			'name'      => 'pictures', // Entity method

@@ -156,13 +156,13 @@
 										</div>
 									@endif
 								@endif
-								
+								{{--
 								<div class="col-12 text-end">
 									<h5 class="fs-4 fw-bold">
 										{!! data_get($post, 'price_formatted') !!}
 									</h5>
 								</div>
-								
+								 --}}
 								<div class="col-12 text-end">
 									@if (!empty(data_get($post, 'payment.package')))
 										@if (data_get($post, 'payment.package.has_badge') == 1)

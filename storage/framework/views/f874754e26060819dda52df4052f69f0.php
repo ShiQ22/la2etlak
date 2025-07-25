@@ -242,12 +242,7 @@
 														</p>
 													</div>
 												</td>
-												<td style="width:16%" class="price-td d-md-table-cell d-sm-none d-none">
-													<div class="fw-bold">
-														<?php echo data_get($post, 'price_formatted'); ?>
-
-													</div>
-												</td>
+												
 												<td style="width:10%" class="action-td">
 													<div>
 														<div class="btn-group">

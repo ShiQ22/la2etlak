@@ -4,7 +4,7 @@
 {{-- bxSlider - Horizontal Thumbnails --}}
 <div class="gallery-container">
 	@if (!empty($price))
-		<div class="p-price-tag">{!! $price !!}</div>
+		 {{--<div class="p-price-tag">{!! $price !!}</div>--}}
 	@endif
 	<div class="bxslider">
 		@forelse($pictures as $key => $image)

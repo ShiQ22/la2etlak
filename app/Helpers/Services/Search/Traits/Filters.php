@@ -72,7 +72,7 @@ trait Filters
 		$this->applyPostTypeFilter();
 		
 		// Price
-		$this->applyPriceFilter();
+		//$this->applyPriceFilter();
 		
 		// Dynamic Fields
 		$this->applyDynamicFieldsFilters();

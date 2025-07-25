@@ -80,24 +80,24 @@ class PostRequest extends Request
 		}
 		
 		// price
-		if ($this->has('price')) {
-			if ($this->filled('price')) {
-				$input['price'] = $this->input('price');
+		//if ($this->has('price')) {
+		//	if ($this->filled('price')) {
+		//		$input['price'] = $this->input('price');
 				// If field's value contains only numbers and dot,
 				// Then decimal separator is set as dot.
-				if (preg_match('/^[\d.]*$/', $input['price'])) {
-					$input['price'] = Num::formatForDb($input['price'], '.');
-				} else {
-					if ($this->filled('currency_decimal_separator')) {
-						$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
-					} else {
-						$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
-					}
-				}
-			} else {
-				$input['price'] = null;
-			}
-		}
+		//		if (preg_match('/^[\d.]*$/', $input['price'])) {
+		//			$input['price'] = Num::formatForDb($input['price'], '.');
+		//		} else {
+		//			if ($this->filled('currency_decimal_separator')) {
+		//				$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
+		//			} else {
+		//				$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
+		//			}
+		//		}
+	//		} else {
+	//			$input['price'] = null;
+	//		}
+	//	}
 		
 		// currency_code
 		if ($this->filled('currency_code')) {
@@ -221,16 +221,16 @@ class PostRequest extends Request
 			new MbAlphanumericRule(),
 			new BlacklistWordRule(),
 		];
-		if (config('settings.listing_form.price_mandatory') == '1') {
-			if ($this->filled('category_id')) {
-				$category = Category::find($this->input('category_id'));
-				if (!empty($category)) {
-					if ($category->type != 'not-salable') {
-						$rules['price'] = ['required', 'numeric', 'gt:0'];
-					}
-				}
-			}
-		}
+		//if (config('settings.listing_form.price_mandatory') == '1') {
+			//if ($this->filled('category_id')) {
+			//	$category = Category::find($this->input('category_id'));
+			//	if (!empty($category)) {
+			//		if ($category->type != 'not-salable') {
+				//		$rules['price'] = ['required', 'numeric', 'gt:0'];
+			//		}
+				//}
+		//	}
+		//}
 		$rules['contact_name'] = ['required', new BetweenRule(2, 200)];
 		$rules['auth_field'] = ['required', Rule::in($authFields)];
 		$rules['phone'] = ['max:30'];

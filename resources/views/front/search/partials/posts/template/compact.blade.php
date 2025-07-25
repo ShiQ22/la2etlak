@@ -115,9 +115,12 @@
 				</div>
 				
 				<div class="col-sm-3 col-12 text-end text-nowrap d-flex flex-column justify-content-between">
+					{{--
+						// [3.0.1.k] Commented out price display
 					<h5 class="fs-5 fw-bold">
 						{!! data_get($post, 'price_formatted') !!}
 					</h5>
+					--}}
 					<div>
 						@if (!empty(data_get($post, 'payment.package')))
 							@if (data_get($post, 'payment.package.has_badge') == 1)
@@ -141,6 +144,7 @@
 						@endif
 					</div>
 				</div>
+
 			</div>
 		@endforeach
 	</div>

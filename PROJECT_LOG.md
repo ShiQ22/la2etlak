@@ -25,15 +25,18 @@
 - Added `lost_or_found` select field on the edit form (select2_from_array).
 
 #### [2.0] Search Enhancements (Global)
-- [ ] Add "Lost / Found / All" dropdown:
-  - [ ] Main search bar
-  - [ ] Sidebar
-  - [ ] Sort controls
+- [x] Add “Lost / Found / All” dropdown to main search bar  
+- [x] Add “Lost / Found / All” dropdown to sidebar  
+- [x] Remove price-based sort options  
+- [x] Add “Lost first” & “Found first” sort controls  
+- [x] Preserve “Distance” & “Date” sorts  
+- [x] Wire up back-end ORDER BY logic for lost/found via boolean expressions  
+- [x] Translation keys for `Lost first` & `Found first` in `en` and `ar`  
 - [ ] Integrate into:
-  - [ ] SearchController
-  - [ ] search traits/helpers (confirm actual files used)
-  - [ ] query builder
-  - [ ] search result templates
+  - [ ] SearchController  
+  - [ ] search traits/helpers (confirm actual files used)  
+  - [ ] query builder  
+  - [ ] search result templates  
 
 #### [3.0] Report Form Cleanup & Multi-Category
 - [ ] Remove price & negotiable fields from listing form
@@ -59,12 +62,23 @@
 
 ---
 
+### 💾 Recent Commits on `feature/lost-found-search`
+
+#### [2.0.1] (2025-07-24)
+- Removed `priceAsc`/`priceDesc` entries from sort options  
+- Re-added `distance` sort as first option  
+- Added `lostFirst` & `foundFirst` keys in:
+  - `OrderBy.php` (SQL ordering via boolean comparisons)  
+  - `SidebarTrait.php` (menu entries)  
+- Kept `date` sort intact  
+- Added translation strings in `resources/lang/en/global.php` and `ar/global.php`  
+- Cleared view/cache to reflect changes  
+
+---
+
 ### 💡 Notes
 
 - Main frontend template = LaraClassifier (CodeCanyon)
 - DB structure modified on `feature/lost-found-admin` branch
 - Last uploaded ZIP = `la2etlak-feature-lost-found_2.zip`
 - Reset and rolled back previous failed work — only above is active
-
----
-

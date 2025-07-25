@@ -7,7 +7,7 @@
 		<div class="swiper-wrapper">
 			@forelse($pictures as $key => $image)
 				@if (!empty($price))
-					<div class="p-price-tag">{!! $price !!}</div>
+				 {{--	<div class="p-price-tag">{!! $price !!}</div>--}}
 				@endif
 				<div class="swiper-slide">
 					@php
@@ -19,7 +19,7 @@
 				</div>
 			@empty
 				@if (!empty($price))
-					<div class="p-price-tag">{!! $price !!}</div>
+					 {{--<div class="p-price-tag">{!! $price !!}</div>--}}
 				@endif
 				<div class="swiper-slide">
 					<img src="{{ thumbParam(config('larapen.media.picture'))->url() }}" alt="img" class="default-picture">

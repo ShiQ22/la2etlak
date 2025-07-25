@@ -87,7 +87,7 @@
 								</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="<?php echo e(url('/')); ?>" class="<?php echo e(linkClass()); ?>">
+								<a href="<?php echo e(url('/search')); ?>" class="<?php echo e(linkClass()); ?>">
 									<?php echo e(config('country.name')); ?>
 
 								</a>

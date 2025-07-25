@@ -368,10 +368,10 @@
 							<?php echo e(t('Powered by')); ?> <?php echo config('settings.footer.powered_by_info'); ?>
 
 						<?php else: ?>
-							<?php echo e(t('Powered by')); ?> <a href="https://laraclassifier.com"
-							                         title="LaraClassifier"
+							<?php echo e(t('Powered by')); ?> <a href="https://la2etlak.com"
+							                         title="La2etlak"
 							                         class="<?php echo e(linkClass()); ?>"
-							>LaraClassifier</a>.
+							>la2etlak</a>.
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>

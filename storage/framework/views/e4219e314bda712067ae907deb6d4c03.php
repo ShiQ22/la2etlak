@@ -1,3 +1,6 @@
+<form action="<?php echo e(url('search')); ?>" method="GET">
+    <input type="hidden" name="filterBy" value="search">
+
 <?php
 	$autocompleteClass ??= '';
 	$searchTooltip ??= '';
@@ -39,4 +42,4 @@
 		</button>
 	</div>
 </div>
-<?php /**PATH C:\xampp\htdocs\resources\views/front/sections/home/search-form/large-screen.blade.php ENDPATH**/ ?>
+</form><?php /**PATH C:\xampp\htdocs\resources\views/front/sections/home/search-form/large-screen.blade.php ENDPATH**/ ?>

@@ -78,10 +78,6 @@
 									<?php endif; ?>
 									
 									
-									<h4 class="fs-4 fw-bold mt-3 text-center">
-										<?php echo data_get($post, 'price_formatted'); ?>
-
-									</h4>
 								</div>
 							</div>
 						</div>

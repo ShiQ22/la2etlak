@@ -99,7 +99,7 @@
 								</a>
 							</li>
 							<li class="breadcrumb-item">
-								<a href="{{ url('/') }}" class="{{ linkClass() }}">
+								<a href="{{ url('/search') }}" class="{{ linkClass() }}">
 									{{ config('country.name') }}
 								</a>
 							</li>

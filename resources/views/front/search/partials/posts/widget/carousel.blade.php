@@ -74,10 +74,11 @@
 										</div>
 									@endif
 									
-									{{-- Price --}}
+									{{-- Price 
 									<h4 class="fs-4 fw-bold mt-3 text-center">
 										{!! data_get($post, 'price_formatted') !!}
 									</h4>
+									--}}
 								</div>
 							</div>
 						</div>

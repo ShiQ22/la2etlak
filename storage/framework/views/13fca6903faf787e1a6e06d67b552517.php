@@ -120,33 +120,6 @@
 										<div id="cfContainer"></div>
 										
 										
-										<?php
-											$currencySymbol = config('currency.symbol', 'X');
-											$price = old('price', data_get($postInput, 'price'));
-											$price = \App\Helpers\Common\Num::format($price, 2, '.', '');
-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
-											$priceHint = !$isPriceMandatory ? t('price_hint') : null;
-											
-											// negotiable
-											$negotiable = old('negotiable', data_get($postInput, 'negotiable'));
-											$negotiableChecked = ($negotiable == '1') ? ' checked' : '';
-											
-											$suffix = '<input id="negotiable" name="negotiable" type="checkbox" value="1"' . $negotiableChecked . '>';
-											$suffix .= '&nbsp;<small>' . t('negotiable') . '</small>';
-										?>
-										<?php echo $__env->make('helpers.forms.fields.number', [
-											'label'       => t('price'),
-											'name'        => 'price',
-											'required'    => $isPriceMandatory,
-											'placeholder' => t('enter_your_price'),
-											'value'       => $price,
-											'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
-											'prefix'      => $currencySymbol,
-											'suffix'      => $suffix,
-											'hint'        => $priceHint,
-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
-											'wrapper'     => ['id' => 'priceBloc'],
-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
 										
 										<?php

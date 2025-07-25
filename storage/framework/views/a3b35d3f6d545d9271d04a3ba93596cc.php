@@ -167,13 +167,6 @@
 								<?php endif; ?>
 								
 								<div class="col-12 text-end">
-									<h5 class="fs-4 fw-bold">
-										<?php echo data_get($post, 'price_formatted'); ?>
-
-									</h5>
-								</div>
-								
-								<div class="col-12 text-end">
 									<?php if(!empty(data_get($post, 'payment.package'))): ?>
 										<?php if(data_get($post, 'payment.package.has_badge') == 1): ?>
 											<a class="btn btn-danger btn-xs small me-1 make-favorite">

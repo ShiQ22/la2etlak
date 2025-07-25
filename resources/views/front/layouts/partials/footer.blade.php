@@ -357,10 +357,10 @@
 						@if (config('settings.footer.powered_by_info'))
 							{{ t('Powered by') }} {!! config('settings.footer.powered_by_info') !!}
 						@else
-							{{ t('Powered by') }} <a href="https://laraclassifier.com"
-							                         title="LaraClassifier"
+							{{ t('Powered by') }} <a href="https://la2etlak.com"
+							                         title="La2etlak"
 							                         class="{{ linkClass() }}"
-							>LaraClassifier</a>.
+							>la2etlak</a>.
 						@endif
 					@endif
 				</div>

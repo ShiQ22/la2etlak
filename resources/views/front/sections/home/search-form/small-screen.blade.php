@@ -1,4 +1,6 @@
-@php
+<form action="{{ url('search') }}" method="GET">
+    <input type="hidden" name="filterBy" value="search">
+	@php
 	$autocompleteClass ??= '';
 	$searchTooltip ??= '';
 @endphp
@@ -38,3 +40,4 @@
 		</button>
 	</div>
 </div>
+</form>

@@ -20,7 +20,7 @@
 				@if (!config('settings.listings_list.hide_date'))
 					@include('front.search.partials.sidebar.date', ['prefixId' => $prefixId])
 				@endif
-				@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])
+				 {{--@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])--}}
 				
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 				@if (!config('settings.listings_list.hide_date'))
 					@include('front.search.partials.sidebar.date', ['prefixId' => $prefixId])
 				@endif
-				@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])
+				{{--@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])--}}
 			
 			</div>
 		</div>

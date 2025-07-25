@@ -4,7 +4,7 @@
 
 <div class="gallery-container">
 	<?php if(!empty($price)): ?>
-		<div class="p-price-tag"><?php echo $price; ?></div>
+	 
 	<?php endif; ?>
 	<div class="swiper main-gallery">
 		<div class="swiper-wrapper">

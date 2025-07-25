@@ -20,7 +20,7 @@
 				<?php if(!config('settings.listings_list.hide_date')): ?>
 					<?php echo $__env->make('front.search.partials.sidebar.date', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				<?php endif; ?>
-				<?php echo $__env->make('front.search.partials.sidebar.price', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+				 
 				
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 				<?php if(!config('settings.listings_list.hide_date')): ?>
 					<?php echo $__env->make('front.search.partials.sidebar.date', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				<?php endif; ?>
-				<?php echo $__env->make('front.search.partials.sidebar.price', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+				
 			
 			</div>
 		</div>
