@@ -94407,3 +94407,5130 @@ index 00000000..d8e4bb4b
 +
 +</div><?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/custom_html.blade.php ENDPATH**/ ?>
 \ No newline at end of file
+diff --git a/PROJECT_LOG.md b/PROJECT_LOG.md
+index a9deb5a9..2abea078 100644
+--- a/PROJECT_LOG.md
++++ b/PROJECT_LOG.md
+@@ -25,15 +25,18 @@ #### [1.0] Admin Panel Integration of Lost/Found – COMPLETED
+ - Added `lost_or_found` select field on the edit form (select2_from_array).
+ 
+ #### [2.0] Search Enhancements (Global)
+-- [ ] Add "Lost / Found / All" dropdown:
+-  - [ ] Main search bar
+-  - [ ] Sidebar
+-  - [ ] Sort controls
++- [x] Add “Lost / Found / All” dropdown to main search bar  
++- [x] Add “Lost / Found / All” dropdown to sidebar  
++- [x] Remove price-based sort options  
++- [x] Add “Lost first” & “Found first” sort controls  
++- [x] Preserve “Distance” & “Date” sorts  
++- [x] Wire up back-end ORDER BY logic for lost/found via boolean expressions  
++- [x] Translation keys for `Lost first` & `Found first` in `en` and `ar`  
+ - [ ] Integrate into:
+-  - [ ] SearchController
+-  - [ ] search traits/helpers (confirm actual files used)
+-  - [ ] query builder
+-  - [ ] search result templates
++  - [ ] SearchController  
++  - [ ] search traits/helpers (confirm actual files used)  
++  - [ ] query builder  
++  - [ ] search result templates  
+ 
+ #### [3.0] Report Form Cleanup & Multi-Category
+ - [ ] Remove price & negotiable fields from listing form
+@@ -59,12 +62,23 @@ #### [5.0] User Verification
+ 
+ ---
+ 
++### 💾 Recent Commits on `feature/lost-found-search`
++
++#### [2.0.1] (2025-07-24)
++- Removed `priceAsc`/`priceDesc` entries from sort options  
++- Re-added `distance` sort as first option  
++- Added `lostFirst` & `foundFirst` keys in:
++  - `OrderBy.php` (SQL ordering via boolean comparisons)  
++  - `SidebarTrait.php` (menu entries)  
++- Kept `date` sort intact  
++- Added translation strings in `resources/lang/en/global.php` and `ar/global.php`  
++- Cleared view/cache to reflect changes  
++
++---
++
+ ### 💡 Notes
+ 
+ - Main frontend template = LaraClassifier (CodeCanyon)
+ - DB structure modified on `feature/lost-found-admin` branch
+ - Last uploaded ZIP = `la2etlak-feature-lost-found_2.zip`
+ - Reset and rolled back previous failed work — only above is active
+-
+----
+-
+diff --git a/app/Helpers/Services/Search/Traits/Filters.php b/app/Helpers/Services/Search/Traits/Filters.php
+index fba99c20..972d6af1 100644
+--- a/app/Helpers/Services/Search/Traits/Filters.php
++++ b/app/Helpers/Services/Search/Traits/Filters.php
+@@ -72,7 +72,7 @@ protected function applyFilters(): void
+ 		$this->applyPostTypeFilter();
+ 		
+ 		// Price
+-		$this->applyPriceFilter();
++		//$this->applyPriceFilter();
+ 		
+ 		// Dynamic Fields
+ 		$this->applyDynamicFieldsFilters();
+diff --git a/app/Http/Controllers/Web/Admin/PostController.php b/app/Http/Controllers/Web/Admin/PostController.php
+index 03431a7c..46c37e41 100644
+--- a/app/Http/Controllers/Web/Admin/PostController.php
++++ b/app/Http/Controllers/Web/Admin/PostController.php
+@@ -384,7 +384,7 @@ function ($value) {
+ 				'rows'        => 10,
+ 			],
+ 		]);
+-		$this->xPanel->addField([
++		 /*$this->xPanel->addField([
+ 			'name'       => 'price',
+ 			'label'      => mb_ucfirst(trans('admin.Price')),
+ 			'type'       => 'number',
+@@ -406,6 +406,7 @@ function ($value) {
+ 				'class' => 'col-md-6',
+ 			],
+ 		]);
++		*/
+ 		$this->xPanel->addField([
+ 			'label'     => mb_ucfirst(trans('admin.pictures')),
+ 			'name'      => 'pictures', // Entity method
+diff --git a/app/Http/Requests/Front/PostRequest.php b/app/Http/Requests/Front/PostRequest.php
+index 35049054..c2ea487b 100644
+--- a/app/Http/Requests/Front/PostRequest.php
++++ b/app/Http/Requests/Front/PostRequest.php
+@@ -80,24 +80,24 @@ protected function prepareForValidation(): void
+ 		}
+ 		
+ 		// price
+-		if ($this->has('price')) {
+-			if ($this->filled('price')) {
+-				$input['price'] = $this->input('price');
++		//if ($this->has('price')) {
++		//	if ($this->filled('price')) {
++		//		$input['price'] = $this->input('price');
+ 				// If field's value contains only numbers and dot,
+ 				// Then decimal separator is set as dot.
+-				if (preg_match('/^[\d.]*$/', $input['price'])) {
+-					$input['price'] = Num::formatForDb($input['price'], '.');
+-				} else {
+-					if ($this->filled('currency_decimal_separator')) {
+-						$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
+-					} else {
+-						$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
+-					}
+-				}
+-			} else {
+-				$input['price'] = null;
+-			}
+-		}
++		//		if (preg_match('/^[\d.]*$/', $input['price'])) {
++		//			$input['price'] = Num::formatForDb($input['price'], '.');
++		//		} else {
++		//			if ($this->filled('currency_decimal_separator')) {
++		//				$input['price'] = Num::formatForDb($input['price'], $this->input('currency_decimal_separator'));
++		//			} else {
++		//				$input['price'] = Num::formatForDb($input['price'], config('currency.decimal_separator', '.'));
++		//			}
++		//		}
++	//		} else {
++	//			$input['price'] = null;
++	//		}
++	//	}
+ 		
+ 		// currency_code
+ 		if ($this->filled('currency_code')) {
+@@ -221,16 +221,16 @@ public function rules(): array
+ 			new MbAlphanumericRule(),
+ 			new BlacklistWordRule(),
+ 		];
+-		if (config('settings.listing_form.price_mandatory') == '1') {
+-			if ($this->filled('category_id')) {
+-				$category = Category::find($this->input('category_id'));
+-				if (!empty($category)) {
+-					if ($category->type != 'not-salable') {
+-						$rules['price'] = ['required', 'numeric', 'gt:0'];
+-					}
+-				}
+-			}
+-		}
++		//if (config('settings.listing_form.price_mandatory') == '1') {
++			//if ($this->filled('category_id')) {
++			//	$category = Category::find($this->input('category_id'));
++			//	if (!empty($category)) {
++			//		if ($category->type != 'not-salable') {
++				//		$rules['price'] = ['required', 'numeric', 'gt:0'];
++			//		}
++				//}
++		//	}
++		//}
+ 		$rules['contact_name'] = ['required', new BetweenRule(2, 200)];
+ 		$rules['auth_field'] = ['required', Rule::in($authFields)];
+ 		$rules['phone'] = ['max:30'];
+diff --git a/resources/views/front/account/posts.blade.php b/resources/views/front/account/posts.blade.php
+index 4f4a708a..96e19702 100644
+--- a/resources/views/front/account/posts.blade.php
++++ b/resources/views/front/account/posts.blade.php
+@@ -248,11 +248,13 @@ class="{{ linkClass() }} fw-bold"
+ 														</p>
+ 													</div>
+ 												</td>
++												{{--
+ 												<td style="width:16%" class="price-td d-md-table-cell d-sm-none d-none">
+ 													<div class="fw-bold">
+ 														{!! data_get($post, 'price_formatted') !!}
+ 													</div>
+ 												</td>
++												--}}
+ 												<td style="width:10%" class="action-td">
+ 													<div>
+ 														<div class="btn-group">
+diff --git a/resources/views/front/layouts/partials/footer.blade.php b/resources/views/front/layouts/partials/footer.blade.php
+index 5d56541a..a9f1535d 100644
+--- a/resources/views/front/layouts/partials/footer.blade.php
++++ b/resources/views/front/layouts/partials/footer.blade.php
+@@ -357,10 +357,10 @@ class="img-thumbnail m-1 bg-light-subtle"
+ 						@if (config('settings.footer.powered_by_info'))
+ 							{{ t('Powered by') }} {!! config('settings.footer.powered_by_info') !!}
+ 						@else
+-							{{ t('Powered by') }} <a href="https://laraclassifier.com"
+-							                         title="LaraClassifier"
++							{{ t('Powered by') }} <a href="https://la2etlak.com"
++							                         title="La2etlak"
+ 							                         class="{{ linkClass() }}"
+-							>LaraClassifier</a>.
++							>la2etlak</a>.
+ 						@endif
+ 					@endif
+ 				</div>
+diff --git a/resources/views/front/post/createOrEdit/multiSteps/create/post.blade.php b/resources/views/front/post/createOrEdit/multiSteps/create/post.blade.php
+index 51a3ae62..ae14ee37 100644
+--- a/resources/views/front/post/createOrEdit/multiSteps/create/post.blade.php
++++ b/resources/views/front/post/createOrEdit/multiSteps/create/post.blade.php
+@@ -134,7 +134,7 @@ class="{{ unsavedFormGuard() }}"
+ 										{{-- cfContainer --}}
+ 										<div id="cfContainer"></div>
+ 										
+-										{{-- price --}}
++										{{-- price 
+ 										@php
+ 											$currencySymbol = config('currency.symbol', 'X');
+ 											$price = old('price', data_get($postInput, 'price'));
+@@ -162,6 +162,7 @@ class="{{ unsavedFormGuard() }}"
+ 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+ 											'wrapper'     => ['id' => 'priceBloc'],
+ 										])
++										--}}
+ 										
+ 										{{-- country_code --}}
+ 										@php
+diff --git a/resources/views/front/post/createOrEdit/singleStep/create.blade.php b/resources/views/front/post/createOrEdit/singleStep/create.blade.php
+index 94e4509f..35bd0bcd 100644
+--- a/resources/views/front/post/createOrEdit/singleStep/create.blade.php
++++ b/resources/views/front/post/createOrEdit/singleStep/create.blade.php
+@@ -177,7 +177,7 @@ class="{{ unsavedFormGuard() }}"
+ 										{{-- cfContainer --}}
+ 										<div id="cfContainer"></div>
+ 										
+-										{{-- price --}}
++										{{-- price 
+ 										@php
+ 											$currencySymbol = config('currency.symbol', 'X');
+ 											$price = old('price');
+@@ -205,7 +205,7 @@ class="{{ unsavedFormGuard() }}"
+ 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+ 											'wrapper'     => ['id' => 'priceBloc'],
+ 										])
+-										
++										--}}
+ 										{{-- country_code --}}
+ 										@php
+ 											$countryCodeOptions = collect($countries)
+diff --git a/resources/views/front/post/show/index.blade.php b/resources/views/front/post/show/index.blade.php
+index 1536837b..4cef826c 100644
+--- a/resources/views/front/post/show/index.blade.php
++++ b/resources/views/front/post/show/index.blade.php
+@@ -99,7 +99,7 @@
+ 								</a>
+ 							</li>
+ 							<li class="breadcrumb-item">
+-								<a href="{{ url('/') }}" class="{{ linkClass() }}">
++								<a href="{{ url('/search') }}" class="{{ linkClass() }}">
+ 									{{ config('country.name') }}
+ 								</a>
+ 							</li>
+diff --git a/resources/views/front/post/show/partials/details.blade.php b/resources/views/front/post/show/partials/details.blade.php
+index c5434bf7..e2bb9d1a 100644
+--- a/resources/views/front/post/show/partials/details.blade.php
++++ b/resources/views/front/post/show/partials/details.blade.php
+@@ -63,7 +63,7 @@
+ 									</h4>
+ 								</div>
+ 								
+-								{{-- Price / Salary --}}
++								{{-- Price / Salary 
+ 								<div class="col-md-6 col-sm-6 col-6 text-end">
+ 									<h4 class="p-0 fs-5 fw-normal">
+ 										<span class="fw-bold">
+@@ -78,7 +78,7 @@
+ 									</h4>
+ 								</div>
+ 							</div>
+-							
++							--}}
+ 							{{-- Description --}}
+ 							<div class="row">
+ 								<div class="col-12 detail-line-content">
+diff --git a/resources/views/front/post/show/partials/pictures-slider/bootstrap-carousel.blade.php b/resources/views/front/post/show/partials/pictures-slider/bootstrap-carousel.blade.php
+index 4b0d3e60..a55ef453 100644
+--- a/resources/views/front/post/show/partials/pictures-slider/bootstrap-carousel.blade.php
++++ b/resources/views/front/post/show/partials/pictures-slider/bootstrap-carousel.blade.php
+@@ -27,7 +27,7 @@ class="active"
+ 		@endforelse
+ 	</div>
+ 	@if (!empty($price))
+-		<div class="p-price-tag">{!! $price !!}</div>
++	 {{--	<div class="p-price-tag">{!! $price !!}</div>--}}
+ 	@endif
+ 	<div class="carousel-inner">
+ 		@forelse($pictures as $key => $image)
+diff --git a/resources/views/front/post/show/partials/pictures-slider/bxslider-horizontal.blade.php b/resources/views/front/post/show/partials/pictures-slider/bxslider-horizontal.blade.php
+index 8b65c983..3d9d719e 100644
+--- a/resources/views/front/post/show/partials/pictures-slider/bxslider-horizontal.blade.php
++++ b/resources/views/front/post/show/partials/pictures-slider/bxslider-horizontal.blade.php
+@@ -4,7 +4,7 @@
+ {{-- bxSlider - Horizontal Thumbnails --}}
+ <div class="gallery-container">
+ 	@if (!empty($price))
+-		<div class="p-price-tag">{!! $price !!}</div>
++		 {{--<div class="p-price-tag">{!! $price !!}</div>--}}
+ 	@endif
+ 	<div class="bxslider">
+ 		@forelse($pictures as $key => $image)
+diff --git a/resources/views/front/post/show/partials/pictures-slider/swiper-horizontal.blade.php b/resources/views/front/post/show/partials/pictures-slider/swiper-horizontal.blade.php
+index 4e77ba1e..4ade7793 100644
+--- a/resources/views/front/post/show/partials/pictures-slider/swiper-horizontal.blade.php
++++ b/resources/views/front/post/show/partials/pictures-slider/swiper-horizontal.blade.php
+@@ -4,7 +4,7 @@
+ {{-- Swiper - Horizontal Thumbnails --}}
+ <div class="gallery-container">
+ 	@if (!empty($price))
+-		<div class="p-price-tag">{!! $price !!}</div>
++	 {{--	<div class="p-price-tag">{!! $price !!}</div>--}}
+ 	@endif
+ 	<div class="swiper main-gallery">
+ 		<div class="swiper-wrapper">
+diff --git a/resources/views/front/post/show/partials/pictures-slider/swiper-vertical.blade.php b/resources/views/front/post/show/partials/pictures-slider/swiper-vertical.blade.php
+index 463828d9..dd62f461 100644
+--- a/resources/views/front/post/show/partials/pictures-slider/swiper-vertical.blade.php
++++ b/resources/views/front/post/show/partials/pictures-slider/swiper-vertical.blade.php
+@@ -7,7 +7,7 @@
+ 		<div class="swiper-wrapper">
+ 			@forelse($pictures as $key => $image)
+ 				@if (!empty($price))
+-					<div class="p-price-tag">{!! $price !!}</div>
++				 {{--	<div class="p-price-tag">{!! $price !!}</div>--}}
+ 				@endif
+ 				<div class="swiper-slide">
+ 					@php
+@@ -19,7 +19,7 @@
+ 				</div>
+ 			@empty
+ 				@if (!empty($price))
+-					<div class="p-price-tag">{!! $price !!}</div>
++					 {{--<div class="p-price-tag">{!! $price !!}</div>--}}
+ 				@endif
+ 				<div class="swiper-slide">
+ 					<img src="{{ thumbParam(config('larapen.media.picture'))->url() }}" alt="img" class="default-picture">
+diff --git a/resources/views/front/search/partials/posts/template/compact.blade.php b/resources/views/front/search/partials/posts/template/compact.blade.php
+index 0e2576f1..0eee64ba 100644
+--- a/resources/views/front/search/partials/posts/template/compact.blade.php
++++ b/resources/views/front/search/partials/posts/template/compact.blade.php
+@@ -115,9 +115,12 @@
+ 				</div>
+ 				
+ 				<div class="col-sm-3 col-12 text-end text-nowrap d-flex flex-column justify-content-between">
++					{{--
++						// [3.0.1.k] Commented out price display
+ 					<h5 class="fs-5 fw-bold">
+ 						{!! data_get($post, 'price_formatted') !!}
+ 					</h5>
++					--}}
+ 					<div>
+ 						@if (!empty(data_get($post, 'payment.package')))
+ 							@if (data_get($post, 'payment.package.has_badge') == 1)
+@@ -141,6 +144,7 @@
+ 						@endif
+ 					</div>
+ 				</div>
++
+ 			</div>
+ 		@endforeach
+ 	</div>
+diff --git a/resources/views/front/search/partials/posts/template/grid.blade.php b/resources/views/front/search/partials/posts/template/grid.blade.php
+index 83ec8666..79855b91 100644
+--- a/resources/views/front/search/partials/posts/template/grid.blade.php
++++ b/resources/views/front/search/partials/posts/template/grid.blade.php
+@@ -156,13 +156,13 @@
+ 										</div>
+ 									@endif
+ 								@endif
+-								
++								{{--
+ 								<div class="col-12 text-end">
+ 									<h5 class="fs-4 fw-bold">
+ 										{!! data_get($post, 'price_formatted') !!}
+ 									</h5>
+ 								</div>
+-								
++								 --}}
+ 								<div class="col-12 text-end">
+ 									@if (!empty(data_get($post, 'payment.package')))
+ 										@if (data_get($post, 'payment.package.has_badge') == 1)
+diff --git a/resources/views/front/search/partials/posts/template/list.blade.php b/resources/views/front/search/partials/posts/template/list.blade.php
+index a4fe447b..d2711d66 100644
+--- a/resources/views/front/search/partials/posts/template/list.blade.php
++++ b/resources/views/front/search/partials/posts/template/list.blade.php
+@@ -138,11 +138,14 @@
+ 					@endif
+ 				</div>
+ 				
+-				{{-- Price & Favourite Button --}}
++				{{-- Price & Favourite Button--}}
+ 				<div class="col-sm-3 col-12 text-end text-nowrap d-flex flex-column justify-content-between">
++					{{--
++						// [3.0.1.l] Commented out price display in list view
+ 					<h5 class="fs-4 fw-bold">
+ 						{!! data_get($post, 'price_formatted') !!}
+ 					</h5>
++					--}}
+ 					<div>
+ 						@if (!empty(data_get($post, 'payment.package')))
+ 							@if (data_get($post, 'payment.package.has_badge') == 1)
+@@ -166,6 +169,7 @@
+ 						@endif
+ 					</div>
+ 				</div>
++
+ 			</div>
+ 		@endforeach
+ 	</div>
+diff --git a/resources/views/front/search/partials/posts/widget/carousel.blade.php b/resources/views/front/search/partials/posts/widget/carousel.blade.php
+index 94b44635..75575bd6 100644
+--- a/resources/views/front/search/partials/posts/widget/carousel.blade.php
++++ b/resources/views/front/search/partials/posts/widget/carousel.blade.php
+@@ -74,10 +74,11 @@
+ 										</div>
+ 									@endif
+ 									
+-									{{-- Price --}}
++									{{-- Price 
+ 									<h4 class="fs-4 fw-bold mt-3 text-center">
+ 										{!! data_get($post, 'price_formatted') !!}
+ 									</h4>
++									--}}
+ 								</div>
+ 							</div>
+ 						</div>
+diff --git a/resources/views/front/search/partials/sidebar.blade.php b/resources/views/front/search/partials/sidebar.blade.php
+index cbb573e5..ae32b039 100644
+--- a/resources/views/front/search/partials/sidebar.blade.php
++++ b/resources/views/front/search/partials/sidebar.blade.php
+@@ -20,7 +20,7 @@
+ 				@if (!config('settings.listings_list.hide_date'))
+ 					@include('front.search.partials.sidebar.date', ['prefixId' => $prefixId])
+ 				@endif
+-				@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])
++				 {{--@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])--}}
+ 				
+ 			</div>
+ 		</div>
+@@ -48,7 +48,7 @@
+ 				@if (!config('settings.listings_list.hide_date'))
+ 					@include('front.search.partials.sidebar.date', ['prefixId' => $prefixId])
+ 				@endif
+-				@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])
++				{{--@include('front.search.partials.sidebar.price', ['prefixId' => $prefixId])--}}
+ 			
+ 			</div>
+ 		</div>
+diff --git a/resources/views/front/sections/home/search-form/large-screen.blade.php b/resources/views/front/sections/home/search-form/large-screen.blade.php
+index 57db9dd1..b3330e43 100644
+--- a/resources/views/front/sections/home/search-form/large-screen.blade.php
++++ b/resources/views/front/sections/home/search-form/large-screen.blade.php
+@@ -1,3 +1,6 @@
++<form action="{{ url('search') }}" method="GET">
++    <input type="hidden" name="filterBy" value="search">
++
+ @php
+ 	$autocompleteClass ??= '';
+ 	$searchTooltip ??= '';
+@@ -38,3 +41,4 @@
+ 		</button>
+ 	</div>
+ </div>
++</form>
+\ No newline at end of file
+diff --git a/resources/views/front/sections/home/search-form/small-screen.blade.php b/resources/views/front/sections/home/search-form/small-screen.blade.php
+index 5ed6db28..ad770887 100644
+--- a/resources/views/front/sections/home/search-form/small-screen.blade.php
++++ b/resources/views/front/sections/home/search-form/small-screen.blade.php
+@@ -1,4 +1,6 @@
+-@php
++<form action="{{ url('search') }}" method="GET">
++    <input type="hidden" name="filterBy" value="search">
++	@php
+ 	$autocompleteClass ??= '';
+ 	$searchTooltip ??= '';
+ @endphp
+@@ -38,3 +40,4 @@
+ 		</button>
+ 	</div>
+ </div>
++</form>
+diff --git a/storage/framework/views/048f8f952d5e11a1c4c08833a8fcd2cc.php b/storage/framework/views/048f8f952d5e11a1c4c08833a8fcd2cc.php
+deleted file mode 100644
+index 59191625..00000000
+--- a/storage/framework/views/048f8f952d5e11a1c4c08833a8fcd2cc.php
++++ /dev/null
+@@ -1,462 +0,0 @@
+-
+-
+-
+-
+-<?php
+-	use App\Helpers\Common\Files\Storage\StorageDisk;
+-	use Illuminate\Support\Facades\Storage;
+-	
+-	$layout ??= 'default'; // default, horizontal
+-	$isHorizontal = $layout === 'horizontal';
+-	$colLabel ??= 'col-md-3';
+-    $colField ??= 'col-md-9';
+-	
+-	$wrapper ??= [];
+-	$viewName = 'fileinput';
+-	$type = 'file';
+-	$label ??= null;
+-	$id ??= null;
+-	$name ??= null;
+-	$value ??= null; // e.g. ['key' => 1, 'path' => 'path/to/file.ext', 'url' => 'https://domain/file.ext'] (or array of that)
+-	$default ??= null; // e.g. ['key' => 1, 'path' => 'path/to/file.ext', 'url' => 'https://domain/file.ext'] (or array of that)
+-	$placeholder ??= null;
+-	$required ??= false;
+-	$hint ??= null;
+-	$attributes ??= [];
+-	
+-	$diskName ??= StorageDisk::getDiskName();
+-	$disk = Storage::disk($diskName);
+-	$fileLoadingMessage ??= t('loading_wd');
+-	$allowsMultiple ??= false;
+-	$limit ??= 5;
+-	$limit = $allowsMultiple ? $limit : 1;
+-	$attributes = $allowsMultiple ? array_merge($attributes, ['multiple' => true]) : $attributes;
+-	$deleteUrlPattern ??= '/';
+-	$downloadable ??= false;
+-	$pluginOptions ??= [];
+-	
+-	$theme = $pluginOptions['theme'] ?? config('larapen.core.fileinput.theme', 'bs5');
+-	$language = $pluginOptions['language'] ?? app()->getLocale();
+-	$rtl = $pluginOptions['rtl'] ?? ((config('lang.direction') == 'rtl') ? 'true' : 'false');
+-	
+-	$previewFileType = $pluginOptions['previewFileType'] ?? null;
+-	$defaultAllowedFileFormats = ($previewFileType == 'image') ? getServerAllowedImageFormats() : getAllowedFileFormats();
+-	$allowedFileExtensions = $pluginOptions['allowedFileExtensions'] ?? $defaultAllowedFileFormats;
+-	$defaultMinFileSize = ($previewFileType == 'image')
+-		? config('settings.upload.min_image_size', 0)
+-		: config('settings.upload.min_file_size', 0);
+-	$defaultMaxFileSize = ($previewFileType == 'image')
+-		? config('settings.upload.max_image_size', 1000)
+-		: config('settings.upload.max_file_size', 1000);
+-	$minFileSize = $pluginOptions['minFileSize'] ?? $defaultMinFileSize;
+-	$maxFileSize = $pluginOptions['maxFileSize'] ?? $defaultMaxFileSize;
+-	$fileTypes = ($previewFileType == 'image') ? 'image' : 'file';
+-	$hint = !empty($hint) ? $hint : t('file_types', ['file_types' => getAllowedFileFormatsHint($fileTypes)]);
+-	$showPreview = $pluginOptions['showPreview'] ?? 'false';
+-	
+-	$showClose = $pluginOptions['showClose'] ?? 'false';
+-	$dropZoneEnabled = $pluginOptions['dropZoneEnabled'] ?? 'false';
+-	$browseOnZoneClick = $pluginOptions['browseOnZoneClick'] ?? 'false';
+-	$dropZoneTitle = $pluginOptions['dropZoneTitle'] ?? null;
+-	$dropZoneTitle = (!$allowsMultiple || $limit <= 1) ? $dropZoneTitle : null;
+-	
+-	$showCaption = $pluginOptions['showCaption'] ?? 'true'; // input field
+-	$showBrowse = $pluginOptions['showBrowse'] ?? 'true'; // input field browse button
+-	$browseClass = $pluginOptions['browseClass'] ?? 'btn btn-primary';
+-	$mainClass = $pluginOptions['mainClass'] ?? null; // 'd-grid'
+-	$showRemove = $pluginOptions['fileActionSettings']['showRemove'] ?? 'true';
+-	$showZoom = $pluginOptions['fileActionSettings']['showZoom'] ?? 'true';
+-	$removeClass = $pluginOptions['fileActionSettings']['removeClass'] ?? 'btn btn-outline-danger btn-sm';
+-	$zoomClass = $pluginOptions['fileActionSettings']['zoomClass'] ?? 'btn btn-outline-secondary btn-sm';
+-	
+-	// Only when multiple upload is allowed
+-	// {uploadUrl: '...'} is required to allow multiple files selection in many times.
+-	// Showing the file upload button is cancel with {showUpload: false}
+-	$uploadUrl = $pluginOptions['uploadUrl'] ?? '/';
+-	$uploadUrl = $allowsMultiple ? $uploadUrl : null;
+-	
+-	$name = $allowsMultiple ? $name . '[]' : $name;
+-	
+-	$dotSepName = arrayFieldToDotNotation($name);
+-	$id = !empty($id) ? $id : str_replace('.', '_', $dotSepName);
+-	
+-	$value = $value ?? ($default ?? []);
+-	// $value = old($name, $value);
+-	
+-	$defaultKey = generateRandomString(type: 'numeric');
+-	$defaultFilePath = config('larapen.media.picture');
+-	$defaultFileUrl = thumbParam($defaultFilePath)->url();
+-	
+-	$wrapper['class'] ??= $isHorizontal ? 'mb-3 row' : 'mb-3 col-md-12';
+-	if ($rtl == 'true') {
+-		$wrapper['dir'] = 'rtl';
+-	}
+-	
+-	$attrStr = !empty($placeholder) ? ' data-msg-placeholder="' . $placeholder . '"' : '';
+-	
+-	// Preview File Function
+-	$fnFilePreview = function($idx, $file, $diskName, $disk, $defaultKey, $defaultFileUrl, $deleteUrlPattern) {
+-		$key = getAsString($file['key'] ?? $defaultKey, $defaultKey);
+-		$filePath = getAsStringOrNull($file['path'] ?? null);
+-		$fileUrl = getAsStringOrNull($file['url'] ?? null);
+-		
+-		if (empty($fileUrl) && !empty($filePath)) {
+-			$fileUrl = ($diskName == 'private') ? privateFileUrl($filePath) : fileUrl($filePath);
+-		}
+-		
+-		$out = '';
+-		
+-		if (!empty($filePath) && $disk->exists($filePath)) {
+-			if (empty($fileUrl)) {
+-				$fileUrl = rescue(fn () => $disk->url($filePath));
+-			}
+-			$fileUrl = $fileUrl ?? $defaultFileUrl;
+-			$fileSize = rescue(fn () => $disk->size($filePath), 0);
+-			$deleteUrl = str_replace(['{index}', '{id}', '{key}'], $key, $deleteUrlPattern);
+-			
+-			$key = (int)$key;
+-			$fileBasename = basename($filePath);
+-			$out .= "fiOptions.initialPreview[$idx] = '<img src=\"$fileUrl\" class=\"file-preview-image\">';";
+-			$out .= "fiOptions.initialPreviewConfig[$idx] = {};";
+-			$out .= "fiOptions.initialPreviewConfig[$idx].key = $key;";
+-			$out .= "fiOptions.initialPreviewConfig[$idx].caption = '$fileBasename';";
+-			$out .= "fiOptions.initialPreviewConfig[$idx].size = $fileSize;";
+-			$out .= "fiOptions.initialPreviewConfig[$idx].url = '$deleteUrl';";
+-		}
+-		
+-		return $out;
+-	};
+-	
+-	$attributes = \App\Helpers\Common\Html\HtmlAttr::append($attributes, 'class', 'file');
+-?>
+-<div <?php echo $__env->make('helpers.forms.attributes.field-wrapper', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>>
+-	<?php echo $__env->make('helpers.forms.partials.label', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	
+-	<?php if($isHorizontal): ?>
+-		<div class="<?php echo e($colField); ?>">
+-			<?php endif; ?>
+-			
+-			<input
+-					type="file"
+-					id="<?php echo e('file_' . $id); ?>"
+-					name="<?php echo e($name); ?>"<?php echo $attrStr; ?>
+-
+-					<?php echo $__env->make('helpers.forms.attributes.field', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			>
+-			<input type="hidden" id="selectedFiles" name="selectedFiles">
+-			
+-			<?php echo $__env->make('helpers.forms.partials.hint', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			
+-			
+-			<?php if(!$allowsMultiple && $downloadable): ?>
+-				<?php
+-					$fileToDownloadPath = getAsStringOrNull($value['path'] ?? null);
+-					$fileToDownloadUrl = getAsStringOrNull($value['url'] ?? '/');
+-					
+-					if (empty($fileToDownloadUrl) && !empty($fileToDownloadPath)) {
+-						$fileToDownloadUrl = ($diskName == 'private') ? privateFileUrl($fileToDownloadPath) : fileUrl($fileToDownloadPath);
+-					}
+-				?>
+-				<?php if(!empty($fileToDownloadPath) && $disk->exists($fileToDownloadPath)): ?>
+-					<div>
+-						<a class="btn btn-secondary" href="<?php echo e($fileToDownloadUrl); ?>" target="_blank">
+-							<i class="fa-solid fa-paperclip"></i> <?php echo e(t('Download')); ?>
+-
+-						</a>
+-					</div>
+-				<?php endif; ?>
+-			<?php endif; ?>
+-			
+-			<?php echo $__env->make('helpers.forms.partials.validation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			
+-			<?php if($isHorizontal): ?>
+-		</div>
+-	<?php endif; ?>
+-</div>
+-<?php echo $__env->make('helpers.forms.partials.newline', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-
+-<?php
+-	$viewName = str($viewName)->replace('-', '_')->toString();
+-	$pluginBasePath = 'assets/plugins/bootstrap-fileinput/';
+-	$pluginFullPath = public_path($pluginBasePath);
+-?>
+-
+-
+-
+-<?php if (! $__env->hasRenderedOnce('eb57d36c-654a-4a09-9c74-323530d1e288')): $__env->markAsRenderedOnce('eb57d36c-654a-4a09-9c74-323530d1e288');
+-$__env->startPush("{$viewName}_assets_styles"); ?>
+-	<link href="<?php echo e(url($pluginBasePath . 'css/fileinput.min.css')); ?>" rel="stylesheet">
+-	<?php if($rtl == 'true'): ?>
+-		<link href="<?php echo e(url($pluginBasePath . 'css/fileinput-rtl.min.css')); ?>" rel="stylesheet">
+-	<?php endif; ?>
+-	<?php if(str_starts_with($theme, 'explorer')): ?>
+-		<link href="<?php echo e(url($pluginBasePath . 'themes/' . $theme . '/theme.min.css')); ?>" rel="stylesheet">
+-	<?php endif; ?>
+-	<style>
+-		.krajee-default.file-preview-frame:hover:not(.file-preview-error) {
+-			box-shadow: 0 0 5px 0 #666666;
+-		}
+-		.file-loading:before {
+-			content: " <?php echo e($fileLoadingMessage); ?>";
+-		}
+-	</style>
+-<?php $__env->stopPush(); endif; ?>
+-
+-<?php if (! $__env->hasRenderedOnce('81441860-8ad7-4393-b889-f60b893d9799')): $__env->markAsRenderedOnce('81441860-8ad7-4393-b889-f60b893d9799');
+-$__env->startPush("{$viewName}_assets_scripts"); ?>
+-	<script src="<?php echo e(url($pluginBasePath . 'js/plugins/sortable.min.js')); ?>" type="text/javascript"></script>
+-	<script src="<?php echo e(url($pluginBasePath . 'js/fileinput.min.js')); ?>" type="text/javascript"></script>
+-	<?php if(file_exists($pluginFullPath . 'themes/' . $theme . '/theme.js')): ?>
+-		<script src="<?php echo e(url($pluginBasePath . 'themes/' . $theme . '/theme.js')); ?>" type="text/javascript"></script>
+-	<?php endif; ?>
+-	<script src="<?php echo e(url('common/js/fileinput/locales/' . $language . '.js')); ?>" type="text/javascript"></script>
+-<?php $__env->stopPush(); endif; ?>
+-
+-<?php if (! $__env->hasRenderedOnce('1e85956b-e003-490f-a0ee-4f25687f9c97')): $__env->markAsRenderedOnce('1e85956b-e003-490f-a0ee-4f25687f9c97');
+-$__env->startPush("fileinput_multiple_selections_assets_scripts"); ?>
+-	<script src="<?php echo e(url('assets/js/helpers/extensionMimetype.js')); ?>" type="text/javascript"></script>
+-	<script>
+-		/**
+-		 * Convert JSON file data array to a FileList object
+-		 * https://developer.mozilla.org/fr/docs/Web/API/FileList
+-		 *
+-		 * @param filesInput
+-		 * @param unique
+-		 * @returns {FileList}
+-		 */
+-		function fileDataArrayToFileList(filesInput, unique = false) {
+-			const dataTransfer = new DataTransfer();
+-			
+-			/* Handle different input types */
+-			/* Return empty FileList for null/undefined */
+-			if (!filesInput) {
+-				return dataTransfer.files;
+-			}
+-			
+-			/* If it's already a FileList, return it directly */
+-			if (filesInput instanceof FileList) {
+-				return filesInput;
+-			}
+-			
+-			/* Convert object to array if needed */
+-			const array = !Array.isArray(filesInput)
+-				? Object.values(filesInput) : filesInput;
+-			
+-			/* Add each file to the DataTransfer */
+-			array.forEach(file => {
+-				let fileObj = null;
+-				if (file instanceof File) {
+-					fileObj = file;
+-				} else if (file.file instanceof Blob) {
+-					fileObj = fileDataToFileObject(file);
+-				}
+-				if (fileObj) {
+-					/* Check if file already exists */
+-					const fileExists = unique && Array.from(dataTransfer.files).some(
+-						f => (f.name === file.name && f.size === file.size)
+-					);
+-					if (!fileExists) {
+-						dataTransfer.items.add(fileObj);
+-					}
+-				}
+-			});
+-			
+-			return dataTransfer.files;
+-		}
+-		
+-		/**
+-		 * Convert JSON file data array to an array of File objects
+-		 * @param filesInput
+-		 * @returns {module:buffer.File[]}
+-		 */
+-		function fileDataArrayToFileObjectsArray(filesInput) {
+-			const array = !Array.isArray(filesInput)
+-				? Object.values(filesInput) : filesInput;
+-			
+-			return array.map(file => fileDataToFileObject(file));
+-		}
+-		
+-		/**
+-		 * Convert a JSON file data object to a File object
+-		 * @param file
+-		 * @returns {module:buffer.File}
+-		 */
+-		function fileDataToFileObject(file) {
+-			if (file instanceof File) return file;
+-			
+-			return new File([file.file], file.name, {
+-				type: file.type || getMimeType(file.name),
+-				lastModified: file.lastModified || Date.now()
+-			});
+-		}
+-	</script>
+-<?php $__env->stopPush(); endif; ?>
+-
+-
+-<?php $__env->startPush("{$viewName}_helper_scripts"); ?>
+-	<script>
+-		var allowsMultiple = <?php echo e($allowsMultiple ? 'true' : 'false'); ?>;
+-		
+-		
+-		var fiOptions = {};
+-		fiOptions.theme = '<?php echo e($theme); ?>';
+-		fiOptions.language = '<?php echo e($language); ?>';
+-		fiOptions.rtl = <?php echo e($rtl); ?>;
+-		fiOptions.showClose = <?php echo e($showClose); ?>;
+-		fiOptions.showUpload = false;
+-		fiOptions.showRemove = false;
+-		fiOptions.showCancel = true;
+-		fiOptions.showCaption = <?php echo e($showCaption); ?>; 
+-		fiOptions.showBrowse = <?php echo e($showBrowse); ?>; 
+-		fiOptions.browseClass = '<?php echo e($browseClass); ?>';
+-		<?php if(!empty($mainClass)): ?>
+-			
+-			fiOptions.mainClass = '<?php echo e($mainClass); ?>';
+-		<?php endif; ?>
+-		fiOptions.browseOnZoneClick = true;
+-		
+-		<?php if(!empty($uploadUrl)): ?>
+-			fiOptions.uploadUrl = '<?php echo e($uploadUrl); ?>';
+-		<?php endif; ?>
+-		
+-		fiOptions.showPreview = <?php echo e($showPreview); ?>;
+-		fiOptions.overwriteInitial = !allowsMultiple;
+-		fiOptions.dropZoneEnabled = <?php echo e($dropZoneEnabled); ?>;
+-		fiOptions.browseOnZoneClick = <?php echo e($browseOnZoneClick); ?>;
+-		fiOptions.previewFileType = 'image';
+-		fiOptions.allowedFileExtensions = <?php echo collect($allowedFileExtensions)->toJson(); ?>;
+-		fiOptions.minFileSize = <?php echo e((int)$minFileSize); ?>;
+-		fiOptions.maxFileSize = <?php echo e((int)$maxFileSize); ?>;
+-		fiOptions.minFileCount = 0;
+-		fiOptions.maxFileCount = <?php echo e($limit); ?>;
+-		fiOptions.validateInitialCount = true;
+-		fiOptions.autoReplace = true;
+-		
+-		fiOptions.initialPreview = [];
+-		fiOptions.initialPreviewConfig = [];
+-		
+-		<?php if($showPreview == 'true'): ?>
+-			<?php if(!$allowsMultiple): ?>
+-				fiOptions.fileActionSettings = {
+-					showDrag: false,
+-				};
+-				fiOptions.layoutTemplates = {
+-					footer: '<div class="file-thumbnail-footer pt-2">{actions}</div>',
+-					actionDelete: ''
+-				};
+-			<?php else: ?>
+-				fiOptions.fileActionSettings = {
+-					showDrag: false,
+-					showUpload: false,
+-					showRotate: false,
+-					showRemove: <?php echo e($showRemove); ?>,
+-					showZoom: <?php echo e($showZoom); ?>,
+-					removeClass: '<?php echo e($removeClass); ?>',
+-					zoomClass: '<?php echo e($zoomClass); ?>',
+-				};
+-			<?php endif; ?>
+-			
+-			<?php if(!empty($value)): ?>
+-				<?php if($allowsMultiple): ?>
+-					<?php
+-						$idx = 0; // Need to be started by 0 to avoid reorder issue
+-					?>
+-					<?php $__currentLoopData = $value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-						<?php if(!empty($file) && is_array($file)): ?>
+-							<?php
+-								$output = $fnFilePreview($idx, $file, $diskName, $disk, $defaultKey, $defaultFileUrl, $deleteUrlPattern);
+-							?>
+-							<?php if(!empty($output)): ?>
+-								<?php
+-									echo $output;
+-									$idx++; // The indexes must follow each other (i.e.: must be consecutive) to avoid eventual issues
+-								?>
+-							<?php endif; ?>
+-						<?php endif; ?>
+-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-				<?php else: ?>
+-					<?php
+-						$output = $fnFilePreview(0, $value, $diskName, $disk, $defaultKey, $defaultFileUrl, $deleteUrlPattern);
+-						echo $output;
+-					?>
+-				<?php endif; ?>
+-			<?php endif; ?>
+-			
+-		<?php endif; ?>
+-		
+-		onDocumentReady((event) => {
+-			<?php if(!empty($dropZoneTitle)): ?>
+-				$.fn.fileinputLocales['<?php echo e($language); ?>'].dropZoneTitle = '<?php echo $dropZoneTitle; ?>';
+-			<?php endif; ?>
+-			
+-			
+-			const fileInputSelector = 'file_<?php echo e($id); ?>';
+-			const fileInputEl = document.getElementById(fileInputSelector);
+-			
+-			const $fileInputEl = $(fileInputEl);
+-			$fileInputEl.fileinput(fiOptions);
+-			
+-			/*
+-			 * Important Notes:
+-			 * - Browsers don't allow appending to the same <input type="file"> from multiple folder selections. Each new selection replaces the old one.
+-			 * - To work around this, you must clone the <input type="file"> dynamically after each selection and keep them in the form.
+-			 *
+-			 * To allow selecting multiple files from different folders without losing previously selected files using
+-			 * a standard <input type="file" multiple> (without AJAX) and then process them in PHP, here's a full solution:
+-			 */
+-			if (allowsMultiple) {
+-				/*
+-				 * Store selected files in a DataTransfer object which can hold File objects
+-				 * https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer
+-				 */
+-				const dataTransfer = new DataTransfer();
+-				
+-				if (fiOptions.showPreview && (fiOptions.dropZoneEnabled || fiOptions.browseOnZoneClick)) {
+-					
+-					$fileInputEl.on('filebatchselected', (event, files) => {
+-						/* Convert to an array of File objects */
+-						/* const fileList = fileDataArrayToFileObjectsArray(files); */
+-						const fileList = fileDataArrayToFileList(files);
+-						
+-						for (let i = 0; i < fileList.length; i++) {
+-							const file = fileList[i];
+-							
+-							/* Check if file already exists */
+-							const fileExists = Array.from(dataTransfer.files).some(
+-								f => (f.name === file.name && f.size === file.size)
+-							);
+-							
+-							if (!fileExists) {
+-								dataTransfer.items.add(file);
+-							}
+-						}
+-						
+-						/* Update the file input with all selected files */
+-						fileInputEl.files = dataTransfer.files;
+-					});
+-				} else {
+-					/* $fileInputEl change hook (from "Browse" button only) */
+-					$fileInputEl.on('change', event => {
+-						/* Add new files to our DataTransfer object */
+-						for (let i = 0; i < event.target.files.length; i++) {
+-							const file = event.target.files[i];
+-							
+-							/* Check if file already exists */
+-							const fileExists = Array.from(dataTransfer.files).some(
+-								f => (f.name === file.name && f.size === file.size)
+-							);
+-							
+-							if (!fileExists) {
+-								dataTransfer.items.add(file);
+-							}
+-						}
+-						
+-						/* Update the file input with all selected files */
+-						fileInputEl.files = dataTransfer.files;
+-					});
+-				}
+-			}
+-		});
+-	</script>
+-<?php $__env->stopPush(); ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/helpers/forms/fields/fileinput.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/0a7d020b9933d8c7abf04c9d173bfe01.php b/storage/framework/views/0a7d020b9933d8c7abf04c9d173bfe01.php
+index 4385bda5..fa63e27c 100644
+--- a/storage/framework/views/0a7d020b9933d8c7abf04c9d173bfe01.php
++++ b/storage/framework/views/0a7d020b9933d8c7abf04c9d173bfe01.php
+@@ -1,4 +1,6 @@
+-<?php
++<form action="<?php echo e(url('search')); ?>" method="GET">
++    <input type="hidden" name="filterBy" value="search">
++	<?php
+ 	$autocompleteClass ??= '';
+ 	$searchTooltip ??= '';
+ ?>
+@@ -39,4 +41,5 @@
+ 		</button>
+ 	</div>
+ </div>
++</form>
+ <?php /**PATH C:\xampp\htdocs\resources\views/front/sections/home/search-form/small-screen.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/0b3ab32f440ea5523401d295b01d4067.php b/storage/framework/views/0b3ab32f440ea5523401d295b01d4067.php
+index 6712dd61..3755088a 100644
+--- a/storage/framework/views/0b3ab32f440ea5523401d295b01d4067.php
++++ b/storage/framework/views/0b3ab32f440ea5523401d295b01d4067.php
+@@ -87,7 +87,7 @@
+ 								</a>
+ 							</li>
+ 							<li class="breadcrumb-item">
+-								<a href="<?php echo e(url('/')); ?>" class="<?php echo e(linkClass()); ?>">
++								<a href="<?php echo e(url('/search')); ?>" class="<?php echo e(linkClass()); ?>">
+ 									<?php echo e(config('country.name')); ?>
+ 
+ 								</a>
+diff --git a/storage/framework/views/0c50c4a0a0068225bbb5fd015462b754.php b/storage/framework/views/0c50c4a0a0068225bbb5fd015462b754.php
+new file mode 100644
+index 00000000..b486501b
+--- /dev/null
++++ b/storage/framework/views/0c50c4a0a0068225bbb5fd015462b754.php
+@@ -0,0 +1,283 @@
++<?php
++	use Illuminate\Support\Facades\Storage;
++	use Illuminate\Support\Number;
++	
++	$field ??= [];
++?>
++<div data-preview="#<?php echo e($field['name']); ?>"
++	data-aspectRatio="<?php echo e($field['aspect_ratio'] ?? 0); ?>"
++	data-crop="<?php echo e($field['crop'] ?? false); ?>"
++	<?php echo $__env->make('admin.panel.inc.field_wrapper_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++>
++	<div class="col-12 text-center p-2 border border-1 border-light rounded-2" style="height: 100%;">
++		
++		<div class="text-start">
++			<label class="form-label fw-bolder"><?php echo $field['label']; ?></label>
++			<?php echo $__env->make('admin.panel.fields.inc.translatable_icon', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++		</div>
++		
++		<div class="row d-flex justify-content-center mt-3 mb-3">
++			<div class="col-sm-6 text-center">
++				<?php
++					$diskName = $field['disk'] ?? null;
++					
++					// Get default picture & its URL
++					$defaultPicture = config('larapen.media.picture');
++					$defaultPictureUrl = Storage::disk($diskName)->url($defaultPicture);
++					
++					// Get default value (Need to be sent/filled as URL)
++					$defaultValue = $field['default'] ?? null;
++					$defaultValue = (!empty($defaultValue) && is_string($defaultValue)) ? $defaultValue : $defaultPictureUrl;
++					
++					// Get value (Sent/filled as storage path)
++					$value = $field['value'] ?? null;
++					
++					// Get the picture's URL
++					$pictureUrl = (!empty($value) && is_string($value)) ? Storage::disk($diskName)->url($value) : $defaultValue;
++					// $pictureUrl = is_string($value) ? thumbParam($value)->setOption('picture-md')->url() : $defaultValue;
++					$pictureUrl = old($field['name'], $pictureUrl);
++					
++					// Get the picture's URL with prefix path (If filled)
++					$prefix = $field['prefix'] ?? '';
++					$pictureUrl = $prefix . $pictureUrl;
++					
++					// Get picture display dimensions
++					$width = $field['width'] ?? 'auto';
++					$height = $field['height'] ?? 'auto';
++					if (is_numeric($width)) {
++						$width = Number::clamp($width, min: 100, max: 800);
++					}
++					if (is_numeric($height)) {
++						$height = Number::clamp($height, min: 100, max: 800);
++					}
++					$width = is_numeric($width) ? $width . 'px' : $width;
++					$height = is_numeric($height) ? $height . 'px' : $height;
++					
++					// Dimensions style
++					$dimensionStyle = (str_ends_with($width, 'px') ? 'max-' : '')  . 'width:' . $width . ';';
++					$dimensionStyle .= (str_ends_with($height, 'px') ? 'max-' : '') . 'height:' . $height . ';';
++				?>
++				<img id="mainImage" class="rounded" src="<?php echo e(url($pictureUrl)); ?>" style="<?php echo $dimensionStyle; ?>">
++			</div>
++			<?php if(isset($field['crop']) && $field['crop']): ?>
++				<div class="col-sm-3 text-center">
++					<div class="docs-preview clearfix">
++						<div id="<?php echo e($field['name']); ?>" class="img-preview preview-lg">
++							<img src=""
++								 style="display: block; min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important; margin-left: -32.875px; margin-top: -18.4922px; transform: none;"
++							>
++						</div>
++					</div>
++				</div>
++			<?php endif; ?>
++		</div>
++		
++		<div class="btn-group">
++			<label class="btn btn-primary btn-file mb-0">
++				<?php echo e(trans('admin.choose_file')); ?>
++
++				<input type="file"
++                        accept="image/*"
++                        id="uploadImage" <?php echo $__env->make('admin.panel.inc.field_attributes', ['default_class' => 'hide'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++				>
++				<input type="hidden" id="hiddenImage" name="<?php echo e($field['name']); ?>">
++			</label>
++			<?php if(isset($field['crop']) && $field['crop']): ?>
++				<button class="btn btn-secondary" id="rotateLeft" type="button" style="display: none;"><i class="fa-solid fa-rotate-left"></i></button>
++				<button class="btn btn-secondary" id="rotateRight" type="button" style="display: none;"><i class="fa-solid fa-rotate-right"></i></button>
++				<button class="btn btn-secondary" id="zoomIn" type="button" style="display: none;"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
++				<button class="btn btn-secondary" id="zoomOut" type="button" style="display: none;"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
++				<button class="btn btn-warning" id="reset" type="button" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
++			<?php endif; ?>
++			<button class="btn btn-danger" id="remove" type="button"><i class="fa-regular fa-trash-can"></i></button>
++		</div>
++		
++		
++		<?php if(isset($field['hint'])): ?>
++			<br>
++			<div class="form-text"><?php echo $field['hint']; ?></div>
++		<?php endif; ?>
++		
++	</div>
++</div>
++
++
++
++
++
++<?php if($xPanel->checkIfFieldIsFirstOfItsType($field, $fields)): ?>
++    
++    
++    <?php $__env->startPush('crud_fields_styles'); ?>
++    
++    <link href="<?php echo e(asset('assets/plugins/cropper/dist/cropper.min.css')); ?>" rel="stylesheet" type="text/css" />
++    <style>
++        .hide {
++            display: none;
++        }
++        .image .btn-group {
++            margin-top: 10px;
++        }
++        img {
++            max-width: 100%; /* This rule is very important, please do not ignore this! */
++        }
++        .img-container, .img-preview {
++            width: 100%;
++            text-align: center;
++        }
++        .img-preview {
++            float: left;
++            margin-right: 10px;
++            margin-bottom: 10px;
++            overflow: hidden;
++        }
++        .preview-lg {
++            width: 263px;
++            height: 148px;
++        }
++        
++        .btn-file {
++            position: relative;
++            overflow: hidden;
++        }
++        .btn-file input[type=file] {
++            position: absolute;
++            top: 0;
++            right: 0;
++            min-width: 100%;
++            min-height: 100%;
++            font-size: 100px;
++            text-align: right;
++            filter: alpha(opacity=0);
++            opacity: 0;
++            outline: none;
++            background: white;
++            cursor: inherit;
++            display: block;
++        }
++    </style>
++    <?php $__env->stopPush(); ?>
++    
++    
++    <?php $__env->startPush('crud_fields_scripts'); ?>
++    
++    <script src="<?php echo e(asset('assets/plugins/cropper/dist/cropper.min.js')); ?>"></script>
++    <script>
++	    onDocumentReady((event) => {
++			// Loop through all instances of the image field
++			$('form div.image').each(function(index){
++				// Find DOM elements under this form-group element
++				var $mainImage = $(this).find('#mainImage');
++				var $uploadImage = $(this).find("#uploadImage");
++				var $hiddenImage = $(this).find("#hiddenImage");
++				var $rotateLeft = $(this).find("#rotateLeft")
++				var $rotateRight = $(this).find("#rotateRight")
++				var $zoomIn = $(this).find("#zoomIn")
++				var $zoomOut = $(this).find("#zoomOut")
++				var $reset = $(this).find("#reset")
++				var $remove = $(this).find("#remove")
++				// Options either global for all image type fields, or use 'data-*' elements for options passed in via the CRUD controller
++				var options = {
++					viewMode: 2,
++					checkOrientation: false,
++					autoCropArea: 1,
++					responsive: true,
++					preview : $(this).attr('data-preview'),
++					aspectRatio : $(this).attr('data-aspectRatio')
++				};
++				var crop = $(this).attr('data-crop');
++				
++				// Hide 'Remove' button if there is no image saved
++				if (!$mainImage.attr('src')){
++					$remove.hide();
++				}
++				// Initialise hidden form input in case we submit with no change
++				$hiddenImage.val($mainImage.attr('src'));
++				
++				
++				// Only initialize cropper plugin if crop is set to true
++				if(crop){
++					
++					$remove.click(function() {
++						$mainImage.cropper("destroy");
++						$mainImage.attr('src','');
++						$hiddenImage.val('');
++						$rotateLeft.hide();
++						$rotateRight.hide();
++						$zoomIn.hide();
++						$zoomOut.hide();
++						$reset.hide();
++						$remove.hide();
++					});
++				} else {
++					
++					$(this).find("#remove").click(function() {
++						$mainImage.attr('src','');
++						$hiddenImage.val('');
++						$remove.hide();
++					});
++				}
++				
++				$uploadImage.change(function() {
++					var fileReader = new FileReader(),
++						files = this.files,
++						file;
++					
++					if (!files.length) {
++						return;
++					}
++					file = files[0];
++					
++					if (/^image\/\w+$/.test(file.type)) {
++						fileReader.readAsDataURL(file);
++						fileReader.onload = function () {
++							$uploadImage.val("");
++							if(crop){
++								$mainImage.cropper(options).cropper("reset", true).cropper("replace", this.result);
++								// Override form submit to copy canvas to hidden input before submitting
++								$('form').submit(function() {
++									var imageURL = $mainImage.cropper('getCroppedCanvas').toDataURL(file.type);
++									$hiddenImage.val(imageURL);
++									return true; // return false to cancel form action
++								});
++								$rotateLeft.click(function() {
++									$mainImage.cropper("rotate", 90);
++								});
++								$rotateRight.click(function() {
++									$mainImage.cropper("rotate", -90);
++								});
++								$zoomIn.click(function() {
++									$mainImage.cropper("zoom", 0.1);
++								});
++								$zoomOut.click(function() {
++									$mainImage.cropper("zoom", -0.1);
++								});
++								$reset.click(function() {
++									$mainImage.cropper("reset");
++								});
++								$rotateLeft.show();
++								$rotateRight.show();
++								$zoomIn.show();
++								$zoomOut.show();
++								$reset.show();
++								$remove.show();
++								
++							} else {
++								$mainImage.attr('src',this.result);
++								$hiddenImage.val(this.result);
++								$remove.show();
++							}
++						};
++					} else {
++						alert("Please choose an image file.");
++					}
++				});
++				
++			});
++		});
++    </script>
++    <?php $__env->stopPush(); ?>
++<?php endif; ?>
++
++
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/image.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/0f162b54005cf4f30acac15ce763d5d6.php b/storage/framework/views/0f162b54005cf4f30acac15ce763d5d6.php
+new file mode 100644
+index 00000000..a4b29f07
+--- /dev/null
++++ b/storage/framework/views/0f162b54005cf4f30acac15ce763d5d6.php
+@@ -0,0 +1,173 @@
++<?php
++	use App\Enums\BootstrapColor;
++	
++	$posts ??= [];
++	$totalPosts ??= 0;
++	
++	$city ??= null;
++	$cat ??= null;
++?>
++<?php if(!empty($posts) && $totalPosts > 0): ?>
++	<div class="container px-0 pt-3 compact-view">
++		<?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++			<?php
++				$postUrl = urlGen()->post($post);
++				$parentCatUrl = null;
++				if (!empty(data_get($post, 'category.parent'))) {
++					$parentCatUrl = urlGen()->category(data_get($post, 'category.parent'), null, $city);
++				}
++				$catUrl = urlGen()->category(data_get($post, 'category'), null, $city);
++				$locationUrl = urlGen()->city(data_get($post, 'city'), null, $cat);
++				
++				$borderBottom = !$loop->last ? ' border-bottom pb-3' : '';
++			?>
++			<div class="row<?php echo e($borderBottom); ?> mb-3 d-flex align-items-stretch item-list item-list">
++				<div class="col-sm-9 col-12">
++					<div class="items-details">
++						
++						<h5 class="fs-5 fw-normal px-0">
++							<?php if(data_get($post, 'featured') == 1): ?>
++								<?php if(!empty(data_get($post, 'payment.package'))): ?>
++									<?php if(data_get($post, 'payment.package.ribbon') != ''): ?>
++										<?php
++											$ribbonColor = data_get($post, 'payment.package.ribbon');
++											$ribbonColorClass = BootstrapColor::Badge->getColorClass($ribbonColor);
++											$packageShortName = data_get($post, 'payment.package.short_name');
++										?>
++										<span class="badge rounded-pill <?php echo e($ribbonColorClass); ?>">
++											<?php echo e($packageShortName); ?>
++
++										</span>
++									<?php endif; ?>
++								<?php endif; ?>
++							<?php endif; ?>
++							
++							<a href="<?php echo e($postUrl); ?>" class="link-body-emphasis text-decoration-none">
++								<?php echo e(str(data_get($post, 'title'))->limit(70)); ?>
++
++							</a>
++							<?php echo $__env->make('front.layouts.partials.lost-found-badge', ['post' => $post], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++						</h5>
++						
++						
++						<?php
++							$showPostInfo = (
++								(!config('settings.listings_list.hide_post_type') && config('settings.listing_form.show_listing_type'))
++								|| !config('settings.listings_list.hide_date')
++								|| !config('settings.listings_list.hide_category')
++								|| !config('settings.listings_list.hide_location')
++							);
++						?>
++						<?php if($showPostInfo): ?>
++							<div class="container px-0 text-secondary">
++								<ul class="list-inline mb-0">
++									<?php if(
++										!config('settings.listings_list.hide_post_type')
++										&& config('settings.listing_form.show_listing_type')
++									): ?>
++										<?php if(!empty(data_get($post, 'postType'))): ?>
++											<li class="list-inline-item">
++												<span class="badge rounded-pill text-bg-secondary fw-normal"
++												      data-bs-toggle="tooltip"
++												      data-bs-placement="bottom"
++												      title="<?php echo e(data_get($post, 'postType.label')); ?>"
++												>
++													<?php echo e(strtoupper(mb_substr(data_get($post, 'postType.label'), 0, 1))); ?>
++
++												</span>
++											</li>
++										<?php endif; ?>
++									<?php endif; ?>
++									<?php if(!config('settings.listings_list.hide_date')): ?>
++										<li class="list-inline-item"<?php echo (config('lang.direction')=='rtl') ? ' dir="rtl"' : ''; ?>>
++											<i class="fa-regular fa-clock"></i> <?php echo data_get($post, 'created_at_formatted'); ?>
++
++										</li>
++									<?php endif; ?>
++									<?php if(!config('settings.listings_list.hide_category')): ?>
++										<li class="list-inline-item"<?php echo (config('lang.direction')=='rtl') ? ' dir="rtl"' : ''; ?>>
++											<i class="bi bi-folder"></i>&nbsp;
++											<?php if(!empty(data_get($post, 'category.parent'))): ?>
++												<a href="<?php echo $parentCatUrl; ?>" class="<?php echo e(linkClass()); ?>">
++													<?php echo e(data_get($post, 'category.parent.name')); ?>
++
++												</a>&nbsp;&raquo;&nbsp;
++											<?php endif; ?>
++											<a href="<?php echo $catUrl; ?>" class="<?php echo e(linkClass()); ?>">
++												<?php echo e(data_get($post, 'category.name')); ?>
++
++											</a>
++										</li>
++									<?php endif; ?>
++									<?php if(!config('settings.listings_list.hide_location')): ?>
++										<li class="list-inline-item"<?php echo (config('lang.direction')=='rtl') ? ' dir="rtl"' : ''; ?>>
++											<i class="bi bi-geo-alt"></i>&nbsp;
++											<a href="<?php echo $locationUrl; ?>" class="<?php echo e(linkClass()); ?>">
++												<?php echo e(data_get($post, 'city.name')); ?>
++
++											</a> <?php echo e(data_get($post, 'distance_info')); ?>
++
++										</li>
++									<?php endif; ?>
++								</ul>
++							</div>
++						<?php endif; ?>
++						
++						
++						<?php if(config('plugins.reviews.installed')): ?>
++							<?php if(view()->exists('reviews::ratings-list')): ?>
++								<?php echo $__env->make('reviews::ratings-list', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++							<?php endif; ?>
++						<?php endif; ?>
++					</div>
++				</div>
++				
++				<div class="col-sm-3 col-12 text-end text-nowrap d-flex flex-column justify-content-between">
++    
++    <div>
++        <?php if(!empty(data_get($post, 'payment.package'))): ?>
++            <?php if(data_get($post, 'payment.package.has_badge') == 1): ?>
++                <a class="btn btn-danger btn-xs small make-favorite">
++                    <i class="fa-solid fa-certificate"></i> <span><?php echo e(data_get($post, 'payment.package.short_name')); ?></span>
++                </a>&nbsp;
++            <?php endif; ?>
++        <?php endif; ?>
++        <?php
++            $postId = data_get($post, 'id');
++            $savedByLoggedUser = (bool)data_get($post, 'p_saved_by_logged_user');
++        ?>
++        <?php if($savedByLoggedUser): ?>
++            <a class="btn btn-success btn-xs small make-favorite" id="<?php echo e($postId); ?>">
++                <i class="bi bi-heart-fill"></i> <span><?php echo e(t('Saved')); ?></span>
++            </a>
++        <?php else: ?>
++            <a class="btn btn-outline-secondary btn-xs small make-favorite" id="<?php echo e($postId); ?>">
++                <i class="bi bi-heart"></i> <span><?php echo e(t('Save')); ?></span>
++            </a>
++        <?php endif; ?>
++    </div>
++</div>
++
++			</div>
++		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++	</div>
++<?php else: ?>
++	<div class="p-4" style="width: 100%;">
++		<?php echo e(t('no_result_refine_your_search')); ?>
++
++	</div>
++<?php endif; ?>
++
++<?php $__env->startSection('after_scripts'); ?>
++	<?php echo \Illuminate\View\Factory::parentPlaceholder('after_scripts'); ?>
++	<script>
++		
++		var lang = {
++			labelSavePostSave: "<?php echo t('Save listing'); ?>",
++			labelSavePostRemove: "<?php echo t('Remove favorite'); ?>",
++			loginToSavePost: "<?php echo t('Please log in to save the Listings'); ?>",
++			loginToSaveSearch: "<?php echo t('Please log in to save your search'); ?>"
++		};
++	</script>
++<?php $__env->stopSection(); ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/search/partials/posts/template/compact.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/0fd2490d9655d6690c8f6446731e5cc3.php b/storage/framework/views/0fd2490d9655d6690c8f6446731e5cc3.php
+index 2fefef74..23485a72 100644
+--- a/storage/framework/views/0fd2490d9655d6690c8f6446731e5cc3.php
++++ b/storage/framework/views/0fd2490d9655d6690c8f6446731e5cc3.php
+@@ -368,10 +368,10 @@ class="img-thumbnail m-1 bg-light-subtle"
+ 							<?php echo e(t('Powered by')); ?> <?php echo config('settings.footer.powered_by_info'); ?>
+ 
+ 						<?php else: ?>
+-							<?php echo e(t('Powered by')); ?> <a href="https://laraclassifier.com"
+-							                         title="LaraClassifier"
++							<?php echo e(t('Powered by')); ?> <a href="https://la2etlak.com"
++							                         title="La2etlak"
+ 							                         class="<?php echo e(linkClass()); ?>"
+-							>LaraClassifier</a>.
++							>la2etlak</a>.
+ 						<?php endif; ?>
+ 					<?php endif; ?>
+ 				</div>
+diff --git a/storage/framework/views/10f1714870cc12331ff8fe673d7c5b5a.php b/storage/framework/views/10f1714870cc12331ff8fe673d7c5b5a.php
+deleted file mode 100644
+index 96df0449..00000000
+--- a/storage/framework/views/10f1714870cc12331ff8fe673d7c5b5a.php
++++ /dev/null
+@@ -1,82 +0,0 @@
+-
+-<?php
+-	use Illuminate\Support\ViewErrorBag;
+-	
+-	$layout ??= 'default'; // default, horizontal
+-	$isHorizontal = $layout === 'horizontal';
+-	$colLabel ??= 'col-md-3';
+-    $colField ??= 'col-md-9';
+-	
+-	$viewName = 'number';
+-	$type = 'number';
+-	$label ??= null;
+-	$id ??= null;
+-	$name ??= null;
+-	$value ??= null;
+-	$default ??= null;
+-	$placeholder ??= null;
+-	$prefix ??= null;
+-	$suffix ??= null;
+-	$required ??= false;
+-	$hint ??= null;
+-	
+-	$min ??= null;
+-	$max ??= null;
+-	$step ??= null;
+-	
+-	$dotSepName = arrayFieldToDotNotation($name);
+-	$id = !empty($id) ? $id : str_replace('.', '-', $dotSepName);
+-	
+-	$value = $value ?? ($default ?? null);
+-	$value = old($dotSepName, $value);
+-	
+-	$attrStr = is_numeric($min) ? ' min="' . $min . '"' : '';
+-	$attrStr .= is_numeric($max) ? ' max="' . $max . '"' : '';
+-	$attrStr .= is_numeric($step) ? ' step="' . $step . '"' : '';
+-	
+-	$hasInputGroup = (!empty($prefix) || !empty($suffix));
+-	
+-	// Handle error class for "input-group"
+-	$errors ??= new ViewErrorBag;
+-	$errorBag = ($errors instanceof ViewErrorBag) ? $errors : new ViewErrorBag;
+-	$isInvalidClass = $errorBag->has($dotSepName) ? 'is-invalid' : '';
+-?>
+-<div <?php echo $__env->make('helpers.forms.attributes.field-wrapper', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>>
+-	<?php echo $__env->make('helpers.forms.partials.label', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	
+-	<?php if($isHorizontal): ?>
+-		<div class="<?php echo e($colField); ?>">
+-			<?php endif; ?>
+-			
+-			<?php if(!empty($prefix) || !empty($suffix)): ?>
+-				<div class="input-group <?php echo e($isInvalidClass); ?>">
+-					<?php endif; ?>
+-					<?php if(!empty($prefix)): ?>
+-						<span class="input-group-text"><?php echo $prefix; ?></span>
+-					<?php endif; ?>
+-					<input
+-							type="number"
+-							name="<?php echo e($name); ?>"
+-							id="<?php echo e($name); ?>"
+-							value="<?php echo e($value); ?>"
+-							<?php if(!empty($placeholder)): ?>placeholder="<?php echo e($placeholder); ?>"<?php endif; ?>
+-							<?php echo $attrStr; ?>
+-
+-							<?php echo $__env->make('helpers.forms.attributes.field', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-					>
+-					<?php if(!empty($suffix)): ?>
+-						<span class="input-group-text"><?php echo $suffix; ?></span>
+-					<?php endif; ?>
+-					<?php if(!empty($prefix) || !empty($suffix)): ?>
+-				</div>
+-			<?php endif; ?>
+-			
+-			<?php echo $__env->make('helpers.forms.partials.hint', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			<?php echo $__env->make('helpers.forms.partials.validation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			
+-			<?php if($isHorizontal): ?>
+-		</div>
+-	<?php endif; ?>
+-</div>
+-<?php echo $__env->make('helpers.forms.partials.newline', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/helpers/forms/fields/number.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/13fca6903faf787e1a6e06d67b552517.php b/storage/framework/views/13fca6903faf787e1a6e06d67b552517.php
+index 6b66f505..48957ecd 100644
+--- a/storage/framework/views/13fca6903faf787e1a6e06d67b552517.php
++++ b/storage/framework/views/13fca6903faf787e1a6e06d67b552517.php
+@@ -120,33 +120,6 @@ class="<?php echo e(unsavedFormGuard()); ?>"
+ 										<div id="cfContainer"></div>
+ 										
+ 										
+-										<?php
+-											$currencySymbol = config('currency.symbol', 'X');
+-											$price = old('price', data_get($postInput, 'price'));
+-											$price = \App\Helpers\Common\Num::format($price, 2, '.', '');
+-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
+-											$priceHint = !$isPriceMandatory ? t('price_hint') : null;
+-											
+-											// negotiable
+-											$negotiable = old('negotiable', data_get($postInput, 'negotiable'));
+-											$negotiableChecked = ($negotiable == '1') ? ' checked' : '';
+-											
+-											$suffix = '<input id="negotiable" name="negotiable" type="checkbox" value="1"' . $negotiableChecked . '>';
+-											$suffix .= '&nbsp;<small>' . t('negotiable') . '</small>';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.number', [
+-											'label'       => t('price'),
+-											'name'        => 'price',
+-											'required'    => $isPriceMandatory,
+-											'placeholder' => t('enter_your_price'),
+-											'value'       => $price,
+-											'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
+-											'prefix'      => $currencySymbol,
+-											'suffix'      => $suffix,
+-											'hint'        => $priceHint,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['id' => 'priceBloc'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+ 										
+ 										
+ 										<?php
+diff --git a/storage/framework/views/145b28bc5cc50db033c22a8f88e6a5f0.php b/storage/framework/views/145b28bc5cc50db033c22a8f88e6a5f0.php
+new file mode 100644
+index 00000000..54c4fc9f
+--- /dev/null
++++ b/storage/framework/views/145b28bc5cc50db033c22a8f88e6a5f0.php
+@@ -0,0 +1,31 @@
++<?php
++    $apiResult ??= [];
++	$isPageable = (!empty(data_get($apiResult, 'links.prev')) || !empty(data_get($apiResult, 'links.next')));
++	$paginator = data_get($apiResult, 'links');
++?>
++<?php if($isPageable): ?>
++    <div class="btn-group btn-group-sm">
++        
++        <?php if(!data_get($apiResult, 'links.prev')): ?>
++            <button type="button" class="btn btn-secondary disabled" aria-disabled="true">
++                <span class="fa-solid fa-arrow-left"></span>
++            </button>
++        <?php else: ?>
++            <a class="btn btn-secondary" href="<?php echo e(data_get($paginator, 'prev')); ?>" rel="prev">
++                <span class="fa-solid fa-arrow-left"></span>
++            </a>
++        <?php endif; ?>
++        
++        
++        <?php if(data_get($paginator, 'next')): ?>
++            <a class="btn btn-secondary" href="<?php echo e(data_get($paginator, 'next')); ?>" rel="next">
++                <span class="fa-solid fa-arrow-right"></span>
++            </a>
++        <?php else: ?>
++            <button type="button" class="btn btn-secondary disabled" aria-disabled="true">
++                <span class="fa-solid fa-arrow-right"></span>
++            </button>
++        <?php endif; ?>
++    </div>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/threads/pagination.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/16bb7fa15f37eb2af72caacc3381eda4.php b/storage/framework/views/16bb7fa15f37eb2af72caacc3381eda4.php
+new file mode 100644
+index 00000000..73f657da
+--- /dev/null
++++ b/storage/framework/views/16bb7fa15f37eb2af72caacc3381eda4.php
+@@ -0,0 +1,102 @@
++<?php
++	$thread ??= [];
++	$isLastThread ??= false;
++	
++	$userName = data_get($thread, 'p_creator.name');
++	$avatarUrl = url(data_get($thread, 'p_creator.photo_url', ''));
++	$userIsOnline = isUserOnline(data_get($thread, 'p_creator')) ? 'online text-success' : 'offline text-secondary';
++	
++	$msgUri = urlGen()->getAccountBasePath() . '/messages/' . data_get($thread, 'id');
++	$msgSubject = data_get($thread, 'subject');
++	$msgBody = str(data_get($thread, 'latest_message.body') ?? '')->limit(125);
++	$msgCreatedAt = data_get($thread, 'created_at_formatted', data_get($thread, 'created_at')); // not sent
++	$isImportant = data_get($thread, 'p_is_important');
++	$isUnread = data_get($thread, 'p_is_unread');
++	
++	$borderBottom = !$isLastThread ? ' border-bottom pb-2' : '';
++	$unreadClass = $isUnread ? ' bg-warning-subtle fw-bold' : '';
++?>
++<div class="row hstack gap-0<?php echo e($unreadClass . $borderBottom); ?> mb-2">
++	<div class="col-auto">
++		<input type="checkbox" name="entries[]" value="<?php echo e(data_get($thread, 'id')); ?>">
++	</div>
++	
++	<div class="col-2">
++		<a href="<?php echo e(url($msgUri)); ?>" class="list-box-user">
++			<img src="<?php echo e($avatarUrl); ?>" class="img-fluid object-fit-fill border rounded" alt="<?php echo e($userName); ?>">
++		</a>
++	</div>
++	
++	<div class="col-8">
++		<a href="<?php echo e(url($msgUri)); ?>" class="list-box-content <?php echo e(linkClass('body-emphasis')); ?>">
++			<h5 class="fs-5 fw-bold mt-0"><?php echo e($msgSubject); ?></h5>
++			<span class="fs-6">
++				<i class="fa-solid fa-circle <?php echo e($userIsOnline); ?>"></i> <?php echo e($userName); ?>
++
++			</span>
++			<div class="">
++				<?php echo e($msgBody); ?>
++
++			</div>
++			<div class="text-muted"><?php echo e($msgCreatedAt); ?></div>
++		</a>
++	</div>
++	
++	<div class="col-1 ms-auto list-box-action">
++		<div class="row d-flex flex-column text-end">
++			<div class="col-12">
++				<?php if($isImportant): ?>
++					<a href="<?php echo e(url($msgUri . '/actions?type=markAsNotImportant')); ?>"
++					   data-bs-toggle="tooltip"
++					   data-bs-placement="top"
++					   class="markAsNotImportant <?php echo e(linkClass()); ?>"
++					   title="<?php echo e(t('Mark as not important')); ?>"
++					>
++						<i class="fa-solid fa-star"></i>
++					</a>
++				<?php else: ?>
++					<a href="<?php echo e(url($msgUri . '/actions?type=markAsImportant')); ?>"
++					   data-bs-toggle="tooltip"
++					   data-bs-placement="top"
++					   class="markAsImportant <?php echo e(linkClass()); ?>"
++					   title="<?php echo e(t('Mark as important')); ?>"
++					>
++						<i class="fa-regular fa-star"></i>
++					</a>
++				<?php endif; ?>
++			</div>
++			<div class="col-12">
++				<a href="<?php echo e(url($msgUri . '/delete')); ?>"
++				   data-bs-toggle="tooltip"
++				   data-bs-placement="top"
++				   class="<?php echo e(linkClass('danger')); ?>"
++				   title="<?php echo e(t('Delete')); ?>"
++				>
++					<i class="fa-solid fa-trash"></i>
++				</a>
++			</div>
++			<div class="col-12">
++				<?php if($isUnread): ?>
++					<a href="<?php echo e(url($msgUri . '/actions?type=markAsRead')); ?>"
++					   data-bs-toggle="tooltip"
++					   data-bs-placement="top"
++					   class="markAsRead <?php echo e(linkClass()); ?>"
++					   title="<?php echo e(t('Mark as read')); ?>"
++					>
++						<i class="fa-solid fa-envelope"></i>
++					</a>
++				<?php else: ?>
++					<a href="<?php echo e(url($msgUri . '/actions?type=markAsUnread')); ?>"
++					   data-bs-toggle="tooltip"
++					   data-bs-placement="top"
++					   class="markAsRead <?php echo e(linkClass()); ?>"
++					   title="<?php echo e(t('Mark as unread')); ?>"
++					>
++						<i class="fa-solid fa-envelope-open"></i>
++					</a>
++				<?php endif; ?>
++			</div>
++		</div>
++	</div>
++</div>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/threads/thread.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/1831aa5eb42af4c540682d7f97854ee5.php b/storage/framework/views/1831aa5eb42af4c540682d7f97854ee5.php
+new file mode 100644
+index 00000000..07d66640
+--- /dev/null
++++ b/storage/framework/views/1831aa5eb42af4c540682d7f97854ee5.php
+@@ -0,0 +1,22 @@
++<?php
++	$apiResult ??= [];
++	$from = (int)data_get($apiResult, 'meta.from', 0);
++	$to = (int)data_get($apiResult, 'meta.to', 0);
++	$totalEntries = (int)data_get($apiResult, 'meta.total', 0);
++?>
++<?php if($totalEntries > 0): ?>
++	<span class="text-muted count-message">
++		<strong>
++			<?php echo e($from); ?>
++
++		</strong> - <strong>
++			<?php echo e($to); ?>
++
++		</strong> <?php echo e(t('of')); ?> <strong>
++			<?php echo e($totalEntries); ?>
++
++		</strong>
++	</span>
++	<?php echo $__env->make('front.account.messenger.threads.pagination', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/threads/links.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/1f297b481574eb82629e6cc54e1a9d73.php b/storage/framework/views/1f297b481574eb82629e6cc54e1a9d73.php
+deleted file mode 100644
+index 0120ff23..00000000
+--- a/storage/framework/views/1f297b481574eb82629e6cc54e1a9d73.php
++++ /dev/null
+@@ -1,137 +0,0 @@
+-<form action="<?php echo e(urlGen()->signIn()); ?>" method="POST" role="form">
+-	<?php echo csrf_field(); ?>
+-	<div class="modal fade" id="quickLogin" tabindex="-1" aria-labelledby="quickLoginLabel" aria-hidden="true">
+-		<div class="modal-dialog modal-dialog-scrollable">
+-			<div class="modal-content">
+-				
+-				<div class="modal-header px-3">
+-					<h4 class="modal-title fs-5 fw-bold" id="quickLoginLabel">
+-						<i class="fa-solid fa-right-to-bracket"></i> <?php echo e(trans('auth.log_in')); ?>
+-
+-					</h4>
+-					
+-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo e(t('Close')); ?>"></button>
+-				</div>
+-				
+-				<div class="modal-body">
+-					<div class="row">
+-						<div class="col-12">
+-							<input type="hidden" name="language_code" value="<?php echo e(config('app.locale')); ?>">
+-							
+-							<?php if(isset($errors) && $errors->any() && old('quickLoginForm')=='1'): ?>
+-								<div class="alert alert-danger alert-dismissible">
+-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo e(t('Close')); ?>"></button>
+-									<ul class="mb-0 list-unstyled">
+-										<?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-											<li class="lh-lg"><i class="bi bi-check-lg me-1"></i><?php echo $error; ?></li>
+-										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-									</ul>
+-								</div>
+-							<?php endif; ?>
+-							
+-							<?php echo $__env->make('auth.login.partials.social', ['socialCol' => 12, 'page' => 'modal'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							<?php
+-								$mtAuth = !socialLogin()->isEnabled() ? ' mt-3' : '';
+-							?>
+-							
+-							
+-							
+-							<?php
+-								$labelRight = '';
+-								if (isPhoneAsAuthFieldEnabled()) {
+-									$labelRight .= '<a href="" class="link-primary text-decoration-none auth-field" data-auth-field="phone" data-ignore-guard="true">';
+-									$labelRight .= trans('auth.login_with_phone');
+-									$labelRight .= '</a>';
+-								}
+-								$emailValue = session()->has('email') ? session('email') : null;
+-							?>
+-							<?php echo $__env->make('helpers.forms.fields.text', [
+-								'label'             => trans('auth.email'),
+-								'labelRightContent' => $labelRight,
+-								'id'                => 'mEmail',
+-								'name'              => 'email',
+-								'required'          => (getAuthField() == 'email'),
+-								'placeholder'       => trans('auth.email_or_username'),
+-								'value'             => $emailValue,
+-								'prefix'            => '<i class="bi bi-person"></i>',
+-								'wrapper'           => ['class' => 'auth-field-item' . $mtAuth],
+-							], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							
+-							
+-							<?php if(isPhoneAsAuthFieldEnabled()): ?>
+-								<?php
+-									$labelRight = '<a href="" class="link-primary text-decoration-none auth-field" data-auth-field="email" data-ignore-guard="true">';
+-									$labelRight .= trans('auth.login_with_email');
+-									$labelRight .= '</a>';
+-									
+-									$phoneValue = session()->has('phone') ? session('phone') : null;
+-									$phoneCountryValue = config('country.code');
+-								?>
+-								<?php echo $__env->make('helpers.forms.fields.intl-tel-input', [
+-									'label'             => trans('auth.phone_number'),
+-									'labelRightContent' => $labelRight,
+-									'id'                => 'mPhone',
+-									'name'              => 'phone',
+-									'required'          => (getAuthField() == 'phone'),
+-									'placeholder'       => null,
+-									'value'             => $phoneValue,
+-									'attributes'        => ['class' => 'form-control m-phone'],
+-									'countryCode'       => $phoneCountryValue,
+-									'independentJs'     => true,
+-									'wrapper'           => ['class' => 'auth-field-item' . $mtAuth],
+-								], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							<?php endif; ?>
+-							
+-							
+-							<input name="auth_field" type="hidden" value="<?php echo e(old('auth_field', getAuthField())); ?>">
+-							
+-							
+-							<?php echo $__env->make('helpers.forms.fields.password', [
+-								'label'          => trans('auth.password'),
+-								'id'             => 'mPassword',
+-								'name'           => 'password',
+-								'placeholder'    => trans('auth.password'),
+-								'required'       => true,
+-								'value'          => null,
+-								'prefix'         => '<i class="bi bi-asterisk"></i>',
+-								'togglePassword' => 'icon',
+-								'hint'           => false,
+-							], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							
+-							
+-							<?php
+-								$labelRight = '<a href="' . urlGen()->passwordForgot() . '" class="' . linkClass() . '">';
+-								$labelRight .= trans('auth.forgot_password');
+-								$labelRight .= '</a>';
+-								$labelRight .= '<br>';
+-								$labelRight .= '<a href="' . urlGen()->signUp() . '" class="' . linkClass() . '">';
+-								$labelRight .= trans('auth.create_account');
+-								$labelRight .= '</a>';
+-							?>
+-							<?php echo $__env->make('helpers.forms.fields.checkbox', [
+-								'label'             => trans('auth.remember_me'),
+-								'labelRightContent' => $labelRight,
+-								'id'                => 'rememberMe2',
+-								'name'              => 'remember',
+-								'value'             => null,
+-								'wrapper'           => ['class' => 'mt-4'],
+-							], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							
+-							
+-							<?php echo $__env->make('helpers.forms.fields.captcha', ['label' => trans('auth.captcha_human_verification')], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							
+-							<input type="hidden" name="quickLoginForm" value="1">
+-							
+-						</div>
+-					</div>
+-				</div>
+-				
+-				<div class="modal-footer">
+-					<button type="submit" class="btn btn-primary float-end"><?php echo e(trans('auth.log_in')); ?></button>
+-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo e(t('Cancel')); ?></button>
+-				</div>
+-			</div>
+-		</div>
+-	</div>
+-</form>
+-<?php /**PATH C:\xampp\htdocs\resources\views/auth/login/partials/modal.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/2be86d36e756290cedde7040566087b4.php b/storage/framework/views/2be86d36e756290cedde7040566087b4.php
+new file mode 100644
+index 00000000..30fe7b46
+--- /dev/null
++++ b/storage/framework/views/2be86d36e756290cedde7040566087b4.php
+@@ -0,0 +1,39 @@
++<script>
++	onDocumentReady((event) => {
++		let displayModeEl = document.querySelector("select[name=display_mode].select2_from_array");
++		if (displayModeEl) {
++			getDisplayModeFields(displayModeEl);
++			$(displayModeEl).on("change", e => getDisplayModeFields(e.target));
++		}
++		
++		let hideDateEl = document.querySelector("input[type=checkbox][name=hide_date]");
++		if (hideDateEl) {
++			toggleDateFields(hideDateEl);
++			hideDateEl.addEventListener("change", e => toggleDateFields(e.target));
++		}
++		
++		let extendedSearchesEl = document.querySelector("input[type=checkbox][name=cities_extended_searches]");
++		if (extendedSearchesEl) {
++			toggleExtendedSearchesFields(extendedSearchesEl);
++			extendedSearchesEl.addEventListener("change", e => toggleExtendedSearchesFields(e.target));
++		}
++	});
++	
++	function getDisplayModeFields(displayModeEl) {
++		setElementsVisibility("hide", ".grid-view");
++		if (displayModeEl.value === "grid-view") {
++			setElementsVisibility("show", ".grid-view");
++		}
++	}
++	
++	function toggleDateFields(hideDateEl) {
++		let action = !hideDateEl.checked ? "show" : "hide";
++		setElementsVisibility(action, ".date-field");
++	}
++	
++	function toggleExtendedSearchesFields(extendedSearchesEl) {
++		let action = extendedSearchesEl.checked ? "show" : "hide";
++		setElementsVisibility(action, ".extended-searches");
++	}
++</script>
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/js/setting/listings-list.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/2dac28aec3dae1f80e6db85243da8f4e.php b/storage/framework/views/2dac28aec3dae1f80e6db85243da8f4e.php
+deleted file mode 100644
+index 1aebdea4..00000000
+--- a/storage/framework/views/2dac28aec3dae1f80e6db85243da8f4e.php
++++ /dev/null
+@@ -1,74 +0,0 @@
+-<?php
+-	$packages ??= collect();
+-	$paymentMethods ??= collect();
+-	
+-	$selectedPackage ??= null;
+-	$currentPackagePrice = $selectedPackage->price ?? 0;
+-	$noPackageOrPremiumOneSelected ??= true;
+-?>
+-<?php if($paymentMethods->count() > 0 && $noPackageOrPremiumOneSelected): ?>
+-	<?php if(!empty($selectedPackage)): ?>
+-		
+-		<div class="col-12 fw-bold fs-5 border-bottom py-2 my-5 mb-4">
+-			<i class="fa-solid fa-wallet"></i> <?php echo e(t('Payment')); ?>
+-
+-		</div>
+-		
+-		<div class="col-md-12 mb-4">
+-			<div class="container bg-body rounded p-2">
+-				
+-				<div class="row">
+-					<div class="col-sm-12">
+-						
+-						<div class="form-group mb-0">
+-							<fieldset>
+-								<?php echo $__env->make('front.payment.packages.selected', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							</fieldset>
+-						</div>
+-					
+-					</div>
+-				</div>
+-				
+-			</div>
+-		</div>
+-		
+-	<?php else: ?>
+-	
+-		<?php if($packages->count() > 0): ?>
+-			<div class="col-12 fw-bold fs-5 border-bottom py-2 my-5 mb-4">
+-				<i class="fa-solid fa-tags"></i> <?php echo e(t('Packages')); ?>
+-
+-			</div>
+-			
+-			<div class="col-md-12 mb-4">
+-				<div class="container bg-body rounded p-2">
+-					
+-					<div class="row">
+-						<div class="col-sm-12">
+-							<fieldset>
+-								<?php echo $__env->make('front.payment.packages', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-							</fieldset>
+-						</div>
+-					</div>
+-					
+-				</div>
+-			</div>
+-		<?php endif; ?>
+-		
+-	<?php endif; ?>
+-<?php endif; ?>
+-
+-<?php $__env->startSection('after_styles'); ?>
+-	<?php echo \Illuminate\View\Factory::parentPlaceholder('after_styles'); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php $__env->startSection('after_scripts'); ?>
+-	<?php echo \Illuminate\View\Factory::parentPlaceholder('after_scripts'); ?>
+-	<script>
+-		const packageType = 'promotion';
+-		const formType = 'singleStep';
+-		const isCreationFormPage = <?php echo e(request()->segment(1) == 'create' ? 'true' : 'false'); ?>;
+-	</script>
+-	<?php echo $__env->make('front.common.js.payment-js', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php $__env->stopSection(); ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/singleStep/partials/packages.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/353b71e46bf51dfd4889cd8b025be8e1.php b/storage/framework/views/353b71e46bf51dfd4889cd8b025be8e1.php
+index ff227482..043fad89 100644
+--- a/storage/framework/views/353b71e46bf51dfd4889cd8b025be8e1.php
++++ b/storage/framework/views/353b71e46bf51dfd4889cd8b025be8e1.php
+@@ -104,13 +104,13 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('1f3789ad-96b4-420f-b698-5dd5f85fdad8')): $__env->markAsRenderedOnce('1f3789ad-96b4-420f-b698-5dd5f85fdad8');
++<?php if (! $__env->hasRenderedOnce('b9b2c4cf-57f1-477b-8a94-59939a31cdbf')): $__env->markAsRenderedOnce('b9b2c4cf-57f1-477b-8a94-59939a31cdbf');
+ $__env->startPush("{$viewName}_assets_styles"); ?>
+ 	<link href="<?php echo e(asset('assets/plugins/intl-tel-input/25.3.1/css/intlTelInput.css')); ?>" rel="stylesheet" type="text/css"/>
+ 	<link href="<?php echo e(asset('assets/plugins/intl-tel-input/25.3.1/css/custom.css')); ?>" rel="stylesheet" type="text/css"/>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('176a1b31-478a-49aa-9f94-7d2167a04e73')): $__env->markAsRenderedOnce('176a1b31-478a-49aa-9f94-7d2167a04e73');
++<?php if (! $__env->hasRenderedOnce('87d0621f-19e9-40e3-9200-0202a62336c7')): $__env->markAsRenderedOnce('87d0621f-19e9-40e3-9200-0202a62336c7');
+ $__env->startPush("{$viewName}_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset('assets/plugins/intl-tel-input/25.3.1/js/intlTelInput.js')); ?>"></script>
+ 	<script src="<?php echo e(asset('assets/plugins/intl-tel-input/25.3.1/js/custom.js')); ?>" defer></script>
+@@ -146,7 +146,7 @@
+ 		</script>
+ 	<?php $__env->stopPush(); ?>
+ <?php else: ?>
+-	<?php if (! $__env->hasRenderedOnce('0c70b306-3af2-424c-bd17-9b244cbe392d')): $__env->markAsRenderedOnce('0c70b306-3af2-424c-bd17-9b244cbe392d');
++	<?php if (! $__env->hasRenderedOnce('105f7a87-9635-4a45-adf0-ad91ff90c804')): $__env->markAsRenderedOnce('105f7a87-9635-4a45-adf0-ad91ff90c804');
+ $__env->startPush("shared_iti_assets_scripts"); ?>
+ 		<script>
+ 			onDocumentReady((event) => {
+diff --git a/storage/framework/views/3d6ade0b588d471129849849bdc0d8ab.php b/storage/framework/views/3d6ade0b588d471129849849bdc0d8ab.php
+new file mode 100644
+index 00000000..824f5f59
+--- /dev/null
++++ b/storage/framework/views/3d6ade0b588d471129849849bdc0d8ab.php
+@@ -0,0 +1,80 @@
++<script>
++	const phpDateFormat = "<?php echo e($phpDateFormat); ?>";
++	const phpDatetimeFormat = "<?php echo e($phpDatetimeFormat); ?>";
++	const phpDateFormatHint = "<?php echo escapeStringForJs($phpDateFormatHint); ?>";
++	
++	const isoDateFormat = "<?php echo e($isoDateFormat); ?>";
++	const isoDatetimeFormat = "<?php echo e($isoDatetimeFormat); ?>";
++	const isoDateFormatHint = "<?php echo escapeStringForJs($isoDateFormatHint); ?>";
++	
++	onDocumentReady((event) => {
++		const darkModeEl = document.querySelector("input[type=checkbox][name=dark_theme_enabled]");
++		if (darkModeEl) {
++			toggleDarkModeFields(darkModeEl);
++			darkModeEl.addEventListener("change", e => toggleDarkModeFields(e.target));
++		}
++		
++		const phpSpecificDateFormatEl = document.querySelector("input[type=checkbox][name=php_specific_date_format]");
++		if (phpSpecificDateFormatEl) {
++			applyPhpSpecificDateFormatActions(phpSpecificDateFormatEl);
++			phpSpecificDateFormatEl.addEventListener("change", e => applyPhpSpecificDateFormatActions(e.target));
++		}
++		
++		const showCountriesChartsEl = document.querySelector("input[type=checkbox][name=show_countries_charts]");
++		if (showCountriesChartsEl) {
++			toggleCountriesChartsFields(showCountriesChartsEl);
++			showCountriesChartsEl.addEventListener("change", e => toggleCountriesChartsFields(e.target));
++		}
++	});
++	
++	function toggleDarkModeFields(darkModeEl) {
++		let action = darkModeEl.checked ? "show" : "hide";
++		setElementsVisibility(action, '.dark-mode-field');
++	}
++	
++	function applyPhpSpecificDateFormatActions(phpSpecificDateFormatEl) {
++		let dateFormat;
++		let datetimeFormat;
++		let dateFormatHint;
++		
++		if (phpSpecificDateFormatEl.checked) {
++			dateFormat = phpDateFormat;
++			datetimeFormat = phpDateFormat;
++			dateFormatHint = phpDateFormatHint;
++		} else {
++			dateFormat = isoDateFormat;
++			datetimeFormat = isoDatetimeFormat;
++			dateFormatHint = isoDateFormatHint;
++		}
++		
++		const dateFormatEl = document.querySelector("input[type=text][name=date_format]");
++		if (dateFormatEl) {
++			dateFormatEl.value = dateFormat;
++			const dateFormatHintEl = dateFormatEl.nextElementSibling;
++			if (dateFormatHintEl) {
++				dateFormatHintEl.innerHTML = dateFormatHint;
++				
++				/* Initialize all popovers in the dateFormatHintEl */
++				initElementPopovers(dateFormatHintEl, {html: true});
++			}
++		}
++		
++		const datetimeFormatEl = document.querySelector("input[type=text][name=datetime_format]");
++		if (datetimeFormatEl) {
++			datetimeFormatEl.value = datetimeFormat;
++			const datetimeFormatHintEl = datetimeFormatEl.nextElementSibling;
++			if (datetimeFormatHintEl) {
++				datetimeFormatHintEl.innerHTML = dateFormatHint;
++				
++				/* Initialize all popovers in the datetimeFormatHintEl */
++				initElementPopovers(datetimeFormatHintEl, {html: true});
++			}
++		}
++	}
++	
++	function toggleCountriesChartsFields(showCountriesChartsEl) {
++		let action = showCountriesChartsEl.checked ? "show" : "hide";
++		setElementsVisibility(action, '.countries-charts-field');
++	}
++</script>
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/js/setting/app.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/40f11919de01e0b21053d3e9453449fe.php b/storage/framework/views/40f11919de01e0b21053d3e9453449fe.php
+deleted file mode 100644
+index 24e256db..00000000
+--- a/storage/framework/views/40f11919de01e0b21053d3e9453449fe.php
++++ /dev/null
+@@ -1,94 +0,0 @@
+-
+-<?php
+-	use App\Helpers\Common\Arr;
+-	
+-	$layout ??= 'default'; // default, horizontal
+-	$isHorizontal = $layout === 'horizontal';
+-	$colLabel ??= 'col-md-3';
+-    $colField ??= 'col-md-9';
+-	
+-	$viewName = 'radio';
+-	$type = 'radio';
+-	$label ??= null;
+-	$id ??= null;
+-	$protectedId ??= false;
+-	$name ??= null;
+-	$value ??= null;
+-	$default ??= null;
+-	$required ??= false;
+-	$hint ??= null;
+-	$attributes ??= [];
+-	
+-	$reverse ??= false;
+-	$checkLabelClass ??= '';
+-	$checkLabelClass .= !empty($label) ? (!empty($checkLabelClass) ? ' fw-normal' : 'fw-normal') : '';
+-	$checkLabelClass = !empty($checkLabelClass) ? " $checkLabelClass" : '';
+-	$options ??= [];
+-	$optionValueName ??= 'value';
+-	$optionTextName ??= 'text';
+-	$inline ??= false;
+-	
+-	$dotSepName = arrayFieldToDotNotation($name);
+-	if (!$protectedId) {
+-		$id = !empty($id) ? $id : str_replace('.', '-', $dotSepName);
+-	}
+-	
+-	$value = $value ?? ($default ?? null);
+-	$value = old($name, $value);
+-?>
+-<div <?php echo $__env->make('helpers.forms.attributes.field-wrapper', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>>
+-	<?php echo $__env->make('helpers.forms.partials.label', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	
+-	<?php if($isHorizontal): ?>
+-		<div class="<?php echo e($colField); ?>">
+-			<?php endif; ?>
+-			
+-			<?php if(!empty($options) && is_array($options)): ?>
+-				<?php if($inline && !$isHorizontal): ?><br><?php endif; ?>
+-				
+-				<?php
+-					$reverseClass = $reverse ? ' form-check-reverse' : '';
+-					$inlineClass = ($inline && !$reverse) ? ' form-check-inline' : '';
+-					$optionPointer = 0
+-				?>
+-				<?php $__currentLoopData = $options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-					<?php
+-						$optionPointer++;
+-						
+-						$optionValue = $option[$optionValueName] ?? null;
+-						$optionText = $option[$optionTextName] ?? null;
+-						$optionAttrs = $option['attributes'] ?? [];
+-						$optionAttrsStr = Arr::toAttributes($optionAttrs);
+-						$optionAttrsStr = !empty($optionAttrsStr) ? ' ' . $optionAttrsStr : '';
+-						
+-						$radioId = $id . $optionValue;
+-					?>
+-					
+-					<div class="form-check<?php echo e($inlineClass . $reverseClass); ?><?php echo e($isHorizontal ? ' mt-2' : ''); ?>">
+-						<input
+-								type="radio"
+-								id="<?php echo e($radioId); ?>"
+-								name="<?php echo e($name); ?>"
+-								value="<?php echo e($optionValue); ?>"<?php echo $optionAttrsStr; ?>
+-
+-								<?php if($optionValue == $value): echo 'checked'; endif; ?>
+-								<?php echo $__env->make('helpers.forms.attributes.field', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-						>
+-						<label class="form-check-label<?php echo e($checkLabelClass); ?>" for="<?php echo e($radioId); ?>">
+-							<?php echo $optionText; ?>
+-
+-						</label>
+-					</div>
+-				
+-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-			<?php endif; ?>
+-			
+-			<?php echo $__env->make('helpers.forms.partials.hint', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			<?php echo $__env->make('helpers.forms.partials.validation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			
+-			<?php if($isHorizontal): ?>
+-		</div>
+-	<?php endif; ?>
+-</div>
+-<?php echo $__env->make('helpers.forms.partials.newline', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/helpers/forms/fields/radio.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/4451f8812db8475e6177a432f5461bbb.php b/storage/framework/views/4451f8812db8475e6177a432f5461bbb.php
+new file mode 100644
+index 00000000..2a5dff37
+--- /dev/null
++++ b/storage/framework/views/4451f8812db8475e6177a432f5461bbb.php
+@@ -0,0 +1,250 @@
++<?php
++    $authUser = auth()->check() ? auth()->user() : null;
++	$authUserId = !empty($authUser) ? $authUser->getAuthIdentifier() : 0;
++	
++	$thread ??= [];
++	$threadId = data_get($thread, 'id', 0);
++	
++    $fiTheme = config('larapen.core.fileinput.theme', 'bs5');
++	$allowedFileFormatsJson = collect(getAllowedFileFormats())->toJson();
++?>
++
++<?php $__env->startSection('content'); ?>
++	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++    <div class="main-container">
++        <div class="container">
++            <div class="row">
++                
++                <div class="col-md-3">
++                    <?php echo $__env->make('front.account.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                </div>
++                
++                <div class="col-md-9">
++                    <div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2">
++                        <h2 class="fw-bold border-bottom pb-3 mb-4">
++                            <i class="bi bi-chat-text"></i> <?php echo e(t('inbox')); ?>
++
++                        </h2>
++    
++                        <?php if(session()->has('flash_notification')): ?>
++                            <div class="row">
++                                <div class="col-12">
++                                    <?php echo $__env->make('flash::message', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                </div>
++                            </div>
++                        <?php endif; ?>
++                        
++                        <?php if(isset($errors) && $errors->any()): ?>
++                            <div class="alert alert-danger alert-dismissible">
++                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo e(t('Close')); ?>"></button>
++                                <ul>
++                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++                                        <li class="mb-0"><?php echo e($error); ?></li>
++                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++                                </ul>
++                            </div>
++                        <?php endif; ?>
++                        
++                        <div id="successMsg" class="alert alert-success d-none" role="alert"></div>
++                        <div id="errorMsg" class="alert alert-danger d-none" role="alert"></div>
++                        
++                        <div class="container px-0">
++                            <div class="row mb-2">
++                                <div class="col-md-12 col-lg-12">
++                                    <div class="d-flex justify-content-between user-bar-top">
++                                        <div class="fs-5">
++                                            <p>
++                                                <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages')); ?>" class="<?php echo e(linkClass()); ?>">
++                                                    <i class="fa-solid fa-inbox"></i>
++                                                </a>&nbsp;
++                                                <?php if($authUserId != data_get($thread, 'p_creator.id')): ?>
++                                                    <a href="<?php echo e(urlGen()->user(data_get($thread, 'p_creator'))); ?>" class="<?php echo e(linkClass()); ?>">
++                                                        <?php if(isUserOnline(data_get($thread, 'p_creator'))): ?>
++                                                            <i class="fa-solid fa-circle text-success"></i>&nbsp;
++                                                        <?php endif; ?>
++                                                        <span>
++                                                            <?php echo e(data_get($thread, 'p_creator.name')); ?>
++
++                                                        </span>
++                                                    </a>
++                                                <?php endif; ?>
++                                                <span><?php echo e(t('Contact request about')); ?></span>
++                                                <a href="<?php echo e(urlGen()->post(data_get($thread, 'post'))); ?>" class="<?php echo e(linkClass()); ?>">
++                                                    <?php echo e(data_get($thread, 'post.title')); ?>
++
++                                                </a>
++                                            </p>
++                                        </div>
++                                        
++                                        <div class="call-xhr-action">
++                                            <div class="btn-group btn-group-sm">
++                                                <?php if(data_get($thread, 'p_is_important')): ?>
++                                                    <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/' . $threadId . '/actions?type=markAsNotImportant')); ?>"
++                                                       class="btn btn-outline-primary markAsNotImportant"
++                                                       data-bs-toggle="tooltip"
++                                                       data-bs-placement="top"
++                                                       title="<?php echo e(t('Mark as not important')); ?>"
++                                                    >
++                                                        <i class="fa-solid fa-star"></i>
++                                                    </a>
++                                                <?php else: ?>
++                                                    <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/' . $threadId . '/actions?type=markAsImportant')); ?>"
++                                                       class="btn btn-outline-primary markAsImportant"
++                                                       data-bs-toggle="tooltip"
++                                                       data-bs-placement="top"
++                                                       title="<?php echo e(t('Mark as important')); ?>"
++                                                    >
++                                                        <i class="fa-regular fa-star"></i>
++                                                    </a>
++                                                <?php endif; ?>
++                                                <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/' . $threadId . '/delete')); ?>"
++                                                   class="btn btn-outline-primary"
++                                                   data-bs-toggle="tooltip"
++                                                   data-bs-placement="top"
++                                                   title="<?php echo e(t('Delete')); ?>"
++                                                >
++                                                    <i class="fa-solid fa-trash"></i>
++                                                </a>
++                                                <?php if(data_get($thread, 'p_is_unread')): ?>
++                                                    <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/' . $threadId . '/actions?type=markAsRead')); ?>"
++                                                       class="btn btn-outline-primary markAsRead"
++                                                       data-bs-toggle="tooltip"
++                                                       data-bs-placement="top"
++                                                       title="<?php echo e(t('Mark as read')); ?>"
++                                                    >
++                                                        <i class="fa-solid fa-envelope"></i>
++                                                    </a>
++                                                <?php else: ?>
++                                                    <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/' . $threadId . '/actions?type=markAsUnread')); ?>"
++                                                       class="btn btn-outline-primary markAsRead"
++                                                       data-bs-toggle="tooltip"
++                                                       data-bs-placement="top"
++                                                       title="<?php echo e(t('Mark as unread')); ?>"
++                                                    >
++                                                        <i class="fa-solid fa-envelope-open"></i>
++                                                    </a>
++                                                <?php endif; ?>
++                                            </div>
++                                        </div>
++                                    </div>
++                                </div>
++                            </div>
++                            
++                            <div class="row">
++                                <?php echo $__env->make('front.account.messenger.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                
++                                <div class="col-md-9 col-lg-10">
++                                    <div class="p-0 m-0 message-chat">
++                                        <div class="container mx-0 border rounded bg-body pb-3 mb-3">
++                                            <div id="messageChatHistory" class="container mt-3 overflow-y-auto" id="listMessages" style="max-height: 550px;">
++                                                <div id="linksMessages" class="text-center">
++                                                    <?php echo $linksRender; ?>
++
++                                                </div>
++                                                
++                                                <?php echo $__env->make('front.account.messenger.messages.messages', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                            </div>
++                                        </div>
++                                        
++                                        <div class="container px-0 mx-0 type-message">
++                                            <?php
++                                                $updateUrl = url(urlGen()->getAccountBasePath() . '/messages/' . $threadId);
++                                            ?>
++                                            <form id="chatForm" role="form" method="POST" action="<?php echo e($updateUrl); ?>" enctype="multipart/form-data">
++                                                <?php echo csrf_field(); ?>
++                                                <?php echo method_field('PUT'); ?>
++                                                <?php echo view('honeypot::honeypot'); ?>
++                                                <div class="hstack gap-3 type-form">
++                                                    <textarea id="body" name="body"
++                                                              maxlength="500"
++                                                              rows="5"
++                                                              class="form-control me-auto input-write"
++                                                              placeholder="<?php echo e(t('Type a message')); ?>"
++                                                              style="height: 60px;"
++                                                    ></textarea>
++                                                    <div class="p-0 m-0 text-nowrap d-flex align-items-center button-wrap">
++                                                        <input id="addFile" name="file_path" type="file">
++                                                    </div>
++                                                    <div class="vr"></div>
++                                                    <button id="sendChat" class="btn btn-primary" type="submit">
++                                                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
++                                                    </button>
++                                                </div>
++                                            </form>
++                                        </div>
++
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                        
++                    </div>
++                </div>
++                
++            </div>
++        </div>
++    </div>
++<?php $__env->stopSection(); ?>
++
++<?php $__env->startSection('after_styles'); ?>
++    <?php echo \Illuminate\View\Factory::parentPlaceholder('after_styles'); ?>
++    <link href="<?php echo e(url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css')); ?>" rel="stylesheet">
++    <?php if(config('lang.direction') == 'rtl'): ?>
++        <link href="<?php echo e(url('assets/plugins/bootstrap-fileinput/css/fileinput-rtl.min.css')); ?>" rel="stylesheet">
++    <?php endif; ?>
++    <?php if(str_starts_with($fiTheme, 'explorer')): ?>
++        <link href="<?php echo e(url('assets/plugins/bootstrap-fileinput/themes/' . $fiTheme . '/theme.min.css')); ?>" rel="stylesheet">
++    <?php endif; ?>
++    <style>
++        .file-input {
++            display: inline-block;
++        }
++    </style>
++<?php $__env->stopSection(); ?>
++
++<?php $__env->startSection('after_scripts'); ?>
++    <?php echo \Illuminate\View\Factory::parentPlaceholder('after_scripts'); ?>
++
++    <script>
++        var loadingImage = '<?php echo e(url('images/spinners/fading-line.gif')); ?>';
++        var loadingErrorMessage = '<?php echo e(t('Threads could not be loaded')); ?>';
++        var actionErrorMessage = '<?php echo e(t('This action could not be done')); ?>';
++        var title = {
++            'seen': '<?php echo e(t('Mark as read')); ?>',
++            'notSeen': '<?php echo e(t('Mark as unread')); ?>',
++            'important': '<?php echo e(t('Mark as important')); ?>',
++            'notImportant': '<?php echo e(t('Mark as not important')); ?>',
++        };
++    </script>
++    <script src="<?php echo e(url('assets/js/app/messenger.js')); ?>" type="text/javascript"></script>
++    <script src="<?php echo e(url('assets/js/app/messenger-chat.js')); ?>" type="text/javascript"></script>
++    
++    <script src="<?php echo e(url('assets/plugins/bootstrap-fileinput/js/plugins/sortable.min.js')); ?>" type="text/javascript"></script>
++    <script src="<?php echo e(url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js')); ?>" type="text/javascript"></script>
++    <script src="<?php echo e(url('assets/plugins/bootstrap-fileinput/themes/' . $fiTheme . '/theme.js')); ?>" type="text/javascript"></script>
++    <script src="<?php echo e(url('common/js/fileinput/locales/' . config('app.locale') . '.js')); ?>" type="text/javascript"></script>
++    
++    <script>
++        let options = {};
++        options.theme = '<?php echo e($fiTheme); ?>';
++        options.language = '<?php echo e(config('app.locale')); ?>';
++        options.rtl = <?php echo e((config('lang.direction') == 'rtl') ? 'true' : 'false'); ?>;
++        options.allowedFileExtensions = <?php echo $allowedFileFormatsJson; ?>;
++        options.minFileSize = <?php echo e((int)config('settings.upload.min_file_size', 0)); ?>;
++        options.maxFileSize = <?php echo e((int)config('settings.upload.max_file_size', 1000)); ?>;
++        options.browseClass = 'btn btn-primary';
++        options.browseIcon = '<i class="fa-solid fa-paperclip" aria-hidden="true"></i>';
++        options.layoutTemplates = {
++            main1: '{browse}',
++            main2: '{browse}',
++            btnBrowse: '<div tabindex="500" class="{css}"{status}>{icon}</div>',
++        };
++        
++        onDocumentReady((event) => {
++            
++            $('#addFile').fileinput(options);
++        });
++    </script>
++<?php $__env->stopSection(); ?>
++
++<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/show.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/45a56e20c653128fda900501303575c8.php b/storage/framework/views/45a56e20c653128fda900501303575c8.php
+deleted file mode 100644
+index 2447430a..00000000
+--- a/storage/framework/views/45a56e20c653128fda900501303575c8.php
++++ /dev/null
+@@ -1,70 +0,0 @@
+-<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
+-
+-$__newAttributes = [];
+-$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['breadcrumbs']));
+-
+-foreach ($attributes->all() as $__key => $__value) {
+-    if (in_array($__key, $__propNames)) {
+-        $$__key = $$__key ?? $__value;
+-    } else {
+-        $__newAttributes[$__key] = $__value;
+-    }
+-}
+-
+-$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+-
+-unset($__propNames);
+-unset($__newAttributes);
+-
+-foreach (array_filter((['breadcrumbs']), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+-    $$__key = $$__key ?? $__value;
+-}
+-
+-$__defined_vars = get_defined_vars();
+-
+-foreach ($attributes->all() as $__key => $__value) {
+-    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+-}
+-
+-unset($__defined_vars); ?>
+-
+-<nav aria-label="breadcrumb">
+-	<?php if(config('breadcrumbs.style') === 'bootstrap'): ?>
+-		<ol class="breadcrumb pb-0 mb-0">
+-			<?php $__currentLoopData = $breadcrumbs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-				<li class="breadcrumb-item<?php echo e($loop->last ? ' active' : ''); ?>"
+-				    <?php if($loop->last): ?> aria-current="page" <?php endif; ?>>
+-					<?php if($item['url'] && !$loop->last): ?>
+-						<a href="<?php echo e($item['url']); ?>" class="link-primary text-decoration-none"><?php echo e($item['title']); ?></a>
+-					<?php else: ?>
+-						<?php echo e($item['title']); ?>
+-
+-					<?php endif; ?>
+-				</li>
+-			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-		</ol>
+-	<?php else: ?>
+-		<ol class="breadcrumb">
+-			<?php $__currentLoopData = $breadcrumbs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-				<?php if($item['url'] && !$loop->last): ?>
+-					<li class="breadcrumb-item">
+-						<a href="<?php echo e($item['url']); ?>" class="link-primary text-decoration-none"><?php echo e($item['title']); ?></a>
+-					</li>
+-				<?php else: ?>
+-					<li class="breadcrumb-item active" aria-current="page">
+-						<?php echo e($item['title']); ?>
+-
+-					</li>
+-				<?php endif; ?>
+-				<?php if(!$loop->last): ?>
+-					<span class="breadcrumb-separator"><?php echo e(config('breadcrumbs.separator')); ?></span>
+-				<?php endif; ?>
+-			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-		</ol>
+-	<?php endif; ?>
+-</nav>
+-
+-<?php if(config('breadcrumbs.style') === 'custom' && config('breadcrumbs.css')): ?>
+-	<link rel="stylesheet" href="<?php echo e(config('breadcrumbs.css')); ?>">
+-<?php endif; ?>
+-<?php /**PATH C:\xampp\htdocs\vendor\mayeulak\breadcrumbs\src/../resources/views/breadcrumb.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/4e812cf2568f1269a20f9736b5ebb624.php b/storage/framework/views/4e812cf2568f1269a20f9736b5ebb624.php
+new file mode 100644
+index 00000000..cbb18925
+--- /dev/null
++++ b/storage/framework/views/4e812cf2568f1269a20f9736b5ebb624.php
+@@ -0,0 +1,17 @@
++<?php
++    $apiResult ??= [];
++	$isPageable = (!empty(data_get($apiResult, 'links.prev')) || !empty(data_get($apiResult, 'links.next')));
++	$paginator = data_get($apiResult, 'links');
++?>
++<?php if($isPageable): ?>
++    
++    <?php if(data_get($paginator, 'next')): ?>
++        <span class="text-muted">
++            <a class="btn btn-sm btn-secondary rounded mb-3" href="<?php echo e(data_get($paginator, 'next')); ?>" rel="next">
++                <?php echo e(t('Load old messages')); ?>
++
++            </a>
++        </span>
++    <?php endif; ?>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/messages/pagination.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/4fc8935ae2a06ec718f1f468f91e0d01.php b/storage/framework/views/4fc8935ae2a06ec718f1f468f91e0d01.php
+index 65f73bc6..b1d33b63 100644
+--- a/storage/framework/views/4fc8935ae2a06ec718f1f468f91e0d01.php
++++ b/storage/framework/views/4fc8935ae2a06ec718f1f468f91e0d01.php
+@@ -106,7 +106,7 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('99d03d71-12b6-43bf-81a3-f27b34cec06e')): $__env->markAsRenderedOnce('99d03d71-12b6-43bf-81a3-f27b34cec06e');
++<?php if (! $__env->hasRenderedOnce('e7f5fceb-832d-4706-ac0c-e81f5f03ea7f')): $__env->markAsRenderedOnce('e7f5fceb-832d-4706-ac0c-e81f5f03ea7f');
+ $__env->startPush("select2_assets_styles"); ?>
+ 	<link href="<?php echo e(asset($pluginBasePath . 'css/select2.min.css')); ?>" rel="stylesheet" type="text/css"/>
+ 	<?php if($theme == 'bootstrap5'): ?>
+@@ -123,7 +123,7 @@
+ 	<?php endif; ?>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('857b1ab5-05b4-4b05-a285-20fdf7871598')): $__env->markAsRenderedOnce('857b1ab5-05b4-4b05-a285-20fdf7871598');
++<?php if (! $__env->hasRenderedOnce('3fbbaab1-4955-4fef-9c3b-f0fafabfcbb8')): $__env->markAsRenderedOnce('3fbbaab1-4955-4fef-9c3b-f0fafabfcbb8');
+ $__env->startPush("select2_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset($pluginBasePath . 'js/select2.full.min.js')); ?>"></script>
+ 	<?php
+diff --git a/storage/framework/views/4ff92baadcf585874eea9e3e72f69fbd.php b/storage/framework/views/4ff92baadcf585874eea9e3e72f69fbd.php
+index eb92dff0..c4a55ed3 100644
+--- a/storage/framework/views/4ff92baadcf585874eea9e3e72f69fbd.php
++++ b/storage/framework/views/4ff92baadcf585874eea9e3e72f69fbd.php
+@@ -104,7 +104,7 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('60317262-5540-4903-8387-9c3749af2f01')): $__env->markAsRenderedOnce('60317262-5540-4903-8387-9c3749af2f01');
++<?php if (! $__env->hasRenderedOnce('d9d6a0af-47a6-4f74-a386-fa8636466b79')): $__env->markAsRenderedOnce('d9d6a0af-47a6-4f74-a386-fa8636466b79');
+ $__env->startPush("{$viewName}_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset('assets/auth/js/toggle-password-visibility.js')); ?>"></script>
+ <?php $__env->stopPush(); endif; ?>
+diff --git a/storage/framework/views/516c0d1aa6989ae253330046fe4bb8f4.php b/storage/framework/views/516c0d1aa6989ae253330046fe4bb8f4.php
+new file mode 100644
+index 00000000..72294b60
+--- /dev/null
++++ b/storage/framework/views/516c0d1aa6989ae253330046fe4bb8f4.php
+@@ -0,0 +1,28 @@
++
++<div <?php echo $__env->make('admin.panel.inc.field_wrapper_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?> >
++    <label class="form-label fw-bolder">
++	    <?php echo $field['label']; ?>
++
++	    <?php if(isset($field['required']) && $field['required']): ?>
++		    <span class="text-danger">*</span>
++	    <?php endif; ?>
++    </label>
++	<?php echo $__env->make('admin.panel.fields.inc.translatable_icon', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++	
++	<?php if(isset($field['prefix']) || isset($field['suffix'])): ?> <div class="input-group"> <?php endif; ?>
++	<?php if(isset($field['prefix'])): ?> <span class="input-group-text"><?php echo $field['prefix']; ?></span> <?php endif; ?>
++    <input
++    	type="email"
++    	name="<?php echo e($field['name']); ?>"
++        value="<?php echo e(old($field['name'], $field['value'] ?? ($field['default'] ?? ''))); ?>"
++        <?php echo $__env->make('admin.panel.inc.field_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++	>
++	<?php if(isset($field['suffix'])): ?> <span class="input-group-text"><?php echo $field['suffix']; ?></span>> <?php endif; ?>
++	<?php if(isset($field['prefix']) || isset($field['suffix'])): ?> </div> <?php endif; ?>
++	
++    
++    <?php if(isset($field['hint'])): ?>
++        <div class="form-text"><?php echo $field['hint']; ?></div>
++    <?php endif; ?>
++</div>
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/email.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/530563770905c3aef6c24bce42a6f0cb.php b/storage/framework/views/530563770905c3aef6c24bce42a6f0cb.php
+new file mode 100644
+index 00000000..56c443b7
+--- /dev/null
++++ b/storage/framework/views/530563770905c3aef6c24bce42a6f0cb.php
+@@ -0,0 +1,112 @@
++
++<?php
++	$field ??= [];
++	
++	$field['allows_null'] ??= false;
++	$field['allows_multiple'] ??= false;
++	
++	$name = $field['name'];
++	$name = $field['allows_multiple'] ? $name . '[]' : $name;
++	
++	$field['options'] ??= [];
++	
++	$multipleAttr = $field['allows_multiple'] ? ' multiple' : '';
++	
++	$fieldValue = $field['value'] ?? ($field['default'] ?? null);
++	$fieldValue = old($field['name'], $fieldValue);
++?>
++<div <?php echo $__env->make('admin.panel.inc.field_wrapper_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?> >
++	<label class="form-label fw-bolder">
++		<?php echo $field['label']; ?>
++
++		<?php if(isset($field['required']) && $field['required']): ?>
++			<span class="text-danger">*</span>
++		<?php endif; ?>
++	</label>
++	<?php echo $__env->make('admin.panel.fields.inc.translatable_icon', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++	<select name="<?php echo e($name); ?>" style="width: 100%"
++			<?php echo $__env->make('admin.panel.inc.field_attributes', ['default_class' => 'form-select select2_from_skins'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++			<?php echo $multipleAttr; ?>
++
++	>
++		<?php if($field['allows_null']): ?>
++			<option value="">-</option>
++		<?php endif; ?>
++		<?php if(!empty($field['options'])): ?>
++			<?php $__currentLoopData = $field['options']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++				<?php
++					$selectedAttr = ($key == $fieldValue || (is_array($fieldValue) && in_array($key, $fieldValue))) ? ' selected' : '';
++				?>
++				<option value="<?php echo e($key); ?>"<?php echo $selectedAttr; ?>><?php echo $value; ?></option>
++			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++		<?php endif; ?>
++	</select>
++	
++	
++	<?php if(isset($field['hint'])): ?>
++		<div class="form-text"><?php echo $field['hint']; ?></div>
++	<?php endif; ?>
++</div>
++
++
++
++
++<?php if($xPanel->checkIfFieldIsFirstOfItsType($field, $fields)): ?>
++	
++	
++	<?php $__env->startPush('crud_fields_styles'); ?>
++	
++	<link href="<?php echo e(asset('assets/plugins/select2/css/select2.min.css')); ?>" rel="stylesheet" type="text/css" />
++	<link href="<?php echo e(asset('assets/plugins/select2-bootstrap3-theme/0.1.0-beta.10/select2-bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
++	<?php $__env->stopPush(); ?>
++	
++	
++	<?php $__env->startPush('crud_fields_scripts'); ?>
++	
++	<script src="<?php echo e(asset('assets/plugins/select2/js/select2.js')); ?>"></script>
++	<script>
++		var skins = jQuery.parseJSON('<?php echo $field['skins']; ?>');
++		
++		onDocumentReady((event) => {
++			// trigger select2 for each untriggered select2 box
++			$('.select2_from_skins').each(function (i, obj) {
++				if (!$(obj).hasClass("select2-hidden-accessible")) {
++					$(obj).select2({
++						theme: "bootstrap",
++						templateResult: formatColor,
++						templateSelection: formatColor
++					});
++				}
++			});
++		});
++		
++		function formatColor(color) {
++			if (!color.id) {
++				return color.text;
++			}
++			
++			let hex = '#000000';
++			if (
++				typeof skins[color.id] !== 'undefined'
++				&& typeof skins[color.id].color !== 'undefined'
++				&& skins[color.id].color != null
++			) {
++				hex = skins[color.id].color;
++			}
++			if (color.id === 'default') {
++				hex = '#CCCCCC';
++			}
++			
++			const colorIcon = `<div class="d-inline-block me-2" style="width: 30px; height: 20px; background-color: ${hex};"></div>`;
++			const colorText = color.text;
++			const formattedValue = `<div style="display: flex; align-items: center;">${colorIcon}${colorText}</div>`;
++			
++			return $(formattedValue);
++		}
++	</script>
++	<?php $__env->stopPush(); ?>
++
++<?php endif; ?>
++
++
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/select2_from_skins.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/56fd4836ae49b46f5274045c0bf35898.php b/storage/framework/views/56fd4836ae49b46f5274045c0bf35898.php
+deleted file mode 100644
+index 917d16b4..00000000
+--- a/storage/framework/views/56fd4836ae49b46f5274045c0bf35898.php
++++ /dev/null
+@@ -1,96 +0,0 @@
+-
+-<?php
+-	$layout ??= 'default'; // default, horizontal
+-	$isHorizontal = $layout === 'horizontal';
+-	$colLabel ??= 'col-md-3';
+-    $colField ??= 'col-md-9';
+-	
+-	$viewName = 'checklist';
+-	$type = 'checkbox'; // checklist
+-	$label ??= null;
+-	$id ??= null;
+-	$name ??= null;
+-	$value ??= [];
+-	$default ??= null;
+-	$required ??= false;
+-	$hint ??= null;
+-	
+-	$switch ??= false;
+-	$reverse ??= false;
+-	$checkLabelClass ??= '';
+-	$checkLabelClass .= !empty($label) ? (!empty($checkLabelClass) ? ' fw-normal' : 'fw-normal') : '';
+-	$checkLabelClass = !empty($checkLabelClass) ? " $checkLabelClass" : '';
+-	$checkboxes ??= [];
+-	$checkboxesKeyName ??= null; // 'id'
+-	$checkboxesLabelName ??= null; // 'name'
+-	$col ??= 4;
+-	$col = (is_integer($col) && $col >= 1 && $col <= 12) ? $col : 4;
+-	
+-	$dotSepName = arrayFieldToDotNotation($name);
+-	$id = !empty($id) ? $id : str_replace('.', '-', $dotSepName);
+-	
+-	$value = old($dotSepName, $value);
+-	$value = collect($value);
+-	
+-	$attrStr = '';
+-?>
+-<div <?php echo $__env->make('helpers.forms.attributes.field-wrapper', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>>
+-	<?php echo $__env->make('helpers.forms.partials.label', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	
+-	<?php if($isHorizontal): ?>
+-		<div class="<?php echo e($colField); ?>">
+-			<?php endif; ?>
+-			
+-			<?php
+-				$switchClass = $switch ? ' form-switch' : '';
+-				$reverseClass = $reverse ? ' form-check-reverse' : '';
+-			?>
+-			<div class="row">
+-				<?php $__currentLoopData = $checkboxes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $checkbox): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-					<?php
+-						$checkboxId = data_get($checkbox, 'id');
+-						$checkboxName = data_get($checkbox, 'name');
+-						$checkboxName = (!str_contains($checkboxName, '[') || !str_contains($checkboxName, ']'))
+-							? str_replace(['[', ']'], '', $checkboxName) . '[]'
+-							: $checkboxName;
+-						$checkboxLabel = data_get($checkbox, 'label');
+-						$checkboxValue = $key;
+-						
+-						$isChecked = (
+-							in_array($checkboxValue, $value->toArray()) ||
+-							(
+-								!empty($checkboxesKeyName) &&
+-								in_array($checkboxValue, $value->pluck($checkboxesKeyName, $checkboxesKeyName)->toArray())
+-							)
+-						);
+-						
+-						$checkboxDotSepName = arrayFieldToDotNotation($checkboxName);
+-						$checkboxId = !empty($checkboxId) ? $checkboxId : str_replace('.', '-', $checkboxDotSepName);
+-					?>
+-					<div class="col-md-<?php echo e($col); ?> my-0 py-0">
+-						<div class="form-check<?php echo e($switchClass . $reverseClass); ?>">
+-							<input
+-									type="checkbox"
+-									id="<?php echo e($checkboxId); ?>"
+-									name="<?php echo e($checkboxName); ?>"
+-									value="<?php echo e($checkboxValue); ?>"
+-									class="form-check-input" <?php if($isChecked): echo 'checked'; endif; ?>
+-							>
+-							<label class="form-check-label fw-normal<?php echo e($checkLabelClass); ?>" for="<?php echo e($checkboxId); ?>">
+-								<?php echo $checkboxLabel; ?>
+-
+-							</label>
+-						</div>
+-					</div>
+-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-			</div>
+-			
+-			<?php echo $__env->make('helpers.forms.partials.hint', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			<?php echo $__env->make('helpers.forms.partials.validation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-			
+-			<?php if($isHorizontal): ?>
+-		</div>
+-	<?php endif; ?>
+-</div>
+-<?php echo $__env->make('helpers.forms.partials.newline', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/helpers/forms/fields/checklist.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/423010ac8a218d63620d5cd4036ae2ac.php b/storage/framework/views/5ed61d1705d259a9c96b91510aa41255.php
+similarity index 58%
+rename from storage/framework/views/423010ac8a218d63620d5cd4036ae2ac.php
+rename to storage/framework/views/5ed61d1705d259a9c96b91510aa41255.php
+index 2214a02e..6f4987e6 100644
+--- a/storage/framework/views/423010ac8a218d63620d5cd4036ae2ac.php
++++ b/storage/framework/views/5ed61d1705d259a9c96b91510aa41255.php
+@@ -3,23 +3,14 @@
+ <?php $__env->stopSection(); ?>
+ 
+ <?php
+-	$post ??= [];
+-	
+-	$postId = data_get($post, 'id');
+-	
+ 	$picturesLimit ??= 0;
+ 	$picturesLimit = is_numeric($picturesLimit) ? $picturesLimit : 0;
+ 	$picturesLimit = ($picturesLimit > 0) ? $picturesLimit : 1;
+ 	
+ 	// Get the listing pictures (by applying the picture limit)
+-	$pictures = data_get($post, 'pictures', []);
++	$pictures = $picturesInput ?? [];
+ 	$pictures = collect($pictures)->slice(0, $picturesLimit)->all();
+ 	
+-	$fiTheme = config('larapen.core.fileinput.theme', 'bs5');
+-	$serverAllowedImageFormatsJson = collect(getServerAllowedImageFormats())->toJson();
+-	
+-	$authUser = auth()->check() ? auth()->user() : null;
+-	
+ 	// Get steps URLs & labels
+ 	$previousStepUrl ??= null;
+ 	$previousStepLabel ??= null;
+@@ -32,7 +23,7 @@
+     <div class="main-container">
+         <div class="container">
+             <div class="row">
+-                
++    
+                 <?php echo $__env->make('front.post.partials.notification', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                 
+                 <div class="col-md-12">
+@@ -41,52 +32,43 @@
+                         <h3 class="fw-bold border-bottom pb-3 mb-4">
+ 							<i class="fa-solid fa-camera"></i> <?php echo e(t('Photos')); ?>
+ 
+-	                        <?php
+-		                        try {
+-									if (!empty($authUser)) {
+-										if (doesUserHavePermission($authUser, \App\Models\Permission::getStaffPermissions())) {
+-											$postLink = '-&nbsp;<a href="' . urlGen()->post($post) . '"
+-													  class="link-primary text-decoration-none"
+-													  data-bs-placement="top"
+-													  data-bs-toggle="tooltip"
+-													  title="' . data_get($post, 'title') . '"
+-											>' . str(data_get($post, 'title'))->limit(45) . '</a>';
+-											
+-											echo $postLink;
+-										}
+-									}
+-								} catch (\Throwable $e) {}
+-	                        ?>
+ 						</h3>
+ 						
+                         <div class="row">
+                             <div class="col-md-12">
+-                                <form id="payableForm" action="<?php echo e($formActionUrl); ?>" method="POST" enctype="multipart/form-data">
++                                <form id="payableForm"
++                                      action="<?php echo e($formActionUrl); ?>"
++                                      method="POST"
++                                      enctype="multipart/form-data"
++                                      onsubmit="actionButton.disabled = true; return true;"
++                                >
+ 	                                <?php echo csrf_field(); ?>
+-	                                
+-                                    <input type="hidden" name="post_id" value="<?php echo e($postId); ?>">
+                                     <fieldset>
+-                                        <?php if(isset($picturesLimit) && is_numeric($picturesLimit) && $picturesLimit > 0): ?>
++                                        <?php if($picturesLimit > 0): ?>
+ 											
+-		                                    <?php
+-												$picturesRequired = (config('settings.listing_form.picture_mandatory') == '1');
++	                                        <?php
++		                                        $picturesRequired = (config('settings.listing_form.picture_mandatory') == '1');
+ 												
+-												$savedPictures = collect($pictures)->map(function ($item) {
++												$savedPictures = collect($pictures)->map(function ($filePath, $key) {
++													// $url = thumbParam($filePath)->setOption('picture-md')->url();
++													// $url = hasTemporaryPath($filePath) ? $disk->url($filePath) : $url;
++													$url = thumbService($filePath)->resize('picture-md')->url();
++													
+ 													return [
+-														'key'  => $item['id'] ?? null,
+-														'path' => $item['file_path'] ?? null,
+-														'url'  => $item['url']['medium'] ?? null,
++														'key'  => $key,
++														'path' => $filePath,
++														'url'  => $url,
+ 													];
+ 												})->toArray();
+ 												
+-												$uploadUrl = url('posts/' . $postId . '/photos/');
++												$uploadUrl = url('posts/create/photos');
+ 												$uploadUrl = urlQuery($uploadUrl)->setParameters(request()->only(['packageId']))->toString();
+-												$deleteUrlPattern = url('posts/' . $postId . '/photos/{id}/delete');
+-												$reorderUrl = url('posts/' . $postId . '/photos/reorder');
++												$deleteUrlPattern = url('posts/create/photos/{id}/delete');
++												$reorderUrl = url('posts/create/photos/reorder');
+ 												
+ 												$picturesHint = t('add_up_to_x_pictures_text', ['pictures_number' => $picturesLimit]);
+ 												$picturesHint .= '<br>' . t('file_types', ['file_types' => getAllowedFileFormatsHint('image')]);
+-		                                    ?>
++	                                        ?>
+ 		                                    <?php echo $__env->make('helpers.forms.fields.fileinput-ajax-multiple', [
+ 												'name'       => 'pictures',
+ 												'label'      => t('pictures'),
+@@ -104,43 +86,38 @@ class="link-primary text-decoration-none"
+ 												'nextStepLabel'    => $nextStepLabel,
+ 											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                                         <?php endif; ?>
+-										
++	                                    
+                                         <div id="uploadError" class="mt-2" style="display: none;"></div>
+                                         <div id="uploadSuccess" class="alert alert-success fade show mt-2" style="display: none;"></div>
+-										
+-										
+-										<div class="row mt-4">
+-											<div class="col-md-6 mb-md-0 mb-2 text-start d-grid">
+-												<a href="<?php echo e($previousStepUrl); ?>" class="btn btn-outline-secondary btn-lg">
++	
++                                        
++                                        <div class="row mt-4">
++                                            <div class="col-md-6 mb-md-0 mb-2 text-start d-grid">
++												<a href="<?php echo e($previousStepUrl); ?>" class="btn btn-secondary btn-lg">
+ 													<?php echo $previousStepLabel; ?>
+ 
+ 												</a>
+-											</div>
+-											<div class="col-md-6 mb-md-0 mb-2 text-end d-grid">
+-												<a id="nextStepAction"
+-													href="<?php echo e($nextStepUrl); ?>"
+-													class="btn btn-outline-primary btn-lg"
+-													onclick="this.className += ' disabled'; return true;"
+-												><?php echo $nextStepLabel; ?></a>
+-											</div>
+-										</div>
+-                                    
++                                            </div>
++	                                        <div class="col-md-6 mb-md-0 mb-2 text-end d-grid">
++												<button id="nextStepBtn" name="actionButton" class="btn btn-primary btn-lg">
++													<?php echo $nextStepLabel; ?>
++
++												</button>
++                                            </div>
++                                        </div>
++                                    	
+                                     </fieldset>
+                                 </form>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+-	            
++                
+             </div>
+         </div>
+     </div>
++	
++	<?php echo $__env->renderWhen(!auth()->check(), 'auth.login.partials.modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1])); ?>
+ <?php $__env->stopSection(); ?>
+ 
+-<?php $__env->startSection('after_styles'); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php $__env->startSection('after_scripts'); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/multiSteps/edit/photos.blade.php ENDPATH**/ ?>
+\ No newline at end of file
++<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/multiSteps/create/photos.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/6ab612a0e9d5f2cdb36f73f5b7fde13a.php b/storage/framework/views/6ab612a0e9d5f2cdb36f73f5b7fde13a.php
+index 8ee9705c..814ddd28 100644
+--- a/storage/framework/views/6ab612a0e9d5f2cdb36f73f5b7fde13a.php
++++ b/storage/framework/views/6ab612a0e9d5f2cdb36f73f5b7fde13a.php
+@@ -149,10 +149,7 @@
+ 				
+ 				
+ 				<div class="col-sm-3 col-12 text-end text-nowrap d-flex flex-column justify-content-between">
+-					<h5 class="fs-4 fw-bold">
+-						<?php echo data_get($post, 'price_formatted'); ?>
+-
+-					</h5>
++					
+ 					<div>
+ 						<?php if(!empty(data_get($post, 'payment.package'))): ?>
+ 							<?php if(data_get($post, 'payment.package.has_badge') == 1): ?>
+@@ -176,6 +173,7 @@
+ 						<?php endif; ?>
+ 					</div>
+ 				</div>
++
+ 			</div>
+ 		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+ 	</div>
+diff --git a/storage/framework/views/721e9d12298f09cbc7dab455674db2ac.php b/storage/framework/views/721e9d12298f09cbc7dab455674db2ac.php
+deleted file mode 100644
+index fb6cb1e5..00000000
+--- a/storage/framework/views/721e9d12298f09cbc7dab455674db2ac.php
++++ /dev/null
+@@ -1,46 +0,0 @@
+-<?php
+-	$authUserIsAdmin ??= true;
+-	$providers ??= [];
+-?>
+-<?php $__env->startSection('content'); ?>
+-	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	<div class="main-container">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-3">
+-					<?php echo $__env->make('front.account.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-				</div>
+-				
+-				<div class="col-md-9">
+-					
+-					<?php echo $__env->make('flash::message', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-					
+-					<?php if(isset($errors) && $errors->any()): ?>
+-						<div class="alert alert-danger alert-dismissible">
+-							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo e(t('Close')); ?>"></button>
+-							<h5><strong><?php echo e(t('validation_errors_title')); ?></strong></h5>
+-							<ul>
+-								<?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-									<li><?php echo $error; ?></li>
+-								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-							</ul>
+-						</div>
+-					<?php endif; ?>
+-					
+-					<?php echo $__env->make('front.account.partials.header', [
+-						'headerTitle' => '<i class="bi bi-plugin"></i> ' . trans('auth.linked_accounts')
+-					], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-					
+-					<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2">
+-						<p><?php echo trans('auth.connected_accounts_hint'); ?></p>
+-						<div class="row gy-3">
+-							<?php echo $__env->make('front.account.partials.linked-accounts', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-						</div>
+-					</div>
+-				</div>
+-			</div>
+-		</div>
+-	</div>
+-<?php $__env->stopSection(); ?>
+-
+-<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/account/linked-accounts.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/79b968741fadcaef1e6e6b48eeef0a3b.php b/storage/framework/views/79b968741fadcaef1e6e6b48eeef0a3b.php
+index c6e17292..7ec34e19 100644
+--- a/storage/framework/views/79b968741fadcaef1e6e6b48eeef0a3b.php
++++ b/storage/framework/views/79b968741fadcaef1e6e6b48eeef0a3b.php
+@@ -20,7 +20,7 @@
+ 				<?php if(!config('settings.listings_list.hide_date')): ?>
+ 					<?php echo $__env->make('front.search.partials.sidebar.date', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+ 				<?php endif; ?>
+-				<?php echo $__env->make('front.search.partials.sidebar.price', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++				 
+ 				
+ 			</div>
+ 		</div>
+@@ -49,7 +49,7 @@
+ 				<?php if(!config('settings.listings_list.hide_date')): ?>
+ 					<?php echo $__env->make('front.search.partials.sidebar.date', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+ 				<?php endif; ?>
+-				<?php echo $__env->make('front.search.partials.sidebar.price', ['prefixId' => $prefixId], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++				
+ 			
+ 			</div>
+ 		</div>
+diff --git a/storage/framework/views/96e7ee9bb2e9fffdf6800be307dce9dc.php b/storage/framework/views/96e7ee9bb2e9fffdf6800be307dce9dc.php
+new file mode 100644
+index 00000000..883d4b8e
+--- /dev/null
++++ b/storage/framework/views/96e7ee9bb2e9fffdf6800be307dce9dc.php
+@@ -0,0 +1,14 @@
++<?php if(!empty($threads) && $totalThreads > 0): ?>
++	<?php $__currentLoopData = $threads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $thread): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++		<?php
++			$isLastThread = $loop->last;
++		?>
++		<?php echo $__env->make('front.account.messenger.threads.thread', [
++			'thread'       => $thread,
++			'isLastThread' => $isLastThread,
++		], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++<?php else: ?>
++	<?php echo $__env->make('front.account.messenger.threads.no-threads', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/threads/threads.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/970bb4916a2fce073a6235e825f7d5eb.php b/storage/framework/views/970bb4916a2fce073a6235e825f7d5eb.php
+new file mode 100644
+index 00000000..4f96cd38
+--- /dev/null
++++ b/storage/framework/views/970bb4916a2fce073a6235e825f7d5eb.php
+@@ -0,0 +1,14 @@
++<?php
++	$thread ??= [];
++	$messages ??= [];
++	$totalMessages = (int)($totalMessages ?? 0);
++?>
++<?php if(!empty($messages) && $totalMessages > 0): ?>
++	<?php $__currentLoopData = $messages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++		<?php echo $__env->make('front.account.messenger.messages.message', [
++			'thread'  => $thread,
++			'message' => $message,
++		], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/messages/messages.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/9d60668846ccc830b4d168590382bc94.php b/storage/framework/views/9d60668846ccc830b4d168590382bc94.php
+index eb378edf..08831ce1 100644
+--- a/storage/framework/views/9d60668846ccc830b4d168590382bc94.php
++++ b/storage/framework/views/9d60668846ccc830b4d168590382bc94.php
+@@ -58,7 +58,7 @@
+ <?php $__env->stopSection(); ?>
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('83692257-1008-45cd-9859-8044b9891a92')): $__env->markAsRenderedOnce('83692257-1008-45cd-9859-8044b9891a92');
++<?php if (! $__env->hasRenderedOnce('055a7832-8e41-4c75-bf27-ecf76580bacb')): $__env->markAsRenderedOnce('055a7832-8e41-4c75-bf27-ecf76580bacb');
+ $__env->startPush("select2_assets_styles"); ?>
+ 	<link href="<?php echo e(asset('assets/plugins/select2/css/select2.min.css')); ?>" rel="stylesheet" type="text/css"/>
+ 	<?php if($s2Theme == 'bootstrap5'): ?>
+@@ -74,7 +74,7 @@
+ 		<link href="<?php echo e(asset('assets/plugins/select2/css/custom.css')); ?>" rel="stylesheet" type="text/css"/>
+ 	<?php endif; ?>
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('116193a6-7ed8-48f6-ab2a-66b52ccb58e8')): $__env->markAsRenderedOnce('116193a6-7ed8-48f6-ab2a-66b52ccb58e8');
++<?php if (! $__env->hasRenderedOnce('2577ebef-61e4-4009-98b0-cf610f667836')): $__env->markAsRenderedOnce('2577ebef-61e4-4009-98b0-cf610f667836');
+ $__env->startPush("select2_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset('assets/plugins/select2/js/select2.full.min.js')); ?>"></script>
+ 	<?php
+@@ -98,7 +98,7 @@
+ 		<script src="<?php echo e(asset($localeFilesBasePath . $foundLocale . '.js')); ?>"></script>
+ 	<?php endif; ?>
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('5c75e839-a58e-423e-b9af-f2708658df05')): $__env->markAsRenderedOnce('5c75e839-a58e-423e-b9af-f2708658df05');
++<?php if (! $__env->hasRenderedOnce('fb1f923e-0e88-4342-aaea-268a8ac66dbd')): $__env->markAsRenderedOnce('fb1f923e-0e88-4342-aaea-268a8ac66dbd');
+ $__env->startPush("fileinput_assets_styles"); ?>
+ 	<link href="<?php echo e(url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css')); ?>" rel="stylesheet">
+ 	<?php if($isRtl == 'true'): ?>
+@@ -116,7 +116,7 @@
+ 		}
+ 	</style>
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('6d6525c5-7542-4e2d-a054-b52c02a8501e')): $__env->markAsRenderedOnce('6d6525c5-7542-4e2d-a054-b52c02a8501e');
++<?php if (! $__env->hasRenderedOnce('70b27290-227a-4070-9019-709d8b3f32ac')): $__env->markAsRenderedOnce('70b27290-227a-4070-9019-709d8b3f32ac');
+ $__env->startPush("fileinput_assets_scripts"); ?>
+ 	<script src="<?php echo e(url('assets/plugins/bootstrap-fileinput/js/plugins/sortable.min.js')); ?>" type="text/javascript"></script>
+ 	<script src="<?php echo e(url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js')); ?>" type="text/javascript"></script>
+@@ -125,7 +125,7 @@
+ 	<?php endif; ?>
+ 	<script src="<?php echo e(url('common/js/fileinput/locales/' . $langCode . '.js')); ?>" type="text/javascript"></script>
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('b8f5bc62-b549-4d73-903b-7a75b2e48712')): $__env->markAsRenderedOnce('b8f5bc62-b549-4d73-903b-7a75b2e48712');
++<?php if (! $__env->hasRenderedOnce('afab5c9e-6702-4dd8-a80a-b90721923f77')): $__env->markAsRenderedOnce('afab5c9e-6702-4dd8-a80a-b90721923f77');
+ $__env->startPush("momentjs_assets_scripts"); ?>
+ 	<script src="<?php echo e(url('assets/plugins/momentjs/2.30.1/moment.min.js')); ?>" type="text/javascript"></script>
+ 	<?php
+@@ -149,11 +149,11 @@
+ 		<script charset="UTF-8" src="<?php echo e(asset($localeFilesBasePath . $foundLocale . '.min.js')); ?>"></script>
+ 	<?php endif; ?>
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('c0e98bc0-ac80-47fc-8a64-8fb121ebd958')): $__env->markAsRenderedOnce('c0e98bc0-ac80-47fc-8a64-8fb121ebd958');
++<?php if (! $__env->hasRenderedOnce('10b73cd3-3165-49f0-8f26-8042d157cd20')): $__env->markAsRenderedOnce('10b73cd3-3165-49f0-8f26-8042d157cd20');
+ $__env->startPush("daterangepicker_date_assets_styles"); ?>
+ 	<link href="<?php echo e(url('assets/plugins/daterangepicker/3.1/daterangepicker.css')); ?>" rel="stylesheet">
+ <?php $__env->stopPush(); endif; ?>
+-<?php if (! $__env->hasRenderedOnce('666e79a5-0d1a-400a-a806-595dbf98b5c7')): $__env->markAsRenderedOnce('666e79a5-0d1a-400a-a806-595dbf98b5c7');
++<?php if (! $__env->hasRenderedOnce('eef0fa66-ddfb-411b-9784-b9a0e4b020f4')): $__env->markAsRenderedOnce('eef0fa66-ddfb-411b-9784-b9a0e4b020f4');
+ $__env->startPush("daterangepicker_date_assets_scripts"); ?>
+ 	<script src="<?php echo e(url('assets/plugins/daterangepicker/3.1/daterangepicker.js')); ?>" type="text/javascript"></script>
+ <?php $__env->stopPush(); endif; ?>
+diff --git a/storage/framework/views/9dc8b4bb2e64b4771bad025f1e281002.php b/storage/framework/views/9dc8b4bb2e64b4771bad025f1e281002.php
+deleted file mode 100644
+index 0fe02fb4..00000000
+--- a/storage/framework/views/9dc8b4bb2e64b4771bad025f1e281002.php
++++ /dev/null
+@@ -1,75 +0,0 @@
+-<?php
+-	$authUserIsAdmin ??= false;
+-	$providers ??= [];
+-?>
+-<div class="col-12">
+-	<div class="card">
+-		<div class="card-header">
+-			<h5 class="card-title mb-0">
+-				<?php echo e(trans('auth.connected_accounts')); ?>
+-
+-			</h5>
+-		</div>
+-		<div class="card-body">
+-			<?php if(!empty($providers)): ?>
+-				<form action="<?php echo e(urlGen()->accountLinkedAccounts()); ?>" method="POST">
+-					<?php echo csrf_field(); ?>
+-
+-					<input name="_method" type="hidden" value="DELETE">
+-					<table class="table">
+-						<thead>
+-						<tr>
+-							<th scope="col" style="width: 10%">#</th>
+-							<th scope="col" style="width: 40%"><?php echo e(trans('auth.service')); ?></th>
+-							<th scope="col" style="width: 40%"><?php echo e(t('Date')); ?></th>
+-							<th scope="col" style="width: 10%"><?php echo e(t('action')); ?></th>
+-						</tr>
+-						</thead>
+-						<tbody>
+-						<?php $__currentLoopData = $providers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $provider => $providerData): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+-							<?php
+-								$btnClass = data_get($providerData, 'btnClass');
+-								$iconClass = data_get($providerData, 'iconClass');
+-								$url = data_get($providerData, 'url');
+-								$name = data_get($providerData, 'name');
+-								$label = data_get($providerData, 'label');
+-								$title = strip_tags($label);
+-								$isConnected = data_get($providerData, 'isConnected');
+-								$connectedAt = data_get($providerData, 'connectedAt');
+-								
+-								$name = $isConnected ? $label : '<strong>' . $name . '</strong>';
+-								// $actionBtnLabel = $isConnected ? trans('auth.disconnect') : trans('auth.connect');
+-								$actionBtnLabel = trans('auth.disconnect');
+-								$disableClass = !$isConnected ? ' disabled' : '';
+-							?>
+-							<tr>
+-								<th scope="row">
+-									<i class="<?php echo e($iconClass); ?>"></i>
+-								</th>
+-								<td><?php echo $name; ?></td>
+-								<td><?php echo $connectedAt; ?></td>
+-								<td>
+-									<a href="<?php echo e(urlGen()->accountDisconnectLinkedAccount($provider)); ?>"
+-									   class="btn btn-sm btn-secondary<?php echo e($disableClass); ?>"
+-									>
+-										<?php echo e($actionBtnLabel); ?>
+-
+-									</a>
+-								</td>
+-							</tr>
+-						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+-						</tbody>
+-					</table>
+-				</form>
+-			<?php else: ?>
+-				<idv class="row m-5">
+-					<div class="col-12 text-muted fs-6 d-flex justify-content-center">
+-						<?php echo e(trans('auth.no_connected_accounts')); ?>
+-
+-					</div>
+-				</idv>
+-			<?php endif; ?>
+-		</div>
+-	</div>
+-</div>
+-<?php /**PATH C:\xampp\htdocs\resources\views/front/account/partials/linked-accounts.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/a3b35d3f6d545d9271d04a3ba93596cc.php b/storage/framework/views/a3b35d3f6d545d9271d04a3ba93596cc.php
+index 4f96f21b..01378ecb 100644
+--- a/storage/framework/views/a3b35d3f6d545d9271d04a3ba93596cc.php
++++ b/storage/framework/views/a3b35d3f6d545d9271d04a3ba93596cc.php
+@@ -166,13 +166,6 @@
+ 									<?php endif; ?>
+ 								<?php endif; ?>
+ 								
+-								<div class="col-12 text-end">
+-									<h5 class="fs-4 fw-bold">
+-										<?php echo data_get($post, 'price_formatted'); ?>
+-
+-									</h5>
+-								</div>
+-								
+ 								<div class="col-12 text-end">
+ 									<?php if(!empty(data_get($post, 'payment.package'))): ?>
+ 										<?php if(data_get($post, 'payment.package.has_badge') == 1): ?>
+diff --git a/storage/framework/views/a4f757eac54a37edadd159d5fb1f0fc6.php b/storage/framework/views/a4f757eac54a37edadd159d5fb1f0fc6.php
+deleted file mode 100644
+index 6d41b071..00000000
+--- a/storage/framework/views/a4f757eac54a37edadd159d5fb1f0fc6.php
++++ /dev/null
+@@ -1,25 +0,0 @@
+-<?php
+-	$headerTitle ??= t('overview');
+-	$userName = $authUser->name ?? '--';
+-	$userPhotoUrl = $authUser->photo_url ?? config('larapen.media.avatar');
+-	$photoSize = '60px';
+-	$photoStyle = "max-width: $photoSize; max-height: $photoSize; width: $photoSize; height: $photoSize;";
+-?>
+-<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2 mb-4">
+-	<div class="row d-flex align-items-center">
+-		<div class="col-lg-8 col-md-12 d-flex justify-content-star flex-column justify-content-center">
+-			<h3 class="p-0 fw-bold">
+-				<?php echo $headerTitle; ?>
+-
+-			</h3>
+-			<div><?php echo Breadcrumb::render(); ?></div>
+-		</div>
+-		<div class="col-lg-4 col-md-12 d-flex justify-content-lg-end hidden-md">
+-			<h5 class="p-0 mb-0">
+-				<?php echo e($userName); ?>&nbsp;
+-				<img id="userImg" class="rounded-circle border" src="<?php echo e($userPhotoUrl); ?>" alt="user" style="<?php echo $photoStyle; ?>">
+-			</h5>
+-		</div>
+-	</div>
+-</div>
+-<?php /**PATH C:\xampp\htdocs\resources\views/front/account/partials/header.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/a50e3a86db7591f2cb2901f053119fd1.php b/storage/framework/views/a50e3a86db7591f2cb2901f053119fd1.php
+index 7f8aafbb..2f566617 100644
+--- a/storage/framework/views/a50e3a86db7591f2cb2901f053119fd1.php
++++ b/storage/framework/views/a50e3a86db7591f2cb2901f053119fd1.php
+@@ -132,7 +132,7 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('5bbc8764-dad8-4789-94ee-be4aeb7b739e')): $__env->markAsRenderedOnce('5bbc8764-dad8-4789-94ee-be4aeb7b739e');
++<?php if (! $__env->hasRenderedOnce('631e37bc-be22-41aa-8035-ad2dcc810727')): $__env->markAsRenderedOnce('631e37bc-be22-41aa-8035-ad2dcc810727');
+ $__env->startPush("fileinput_assets_styles"); ?>
+ 	<link href="<?php echo e(url($pluginBasePath . 'css/fileinput.min.css')); ?>" rel="stylesheet">
+ 	<?php if($rtl == 'true'): ?>
+@@ -152,7 +152,7 @@
+ 	</style>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('671f0104-a2bf-48fa-9b57-123285dcbd29')): $__env->markAsRenderedOnce('671f0104-a2bf-48fa-9b57-123285dcbd29');
++<?php if (! $__env->hasRenderedOnce('32d2dcc1-f3db-40cc-a7e7-991f1edbf0d3')): $__env->markAsRenderedOnce('32d2dcc1-f3db-40cc-a7e7-991f1edbf0d3');
+ $__env->startPush("fileinput_assets_scripts"); ?>
+ 	<script src="<?php echo e(url($pluginBasePath . 'js/plugins/sortable.min.js')); ?>" type="text/javascript"></script>
+ 	<script src="<?php echo e(url($pluginBasePath . 'js/fileinput.min.js')); ?>" type="text/javascript"></script>
+@@ -162,7 +162,7 @@
+ 	<script src="<?php echo e(url('common/js/fileinput/locales/' . $language . '.js')); ?>" type="text/javascript"></script>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('7a7f9026-7b8c-4a31-bba6-2fae554e04f4')): $__env->markAsRenderedOnce('7a7f9026-7b8c-4a31-bba6-2fae554e04f4');
++<?php if (! $__env->hasRenderedOnce('c8992c25-79ca-4e56-88b6-1d4cf8014825')): $__env->markAsRenderedOnce('c8992c25-79ca-4e56-88b6-1d4cf8014825');
+ $__env->startPush("{$viewName}_assets_styles"); ?>
+ 	<style>
+ 		.file-drop-zone .krajee-default.file-preview-frame .kv-file-content,
+@@ -178,7 +178,7 @@
+ 	</style>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('625ac1e5-9216-4558-ba9e-4dcad979a56d')): $__env->markAsRenderedOnce('625ac1e5-9216-4558-ba9e-4dcad979a56d');
++<?php if (! $__env->hasRenderedOnce('6259ba43-ba82-40b0-bfac-874e5da9d381')): $__env->markAsRenderedOnce('6259ba43-ba82-40b0-bfac-874e5da9d381');
+ $__env->startPush("{$viewName}_assets_scripts"); ?>
+ 	<script>
+ 		/**
+diff --git a/storage/framework/views/ab413138e8166ee403a0e5b30e2eae0d.php b/storage/framework/views/ab413138e8166ee403a0e5b30e2eae0d.php
+index 97eb8c25..09aff9ec 100644
+--- a/storage/framework/views/ab413138e8166ee403a0e5b30e2eae0d.php
++++ b/storage/framework/views/ab413138e8166ee403a0e5b30e2eae0d.php
+@@ -118,7 +118,7 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('42377b83-4656-4240-9bf3-f9525afc081d')): $__env->markAsRenderedOnce('42377b83-4656-4240-9bf3-f9525afc081d');
++<?php if (! $__env->hasRenderedOnce('1034b96f-67df-4821-ba56-e345d9382380')): $__env->markAsRenderedOnce('1034b96f-67df-4821-ba56-e345d9382380');
+ $__env->startPush("{$viewName}_assets_styles"); ?>
+ 	<link href="<?php echo e(asset($pluginBasePath . 'css/select2.min.css')); ?>" rel="stylesheet" type="text/css"/>
+ 	<?php if($theme == 'bootstrap5'): ?>
+@@ -135,7 +135,7 @@
+ 	<?php endif; ?>
+ <?php $__env->stopPush(); endif; ?>
+ 
+-<?php if (! $__env->hasRenderedOnce('f4dfa0fb-81bb-47af-83c9-5adaf8dce59a')): $__env->markAsRenderedOnce('f4dfa0fb-81bb-47af-83c9-5adaf8dce59a');
++<?php if (! $__env->hasRenderedOnce('241507c2-7008-41ae-9735-03c0bc69b6a0')): $__env->markAsRenderedOnce('241507c2-7008-41ae-9735-03c0bc69b6a0');
+ $__env->startPush("{$viewName}_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset($pluginBasePath . 'js/select2.full.min.js')); ?>"></script>
+ 	<?php
+@@ -161,7 +161,7 @@
+ <?php $__env->stopPush(); endif; ?>
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('2ba18098-b641-48e9-a6d1-e9715fb2c926')): $__env->markAsRenderedOnce('2ba18098-b641-48e9-a6d1-e9715fb2c926');
++<?php if (! $__env->hasRenderedOnce('cc761a53-9b6b-4b90-b951-3c85f0139c97')): $__env->markAsRenderedOnce('cc761a53-9b6b-4b90-b951-3c85f0139c97');
+ $__env->startPush("select2_basic_assets_scripts"); ?>
+ 	<script>
+ 		onDocumentReady((event) => {
+diff --git a/storage/framework/views/b41429280877f7ba1d3f5fe901c3b67c.php b/storage/framework/views/b41429280877f7ba1d3f5fe901c3b67c.php
+new file mode 100644
+index 00000000..7132d19f
+--- /dev/null
++++ b/storage/framework/views/b41429280877f7ba1d3f5fe901c3b67c.php
+@@ -0,0 +1,57 @@
++<?php
++	$stats ??= [];
++	$countThreadsWithNewMessage = (int)data_get($stats, 'threads.withNewMessage'); // not sent
++	
++	$navLinks = [
++		'inbox' => [
++			'label'    => t('inbox'),
++			'url'      => url(urlGen()->getAccountBasePath() . '/messages'),
++			'isActive' => (!request()->has('filter') || request()->query('filter')==''),
++		],
++		'unread' => [
++			'label'    => t('unread'),
++			'url'      => url(urlGen()->getAccountBasePath() . '/messages?filter=unread'),
++			'isActive' => (request()->query('filter')=='unread'),
++		],
++		'started' => [
++			'label'    => t('started'),
++			'url'      => url(urlGen()->getAccountBasePath() . '/messages?filter=started'),
++			'isActive' => (request()->query('filter')=='started'),
++		],
++		'important' => [
++			'label'    => t('important'),
++			'url'      => url(urlGen()->getAccountBasePath() . '/messages?filter=important'),
++			'isActive' => (request()->query('filter')=='important'),
++		],
++	];
++?>
++<div class="col-md-3 col-lg-2">
++	<ul class="nav nav-pills nav-justified inbox-nav">
++		<?php $__currentLoopData = $navLinks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
++			<?php
++				$activeClass = $item['isActive'] ? ' active' : '';
++				$linkUrl = $item['url'];
++				$linkLabel = $item['label'];
++				$activeLinkClass = $item['isActive'] ? 'text-white' : 'link-primary';
++			
++				$hasBadge = ($key == 'inbox');
++				$badgeColor = ' ' . ($item['isActive'] ? 'text-bg-light' : 'text-bg-primary');
++				$badgeVisibility = ($countThreadsWithNewMessage <= 0) ? ' d-none' : '';
++				$badgeVisibility = '';
++			?>
++			<li class="nav-item">
++				<a class="nav-link<?php echo e($activeClass); ?>" href="<?php echo e($linkUrl); ?>">
++					<?php echo e($linkLabel); ?>
++
++					<?php if($hasBadge): ?>
++						<span class="count-threads-with-new-messages count badge rounded-pill <?php echo e($badgeColor . $badgeVisibility); ?>">
++							<?php echo e(\App\Helpers\Common\Num::short($countThreadsWithNewMessage)); ?>
++
++						</span>
++					<?php endif; ?>
++				</a>
++			</li>
++		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
++	</ul>
++</div>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/partials/sidebar.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/b5e9beb999899b09a67e1c30a7a42af3.php b/storage/framework/views/b5e9beb999899b09a67e1c30a7a42af3.php
+index 8af768f6..09db56c2 100644
+--- a/storage/framework/views/b5e9beb999899b09a67e1c30a7a42af3.php
++++ b/storage/framework/views/b5e9beb999899b09a67e1c30a7a42af3.php
+@@ -72,7 +72,7 @@
+ 
+ 
+ 
+-<?php if (! $__env->hasRenderedOnce('3d38c2d5-c533-44c0-9bbd-52e6aaf4e65e')): $__env->markAsRenderedOnce('3d38c2d5-c533-44c0-9bbd-52e6aaf4e65e');
++<?php if (! $__env->hasRenderedOnce('8602a46c-6864-4d58-8bea-f93f166e99e2')): $__env->markAsRenderedOnce('8602a46c-6864-4d58-8bea-f93f166e99e2');
+ $__env->startPush("{$viewName}_assets_scripts"); ?>
+ 	<script src="<?php echo e(asset('assets/plugins/tinymce/tinymce.min.js')); ?>"></script>
+ 	<?php
+diff --git a/storage/framework/views/b8f59d8f5e9e36425781c58742dd4f23.php b/storage/framework/views/b8f59d8f5e9e36425781c58742dd4f23.php
+deleted file mode 100644
+index 7d5c11d4..00000000
+--- a/storage/framework/views/b8f59d8f5e9e36425781c58742dd4f23.php
++++ /dev/null
+@@ -1,111 +0,0 @@
+-<?php
+-	$packages ??= collect();
+-	$paymentMethods ??= collect();
+-	
+-	$selectedPackage ??= null;
+-	$currentPackagePrice = $selectedPackage->price ?? 0;
+-?>
+-<?php if($packages->count() > 0 && $paymentMethods->count() > 0): ?>
+-	
+-	<script>
+-		
+-		const packagesRowElsSelector = '#packagesTable tbody tr:not(:last-child)';
+-		const packagesElsSelector = '#packagesTable input[type="radio"][name="package_id"]';
+-		
+-		var currentPackagePrice = <?php echo e($currentPackagePrice ?? 0); ?>;
+-		var paymentIsActive = <?php echo e($paymentIsActive ?? 0); ?>;
+-		var forceDisplayPaymentMethods = <?php echo e(!empty($selectedPackage) ? 'true' : 'false'); ?>;
+-		
+-		const submitBtnLabel = {
+-			pay: langLayout.payment.submitBtnLabel.pay ?? 'Pay',
+-			submit: langLayout.payment.submitBtnLabel.submit ?? 'Submit',
+-		};
+-		
+-		onDocumentReady((event) => {
+-			
+-			const selectedPackageEl = document.querySelector(packagesElsSelector + ':checked');
+-			const paymentMethodEl = document.getElementById('paymentMethodId');
+-			
+-			if (!selectedPackageEl || !paymentMethodEl) {
+-				if (packageType === 'promotion') {
+-					if (!selectedPackageEl) {
+-						if (urlQuery().hasParameter('package')) {
+-							let urlWithoutPackage = urlQuery().removeParameter('package').toString();
+-							redirect(urlWithoutPackage);
+-						}
+-					}
+-				}
+-				return false;
+-			}
+-			
+-			
+-			let selectedPackage = selectedPackageEl.value;
+-			let packagePrice = getPackagePrice(selectedPackage);
+-			let packageCurrencySymbol = selectedPackageEl.dataset.currencySymbol;
+-			let packageCurrencyInLeft = selectedPackageEl.dataset.currencyInLeft;
+-			
+-			
+-			let paymentMethodSelectedOption = paymentMethodEl.options[paymentMethodEl.selectedIndex];
+-			let paymentMethod = paymentMethodSelectedOption.dataset.name;
+-			
+-			showPaymentMethods(packagePrice, forceDisplayPaymentMethods);
+-			showAmount(packagePrice, packageCurrencySymbol, packageCurrencyInLeft);
+-			if (formType === 'multiStep') {
+-				showPaymentSubmitButton(currentPackagePrice, packagePrice, paymentIsActive, paymentMethod, isCreationFormPage);
+-			}
+-			
+-			
+-			const packagesRowEls = document.querySelectorAll(`${packagesElsSelector}, ${packagesRowElsSelector}`);
+-			if (packagesRowEls.length > 0) {
+-				packagesRowEls.forEach((element) => {
+-					element.style.cursor = 'pointer';
+-					element.addEventListener('click', (e) => {
+-						let thisEl = e.target;
+-						
+-						thisEl = selectPackageRadioButton(thisEl);
+-						if (!thisEl) return;
+-						
+-						selectedPackage = thisEl.value;
+-						packagePrice = getPackagePrice(selectedPackage);
+-						packageCurrencySymbol = thisEl.dataset.currencySymbol;
+-						packageCurrencyInLeft = thisEl.dataset.currencyInLeft;
+-						
+-						showPaymentMethods(packagePrice);
+-						showAmount(packagePrice, packageCurrencySymbol, packageCurrencyInLeft);
+-						if (formType === 'multiStep') {
+-							showPaymentSubmitButton(currentPackagePrice, packagePrice, paymentIsActive, paymentMethod, isCreationFormPage);
+-						}
+-					});
+-				});
+-			}
+-			
+-			
+-			$(paymentMethodEl).on('change', (e) => {
+-				let selectedOption = paymentMethodEl.options[paymentMethodEl.selectedIndex];
+-				paymentMethod = selectedOption.dataset.name;
+-				
+-				if (formType === 'multiStep') {
+-					showPaymentSubmitButton(currentPackagePrice, packagePrice, paymentIsActive, paymentMethod, isCreationFormPage);
+-				}
+-			});
+-			
+-			
+-			const formSubmitBtnEl = document.getElementById('payableFormSubmitButton');
+-			if (formSubmitBtnEl) {
+-				formSubmitBtnEl.addEventListener('click', (e) => {
+-					e.preventDefault();
+-					
+-					const formEl = document.getElementById('payableForm');
+-					if (formEl && packagePrice <= 0) {
+-						formEl.submit();
+-					}
+-					
+-					return false;
+-				});
+-			}
+-			
+-		});
+-		
+-	</script>
+-<?php endif; ?>
+-<?php /**PATH C:\xampp\htdocs\resources\views/front/common/js/payment-js.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/bf94dd5bb17c7891689f5c5df3587e90.php b/storage/framework/views/bf94dd5bb17c7891689f5c5df3587e90.php
+new file mode 100644
+index 00000000..934b73e5
+--- /dev/null
++++ b/storage/framework/views/bf94dd5bb17c7891689f5c5df3587e90.php
+@@ -0,0 +1,168 @@
++<?php
++    $apiResult ??= [];
++	$threads = (array)data_get($apiResult, 'data');
++	$totalThreads = (int)data_get($apiResult, 'meta.total', 0);
++?>
++
++<?php $__env->startSection('content'); ?>
++	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++    <div class="main-container">
++        <div class="container">
++            <div class="row">
++                
++                <div class="col-md-3">
++                    <?php echo $__env->make('front.account.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                </div>
++                
++                <div class="col-md-9">
++                    <div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2">
++                        <h3 class="fw-bold border-bottom pb-3 mb-4">
++                            <i class="bi bi-chat-text"></i> <?php echo e(t('inbox')); ?>
++
++                        </h3>
++                        
++                        <?php if(session()->has('flash_notification')): ?>
++                            <div class="row">
++                                <div class="col-12">
++                                    <?php echo $__env->make('flash::message', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                </div>
++                            </div>
++                        <?php endif; ?>
++                        
++                        <div id="successMsg" class="alert alert-success d-none" role="alert"></div>
++                        <div id="errorMsg" class="alert alert-danger d-none" role="alert"></div>
++                        
++                        <div class="">
++                            <div class="row mb-3">
++                                <?php echo csrf_field(); ?>
++                                
++                                <div class="col-md-3 col-lg-2">
++                                    <div class="btn-group d-md-inline-block d-sm-none d-none"></div>
++                                </div>
++                                
++                                <div class="col-md-9 col-lg-10 d-flex justify-content-between">
++                                    <div class="btn-group d-md-none d-sm-inline-block">
++                                        <a href="#" class="btn btn-primary text-uppercase">
++                                            <i class="fa-solid fa-pen"></i>
++                                        </a>
++                                    </div>
++                                    
++                                    <div class="d-md-inline-block d-sm-none d-none">
++                                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
++                                            <button type="button" class="btn btn-outline-primary">
++                                                <input type="checkbox" id="form-check-all">
++                                            </button>
++                                            
++                                            <div class="btn-group" role="group">
++                                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
++                                                    <span class="dropdown-menu-sort-selected"><?php echo e(t('action')); ?></span>
++                                                </button>
++                                                <ul id="groupedAction" class="dropdown-menu dropdown-menu-sort">
++                                                    <li>
++                                                        <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/actions?type=markAsRead')); ?>"
++                                                           class="dropdown-item"
++                                                        >
++                                                            <?php echo e(t('Mark as read')); ?>
++
++                                                        </a>
++                                                    </li>
++                                                    <li>
++                                                        <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/actions?type=markAsUnread')); ?>"
++                                                           class="dropdown-item"
++                                                        >
++                                                            <?php echo e(t('Mark as unread')); ?>
++
++                                                        </a>
++                                                    </li>
++                                                    <li>
++                                                        <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/actions?type=markAsImportant')); ?>"
++                                                           class="dropdown-item"
++                                                        >
++                                                            <?php echo e(t('Mark as important')); ?>
++
++                                                        </a>
++                                                    </li>
++                                                    <li>
++                                                        <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/actions?type=markAsNotImportant')); ?>"
++                                                           class="dropdown-item"
++                                                        >
++                                                            <?php echo e(t('Mark as not important')); ?>
++
++                                                        </a>
++                                                    </li>
++                                                    <li>
++                                                        <a href="<?php echo e(url(urlGen()->getAccountBasePath() . '/messages/delete')); ?>"
++                                                           class="dropdown-item"
++                                                        >
++                                                            <?php echo e(t('Delete')); ?>
++
++                                                        </a>
++                                                    </li>
++                                                </ul>
++                                            </div>
++                                            
++                                            <button type="button"
++                                                    id="btnRefresh"
++                                                    class="btn btn-outline-primary"
++                                                    data-bs-toggle="tooltip"
++                                                    title="<?php echo e(t('refresh')); ?>"
++                                            >
++                                                <span class="fa-solid fa-rotate"></span>
++                                            </button>
++                                            
++                                            <div class="btn-group" role="group">
++                                                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
++                                                    <?php echo e(t('more')); ?>
++
++                                                </button>
++                                                <ul class="dropdown-menu">
++                                                    <li>
++                                                        <a href="" class="dropdown-item markAllAsRead"><?php echo e(t('Mark all as read')); ?></a>
++                                                    </li>
++                                                </ul>
++                                            </div>
++                                        </div>
++                                    </div>
++                                    
++                                    <div class="message-tool-bar-right d-flex align-items-center" id="linksThreads">
++                                        <?php echo $__env->make('front.account.messenger.threads.links', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                    </div>
++                                </div>
++                            </div>
++                            
++                            <div class="row">
++                                <?php echo $__env->make('front.account.messenger.partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                
++                                <div class="col-md-9 col-lg-10 message-list">
++                                    <div class="container border rounded bg-body py-2" id="listThreads">
++                                        <?php echo $__env->make('front.account.messenger.threads.threads', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                        
++                    </div>
++                </div>
++                
++            </div>
++        </div>
++    </div>
++<?php $__env->stopSection(); ?>
++
++<?php $__env->startSection('after_scripts'); ?>
++	<script>
++        var loadingImage = '<?php echo e(url('images/spinners/fading-line.gif')); ?>';
++        var loadingErrorMessage = '<?php echo e(t('Threads could not be loaded')); ?>';
++        var actionText = '<?php echo e(t('action')); ?>';
++        var actionErrorMessage = '<?php echo e(t('This action could not be done')); ?>';
++        var title = {
++            'seen': '<?php echo e(t('Mark as read')); ?>',
++            'notSeen': '<?php echo e(t('Mark as unread')); ?>',
++            'important': '<?php echo e(t('Mark as important')); ?>',
++            'notImportant': '<?php echo e(t('Mark as not important')); ?>',
++        };
++	</script>
++    <script src="<?php echo e(url('assets/js/app/messenger.js')); ?>" type="text/javascript"></script>
++<?php $__env->stopSection(); ?>
++
++<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/index.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/c23a3dd7fa459370de6786894593377c.php b/storage/framework/views/c23a3dd7fa459370de6786894593377c.php
+deleted file mode 100644
+index 11dad93f..00000000
+--- a/storage/framework/views/c23a3dd7fa459370de6786894593377c.php
++++ /dev/null
+@@ -1,414 +0,0 @@
+-<?php $__env->startSection('wizard'); ?>
+-	<?php echo $__env->make('front.post.createOrEdit.multiSteps.partials.wizard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php
+-	$post ??= [];
+-	
+-	$postTypes ??= [];
+-	$countries ??= [];
+-	
+-	$postCatParentId = data_get($post, 'category.parent_id');
+-	$postCatParentId = (empty($postCatParentId)) ? data_get($post, 'category.id', 0) : $postCatParentId;
+-	
+-	// Get steps URLs & labels
+-	$previousStepUrl ??= null;
+-	$previousStepLabel ??= null;
+-	$formActionUrl ??= request()->fullUrl();
+-	$nextStepUrl ??= '/';
+-	$nextStepLabel ??= t('submit') . '  <i class="bi bi-chevron-right"></i>';
+-?>
+-
+-<?php $__env->startSection('content'); ?>
+-	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	<div class="main-container">
+-		<div class="container">
+-			<div class="row">
+-				
+-				<?php echo $__env->make('front.post.partials.notification', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-				
+-				<div class="col-md-9">
+-					<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2 mb-sm-3">
+-						<h3 class="fw-bold border-bottom pb-3 mb-4">
+-							<i class="fa-solid fa-pen-to-square"></i> <?php echo e(t('update_my_listing')); ?>
+-
+-							-&nbsp;<a href="<?php echo e(urlGen()->post($post)); ?>"
+-							          class="<?php echo e(linkClass()); ?>"
+-							          data-bs-placement="top"
+-							          data-bs-toggle="tooltip"
+-							          title="<?php echo data_get($post, 'title'); ?>"
+-							><?php echo str(data_get($post, 'title'))->limit(45); ?></a>
+-						</h3>
+-						
+-						<div class="row d-flex justify-content-center">
+-							<div class="col-md-10 col-sm-12 col-xs-12">
+-								
+-								<form id="payableForm"
+-								      action="<?php echo e($formActionUrl); ?>"
+-								      method="POST"
+-								      enctype="multipart/form-data"
+-								      class="<?php echo e(unsavedFormGuard()); ?>"
+-								>
+-									<?php echo csrf_field(); ?>
+-									<?php echo method_field('PUT'); ?>
+-									
+-									<input type="hidden" name="post_id" value="<?php echo e(data_get($post, 'id')); ?>">
+-									<fieldset>
+-
+-									 
+-										<div class="form-group col-md-6">
+-											<label for="lost_or_found"><?php echo e(t('type')); ?></label>
+-											<select name="lost_or_found" id="lost_or_found" class="form-control" required>
+-											<option value="lost"
+-												<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : ''); ?>>
+-												<?php echo e(t('Lost')); ?>
+-
+-											</option>
+-											<option value="found"
+-												<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : ''); ?>>
+-												<?php echo e(t('Found')); ?>
+-
+-											</option>
+-											</select>
+-										</div>
+-										
+-										
+-										<?php
+-											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
+-											$catSelectionUrl = url('browsing/categories/select');
+-											
+-											$categoryId = old('category_id', data_get($post, 'category.id'));
+-											$categoryType = old('category_type', data_get($post, 'category.type'));
+-											
+-											$aModal = 'data-bs-toggle="modal"';
+-											$aHref = 'href="#browseCategories"';
+-											$aDataUrl = 'data-selection-url="' . $catSelectionUrl . '"';
+-											$aClass = 'class="modal-cat-link open-selection-url ' . linkClass() . '"';
+-											
+-											$customHtml = '<div id="catsContainer" class="form-control' . $categoryIdError . '">';
+-											$customHtml .= "<a {$aHref} {$aModal} {$aDataUrl} {$aClass}>";
+-											$customHtml .= t('select_a_category');
+-											$customHtml .= '</a>';
+-											$customHtml .= '</div>';
+-											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
+-											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.html', [
+-											'label'    => t('category'),
+-											'name'     => 'category_id', // <label for="name">
+-											'required' => true,
+-											'value'    => $customHtml,
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php if(config('settings.listing_form.show_listing_type')): ?>
+-											<?php echo $__env->make('helpers.forms.fields.radio', [
+-												'label'           => t('type'),
+-												'id'              => 'postTypeId-',
+-												'name'            => 'post_type_id',
+-												'inline'          => true,
+-												'required'        => true,
+-												'options'         => $postTypes,
+-												'optionValueName' => 'id',
+-												'optionTextName'  => 'label',
+-												'value'           => data_get($post, 'post_type_id'),
+-												'hint'            => t('post_type_hint'),
+-												'wrapper'         => ['id' => 'postTypeBloc'],
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php endif; ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.text', [
+-											'label'       => t('title'),
+-											'name'        => 'title',
+-											'placeholder' => t('enter_your_title'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'title'),
+-											'hint'        => t('a_great_title_needs_at_least_60_characters'),
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.wysiwyg', [
+-											'label'       => t('Description'),
+-											'name'        => 'description',
+-											'placeholder' => t('enter_your_message'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'description'),
+-											'height'      => 350,
+-											'attributes'  => ['rows' => 15],
+-											'hint'        => t('describe_what_makes_your_listing_unique'),
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<div id="cfContainer"></div>
+-										
+-										
+-										<?php
+-											$currencySymbol = config('currency.symbol', 'X');
+-											$price = old('price', data_get($post, 'price'));
+-											$price = \App\Helpers\Common\Num::format($price, 2, '.', '');
+-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
+-											$priceHint = !$isPriceMandatory ? t('price_hint') : null;
+-											
+-											// negotiable
+-											$negotiable = old('negotiable', data_get($post, 'negotiable'));
+-											$negotiableChecked = ($negotiable == '1') ? ' checked' : '';
+-											
+-											$suffix = '<input id="negotiable" name="negotiable" type="checkbox" value="1"' . $negotiableChecked . '>';
+-											$suffix .= '&nbsp;<small>' . t('negotiable') . '</small>';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.number', [
+-											'label'       => t('price'),
+-											'name'        => 'price',
+-											'required'    => $isPriceMandatory,
+-											'placeholder' => t('enter_your_price'),
+-											'value'       => $price,
+-											'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
+-											'prefix'      => $currencySymbol,
+-											'suffix'      => $suffix,
+-											'hint'        => $priceHint,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['id' => 'priceBloc'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<input id="countryCode"
+-										       name="country_code"
+-										       type="hidden"
+-										       value="<?php echo e(data_get($post, 'country_code') ?? config('country.code')); ?>"
+-										>
+-										
+-										<?php
+-											$adminType = config('country.admin_type', 0);
+-										?>
+-										<?php if(config('settings.listing_form.city_selection') == 'select'): ?>
+-											<?php if(in_array($adminType, ['1', '2'])): ?>
+-												
+-												<?php echo $__env->make('helpers.forms.fields.select2', [
+-													'label'        => t('location'),
+-													'id'           => 'adminCode',
+-													'name'         => 'admin_code',
+-													'required'     => true,
+-													'placeholder'  => t('select_your_location'),
+-													'options'      => [],
+-													'largeOptions' => true,
+-													'hint'         => null,
+-													'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
+-													'wrapper'      => ['id' => 'locationBox'],
+-												], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-											<?php endif; ?>
+-										<?php else: ?>
+-											<?php
+-												$adminType = (in_array($adminType, ['0', '1', '2'])) ? $adminType : 0;
+-												$relAdminType = (in_array($adminType, ['1', '2'])) ? $adminType : 1;
+-												$adminCode = data_get($post, 'city.subadmin' . $relAdminType . '_code', 0);
+-												$adminCode = data_get($post, 'city.subAdmin' . $relAdminType . '.code', $adminCode);
+-												$adminName = data_get($post, 'city.subAdmin' . $relAdminType . '.name');
+-												$cityId = data_get($post, 'city.id', 0);
+-												$cityName = data_get($post, 'city.name');
+-												$fullCityName = !empty($adminName) ? $cityName . ', ' . $adminName : $cityName;
+-											?>
+-											<input type="hidden"
+-											       id="selectedAdminType"
+-											       name="selected_admin_type"
+-											       value="<?php echo e(old('selected_admin_type', $adminType)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedAdminCode"
+-											       name="selected_admin_code"
+-											       value="<?php echo e(old('selected_admin_code', $adminCode)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedCityId"
+-											       name="selected_city_id"
+-											       value="<?php echo e(old('selected_city_id', $cityId)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedCityName"
+-											       name="selected_city_name"
+-											       value="<?php echo e(old('selected_city_name', $fullCityName)); ?>"
+-											>
+-										<?php endif; ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.select2', [
+-											'label'        => t('city'),
+-											'id'           => 'cityId',
+-											'name'         => 'city_id',
+-											'required'     => true,
+-											'placeholder'  => t('select_a_city'),
+-											'options'      => [],
+-											'largeOptions' => true,
+-											'hint'         => null,
+-											'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'      => ['id' => 'cityBox'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php
+-											$tagHint = t('tags_hint', ['limit' => '{limit}', 'min' => '{min}', 'max' => '{max}']);
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.select2-tagging', [
+-											'label'       => t('Tags'),
+-											'id'          => 'tags',
+-											'name'        => 'tags',
+-											'placeholder' => t('enter_tags'),
+-											'options'     => data_get($post, 'tags'),
+-											'hint'        => $tagHint,
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php if(config('settings.listing_form.permanent_listings_enabled') == '3'): ?>
+-											<input id="isPermanent"
+-											       name="is_permanent"
+-											       type="hidden"
+-											       value="<?php echo e(old('is_permanent', data_get($post, 'is_permanent'))); ?>"
+-											>
+-										<?php else: ?>
+-											<?php echo $__env->make('helpers.forms.fields.checkbox', [
+-												'label'    => t('is_permanent_label'),
+-												'id'       => 'isPermanent',
+-												'name'     => 'is_permanent',
+-												'switch'   => true,
+-												'required' => false,
+-												'value'    => data_get($post, 'is_permanent'),
+-												'hint'     => t('is_permanent_hint'),
+-												'wrapper'  => ['id' => 'isPermanentBox', 'class' => 'hide']
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php endif; ?>
+-										
+-										
+-										<div class="col-12 fw-bold fs-5 border-bottom py-2 my-5 mb-4">
+-											<i class="bi bi-person-circle"></i> <?php echo e(t('seller_information')); ?>
+-
+-										</div>
+-										
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.text', [
+-											'label'       => t('your_name'),
+-											'id'          => 'contactName',
+-											'name'        => 'contact_name',
+-											'placeholder' => t('enter_your_name'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'contact_name'),
+-											'prefix'      => '<i class="fa-regular fa-user"></i>',
+-											'suffix'      => null,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php
+-											$authFields = getAuthFields(true);
+-											$authFieldOptions = collect($authFields)
+-												->map(fn($item, $key) => ['value' => $key, 'text' => $item])
+-												->toArray();
+-											
+-											$usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel();
+-											$authFieldValue = data_get($post, 'auth_field') ?? getAuthField();
+-											$authFieldValue = $usersCanChooseNotifyChannel ? old('auth_field', $authFieldValue) : $authFieldValue;
+-										?>
+-										<?php if($usersCanChooseNotifyChannel): ?>
+-											<?php echo $__env->make('helpers.forms.fields.radio', [
+-												'label'      => trans('auth.notifications_channel'),
+-												'btnVariant' => 'secondary',
+-												'btnOutline' => true,
+-												'id'         => 'authField-',
+-												'name'       => 'auth_field',
+-												'inline'     => true,
+-												'required'   => true,
+-												'options'    => $authFieldOptions,
+-												'value'      => $authFieldValue,
+-												'attributes' => ['class' => 'auth-field-input'],
+-												'hint'       => trans('auth.notifications_channel_hint'),
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php else: ?>
+-											<input id="authField-<?php echo e($authFieldValue); ?>" name="auth_field" type="hidden" value="<?php echo e($authFieldValue); ?>">
+-										<?php endif; ?>
+-										
+-										<?php
+-											$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
+-										?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.email', [
+-											'label'       => trans('auth.email'),
+-											'id'          => 'email',
+-											'name'        => 'email',
+-											'required'    => (getAuthField() == 'email'),
+-											'placeholder' => t('enter_your_email'),
+-											'value'       => data_get($post, 'email'),
+-											'prefix'      => '<i class="fa-regular fa-envelope"></i>',
+-											'suffix'      => null,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php
+-											$phoneValue = data_get($post, 'phone');
+-											$phoneCountryValue = data_get($post, 'phone_country') ?? config('country.code');
+-											
+-											// phone_hidden
+-											$phoneHiddenValue = old('phone_hidden', data_get($post, 'phone_hidden'));
+-											$phoneHiddenChecked = ($phoneHiddenValue == '1') ? ' checked' : '';
+-											$suffix = '<input id="phoneHidden" name="phone_hidden" type="checkbox" value="1"' . $phoneHiddenChecked . '>';
+-											$suffix .= '&nbsp;<small>' . t('Hide') . '</small>';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.intl-tel-input', [
+-											'label'       => trans('auth.phone_number'),
+-											'id'          => 'phone',
+-											'name'        => 'phone',
+-											'required'    => (getAuthField() == 'phone'),
+-											'placeholder' => null,
+-											'value'       => $phoneValue,
+-											'countryCode' => $phoneCountryValue,
+-											'suffix'      => $suffix,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<div class="row mb-3 mt-5">
+-											<div class="col-md-6 mb-md-0 mb-2 text-start d-grid">
+-												<a href="<?php echo e($previousStepUrl); ?>" class="btn btn-secondary btn-lg">
+-													<?php echo $previousStepLabel; ?>
+-
+-												</a>
+-											</div>
+-											<div class="col-md-6 mb-md-0 mb-2 text-end d-grid">
+-												<button id="nextStepBtn" class="btn btn-primary btn-lg">
+-													<?php echo $nextStepLabel; ?>
+-
+-												</button>
+-											</div>
+-										</div>
+-									
+-									</fieldset>
+-								</form>
+-							
+-							</div>
+-						</div>
+-					</div>
+-				</div>
+-				
+-				<div class="col-md-3 reg-sidebar">
+-					<?php echo $__env->make('front.post.createOrEdit.partials.right-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-				</div>
+-			
+-			</div>
+-		</div>
+-	</div>
+-	<?php echo $__env->make('front.post.createOrEdit.partials.category-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php $__env->startSection('after_scripts'); ?>
+-	<script>
+-		defaultAuthField = '<?php echo e(old('auth_field', $authFieldValue ?? getAuthField())); ?>';
+-		phoneCountry = '<?php echo e(old('phone_country', ($phoneCountryValue ?? ''))); ?>';
+-	</script>
+-<?php $__env->stopSection(); ?>
+-
+-<?php echo $__env->make('front.post.createOrEdit.partials.form-assets', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-
+-<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/multiSteps/edit/post.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/c26fd79cb5ace5f7a19da4c4a7d19c0d.php b/storage/framework/views/c26fd79cb5ace5f7a19da4c4a7d19c0d.php
+index c3a70cad..a2d7c71c 100644
+--- a/storage/framework/views/c26fd79cb5ace5f7a19da4c4a7d19c0d.php
++++ b/storage/framework/views/c26fd79cb5ace5f7a19da4c4a7d19c0d.php
+@@ -65,23 +65,6 @@
+ 								</div>
+ 								
+ 								
+-								<div class="col-md-6 col-sm-6 col-6 text-end">
+-									<h4 class="p-0 fs-5 fw-normal">
+-										<span class="fw-bold">
+-											<?php echo e(data_get($post, 'price_label')); ?>
+-
+-										</span>
+-										<span>
+-											<?php echo data_get($post, 'price_formatted'); ?>
+-
+-											<?php if(data_get($post, 'negotiable') == 1): ?>
+-												<small class="badge rounded-pill text-bg-info"> <?php echo e(t('negotiable')); ?></small>
+-											<?php endif; ?>
+-										</span>
+-									</h4>
+-								</div>
+-							</div>
+-							
+ 							
+ 							<div class="row">
+ 								<div class="col-12 detail-line-content">
+diff --git a/storage/framework/views/cd457c441e9e2fe47f3fdb1dfb481138.php b/storage/framework/views/cd457c441e9e2fe47f3fdb1dfb481138.php
+new file mode 100644
+index 00000000..4ea6c008
+--- /dev/null
++++ b/storage/framework/views/cd457c441e9e2fe47f3fdb1dfb481138.php
+@@ -0,0 +1,22 @@
++
++<div <?php echo $__env->make('admin.panel.inc.field_wrapper_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?> >
++    <label class="form-label fw-bolder">
++	    <?php echo $field['label']; ?>
++
++	    <?php if(isset($field['required']) && $field['required']): ?>
++		    <span class="text-danger">*</span>
++	    <?php endif; ?>
++    </label>
++	<?php echo $__env->make('admin.panel.fields.inc.translatable_icon', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++    <textarea
++    	name="<?php echo e($field['name']); ?>"
++        <?php echo $__env->make('admin.panel.inc.field_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++
++    	><?php echo e(old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '' ))); ?></textarea>
++
++    
++    <?php if(isset($field['hint'])): ?>
++        <div class="form-text"><?php echo $field['hint']; ?></div>
++    <?php endif; ?>
++</div>
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/textarea.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/d3574f113df738397dc38b5b5b006e09.php b/storage/framework/views/d3574f113df738397dc38b5b5b006e09.php
+index cae7ca85..168c127b 100644
+--- a/storage/framework/views/d3574f113df738397dc38b5b5b006e09.php
++++ b/storage/framework/views/d3574f113df738397dc38b5b5b006e09.php
+@@ -78,10 +78,6 @@
+ 									<?php endif; ?>
+ 									
+ 									
+-									<h4 class="fs-4 fw-bold mt-3 text-center">
+-										<?php echo data_get($post, 'price_formatted'); ?>
+-
+-									</h4>
+ 								</div>
+ 							</div>
+ 						</div>
+diff --git a/storage/framework/views/e4219e314bda712067ae907deb6d4c03.php b/storage/framework/views/e4219e314bda712067ae907deb6d4c03.php
+index 190d9d55..9a214cf3 100644
+--- a/storage/framework/views/e4219e314bda712067ae907deb6d4c03.php
++++ b/storage/framework/views/e4219e314bda712067ae907deb6d4c03.php
+@@ -1,3 +1,6 @@
++<form action="<?php echo e(url('search')); ?>" method="GET">
++    <input type="hidden" name="filterBy" value="search">
++
+ <?php
+ 	$autocompleteClass ??= '';
+ 	$searchTooltip ??= '';
+@@ -39,4 +42,4 @@
+ 		</button>
+ 	</div>
+ </div>
+-<?php /**PATH C:\xampp\htdocs\resources\views/front/sections/home/search-form/large-screen.blade.php ENDPATH**/ ?>
+\ No newline at end of file
++</form><?php /**PATH C:\xampp\htdocs\resources\views/front/sections/home/search-form/large-screen.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/e5fddfcdc1ebc6d291a34d50b5cd8fbf.php b/storage/framework/views/e5fddfcdc1ebc6d291a34d50b5cd8fbf.php
+deleted file mode 100644
+index 469581ae..00000000
+--- a/storage/framework/views/e5fddfcdc1ebc6d291a34d50b5cd8fbf.php
++++ /dev/null
+@@ -1,465 +0,0 @@
+-<?php
+-	$post ??= [];
+-	
+-	$postTypes ??= [];
+-	$countries ??= [];
+-	
+-	$postCatParentId = data_get($post, 'category.parent_id');
+-	$postCatParentId = (empty($postCatParentId)) ? data_get($post, 'category.id', 0) : $postCatParentId;
+-?>
+-
+-<?php $__env->startSection('content'); ?>
+-	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-	<div class="main-container">
+-		<div class="container">
+-			<div class="row">
+-				
+-				<?php echo $__env->make('front.post.partials.notification', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-				
+-				<div class="col-md-9">
+-					<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2 mb-sm-3">
+-						<h2 class="fw-bold border-bottom pb-3 mb-4">
+-							<i class="fa-solid fa-pen-to-square"></i> <?php echo e(t('update_my_listing')); ?> -&nbsp;
+-							<a href="<?php echo e(urlGen()->post($post)); ?>" class="" data-bs-placement="top"
+-							   data-bs-toggle="tooltip"
+-							   title="<?php echo data_get($post, 'title'); ?>">
+-								<?php echo str(data_get($post, 'title'))->limit(45); ?>
+-
+-							</a>
+-						</h2>
+-						
+-						<div class="row d-flex justify-content-center">
+-							<div class="col-md-10 col-sm-12 col-xs-12">
+-								
+-								<form id="payableForm"
+-								      action="<?php echo e(url()->current()); ?>"
+-								      method="POST"
+-								      enctype="multipart/form-data"
+-								      class="<?php echo e(unsavedFormGuard()); ?>"
+-								>
+-									<?php echo csrf_field(); ?>
+-									<?php echo method_field('PUT'); ?>
+-									
+-									<input type="hidden" name="post_id" value="<?php echo e(data_get($post, 'id')); ?>">
+-									<input type="hidden" name="payable_id" value="<?php echo e(data_get($post, 'id')); ?>">
+-									<fieldset>
+-
+-									
+-										<div class="form-group col-md-6">
+-										<label for="lost_or_found"><?php echo e(t('type')); ?></label>
+-										<select name="lost_or_found" id="lost_or_found" class="form-control" required>
+-											<option value="lost"
+-											<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : ''); ?>>
+-											<?php echo e(t('Lost')); ?>
+-
+-											</option>
+-											<option value="found"
+-											<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : ''); ?>>
+-											<?php echo e(t('Found')); ?>
+-
+-											</option>
+-										</select>
+-										</div>
+-										
+-										
+-										<?php
+-											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
+-											$catSelectionUrl = url('browsing/categories/select');
+-											
+-											$categoryId = old('category_id', data_get($post, 'category.id'));
+-											$categoryType = old('category_type', data_get($post, 'category.type'));
+-											
+-											$aModal = 'data-bs-toggle="modal"';
+-											$aHref = 'href="#browseCategories"';
+-											$aDataUrl = 'data-selection-url="' . $catSelectionUrl . '"';
+-											$aClass = 'class="modal-cat-link open-selection-url ' . linkClass() . '"';
+-											
+-											$customHtml = '<div id="catsContainer" class="form-control' . $categoryIdError . '">';
+-											$customHtml .= "<a {$aHref} {$aModal} {$aDataUrl} {$aClass}>";
+-											$customHtml .= t('select_a_category');
+-											$customHtml .= '</a>';
+-											$customHtml .= '</div>';
+-											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
+-											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.html', [
+-											'label'    => t('category'),
+-											'name'     => 'category_id', // <label for="name">
+-											'required' => true,
+-											'value'    => $customHtml,
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php if(config('settings.listing_form.show_listing_type')): ?>
+-											<?php echo $__env->make('helpers.forms.fields.radio', [
+-												'label'           => t('type'),
+-												'id'              => 'postTypeId-',
+-												'name'            => 'post_type_id',
+-												'inline'          => true,
+-												'required'        => true,
+-												'options'         => $postTypes,
+-												'optionValueName' => 'id',
+-												'optionTextName'  => 'label',
+-												'value'           => data_get($post, 'post_type_id'),
+-												'hint'            => t('post_type_hint'),
+-												'wrapper'         => ['id' => 'postTypeBloc'],
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php endif; ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.text', [
+-											'label'       => t('title'),
+-											'name'        => 'title',
+-											'placeholder' => t('enter_your_title'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'title'),
+-											'hint'        => t('a_great_title_needs_at_least_60_characters'),
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.wysiwyg', [
+-											'label'       => t('Description'),
+-											'name'        => 'description',
+-											'placeholder' => t('enter_your_message'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'description'),
+-											'height'      => 350,
+-											'attributes'  => ['rows' => 15],
+-											'hint'        => t('describe_what_makes_your_listing_unique'),
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										<?php if(isset($picturesLimit) && is_numeric($picturesLimit) && $picturesLimit > 0): ?>
+-											
+-											<?php
+-												$postId = data_get($post, 'id') ?? '';
+-												$pictures = data_get($post, 'pictures');
+-												
+-												$picturesRequired = (config('settings.listing_form.picture_mandatory') == '1');
+-												
+-												$savedPictures = collect($pictures)->map(function ($item) {
+-													return [
+-														'key'  => $item['id'] ?? null,
+-														'path' => $item['file_path'] ?? null,
+-														'url'  => $item['url']['medium'] ?? null,
+-													];
+-												})->toArray();
+-												
+-												$deleteUrlPattern = !empty($postId) ? url('posts/' . $postId . '/photos/{id}/delete') : null;
+-												
+-												$picturesHint = t('add_up_to_x_pictures_text', ['pictures_number' => $picturesLimit]);
+-												$picturesHint .= ' ' . t('file_types', ['file_types' => getAllowedFileFormatsHint('image')]);
+-											?>
+-											<?php if(config('settings.listing_form.one_picture_field_for_multiple_selections') == '1'): ?>
+-												<?php echo $__env->make('helpers.forms.fields.fileinput', [
+-													'label'       => t('pictures'),
+-													'name'        => 'pictures',
+-													'required'    => $picturesRequired,
+-													'attributes'  => ['accept' => 'image/*'],
+-													'value'       => $savedPictures,
+-													'hint'        => $picturesHint,
+-													'allowsMultiple'   => true,
+-													'limit'            => $picturesLimit,
+-													'pluginOptions'    => [
+-														'previewFileType'   => 'image',
+-														'showPreview'       => 'true',
+-														'dropZoneEnabled'   => 'true',
+-														'browseOnZoneClick' => 'true',
+-														'showCaption'       => 'false',
+-													],
+-													'deleteUrlPattern' => $deleteUrlPattern,
+-												], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-											<?php else: ?>
+-												<?php echo $__env->make('helpers.forms.fields.fileinput-multiple', [
+-													'label'       => t('pictures'),
+-													'name'        => 'pictures',
+-													'placeholder' => t('Picture X', ['number' => '{index}']),
+-													'required'    => $picturesRequired,
+-													'attributes'  => ['accept' => 'image/*'],
+-													'value'       => $savedPictures,
+-													'hint'        => $picturesHint,
+-													'limit'       => $picturesLimit,
+-													'pluginOptions'    => [
+-														'previewFileType' => 'image',
+-														'showPreview'     => 'true',
+-													],
+-												], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-											<?php endif; ?>
+-										<?php endif; ?>
+-										
+-										
+-										<div id="cfContainer"></div>
+-										
+-										
+-										<?php
+-											$currencySymbol = config('currency.symbol', 'X');
+-											$price = old('price', data_get($post, 'price'));
+-											$price = \App\Helpers\Common\Num::format($price, 2, '.', '');
+-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
+-											$priceHint = !$isPriceMandatory ? t('price_hint') : null;
+-											
+-											// negotiable
+-											$negotiable = old('negotiable', data_get($post, 'negotiable'));
+-											$negotiableChecked = ($negotiable == '1') ? ' checked' : '';
+-											
+-											$suffix = '<input id="negotiable" name="negotiable" type="checkbox" value="1"' . $negotiableChecked . '>';
+-											$suffix .= '&nbsp;<small>' . t('negotiable') . '</small>';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.number', [
+-											'label'       => t('price'),
+-											'name'        => 'price',
+-											'required'    => $isPriceMandatory,
+-											'placeholder' => t('enter_your_price'),
+-											'value'       => $price,
+-											'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
+-											'prefix'      => $currencySymbol,
+-											'suffix'      => $suffix,
+-											'hint'        => $priceHint,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['id' => 'priceBloc'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<input id="countryCode" name="country_code"
+-										       type="hidden"
+-										       value="<?php echo e(data_get($post, 'country_code') ?? config('country.code')); ?>"
+-										>
+-										
+-										<?php
+-											$adminType = config('country.admin_type', 0);
+-										?>
+-										<?php if(config('settings.listing_form.city_selection') == 'select'): ?>
+-											<?php if(in_array($adminType, ['1', '2'])): ?>
+-												
+-												<?php echo $__env->make('helpers.forms.fields.select2', [
+-													'label'        => t('location'),
+-													'id'           => 'adminCode',
+-													'name'         => 'admin_code',
+-													'required'     => true,
+-													'placeholder'  => t('select_your_location'),
+-													'options'      => [],
+-													'largeOptions' => true,
+-													'hint'         => null,
+-													'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
+-													'wrapper'      => ['id' => 'locationBox'],
+-												], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-											<?php endif; ?>
+-										<?php else: ?>
+-											<?php
+-												$adminType = (in_array($adminType, ['0', '1', '2'])) ? $adminType : 0;
+-												$relAdminType = (in_array($adminType, ['1', '2'])) ? $adminType : 1;
+-												$adminCode = data_get($post, 'city.subadmin' . $relAdminType . '_code', 0);
+-												$adminCode = data_get($post, 'city.subAdmin' . $relAdminType . '.code', $adminCode);
+-												$adminName = data_get($post, 'city.subAdmin' . $relAdminType . '.name');
+-												$cityId = data_get($post, 'city.id', 0);
+-												$cityName = data_get($post, 'city.name');
+-												$fullCityName = !empty($adminName) ? $cityName . ', ' . $adminName : $cityName;
+-											?>
+-											<input type="hidden"
+-											       id="selectedAdminType"
+-											       name="selected_admin_type"
+-											       value="<?php echo e(old('selected_admin_type', $adminType)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedAdminCode"
+-											       name="selected_admin_code"
+-											       value="<?php echo e(old('selected_admin_code', $adminCode)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedCityId"
+-											       name="selected_city_id"
+-											       value="<?php echo e(old('selected_city_id', $cityId)); ?>"
+-											>
+-											<input type="hidden"
+-											       id="selectedCityName"
+-											       name="selected_city_name"
+-											       value="<?php echo e(old('selected_city_name', $fullCityName)); ?>"
+-											>
+-										<?php endif; ?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.select2', [
+-											'label'        => t('city'),
+-											'id'           => 'cityId',
+-											'name'         => 'city_id',
+-											'required'     => true,
+-											'placeholder'  => t('select_a_city'),
+-											'options'      => [],
+-											'largeOptions' => true,
+-											'hint'         => null,
+-											'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'      => ['id' => 'cityBox'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-
+-										
+-										
+-										
+-										<?php
+-											$tagHint = t('tags_hint', ['limit' => '{limit}', 'min' => '{min}', 'max' => '{max}']);
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.select2-tagging', [
+-											'label'       => t('Tags'),
+-											'id'          => 'tags',
+-											'name'        => 'tags',
+-											'placeholder' => t('enter_tags'),
+-											'options'     => data_get($post, 'tags'),
+-											'hint'        => $tagHint,
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php if(config('settings.listing_form.permanent_listings_enabled') == '3'): ?>
+-											<input id="isPermanent"
+-											       name="is_permanent"
+-											       type="hidden"
+-											       value="<?php echo e(old('is_permanent', data_get($post, 'is_permanent'))); ?>"
+-											>
+-										<?php else: ?>
+-											<?php echo $__env->make('helpers.forms.fields.checkbox', [
+-												'label'    => t('is_permanent_label'),
+-												'id'       => 'isPermanent',
+-												'name'     => 'is_permanent',
+-												'switch'   => true,
+-												'required' => false,
+-												'value'    => data_get($post, 'is_permanent'),
+-												'hint'     => t('is_permanent_hint'),
+-												'wrapper'  => ['id' => 'isPermanentBox', 'class' => 'hide']
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php endif; ?>
+-										
+-										
+-										<div class="col-12 fw-bold fs-5 border-bottom py-2 my-5 mb-4">
+-											<i class="bi bi-person-circle"></i> <?php echo e(t('seller_information')); ?>
+-
+-										</div>
+-										
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.text', [
+-											'label'       => t('your_name'),
+-											'id'          => 'contactName',
+-											'name'        => 'contact_name',
+-											'placeholder' => t('enter_your_name'),
+-											'required'    => true,
+-											'value'       => data_get($post, 'contact_name'),
+-											'prefix'      => '<i class="fa-regular fa-user"></i>',
+-											'suffix'      => null,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php
+-											$authFields = getAuthFields(true);
+-											$authFieldOptions = collect($authFields)
+-												->map(fn($item, $key) => ['value' => $key, 'text' => $item])
+-												->toArray();
+-											
+-											$usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel();
+-											$authFieldValue = data_get($post, 'auth_field') ?? getAuthField();
+-											$authFieldValue = $usersCanChooseNotifyChannel ? old('auth_field', $authFieldValue) : $authFieldValue;
+-										?>
+-										<?php if($usersCanChooseNotifyChannel): ?>
+-											<?php echo $__env->make('helpers.forms.fields.radio', [
+-												'label'      => trans('auth.notifications_channel'),
+-												'btnVariant' => 'secondary',
+-												'btnOutline' => true,
+-												'id'         => 'authField-',
+-												'name'       => 'auth_field',
+-												'inline'     => true,
+-												'required'   => true,
+-												'options'    => $authFieldOptions,
+-												'value'      => $authFieldValue,
+-												'attributes' => ['class' => 'auth-field-input'],
+-												'hint'       => trans('auth.notifications_channel_hint'),
+-											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										<?php else: ?>
+-											<input id="authField-<?php echo e($authFieldValue); ?>" name="auth_field" type="hidden" value="<?php echo e($authFieldValue); ?>">
+-										<?php endif; ?>
+-										
+-										<?php
+-											$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
+-										?>
+-										
+-										
+-										<?php echo $__env->make('helpers.forms.fields.email', [
+-											'label'       => trans('auth.email'),
+-											'id'          => 'email',
+-											'name'        => 'email',
+-											'required'    => (getAuthField() == 'email'),
+-											'placeholder' => t('enter_your_email'),
+-											'value'       => data_get($post, 'email'),
+-											'prefix'      => '<i class="fa-regular fa-envelope"></i>',
+-											'suffix'      => null,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										
+-										<?php
+-											$phoneValue = data_get($post, 'phone');
+-											$phoneCountryValue = data_get($post, 'phone_country') ?? config('country.code');
+-											
+-											// phone_hidden
+-											$phoneHiddenValue = old('phone_hidden', data_get($post, 'phone_hidden'));
+-											$phoneHiddenChecked = ($phoneHiddenValue == '1') ? ' checked' : '';
+-											$suffix = '<input id="phoneHidden" name="phone_hidden" type="checkbox" value="1"' . $phoneHiddenChecked . '>';
+-											$suffix .= '&nbsp;<small>' . t('Hide') . '</small>';
+-										?>
+-										<?php echo $__env->make('helpers.forms.fields.intl-tel-input', [
+-											'label'       => trans('auth.phone_number'),
+-											'id'          => 'phone',
+-											'name'        => 'phone',
+-											'required'    => (getAuthField() == 'phone'),
+-											'placeholder' => null,
+-											'value'       => $phoneValue,
+-											'countryCode' => $phoneCountryValue,
+-											'suffix'      => $suffix,
+-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
+-											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
+-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-										<?php echo $__env->make('front.post.createOrEdit.singleStep.partials.packages', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-										
+-																				
+-										
+-										<div class="row mb-3 mt-5">
+-											<div class="col-md-6 mb-md-0 mb-2 text-start d-grid">
+-												<a href="<?php echo e(urlGen()->post($post)); ?>" class="btn btn-secondary btn-lg">
+-													<?php echo e(t('Back')); ?>
+-
+-												</a>
+-											</div>
+-											<div class="col-md-6 mb-md-0 mb-2 text-end d-grid">
+-												<button id="payableFormSubmitButton" class="btn btn-primary btn-lg">
+-													<?php echo e(t('Update')); ?>
+-
+-												</button>
+-											</div>
+-										</div>
+-										
+-									</fieldset>
+-								</form>
+-							
+-							</div>
+-						</div>
+-					</div>
+-				</div>
+-				
+-				<div class="col-md-3 reg-sidebar">
+-					<?php echo $__env->make('front.post.createOrEdit.partials.right-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-				</div>
+-			
+-			</div>
+-		</div>
+-	</div>
+-	<?php echo $__env->make('front.post.createOrEdit.partials.category-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-<?php $__env->stopSection(); ?>
+-
+-<?php $__env->startSection('after_scripts'); ?>
+-	<script>
+-		defaultAuthField = '<?php echo e(old('auth_field', $authFieldValue ?? getAuthField())); ?>';
+-		phoneCountry = '<?php echo e(old('phone_country', ($phoneCountryValue ?? ''))); ?>';
+-	</script>
+-<?php $__env->stopSection(); ?>
+-
+-<?php echo $__env->make('front.post.createOrEdit.partials.form-assets', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+-
+-<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/singleStep/edit.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/f15b773cf5e37dafc10c944b579cc895.php b/storage/framework/views/f15b773cf5e37dafc10c944b579cc895.php
+index 5fe3ea0e..e4d74a06 100644
+--- a/storage/framework/views/f15b773cf5e37dafc10c944b579cc895.php
++++ b/storage/framework/views/f15b773cf5e37dafc10c944b579cc895.php
+@@ -4,7 +4,7 @@
+ 
+ <div class="gallery-container">
+ 	<?php if(!empty($price)): ?>
+-		<div class="p-price-tag"><?php echo $price; ?></div>
++	 
+ 	<?php endif; ?>
+ 	<div class="swiper main-gallery">
+ 		<div class="swiper-wrapper">
+diff --git a/storage/framework/views/f874754e26060819dda52df4052f69f0.php b/storage/framework/views/f874754e26060819dda52df4052f69f0.php
+index a3215985..a4dc84be 100644
+--- a/storage/framework/views/f874754e26060819dda52df4052f69f0.php
++++ b/storage/framework/views/f874754e26060819dda52df4052f69f0.php
+@@ -242,12 +242,7 @@ class="<?php echo e(linkClass()); ?> fw-bold"
+ 														</p>
+ 													</div>
+ 												</td>
+-												<td style="width:16%" class="price-td d-md-table-cell d-sm-none d-none">
+-													<div class="fw-bold">
+-														<?php echo data_get($post, 'price_formatted'); ?>
+-
+-													</div>
+-												</td>
++												
+ 												<td style="width:10%" class="action-td">
+ 													<div>
+ 														<div class="btn-group">
+diff --git a/storage/framework/views/fe74ee4027c85b82ecdf2c500d37efa7.php b/storage/framework/views/fe74ee4027c85b82ecdf2c500d37efa7.php
+new file mode 100644
+index 00000000..5e29ade5
+--- /dev/null
++++ b/storage/framework/views/fe74ee4027c85b82ecdf2c500d37efa7.php
+@@ -0,0 +1,109 @@
++<?php
++	$authUser = auth()->check() ? auth()->user() : null;
++	$authUserId = !empty($authUser) ? $authUser->getAuthIdentifier() : 0;
++	
++	$thread ??= [];
++	$message ??= [];
++	
++	$filePath = data_get($message, 'file_path');
++?>
++<?php if($authUserId == data_get($message, 'user.id')): ?>
++	<div class="row mb-3 d-flex justify-content-end chat-item object-me">
++		<div class="col-8 text-end chat-item-content">
++			<div class="msg bg-success-subtle rounded-4 rounded-end-0 rounded px-3 py-2">
++				<?php echo urlsToLinks(nlToBr(data_get($message, 'body')), ['class' => linkClass()]); ?>
++
++				<?php if(!empty($filePath) && $disk->exists($filePath)): ?>
++					<?php
++						$mt2Class = !empty(trim(data_get($message, 'body'))) ? ' mt-2' : '';
++					?>
++					<div class="<?php echo e($mt2Class); ?>">
++						<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
++						<a class="<?php echo e(linkClass()); ?>"
++						   href="<?php echo e(privateFileUrl($filePath, null)); ?>"
++						   target="_blank"
++						   data-bs-toggle="tooltip"
++						   data-bs-placement="left"
++						   title="<?php echo e(basename($filePath)); ?>"
++						>
++							<?php echo e(str($filePath)->basename()->limit(20)); ?>
++
++						</a>
++					</div>
++				<?php endif; ?>
++			</div>
++			<span class="small text-secondary time-and-date">
++				<?php echo e(data_get($message, 'created_at_formatted')); ?>
++
++				<?php
++					$recipient = data_get($message, 'p_recipient');
++					
++					$threadUpdatedAt = new \Illuminate\Support\Carbon(data_get($thread, 'updated_at'));
++					$threadUpdatedAt->timezone(\App\Helpers\Common\Date::getAppTimeZone());
++					
++					$recipientLastRead = new \Illuminate\Support\Carbon(data_get($recipient, 'last_read'));
++					$recipientLastRead->timezone(\App\Helpers\Common\Date::getAppTimeZone());
++					
++					$threadIsUnreadByThisRecipient = (
++						!empty($recipient)
++						&& (
++							data_get($recipient, 'last_read') === null
++							|| $threadUpdatedAt->gt($recipientLastRead)
++						)
++					);
++				?>
++				<?php if($threadIsUnreadByThisRecipient): ?>
++					&nbsp;<i class="fa-solid fa-check-double"></i>
++				<?php endif; ?>
++			</span>
++		</div>
++	</div>
++<?php else: ?>
++	<div class="row mb-3 d-flex justify-content-start chat-item object-user">
++		<div class="col-2 object-user-img">
++			<a href="<?php echo e(urlGen()->user(data_get($message, 'user'))); ?>">
++				<img src="<?php echo e(url(data_get($message, 'user.photo_url'))); ?>"
++				     class="img-fluid object-fit-fill rounded-circle"
++				     alt="<?php echo e(data_get($message, 'user.name')); ?>"
++				>
++			</a>
++		</div>
++		<div class="col-8 chat-item-content">
++			<div class="chat-item-content-inner">
++				<div class="msg bg-body-secondary rounded-4 rounded-start-0 px-3 py-2">
++					<?php echo urlsToLinks(nlToBr(data_get($message, 'body')), ['class' => linkClass()]); ?>
++
++					<?php if(!empty($filePath) && $disk->exists($filePath)): ?>
++						<?php
++							$mt2Class = !empty(trim(data_get($message, 'body'))) ? 'mt-2' : '';
++						?>
++						<div class="<?php echo e($mt2Class); ?>">
++							<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
++							<a class="<?php echo e(linkClass()); ?>"
++							   href="<?php echo e(privateFileUrl($filePath, null)); ?>"
++							   target="_blank"
++							   data-bs-toggle="tooltip"
++							   data-bs-placement="left"
++							   title="<?php echo e(basename($filePath)); ?>"
++							>
++								<?php echo e(str($filePath)->basename()->limit(20)); ?>
++
++							</a>
++						</div>
++					<?php endif; ?>
++				</div>
++				<?php
++					$userIsOnline = isUserOnline(data_get($message, 'user'));
++				?>
++				<span class="small text-secondary time-and-date ms-0">
++					<?php if($userIsOnline): ?>
++						<i class="fa-solid fa-circle color-success"></i>&nbsp;
++					<?php endif; ?>
++					<?php echo e(data_get($message, 'created_at_formatted')); ?>
++
++				</span>
++			</div>
++		</div>
++	</div>
++<?php endif; ?>
++<?php /**PATH C:\xampp\htdocs\resources\views/front/account/messenger/messages/message.blade.php ENDPATH**/ ?>
+\ No newline at end of file
+diff --git a/storage/framework/views/ff9b5377d4f09a30110b501b1ea14194.php b/storage/framework/views/ff9b5377d4f09a30110b501b1ea14194.php
+new file mode 100644
+index 00000000..92f43a2b
+--- /dev/null
++++ b/storage/framework/views/ff9b5377d4f09a30110b501b1ea14194.php
+@@ -0,0 +1,117 @@
++
++<div <?php echo $__env->make('admin.panel.inc.field_wrapper_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?> >
++    <label class="form-label fw-bolder">
++        <?php echo $field['label']; ?>
++
++        <?php if(isset($field['required']) && $field['required']): ?>
++            <span class="text-danger">*</span>
++        <?php endif; ?>
++    </label>
++    <?php echo $__env->make('admin.panel.fields.inc.translatable_icon', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++    <div class="input-group">
++        <?php
++            $default = $field['value'] ?? ($field['default'] ?? '' );
++        ?>
++        <input
++                type="text"
++                name="<?php echo e($field['name']); ?>"
++                value="<?php echo e(old($field['name'], $default)); ?>" data-coloris
++                <?php echo $__env->make('admin.panel.inc.field_attributes', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
++        >
++    </div>
++    
++    <?php if(isset($field['hint'])): ?>
++        <div class="form-text"><?php echo $field['hint']; ?></div>
++    <?php endif; ?>
++</div>
++
++
++
++
++<?php if($xPanel->checkIfFieldIsFirstOfItsType($field, $fields)): ?>
++
++    
++    <?php $__env->startPush('crud_fields_styles'); ?>
++        <link rel="stylesheet" href="<?php echo e(asset('assets/plugins/coloris/0.24.0/coloris.min.css')); ?>" />
++        <style>
++            .coloris {
++                /* display: flex; /* Buggy in v0.24.0 */
++                /* flex-wrap: wrap; /* Buggy in v0.24.0 */
++                flex-shrink: 0;
++                margin-bottom: 30px;
++            }
++            
++            .coloris input {
++                width: 100%;
++                height: 32px;
++                padding: 0 10px;
++                border: 1px solid #ccc;
++                border-radius: 5px;
++                font-family: inherit;
++                font-size: inherit;
++                font-weight: inherit;
++                box-sizing: border-box;
++            }
++            
++            .clr-field  {
++                width: 100%;
++            }
++            
++            .square .clr-field button,
++            .circle .clr-field button {
++                width: 22px;
++                height: 22px;
++                left: 5px;
++                right: auto;
++                border-radius: 5px;
++            }
++    
++            .square .clr-field input,
++            .circle .clr-field input {
++                padding-left: 36px;
++            }
++    
++            .circle .clr-field button {
++                border-radius: 50%;
++            }
++    
++            .full .clr-field button {
++                width: 100%;
++                height: 100%;
++                border-radius: 5px;
++            }
++        </style>
++    <?php $__env->stopPush(); ?>
++
++    
++    <?php $__env->startPush('crud_fields_scripts'); ?>
++        <script type="text/javascript" src="<?php echo e(asset('assets/plugins/coloris/0.24.0/coloris.min.js')); ?>"></script>
++    <?php $__env->stopPush(); ?>
++
++<?php endif; ?>
++
++<?php $__env->startPush('crud_fields_scripts'); ?>
++<script type="text/javascript">
++    onDocumentReady((event) => {
++        /* https://github.com/mdbassit/Coloris */
++        let defaultConfig = {
++            theme: 'pill',
++            themeMode: 'dark',
++            formatToggle: true,
++            closeButton: true,
++            clearButton: true,
++        };
++        let config = {};
++        <?php if(isset($field['colorpicker_options'])): ?>
++                config = <?php echo json_encode($field['colorpicker_options']); ?>;
++        <?php endif; ?>
++        document.querySelector('[name="<?php echo e($field['name']); ?>"]').addEventListener('click', e => {
++            Coloris(!isEmpty(config) ? config : defaultConfig);
++        });
++    });
++</script>
++<?php $__env->stopPush(); ?>
++
++
++
++<?php /**PATH C:\xampp\htdocs\resources\views/admin/panel/fields/color_picker.blade.php ENDPATH**/ ?>
+\ No newline at end of file

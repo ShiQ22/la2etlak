@@ -65,6 +65,11 @@
 								</div>
 								
 								
+								<div class="col-md-6 col-sm-6 col-6 text-end">
+									
+								</div>
+							</div>
+							
 							
 							<div class="row">
 								<div class="col-12 detail-line-content">

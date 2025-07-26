@@ -15,10 +15,6 @@
   - Similar listings
   - User dashboard (frontend)
 
----
-
-### 🔄 Current Work & Roadmap (Pending)
-
 #### [1.0] Admin Panel Integration of Lost/Found – COMPLETED
 - Added `lost_or_found` text column in admin list view.
 - Registered Lost/Found dropdown filter.
@@ -38,11 +34,36 @@
   - [ ] query builder  
   - [ ] search result templates  
 
+---
+
+### 🔄 Current Work & Roadmap (Pending)
+
 #### [3.0] Report Form Cleanup & Multi-Category
-- [ ] Remove price & negotiable fields from listing form
-- [ ] Enable multi-category linking:
-  - [ ] Recommended: many-to-many pivot table (`post_category`)
-  - [ ] OR: support “Other” with serialized fields (temporary)
+
+##### [3.0.1] Price & Negotiable Cleanup – **COMPLETED**
+- Commented out **price** & **negotiable** fields (create/edit forms) in:
+  - Front: multi-step & single-step Blade templates  
+  - Search result templates (grid, list, compact)  
+  - Account dashboard (`front/account/posts.blade.php`)  
+  - Post detail & similar listings  
+  - Sidebar filters  
+- Disabled backend price filtering:
+  - Removed `applyPriceFilter()` call in `Filters.php`  
+  - Kept default search logic intact  
+- Removed admin Price & Negotiable fields from:
+  - Backpack PostController’s `addField()` calls  
+
+##### [3.0.2] Multi-Category Linking – **IN PROGRESS**  
+- **Option A (Recommended)**: Add many-to-many pivot (`post_category`)  
+  - **DB**: Create migration for `post_category(post_id, category_id)`  
+  - **Model**: `Post` ↔️ `categories()` relation; remove single `category_id` foreign key usage  
+  - **Forms**:  
+    - Front-end: use Select2 multiple or checkboxes to choose several categories  
+    - Admin: update Backpack fields to use `select2_from_array` with multiple  
+  - **Custom Fields**: loop through each chosen category to display its fields  
+  - **Search**: join `post_category` in filters so any matching category returns the post  
+  - **Admin List**: show categories as comma-separated labels  
+- **Next**: Draft migration and update Eloquent relations (step-by-step)
 
 #### [4.0] Claimed Status
 - [ ] Add ENUM `claimed` to `posts.status`
@@ -75,10 +96,3 @@
 - Cleared view/cache to reflect changes  
 
 ---
-
-### 💡 Notes
-
-- Main frontend template = LaraClassifier (CodeCanyon)
-- DB structure modified on `feature/lost-found-admin` branch
-- Last uploaded ZIP = `la2etlak-feature-lost-found_2.zip`
-- Reset and rolled back previous failed work — only above is active

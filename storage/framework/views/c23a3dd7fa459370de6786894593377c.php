@@ -1,24 +1,8 @@
-{{--
- * LaraClassifier - Classified Ads Web Application
- * Copyright (c) BeDigit. All Rights Reserved
- *
- * Website: https://laraclassifier.com
- * Author: Mayeul Akpovi (BeDigit - https://bedigit.com)
- *
- * LICENSE
- * -------
- * This software is provided under a license agreement and may only be used or copied
- * in accordance with its terms, including the inclusion of the above copyright notice.
- * As this software is sold exclusively on CodeCanyon,
- * please review the full license details here: https://codecanyon.net/licenses/standard
---}}
-@extends('front.layouts.master')
+<?php $__env->startSection('wizard'); ?>
+	<?php echo $__env->make('front.post.createOrEdit.multiSteps.partials.wizard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('wizard')
-	@include('front.post.createOrEdit.multiSteps.partials.wizard')
-@endsection
-
-@php
+<?php
 	$post ??= [];
 	
 	$postTypes ??= [];
@@ -33,60 +17,63 @@
 	$formActionUrl ??= request()->fullUrl();
 	$nextStepUrl ??= '/';
 	$nextStepLabel ??= t('submit') . '  <i class="bi bi-chevron-right"></i>';
-@endphp
+?>
 
-@section('content')
-	@include('front.common.spacer')
+<?php $__env->startSection('content'); ?>
+	<?php echo $__env->make('front.common.spacer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 	<div class="main-container">
 		<div class="container">
 			<div class="row">
 				
-				@include('front.post.partials.notification')
+				<?php echo $__env->make('front.post.partials.notification', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				
 				<div class="col-md-9">
 					<div class="container border rounded bg-body-tertiary p-4 p-lg-3 p-md-2 mb-sm-3">
 						<h3 class="fw-bold border-bottom pb-3 mb-4">
-							<i class="fa-solid fa-pen-to-square"></i> {{ t('update_my_listing') }}
-							-&nbsp;<a href="{{ urlGen()->post($post) }}"
-							          class="{{ linkClass() }}"
+							<i class="fa-solid fa-pen-to-square"></i> <?php echo e(t('update_my_listing')); ?>
+
+							-&nbsp;<a href="<?php echo e(urlGen()->post($post)); ?>"
+							          class="<?php echo e(linkClass()); ?>"
 							          data-bs-placement="top"
 							          data-bs-toggle="tooltip"
-							          title="{!! data_get($post, 'title') !!}"
-							>{!! str(data_get($post, 'title'))->limit(45) !!}</a>
+							          title="<?php echo data_get($post, 'title'); ?>"
+							><?php echo str(data_get($post, 'title'))->limit(45); ?></a>
 						</h3>
 						
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-10 col-sm-12 col-xs-12">
 								
 								<form id="payableForm"
-								      action="{{ $formActionUrl }}"
+								      action="<?php echo e($formActionUrl); ?>"
 								      method="POST"
 								      enctype="multipart/form-data"
-								      class="{{ unsavedFormGuard() }}"
+								      class="<?php echo e(unsavedFormGuard()); ?>"
 								>
-									@csrf
-									@method('PUT')
+									<?php echo csrf_field(); ?>
+									<?php echo method_field('PUT'); ?>
 									
-									<input type="hidden" name="post_id" value="{{ data_get($post, 'id') }}">
+									<input type="hidden" name="post_id" value="<?php echo e(data_get($post, 'id')); ?>">
 									<fieldset>
 
-									 {{-- Lost / Found (Step 1, shown first) --}}
+									 
 										<div class="form-group col-md-6">
-											<label for="lost_or_found">{{ t('type') }}</label>
+											<label for="lost_or_found"><?php echo e(t('type')); ?></label>
 											<select name="lost_or_found" id="lost_or_found" class="form-control" required>
 											<option value="lost"
-												{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : '' }}>
-												{{ t('Lost') }}
+												<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'lost' ? 'selected' : ''); ?>>
+												<?php echo e(t('Lost')); ?>
+
 											</option>
 											<option value="found"
-												{{ old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : '' }}>
-												{{ t('Found') }}
+												<?php echo e(old('lost_or_found', data_get($post, 'lost_or_found')) === 'found' ? 'selected' : ''); ?>>
+												<?php echo e(t('Found')); ?>
+
 											</option>
 											</select>
 										</div>
 										
-										{{-- category_id --}}
-										@php
+										
+										<?php
 											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
 											$catSelectionUrl = url('browsing/categories/select');
 											
@@ -105,17 +92,17 @@
 											$customHtml .= '</div>';
 											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
 											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
-										@endphp
-										@include('helpers.forms.fields.html', [
+										?>
+										<?php echo $__env->make('helpers.forms.fields.html', [
 											'label'    => t('category'),
 											'name'     => 'category_id', // <label for="name">
 											'required' => true,
 											'value'    => $customHtml,
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- post_type_id --}}
-										@if (config('settings.listing_form.show_listing_type'))
-											@include('helpers.forms.fields.radio', [
+										
+										<?php if(config('settings.listing_form.show_listing_type')): ?>
+											<?php echo $__env->make('helpers.forms.fields.radio', [
 												'label'           => t('type'),
 												'id'              => 'postTypeId-',
 												'name'            => 'post_type_id',
@@ -127,21 +114,21 @@
 												'value'           => data_get($post, 'post_type_id'),
 												'hint'            => t('post_type_hint'),
 												'wrapper'         => ['id' => 'postTypeBloc'],
-											])
-										@endif
+											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+										<?php endif; ?>
 										
-										{{-- title --}}
-										@include('helpers.forms.fields.text', [
+										
+										<?php echo $__env->make('helpers.forms.fields.text', [
 											'label'       => t('title'),
 											'name'        => 'title',
 											'placeholder' => t('enter_your_title'),
 											'required'    => true,
 											'value'       => data_get($post, 'title'),
 											'hint'        => t('a_great_title_needs_at_least_60_characters'),
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- description --}}
-										@include('helpers.forms.fields.wysiwyg', [
+										
+										<?php echo $__env->make('helpers.forms.fields.wysiwyg', [
 											'label'       => t('Description'),
 											'name'        => 'description',
 											'placeholder' => t('enter_your_message'),
@@ -150,54 +137,26 @@
 											'height'      => 350,
 											'attributes'  => ['rows' => 15],
 											'hint'        => t('describe_what_makes_your_listing_unique'),
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- cfContainer --}}
+										
 										<div id="cfContainer"></div>
 										
-										{{-- price 
-										@php
-											$currencySymbol = config('currency.symbol', 'X');
-											$price = old('price', data_get($post, 'price'));
-											$price = \App\Helpers\Common\Num::format($price, 2, '.', '');
-											$isPriceMandatory = (config('settings.listing_form.price_mandatory') == '1');
-											$priceHint = !$isPriceMandatory ? t('price_hint') : null;
-											
-											// negotiable
-											$negotiable = old('negotiable', data_get($post, 'negotiable'));
-											$negotiableChecked = ($negotiable == '1') ? ' checked' : '';
-											
-											$suffix = '<input id="negotiable" name="negotiable" type="checkbox" value="1"' . $negotiableChecked . '>';
-											$suffix .= '&nbsp;<small>' . t('negotiable') . '</small>';
-										@endphp
-										@include('helpers.forms.fields.number', [
-											'label'       => t('price'),
-											'name'        => 'price',
-											'required'    => $isPriceMandatory,
-											'placeholder' => t('enter_your_price'),
-											'value'       => $price,
-											'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
-											'prefix'      => $currencySymbol,
-											'suffix'      => $suffix,
-											'hint'        => $priceHint,
-											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
-											'wrapper'     => ['id' => 'priceBloc'],
-										])
-										--}}
-										{{-- country_code --}}
+										
+										
 										<input id="countryCode"
 										       name="country_code"
 										       type="hidden"
-										       value="{{ data_get($post, 'country_code') ?? config('country.code') }}"
+										       value="<?php echo e(data_get($post, 'country_code') ?? config('country.code')); ?>"
 										>
 										
-										@php
+										<?php
 											$adminType = config('country.admin_type', 0);
-										@endphp
-										@if (config('settings.listing_form.city_selection') == 'select')
-											@if (in_array($adminType, ['1', '2']))
-												{{-- admin_code --}}
-												@include('helpers.forms.fields.select2', [
+										?>
+										<?php if(config('settings.listing_form.city_selection') == 'select'): ?>
+											<?php if(in_array($adminType, ['1', '2'])): ?>
+												
+												<?php echo $__env->make('helpers.forms.fields.select2', [
 													'label'        => t('location'),
 													'id'           => 'adminCode',
 													'name'         => 'admin_code',
@@ -208,10 +167,10 @@
 													'hint'         => null,
 													'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
 													'wrapper'      => ['id' => 'locationBox'],
-												])
-											@endif
-										@else
-											@php
+												], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+											<?php endif; ?>
+										<?php else: ?>
+											<?php
 												$adminType = (in_array($adminType, ['0', '1', '2'])) ? $adminType : 0;
 												$relAdminType = (in_array($adminType, ['1', '2'])) ? $adminType : 1;
 												$adminCode = data_get($post, 'city.subadmin' . $relAdminType . '_code', 0);
@@ -220,31 +179,31 @@
 												$cityId = data_get($post, 'city.id', 0);
 												$cityName = data_get($post, 'city.name');
 												$fullCityName = !empty($adminName) ? $cityName . ', ' . $adminName : $cityName;
-											@endphp
+											?>
 											<input type="hidden"
 											       id="selectedAdminType"
 											       name="selected_admin_type"
-											       value="{{ old('selected_admin_type', $adminType) }}"
+											       value="<?php echo e(old('selected_admin_type', $adminType)); ?>"
 											>
 											<input type="hidden"
 											       id="selectedAdminCode"
 											       name="selected_admin_code"
-											       value="{{ old('selected_admin_code', $adminCode) }}"
+											       value="<?php echo e(old('selected_admin_code', $adminCode)); ?>"
 											>
 											<input type="hidden"
 											       id="selectedCityId"
 											       name="selected_city_id"
-											       value="{{ old('selected_city_id', $cityId) }}"
+											       value="<?php echo e(old('selected_city_id', $cityId)); ?>"
 											>
 											<input type="hidden"
 											       id="selectedCityName"
 											       name="selected_city_name"
-											       value="{{ old('selected_city_name', $fullCityName) }}"
+											       value="<?php echo e(old('selected_city_name', $fullCityName)); ?>"
 											>
-										@endif
+										<?php endif; ?>
 										
-										{{-- city_id --}}
-										@include('helpers.forms.fields.select2', [
+										
+										<?php echo $__env->make('helpers.forms.fields.select2', [
 											'label'        => t('city'),
 											'id'           => 'cityId',
 											'name'         => 'city_id',
@@ -255,30 +214,30 @@
 											'hint'         => null,
 											'baseClass'    => ['wrapper' => 'mb-3 col-md-8'],
 											'wrapper'      => ['id' => 'cityBox'],
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- tags --}}
-										@php
+										
+										<?php
 											$tagHint = t('tags_hint', ['limit' => '{limit}', 'min' => '{min}', 'max' => '{max}']);
-										@endphp
-										@include('helpers.forms.fields.select2-tagging', [
+										?>
+										<?php echo $__env->make('helpers.forms.fields.select2-tagging', [
 											'label'       => t('Tags'),
 											'id'          => 'tags',
 											'name'        => 'tags',
 											'placeholder' => t('enter_tags'),
 											'options'     => data_get($post, 'tags'),
 											'hint'        => $tagHint,
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- is_permanent --}}
-										@if (config('settings.listing_form.permanent_listings_enabled') == '3')
+										
+										<?php if(config('settings.listing_form.permanent_listings_enabled') == '3'): ?>
 											<input id="isPermanent"
 											       name="is_permanent"
 											       type="hidden"
-											       value="{{ old('is_permanent', data_get($post, 'is_permanent')) }}"
+											       value="<?php echo e(old('is_permanent', data_get($post, 'is_permanent'))); ?>"
 											>
-										@else
-											@include('helpers.forms.fields.checkbox', [
+										<?php else: ?>
+											<?php echo $__env->make('helpers.forms.fields.checkbox', [
 												'label'    => t('is_permanent_label'),
 												'id'       => 'isPermanent',
 												'name'     => 'is_permanent',
@@ -287,17 +246,18 @@
 												'value'    => data_get($post, 'is_permanent'),
 												'hint'     => t('is_permanent_hint'),
 												'wrapper'  => ['id' => 'isPermanentBox', 'class' => 'hide']
-											])
-										@endif
+											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+										<?php endif; ?>
 										
 										
 										<div class="col-12 fw-bold fs-5 border-bottom py-2 my-5 mb-4">
-											<i class="bi bi-person-circle"></i> {{ t('seller_information') }}
+											<i class="bi bi-person-circle"></i> <?php echo e(t('seller_information')); ?>
+
 										</div>
 										
 										
-										{{-- contact_name --}}
-										@include('helpers.forms.fields.text', [
+										
+										<?php echo $__env->make('helpers.forms.fields.text', [
 											'label'       => t('your_name'),
 											'id'          => 'contactName',
 											'name'        => 'contact_name',
@@ -307,10 +267,10 @@
 											'prefix'      => '<i class="fa-regular fa-user"></i>',
 											'suffix'      => null,
 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- auth_field (as notification channel) --}}
-										@php
+										
+										<?php
 											$authFields = getAuthFields(true);
 											$authFieldOptions = collect($authFields)
 												->map(fn($item, $key) => ['value' => $key, 'text' => $item])
@@ -319,9 +279,9 @@
 											$usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel();
 											$authFieldValue = data_get($post, 'auth_field') ?? getAuthField();
 											$authFieldValue = $usersCanChooseNotifyChannel ? old('auth_field', $authFieldValue) : $authFieldValue;
-										@endphp
-										@if ($usersCanChooseNotifyChannel)
-											@include('helpers.forms.fields.radio', [
+										?>
+										<?php if($usersCanChooseNotifyChannel): ?>
+											<?php echo $__env->make('helpers.forms.fields.radio', [
 												'label'      => trans('auth.notifications_channel'),
 												'btnVariant' => 'secondary',
 												'btnOutline' => true,
@@ -333,17 +293,17 @@
 												'value'      => $authFieldValue,
 												'attributes' => ['class' => 'auth-field-input'],
 												'hint'       => trans('auth.notifications_channel_hint'),
-											])
-										@else
-											<input id="authField-{{ $authFieldValue }}" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
-										@endif
+											], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+										<?php else: ?>
+											<input id="authField-<?php echo e($authFieldValue); ?>" name="auth_field" type="hidden" value="<?php echo e($authFieldValue); ?>">
+										<?php endif; ?>
 										
-										@php
+										<?php
 											$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
-										@endphp
+										?>
 										
-										{{-- email --}}
-										@include('helpers.forms.fields.email', [
+										
+										<?php echo $__env->make('helpers.forms.fields.email', [
 											'label'       => trans('auth.email'),
 											'id'          => 'email',
 											'name'        => 'email',
@@ -354,10 +314,10 @@
 											'suffix'      => null,
 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
 											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- phone --}}
-										@php
+										
+										<?php
 											$phoneValue = data_get($post, 'phone');
 											$phoneCountryValue = data_get($post, 'phone_country') ?? config('country.code');
 											
@@ -366,8 +326,8 @@
 											$phoneHiddenChecked = ($phoneHiddenValue == '1') ? ' checked' : '';
 											$suffix = '<input id="phoneHidden" name="phone_hidden" type="checkbox" value="1"' . $phoneHiddenChecked . '>';
 											$suffix .= '&nbsp;<small>' . t('Hide') . '</small>';
-										@endphp
-										@include('helpers.forms.fields.intl-tel-input', [
+										?>
+										<?php echo $__env->make('helpers.forms.fields.intl-tel-input', [
 											'label'       => trans('auth.phone_number'),
 											'id'          => 'phone',
 											'name'        => 'phone',
@@ -378,18 +338,20 @@
 											'suffix'      => $suffix,
 											'baseClass'   => ['wrapper' => 'mb-3 col-md-8'],
 											'wrapper'     => ['class' => "auth-field-item{$forceToDisplay}"],
-										])
+										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 										
-										{{-- buttons --}}
+										
 										<div class="row mb-3 mt-5">
 											<div class="col-md-6 mb-md-0 mb-2 text-start d-grid">
-												<a href="{{ $previousStepUrl }}" class="btn btn-secondary btn-lg">
-													{!! $previousStepLabel !!}
+												<a href="<?php echo e($previousStepUrl); ?>" class="btn btn-secondary btn-lg">
+													<?php echo $previousStepLabel; ?>
+
 												</a>
 											</div>
 											<div class="col-md-6 mb-md-0 mb-2 text-end d-grid">
 												<button id="nextStepBtn" class="btn btn-primary btn-lg">
-													{!! $nextStepLabel !!}
+													<?php echo $nextStepLabel; ?>
+
 												</button>
 											</div>
 										</div>
@@ -403,20 +365,22 @@
 				</div>
 				
 				<div class="col-md-3 reg-sidebar">
-					@include('front.post.createOrEdit.partials.right-sidebar')
+					<?php echo $__env->make('front.post.createOrEdit.partials.right-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 				</div>
 			
 			</div>
 		</div>
 	</div>
-	@include('front.post.createOrEdit.partials.category-modal')
-@endsection
+	<?php echo $__env->make('front.post.createOrEdit.partials.category-modal', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('after_scripts')
+<?php $__env->startSection('after_scripts'); ?>
 	<script>
-		defaultAuthField = '{{ old('auth_field', $authFieldValue ?? getAuthField()) }}';
-		phoneCountry = '{{ old('phone_country', ($phoneCountryValue ?? '')) }}';
+		defaultAuthField = '<?php echo e(old('auth_field', $authFieldValue ?? getAuthField())); ?>';
+		phoneCountry = '<?php echo e(old('phone_country', ($phoneCountryValue ?? ''))); ?>';
 	</script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@include('front.post.createOrEdit.partials.form-assets')
+<?php echo $__env->make('front.post.createOrEdit.partials.form-assets', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+<?php echo $__env->make('front.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resources\views/front/post/createOrEdit/multiSteps/edit/post.blade.php ENDPATH**/ ?>
