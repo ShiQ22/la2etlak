@@ -21,6 +21,15 @@
 			<div class="modal-body">
 				<div class="p-0 m-0" id="selectCats"></div>
 			</div>
+			<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+    {{ t('Cancel') }}
+  </button>
+  <button type="button" class="btn btn-primary" id="catsDoneBtn">
+    {{ t('Done') }}
+  </button>
+</div>
+
 			
 		</div>
 	</div>

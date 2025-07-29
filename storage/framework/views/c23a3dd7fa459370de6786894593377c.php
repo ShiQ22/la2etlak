@@ -73,32 +73,43 @@
 										</div>
 										
 										
-										<?php
-											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
-											$catSelectionUrl = url('browsing/categories/select');
-											
-											$categoryId = old('category_id', data_get($post, 'category.id'));
-											$categoryType = old('category_type', data_get($post, 'category.type'));
-											
-											$aModal = 'data-bs-toggle="modal"';
-											$aHref = 'href="#browseCategories"';
-											$aDataUrl = 'data-selection-url="' . $catSelectionUrl . '"';
-											$aClass = 'class="modal-cat-link open-selection-url ' . linkClass() . '"';
-											
-											$customHtml = '<div id="catsContainer" class="form-control' . $categoryIdError . '">';
-											$customHtml .= "<a {$aHref} {$aModal} {$aDataUrl} {$aClass}>";
-											$customHtml .= t('select_a_category');
-											$customHtml .= '</a>';
-											$customHtml .= '</div>';
-											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
-											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
-										?>
-										<?php echo $__env->make('helpers.forms.fields.html', [
-											'label'    => t('category'),
-											'name'     => 'category_id', // <label for="name">
-											'required' => true,
-											'value'    => $customHtml,
-										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+											<?php
+												// Validation error class
+												$catsError = $errors->has('categories') ? ' is-invalid' : '';
+
+												// Modal URL (with ?multiple=1)
+												$catsModalUrl = url('browsing/categories/select?multiple=1');
+
+												// Pre-selected IDs from controller: $selected (array), names via $categories
+											?>
+
+											<div class="form-group col-md-6">
+												<label><?php echo e(t('categories')); ?></label>
+												<div id="catsContainer" class="form-control<?php echo e($catsError); ?>">
+													<ul id="catsList" class="list-unstyled mb-2">
+														<?php $__currentLoopData = $selected; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catId): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+															<?php $cat = $categories->find($catId); ?>
+															<?php if($cat): ?>
+																<li data-id="<?php echo e($catId); ?>">
+																	<?php echo e($cat->name); ?>
+
+																	<span class="remove-cat" data-id="<?php echo e($catId); ?>">×</span>
+																	<input type="hidden" name="categories[]" value="<?php echo e($catId); ?>">
+																</li>
+															<?php endif; ?>
+														<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+													</ul>
+
+													<a href="#browseCategories"
+													data-bs-toggle="modal"
+													data-selection-url="<?php echo e($catsModalUrl); ?>"
+													class="modal-cat-link open-selection-url <?php echo e(linkClass()); ?>">
+														<?php echo e(t('select_categories')); ?>
+
+													</a>
+												</div>
+											</div>
+
 										
 										
 										<?php if(config('settings.listing_form.show_listing_type')): ?>
@@ -378,6 +389,7 @@
 	<script>
 		defaultAuthField = '<?php echo e(old('auth_field', $authFieldValue ?? getAuthField())); ?>';
 		phoneCountry = '<?php echo e(old('phone_country', ($phoneCountryValue ?? ''))); ?>';
+		 var postId = <?php echo e(data_get($post, 'id')); ?>;
 	</script>
 <?php $__env->stopSection(); ?>
 

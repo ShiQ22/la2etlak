@@ -23,7 +23,9 @@ use App\Services\PostService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
-
+use App\Models\Category;
+use App\Models\Post as PostModel;
+use App\Models\CategoryField;
 class PostController extends BaseController
 {
 	use RetrievePackageFeatures;
@@ -119,7 +121,30 @@ class PostController extends BaseController
 		view()->share('nextStepUrl', $nextStepUrl);
 		view()->share('nextStepLabel', $nextStepLabel);
 		
-		return view('front.post.createOrEdit.multiSteps.edit.post', $data);
+		        // ◼︎ Load all categories for the multi‐select picker
+        $allCategories = Category::all();
+
+        // ◼︎ Resolve an Eloquent Post to fetch its pivot categories
+        $postModel = PostModel::find(data_get($data, 'result.id'));
+        $selectedIds = $postModel
+            ? $postModel->categories()->pluck('category_id')->toArray()
+            : [];
+
+        // ◼︎ Inject into view data
+        $data['categories'] = $allCategories;
+        $data['selected']   = $selectedIds;
+
+		    // ◼︎ ─── Multi‐Category Custom Fields Merge ───
+		$fieldsCollection = collect();
+		foreach ($selectedIds as $catId) {
+			$fieldsCollection = $fieldsCollection->merge(
+				CategoryField::getFields($catId)
+			);
+		}
+   		 // Remove duplicates by field ID and re-index
+   		 $data['fields'] = $fieldsCollection->unique('id')->values();
+
+        return view('front.post.createOrEdit.multiSteps.edit.post', $data);
 	}
 	
 	/**

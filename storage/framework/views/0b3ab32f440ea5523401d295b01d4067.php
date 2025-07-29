@@ -300,6 +300,16 @@
 					}
 				}
             }
+			// Expose pivot categories from PHP to JS:
+        var postId        = <?php echo e(data_get($post,'id')); ?>;
+        var selectedCats  = <?php echo json_encode($categoryIds, 15, 512) ?>;
+        var selectedNames = <?php echo json_encode($categoryNames, 15, 512) ?>;
+
+        onDocumentReady((event) => {
+            // Now you can call your helper for each category:
+            selectedCats.forEach(id => {
+                loadFieldsForCategory(id, selectedNames[id] || '');
+            });
 		});
 	</script>
 <?php $__env->stopSection(); ?>

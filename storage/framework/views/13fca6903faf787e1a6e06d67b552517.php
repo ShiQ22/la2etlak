@@ -51,31 +51,43 @@
 										
 										
 										<?php
-											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
-											$catSelectionUrl = url('browsing/categories/select');
+											// Validation error class for the container
+											$catsError = (isset($errors) && $errors->has('categories')) ? ' is-invalid' : '';
+											$catSelectionUrl = url('browsing/categories/select?multiple=1'); // we’ll flag modal to allow multi
 											
-											$categoryId = old('category_id', data_get($postInput, 'category_id', 0));
-											$categoryType = old('category_type', data_get($postInput, 'category_type'));
+											// Determine pre-selected IDs & types
+											$oldCats = old('categories', data_get($postInput, 'categories', []));
+											$oldTypes = old('category_types', data_get($postInput, 'category_types', []));
 											
-											$aModal = 'data-bs-toggle="modal"';
-											$aHref = 'href="#browseCategories"';
-											$aDataUrl = 'data-selection-url="' . $catSelectionUrl . '"';
-											$aClass = 'class="modal-cat-link open-selection-url ' . linkClass() . '"';
-											
-											$customHtml = '<div id="catsContainer" class="form-control' . $categoryIdError . '">';
-											$customHtml .= "<a {$aHref} {$aModal} {$aDataUrl} {$aClass}>";
-											$customHtml .= t('select_a_category');
+											// Build the display: list selected names (populated by your modal JS)
+											$customHtml  = '<div id="catsContainer" class="form-control' . $catsError . '">';
+											$customHtml .= '<ul id="catsList">';
+											foreach ($oldCats as $idx => $catId) {
+												$catName = data_get($categories->find($catId), 'name', t('Unknown'));
+												$customHtml .= '<li data-id="' . $catId . '">' . e($catName) . '</li>';
+											}
+											$customHtml .= '</ul>';
+											$customHtml .= "<a href=\"#browseCategories\" data-bs-toggle=\"modal\" data-selection-url=\"{$catSelectionUrl}\" class=\"modal-cat-link open-selection-url " . linkClass() . "\">";
+											$customHtml .= t('select_categories');
 											$customHtml .= '</a>';
 											$customHtml .= '</div>';
-											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
-											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
+											
+											// Hidden inputs array for submission
+											foreach ($oldCats as $idx => $catId) {
+												$customHtml .= '<input type="hidden" name="categories[]" value="' . $catId . '">';
+												// If you track types too:
+												$type = $oldTypes[$idx] ?? '';
+												$customHtml .= '<input type="hidden" name="category_types[]" value="' . e($type) . '">';
+											}
 										?>
+
 										<?php echo $__env->make('helpers.forms.fields.html', [
-											'label'    => t('category'),
-											'name'     => 'category_id', // <label for="name">
+											'label'    => t('categories'),
+											'name'     => 'categories[]',
 											'required' => true,
 											'value'    => $customHtml,
 										], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
 										
 										
 										<?php if(config('settings.listing_form.show_listing_type')): ?>

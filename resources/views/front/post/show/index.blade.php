@@ -301,6 +301,16 @@
 					}
 				}
             }
+			// Expose pivot categories from PHP to JS:
+        var postId        = {{ data_get($post,'id') }};
+        var selectedCats  = @json($categoryIds);
+        var selectedNames = @json($categoryNames);
+
+        onDocumentReady((event) => {
+            // Now you can call your helper for each category:
+            selectedCats.forEach(id => {
+                loadFieldsForCategory(id, selectedNames[id] || '');
+            });
 		});
 	</script>
 @endsection

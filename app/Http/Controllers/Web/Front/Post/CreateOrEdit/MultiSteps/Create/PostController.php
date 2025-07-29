@@ -19,9 +19,11 @@ namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create;
 use App\Helpers\Common\Files\TmpUpload;
 use App\Http\Requests\Front\PostRequest;
 use App\Models\CategoryField;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 class PostController extends BaseController
 {
 	/**
@@ -72,60 +74,82 @@ class PostController extends BaseController
     view()->share('nextStepUrl', $nextStepUrl);
     view()->share('nextStepLabel', $nextStepLabel);
 
-    // Render the view, passing both postInput and type
-    return view(
-        'front.post.createOrEdit.multiSteps.create.post',
-        ['postInput' => $postInput, 'type' => $type]
-    );
+    // ◆◆◆ Load all categories so the modal has data on first open ◆◆◆
+        $categories = Category::all();
+
+        // Render the view, passing postInput, type, and categories
+        return view(
+            'front.post.createOrEdit.multiSteps.create.post',
+            [
+                'postInput'  => $postInput,
+                'type'       => $type,
+                'categories' => $categories,    // ← Newly passed variable
+            ]
+        );
 }
 
 	
 	/**
-	 * Listing's step (POST)
-	 *
-	 * @param \App\Http\Requests\Front\PostRequest $request
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postForm(PostRequest $request): RedirectResponse
-	{
-		    // Grab everything _except_ unwanted, but then ensure we include 'type'
-		$postInput = $request->except($this->unwantedFields());
+ * Listing's step (POST)
+ *
+ * @param \App\Http\Requests\Front\PostRequest $request
+ * @return \Illuminate\Http\RedirectResponse
+ */
+public function postForm(PostRequest $request): RedirectResponse
+{
+    // 1) Grab everything _except_ unwanted, but then ensure we include 'type'
+    $postInput = $request->except($this->unwantedFields());
 
-		// FORCE in the Lost/Found choice
-		$postInput['type'] = $request->input('type', 'lost');
-		
-		// Use unique ID to store post's pictures
-		if (session()->has('cfUid')) {
-			$this->cfTmpUploadDir = $this->cfTmpUploadDir . '/' . session('cfUid');
-		}
-		
-		// Save uploaded files
-		// Get Category's Fields details
-		$fields = CategoryField::getFields($request->input('category_id'));
-		if ($fields->count() > 0) {
-			foreach ($fields as $field) {
-				if ($field->type == 'file') {
-					if ($request->hasFile('cf.' . $field->id)) {
-						// Get the file
-						$file = $request->file('cf.' . $field->id);
-						
-						// Check if the file is valid
-						if (!$file->isValid()) {
-							continue;
-						}
-						
-						$postInput['cf'][$field->id] = TmpUpload::file($file, $this->cfTmpUploadDir);
-					}
-				}
-			}
-		}
-		
-		session()->put('postInput', $postInput);
-		
-		// Get the next URL
-		$currentStep = $this->getStepByKey(get_class($this));
-		$nextUrl = $this->getNextStepUrl($currentStep);
-		
-		return redirect()->to($nextUrl);
-	}
+    // 2) FORCE in the Lost/Found choice
+    $postInput['type'] = $request->input('type', 'lost');
+
+    // 3) Use unique ID to store post's pictures
+    if (session()->has('cfUid')) {
+        $this->cfTmpUploadDir = $this->cfTmpUploadDir . '/' . session('cfUid');
+    }
+
+    // 4) Save uploaded files for *all* selected categories
+    //    Retrieve the array of selected category IDs
+    $categoryIds = $request->input('categories', []);
+
+    //    Merge fields for each selected category
+    /** @var \Illuminate\Support\Collection $fieldsCollection */
+    $fieldsCollection = collect();
+    foreach ($categoryIds as $catId) {
+        $fieldsCollection = $fieldsCollection->merge(
+            CategoryField::getFields($catId)
+        );
+    }
+    //    Remove duplicates by field ID
+    $fields = $fieldsCollection->unique('id');
+
+    if ($fields->count() > 0) {
+        foreach ($fields as $field) {
+            if ($field->type == 'file' && $request->hasFile('cf.' . $field->id)) {
+                $file = $request->file('cf.' . $field->id);
+                if (!$file->isValid()) {
+                    continue;
+                }
+                $postInput['cf'][$field->id] = TmpUpload::file($file, $this->cfTmpUploadDir);
+            }
+        }
+    }
+
+    // 5) LEGACY COMPATIBILITY: ensure category_id is set for the next-step URL
+    if (!empty($categoryIds)) {
+        $postInput['category_id'] = $categoryIds[0];
+    } elseif ($request->filled('category_id')) {
+        $postInput['category_id'] = $request->input('category_id');
+    }
+
+    // 6) Persist all form data (including categories[] and category_id) to session
+    session()->put('postInput', $postInput);
+
+    // 7) Compute next URL & redirect
+    $currentStep = $this->getStepByKey(get_class($this));
+    $nextUrl     = $this->getNextStepUrl($currentStep);
+
+    return redirect()->to($nextUrl);
+}
+
 }

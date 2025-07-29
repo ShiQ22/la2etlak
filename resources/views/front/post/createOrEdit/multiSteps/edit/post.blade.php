@@ -85,33 +85,42 @@
 											</select>
 										</div>
 										
-										{{-- category_id --}}
-										@php
-											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
-											$catSelectionUrl = url('browsing/categories/select');
-											
-											$categoryId = old('category_id', data_get($post, 'category.id'));
-											$categoryType = old('category_type', data_get($post, 'category.type'));
-											
-											$aModal = 'data-bs-toggle="modal"';
-											$aHref = 'href="#browseCategories"';
-											$aDataUrl = 'data-selection-url="' . $catSelectionUrl . '"';
-											$aClass = 'class="modal-cat-link open-selection-url ' . linkClass() . '"';
-											
-											$customHtml = '<div id="catsContainer" class="form-control' . $categoryIdError . '">';
-											$customHtml .= "<a {$aHref} {$aModal} {$aDataUrl} {$aClass}>";
-											$customHtml .= t('select_a_category');
-											$customHtml .= '</a>';
-											$customHtml .= '</div>';
-											$customHtml .= '<input type="hidden" name="category_id" id="categoryId" value="' . $categoryId . '">';
-											$customHtml .= '<input type="hidden" name="category_type" id="categoryType" value="' . $categoryType . '">';
-										@endphp
-										@include('helpers.forms.fields.html', [
-											'label'    => t('category'),
-											'name'     => 'category_id', // <label for="name">
-											'required' => true,
-											'value'    => $customHtml,
-										])
+										{{-- categories (multi–select) --}}
+											@php
+												// Validation error class
+												$catsError = $errors->has('categories') ? ' is-invalid' : '';
+
+												// Modal URL (with ?multiple=1)
+												$catsModalUrl = url('browsing/categories/select?multiple=1');
+
+												// Pre-selected IDs from controller: $selected (array), names via $categories
+											@endphp
+
+											<div class="form-group col-md-6">
+												<label>{{ t('categories') }}</label>
+												<div id="catsContainer" class="form-control{{ $catsError }}">
+													<ul id="catsList" class="list-unstyled mb-2">
+														@foreach($selected as $catId)
+															@php $cat = $categories->find($catId); @endphp
+															@if($cat)
+																<li data-id="{{ $catId }}">
+																	{{ $cat->name }}
+																	<span class="remove-cat" data-id="{{ $catId }}">×</span>
+																	<input type="hidden" name="categories[]" value="{{ $catId }}">
+																</li>
+															@endif
+														@endforeach
+													</ul>
+
+													<a href="#browseCategories"
+													data-bs-toggle="modal"
+													data-selection-url="{{ $catsModalUrl }}"
+													class="modal-cat-link open-selection-url {{ linkClass() }}">
+														{{ t('select_categories') }}
+													</a>
+												</div>
+											</div>
+
 										
 										{{-- post_type_id --}}
 										@if (config('settings.listing_form.show_listing_type'))
@@ -416,6 +425,7 @@
 	<script>
 		defaultAuthField = '{{ old('auth_field', $authFieldValue ?? getAuthField()) }}';
 		phoneCountry = '{{ old('phone_country', ($phoneCountryValue ?? '')) }}';
+		 var postId = {{ data_get($post, 'id') }};
 	</script>
 @endsection
 

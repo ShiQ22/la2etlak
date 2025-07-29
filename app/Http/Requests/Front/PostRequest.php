@@ -195,7 +195,9 @@ class PostRequest extends Request
 		
 		$rules = [];
 		
-		$rules['category_id'] = ['required', 'not_in:0', 'exists:categories,id'];
+		// Multi‐category pivot validation
+		$rules['categories']   = ['required', 'array', 'min:1'];
+		$rules['categories.*'] = ['integer', 'exists:categories,id'];
 		if (config('settings.listing_form.show_listing_type')) {
 			$rules['post_type_id'] = ['required', Rule::in(PostType::values())];
 		}

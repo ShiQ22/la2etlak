@@ -54,6 +54,7 @@ use Illuminate\Support\Facades\Schema;
 use Spatie\Feed\Feedable;
 use App\Models\Scopes\IncludeLostOrFound;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[ObservedBy([PostObserver::class])]
 #[ScopedBy([VerifiedScope::class, ReviewedScope::class, LocalizedScope::class])]
@@ -124,7 +125,7 @@ class Post extends BaseModel implements Feedable
 		'country_code',
 		'user_id',
 		'payment_id',
-		'category_id',
+	//	'category_id',
 		'post_type_id',
 		'lost_or_found',
 		'title',
@@ -348,7 +349,18 @@ class Post extends BaseModel implements Feedable
 	{
 		return $this->belongsTo(Payment::class, 'payment_id');
 	}
-	
+	 /**
+ 	* The categories attached to this post (many-to-many).
+ 	*/
+	public function categories(): BelongsToMany
+	{
+    return $this->belongsToMany(
+        Category::class,
+        'post_category',  // pivot table name
+        'post_id',        // this model’s foreign key
+        'category_id'     // related model’s foreign key
+    );
+	}
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES

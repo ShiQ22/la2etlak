@@ -275,4 +275,25 @@ protected function responseDBQueryException(QueryException $e, Request $request)
     return response()
         ->view('errors.500', ['exception' => $e], 500);
 }
-}
+    /**
+     * Override the DB “table not found” exception handler so it returns a proper Response.
+     */
+    protected function responseDBTableException(\Throwable $e, Request $request): Response|JsonResponse
+    {
+        \Log::error('DB Table Exception: '.$e->getMessage());
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'A database table error occurred.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+
+        // For normal web traffic, show your 500 blade:
+        return response()
+            ->view('errors.500', ['exception' => $e], 500);
+    }
+
+}  // ← keep this closing brace
+
+

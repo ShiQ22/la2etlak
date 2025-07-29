@@ -27,6 +27,8 @@ use Illuminate\Http\Request;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 use Larapen\TextToImage\Facades\TextToImage;
 use Throwable;
+use App\Models\Post as PostModel;
+use App\Models\CategoryField;
 
 class ShowController extends FrontController
 {
@@ -118,10 +120,37 @@ class ShowController extends FrontController
 		
 		$message = data_get($data, 'message');
 		$post = data_get($data, 'result');
-		$customFields = data_get($data, 'extra.fieldsValues');
+		      // ─── Build multi‐category custom fields ───
+    $postModel = PostModel::with('categories')->find($postId);
+
+    // 1) Extract IDs & Names for both server‐ and client‐side use
+    $categoryIds   = $postModel
+        ? $postModel->categories->pluck('id')->toArray()
+        : [];
+    $categoryNames = $postModel
+        ? $postModel->categories->pluck('name','id')->toArray()
+        : [];
+
+    // 2) Merge each category's fields into one Collection
+    $fieldsCollection = collect();
+    foreach ($categoryIds as $catId) {
+        $fieldsCollection = $fieldsCollection->merge(
+            CategoryField::getFields($catId)
+        );
+    }
+    // 3) De-duplicate by field ID & retain order
+    $customFields = $fieldsCollection->unique('id')->values();
+
+    // share with view
+    view()->share('customFields',    $customFields);
+    view()->share('categoryIds',     $categoryIds);
+    view()->share('categoryNames',   $categoryNames);
+
+    // Listing isn't found
+    abort_if(empty($post), 404, $message ?? t('post_not_found'));
+
+
 		
-		// Listing isn't found
-		abort_if(empty($post), 404, $message ?? t('post_not_found'));
 		
 		session()->put('isPostVisited', $postId);
 		
@@ -191,21 +220,24 @@ class ShowController extends FrontController
 		if (config('plugins.reviews.installed')) {
 			$reviewsApiResult = $this->getReviews(data_get($post, 'id'));
 			view()->share('reviewsApiResult', $reviewsApiResult);
+			
 		}
-		
 		return view(
-			'front.post.show.index',
-			compact(
-				'post',
-				'pictures',
-				'user',
-				'catBreadcrumb',
-				'customFields',
-				'commentsAreDisabledByUser',
-				'widgetSimilarPosts',
-				'isFromPostDetails'
-			)
-		);
+    'front.post.show.index',
+    compact(
+        'post',
+        'pictures',
+        'user',
+        'catBreadcrumb',
+        'customFields',
+        'commentsAreDisabledByUser',
+        'widgetSimilarPosts',
+        'isFromPostDetails',
+        'categoryIds',
+        'categoryNames'
+    )
+);
+		
 	}
 	
 	/**

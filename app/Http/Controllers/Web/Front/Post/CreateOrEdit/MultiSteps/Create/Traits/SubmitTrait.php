@@ -24,6 +24,7 @@ use App\Http\Requests\Front\PhotoRequest;
 use App\Http\Requests\Front\PostRequest;
 use App\Models\CategoryField;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Post;
 
 trait SubmitTrait
 {
@@ -129,6 +130,21 @@ trait SubmitTrait
 		$post = data_get($data, 'result');
 		
 		abort_if(empty($post), 404, t('post_not_found'));
+
+				// Convert API response into Eloquent model
+		/** @var \App\Models\Post|null $post */
+		$post = Post::find($postId);
+		abort_if(empty($post), 404, t('post_not_found'));
+		
+		// ─── Sync multi‐category pivot & set primary category ───
+		$categoryIds = $request->input('categories', []);
+		if (!empty($categoryIds)) {
+		    // 1) Sync pivot table
+		    $post->categories()->sync($categoryIds);
+		    // 2) Update primary category_id for ShowController lookup
+		    $post->category_id = $categoryIds[0];
+		    $post->save();
+		}
 		
 		// Get the next URL
 		$nextStep = $this->getStepByKey(FinishController::class);
